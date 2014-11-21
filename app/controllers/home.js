@@ -1,17 +1,15 @@
 var express = require('express'),
-  router = express.Router(),
-  db = require('../models');
+    router  = require('../routes/home'),
+    db      = require('../models');
 
-module.exports = function (app) {
-  app.use('/', router);
+module.exports = {
+
+    findAll: function(resquest, response){
+        // db.Article.findAll().success(function (articles) {
+        response.render('index', {
+            title: 'BitVagas',
+            // articles: articles
+        });
+     //});
+    }
 };
-
-router.get('/', function (req, res, next) {
-
-  db.Article.findAll().success(function (articles) {
-    res.render('index', {
-      title: 'Generator-Express MVC',
-      articles: articles
-    });
-  });
-});
