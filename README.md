@@ -1,2 +1,2 @@
-api.bitvagas.com
+bitvagas.com
 ================
