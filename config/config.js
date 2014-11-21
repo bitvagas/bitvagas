@@ -9,8 +9,9 @@ var config = {
       name: 'bitvagas-com'
     },
     port: 3000,
-    db: 'mysql://localhost/bitvagas-com-development'
-    
+    username: 'root',
+    password: '',
+    db: 'BITVAGAS'
   },
 
   test: {
@@ -19,7 +20,9 @@ var config = {
       name: 'bitvagas-com'
     },
     port: 3000,
-    db: 'mysql://localhost/bitvagas-com-test'
+    username: 'root',
+    password: '',
+    db: 'BITVAGAS'
     
   },
 
@@ -29,7 +32,9 @@ var config = {
       name: 'bitvagas-com'
     },
     port: 3000,
-    db: 'mysql://localhost/bitvagas-com-production'
+    username: 'root',
+    password: '',
+    db: 'BITVAGAS'
     
   }
 };

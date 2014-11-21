@@ -1,14 +1,16 @@
-var express = require('express');
-var glob = require('glob');
+var express        = require('express'),
+    favicon        = require('serve-favicon'),
+    logger         = require('morgan'),
+    cookieParser   = require('cookie-parser'),
+    bodyParser     = require('body-parser'),
+    compress       = require('compression'),
+    methodOverride = require('method-override'),
+    harp           = require('harp');
 
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var compress = require('compression');
-var methodOverride = require('method-override');
+var routes = require('../app/routes/home');
 
 module.exports = function(app, config) {
+
   app.set('views', config.root + '/app/views');
   app.set('view engine', 'jade');
 
@@ -23,10 +25,11 @@ module.exports = function(app, config) {
   app.use(express.static(config.root + '/public'));
   app.use(methodOverride());
 
-  var controllers = glob.sync(config.root + '/app/controllers/*.js');
-  controllers.forEach(function (controller) {
-    require(controller)(app);
-  });
+  //Initialize HarpJS
+  app.use(harp.mount(config.root + "/public"));
+
+  //Routes
+  app.use('/', routes);
 
   app.use(function (req, res, next) {
     var err = new Error('Not Found');
@@ -34,8 +37,9 @@ module.exports = function(app, config) {
     next(err);
   });
 
+  // error handlers
   if(app.get('env') === 'development'){
-    app.use(function (err, req, res) {
+    app.use(function (err, req, res, next) {
       res.status(err.status || 500);
       res.render('error', {
         message: err.message,
@@ -45,7 +49,7 @@ module.exports = function(app, config) {
     });
   }
 
-  app.use(function (err, req, res) {
+  app.use(function (err, req, res, next) {
     res.status(err.status || 500);
     res.render('error', {
       message: err.message,
