@@ -1,0 +1,32 @@
+.head
+  +cf
+
+  background: white url(../img/head-bg.png) repeat
+  border-bottom: 1px solid #e7e7e7
+  padding: 12px 0
+
+  a
+    text-decoration: none
+
+.head-nav
+  +cf
+
+  font-weight: 700
+  line-height: 1
+  list-style: none
+  margin: 0
+
+  > li
+    > a
+      border-radius: 4px
+      color: #7d7d7d
+      display: block
+      padding: 12px
+      &:hover
+        background-color: #f2f2f2
+
+  +media-query(desk)
+    float: left
+    > li
+      border-bottom: none
+      float: left

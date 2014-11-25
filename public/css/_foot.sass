@@ -1,0 +1,45 @@
+.foot
+  background: url(../img/foot-bg.png) repeat-x top center
+  padding: 30px 0 48px
+  > .wrapper
+    position: relative
+  a
+    text-decoration: none
+    &:hover
+      text-decoration: underline
+
+.foot-nav
+  +cf
+
+  line-height: 1
+  list-style: none
+  margin-left: 0
+  > li
+    border-bottom: 1px dotted #fff
+    > a
+      color: #fff
+      display: block
+      padding: 12px
+    &:last-child
+      border-bottom: none
+  +media-query(desk)
+    position: absolute
+    left: 340px
+    top: 6px
+    margin-bottom: 0
+    > li
+      border-bottom: none
+      border-right: 1px solid #fff
+      float: left
+      padding: 0 6px
+      > a
+        padding: 0
+      &:first-child
+        padding-left: 0
+      &:last-child
+        border-right: none
+        padding-right: 0
+
+.foot-social
+  display: none
+
