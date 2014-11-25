@@ -13,8 +13,7 @@ gulp.task('browser-sync', ['nodemon'], function () {
 
 gulp.task('nodemon', function(){
     nodemon({
-        script: 'app.js',
-        ext: 'js jade sass',
+        script: 'app.js'
     })
     .on('restart', function () {
         setTimeout(function () {
