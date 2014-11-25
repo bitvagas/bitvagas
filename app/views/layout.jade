@@ -1,10 +1,78 @@
 doctype html
-html(lang='en')
-  head
+html(lang='pt-br')
+head
+    title
+      | BitVagas — Plataforma de Vagas para usuários Bitcoin
+
     meta(charset='UTF-8')
-    meta(name='viewport', content='width=device-width')
-    title= title
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(name='description', content='')
+    meta(name='author', content='BitVagas')
+    meta(name='application-name', content='')
+    meta(name='google-site-verification', content='')
+
+    meta(property='og:title', content='BitVagas — Plataforma de Vagas para usuários Bitcoin')
+    meta(property='og:site_name', content='BitVagas')
+    meta(property='og:url', content='')
+    meta(property='og:image', content='')
+    meta(property='og:type', content='website')
+    meta(property='og:description', content='')
+
+    meta(name='twitter:card', content='summary')
+    meta(name='twitter:title', content='BitVagas — Plataforma de Vagas para usuários Bitcoin')
+    meta(name='twitter:description', content='')
+    meta(name='twitter:image', content='')
+    meta(name='twitter:site', content='BitVagas')
+
+    link(rel='shortcut icon', href='')
+
     block css
+      link(href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700', rel='stylesheet', type='text/css')
       link(rel='stylesheet', href='/css/bitvagas.css')
+
   body
+    header.head
+      .wrapper.cf
+        a.logo(href='', title='BitVagas')
+          img(src='/img/bitvagas.png', alt='BitVagas')
+
+        ul.head-nav
+          li
+            a(href='', title='Todas as Vagas') Todas as Vagas
+          li
+            a(href='', title='Postar Vaga') Postar Vaga
+          li
+            a(href='', title='Sobre') Sobre
+          li
+            a(href='', title='Contato') Contato
+
     block content
+
+    footer.foot
+      .wrapper.cf
+        a.logo-foot(href='', title='BitVagas')
+          img.logo-foot__img(src='/img/bitvagas-white.png', alt='BitVagas')
+
+        ul.foot-nav
+          li
+            a(href='', title='Postar Vaga') Postar Vaga
+          li
+            a(href='', title='Sobre') Sobre
+          li
+            a(href='', title='Termos de uso') Termos de uso
+          li
+            a(href='', title='Contato') Contato
+
+        ul.foot-social
+          li
+            a(href='')
+              img(src='', alt='Facebook')
+          li
+            a(href='')
+              img(src='', alt='Twitter')
+          li
+            a(href='')
+              img(src='', alt='Google+')
+          li
+            a(href='')
+              img(src='', alt='RSS')
