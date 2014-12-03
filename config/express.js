@@ -7,7 +7,7 @@ var express        = require('express'),
     methodOverride = require('method-override'),
     harp           = require('harp');
 
-var routes = require('../app/routes/home');
+var routes = require('../app/modules/jobs/routes/jobs');
 
 module.exports = function(app, config) {
 

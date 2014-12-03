@@ -1,5 +1,5 @@
 var express = require('express'),
-    home    = require('../controllers/home'),
+    home    = require('../controllers/jobs'),
     router  = express.Router();
 
 router.get('/', function(request, response){

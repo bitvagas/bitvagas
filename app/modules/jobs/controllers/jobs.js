@@ -1,6 +1,6 @@
 var express = require('express'),
-    router  = require('../routes/home'),
-    db      = require('../models');
+    router  = require('../routes/jobs'),
+    db      = require('../../../models');
 
 module.exports = {
 
