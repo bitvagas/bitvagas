@@ -1,11 +1,11 @@
-var express        = require('express'),
-    favicon        = require('serve-favicon'),
-    logger         = require('morgan'),
-    cookieParser   = require('cookie-parser'),
-    bodyParser     = require('body-parser'),
-    compress       = require('compression'),
-    methodOverride = require('method-override'),
-    harp           = require('harp');
+var express        = require('express')
+  , favicon        = require('serve-favicon')
+  , logger         = require('morgan')
+  , cookieParser   = require('cookie-parser')
+  , bodyParser     = require('body-parser')
+  , compress       = require('compression')
+  , methodOverride = require('method-override')
+  , harp           = require('harp');
 
 var routes = require('../app/modules/jobs/routes/jobs');
 
