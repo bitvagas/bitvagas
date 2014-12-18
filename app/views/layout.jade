@@ -33,18 +33,18 @@ head
   body
     header.head
       .wrapper.cf
-        a.logo(href='', title='BitVagas')
+        a.logo(href='/', title='BitVagas')
           img(src='/img/bitvagas.png', alt='BitVagas')
 
         ul.head-nav
           li
-            a(href='', title='Todas as Vagas') Todas as Vagas
+            a(href='/jobs/list', title='Todas as Vagas') Todas as Vagas
           li
-            a(href='', title='Postar Vaga') Postar Vaga
+            a(href='/jobs/create', title='Postar Vaga') Postar Vaga
           li
-            a(href='', title='Sobre') Sobre
+            a(href='/about', title='Sobre') Sobre
           li
-            a(href='', title='Contato') Contato
+            a(href='/contact', title='Contato') Contato
 
     block content
 
@@ -57,11 +57,11 @@ head
           li
             a(href='', title='Postar Vaga') Postar Vaga
           li
-            a(href='', title='Sobre') Sobre
+            a(href='/about', title='Sobre') Sobre
           li
             a(href='', title='Termos de uso') Termos de uso
           li
-            a(href='', title='Contato') Contato
+            a(href='/contact', title='Contato') Contato
 
         ul.foot-social
           li
