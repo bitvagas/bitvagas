@@ -1,5 +1,5 @@
 doctype html
-html(lang='pt-br')
+html(lang='pt-br', ng-app='bitvagas')
 head
     title
       | BitVagas — Plataforma de Vagas para usuários Bitcoin
@@ -29,6 +29,13 @@ head
     block css
       link(href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700', rel='stylesheet', type='text/css')
       link(rel='stylesheet', href='/css/bitvagas.css')
+      script(src='components/angular/angular.min.js')
+      script(src='components/angular-route/angular-route.min.js')
+      script(src='components/angular-ui-router/release/angular-ui-router.min.js')
+      script(src='js/app.js')
+      script.
+        if (typeof angular == 'undefined')
+            window.location.replace("/main_url");
 
   body
     header.head
@@ -38,9 +45,9 @@ head
 
         ul.head-nav
           li
-            a(href='/jobs/list', title='Todas as Vagas') Todas as Vagas
+            a(href='jobs', title='Todas as Vagas') Todas as Vagas
           li
-            a(href='/jobs/create', title='Postar Vaga') Postar Vaga
+            a(href='jobs/create', title='Postar Vaga') Postar Vaga
           li
             a(href='/about', title='Sobre') Sobre
           li
