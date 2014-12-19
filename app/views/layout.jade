@@ -32,26 +32,25 @@ head
       script(src='components/angular/angular.min.js')
       script(src='components/angular-route/angular-route.min.js')
       script(src='components/angular-ui-router/release/angular-ui-router.min.js')
-      script(src='js/app.js')
-      script.
-        if (typeof angular == 'undefined')
-            window.location.replace("/main_url");
+      script(src='modules/app.js')
+      script(src='modules/main/app.js')
+      script(src='modules/jobs/app.js')
 
   body
     header.head
       .wrapper.cf
-        a.logo(href='/', title='BitVagas')
+        a.logo(href='/#/', title='BitVagas')
           img(src='/img/bitvagas.png', alt='BitVagas')
 
         ul.head-nav
           li
-            a(href='jobs', title='Todas as Vagas') Todas as Vagas
+            a(ui-sref='jobs-list', title='Todas as Vagas') Todas as Vagas
           li
-            a(href='jobs/create', title='Postar Vaga') Postar Vaga
+            a(ui-sref='jobs-create', title='Postar Vaga') Postar Vaga
           li
-            a(href='/about', title='Sobre') Sobre
+            a(ui-sref='about', title='Sobre') Sobre
           li
-            a(href='/contact', title='Contato') Contato
+            a(ui-sref='contact', title='Contato') Contato
 
     block content
 
@@ -62,13 +61,13 @@ head
 
         ul.foot-nav
           li
-            a(href='', title='Postar Vaga') Postar Vaga
+            a(ui-sref='jobs-create', title='Postar Vaga') Postar Vaga
           li
-            a(href='/about', title='Sobre') Sobre
+            a(ui-sref='about', title='Sobre') Sobre
           li
-            a(href='', title='Termos de uso') Termos de uso
+            a(href='#', title='Termos de uso') Termos de uso
           li
-            a(href='/contact', title='Contato') Contato
+            a(ui-sref='contact', title='Contato') Contato
 
         ul.foot-social
           li
