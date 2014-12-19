@@ -1,6 +1,7 @@
 angular.module('bitvagas.main', ['ui.router'])
     .config(function($urlRouterProvider, $stateProvider){
 
+        $urlRouterProvider.otherwise('/');
         $stateProvider
         .state('about', {
             url: '/about',
