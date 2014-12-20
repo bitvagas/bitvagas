@@ -10,23 +10,29 @@
 
 .head-nav
   +cf
-
   font-weight: 700
   line-height: 1
   list-style: none
   margin: 0
-
   > li
+    &.current
+      > a
+        box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.125)
+        background-color: #f2f2f2
+        color: #555
+        text-shadow: 0 1px 0 white
     > a
       border-radius: 4px
       color: #7d7d7d
       display: block
       padding: 12px
       &:hover
-        background-color: #f2f2f2
-
+        color: #555
   +media-query(desk)
     float: left
     > li
       border-bottom: none
       float: left
+      margin-right: 6px
+      &:last-child
+        margin-right: 0
