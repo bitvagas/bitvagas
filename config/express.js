@@ -1,17 +1,15 @@
-var express        = require('express'),
-    favicon        = require('serve-favicon'),
-    logger         = require('morgan'),
-    cookieParser   = require('cookie-parser'),
-    bodyParser     = require('body-parser'),
-    compress       = require('compression'),
-    methodOverride = require('method-override'),
-    harp           = require('harp');
-
-var routes = require('../app/modules/jobs/routes/jobs');
+var express        = require('express')
+  , favicon        = require('serve-favicon')
+  , logger         = require('morgan')
+  , cookieParser   = require('cookie-parser')
+  , bodyParser     = require('body-parser')
+  , compress       = require('compression')
+  , methodOverride = require('method-override')
+  , harp           = require('harp');
 
 module.exports = function(app, config) {
 
-  app.set('views', config.root + '/app/views');
+  app.set('views', './app/views');
   app.set('view engine', 'jade');
 
   // app.use(favicon(config.root + '/public/img/favicon.ico'));
@@ -29,7 +27,11 @@ module.exports = function(app, config) {
   app.use(harp.mount(config.root + "/public"));
 
   //Routes
-  app.use('/', routes);
+  var jobs = require(config.root + '/app/modules/jobs/routes/job-router')
+    , main = require(config.root + '/app/modules/main/routes/main-router');
+
+  app.use('/',main);
+  app.use('/jobs',jobs);
 
   app.use(function (req, res, next) {
     var err = new Error('Not Found');

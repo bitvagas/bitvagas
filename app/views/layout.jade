@@ -1,5 +1,5 @@
 doctype html
-html(lang='pt-br')
+html(lang='pt-br', ng-app='bitvagas')
 head
     title
       | BitVagas — Plataforma de Vagas para usuários Bitcoin
@@ -29,22 +29,27 @@ head
     block css
       link(href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700', rel='stylesheet', type='text/css')
       link(rel='stylesheet', href='/css/bitvagas.css')
+      script(src='components/angular/angular.min.js')
+      script(src='components/angular-ui-router/release/angular-ui-router.min.js')
+      script(src='modules/app.js')
+      script(src='modules/main/app.js')
+      script(src='modules/jobs/app.js')
 
   body
     header.head
       .wrapper.cf
-        a.logo(href='', title='BitVagas')
+        a.logo(href='/#/', title='BitVagas')
           img(src='/img/bitvagas.png', alt='BitVagas')
 
         ul.head-nav
-          li.current
-            a(href='', title='Todas as Vagas') Todas as Vagas
           li
-            a(href='', title='Postar Vaga') Postar Vaga
+            a(ui-sref='jobs-list', title='Todas as Vagas') Todas as Vagas
           li
-            a(href='', title='Sobre') Sobre
+            a(ui-sref='jobs-create', title='Postar Vaga') Postar Vaga
           li
-            a(href='', title='Contato') Contato
+            a(ui-sref='about', title='Sobre') Sobre
+          li
+            a(ui-sref='contact', title='Contato') Contato
 
     block content
 
@@ -55,13 +60,13 @@ head
 
         ul.foot-nav
           li
-            a(href='', title='Postar Vaga') Postar Vaga
+            a(ui-sref='jobs-create', title='Postar Vaga') Postar Vaga
           li
-            a(href='', title='Sobre') Sobre
+            a(ui-sref='about', title='Sobre') Sobre
           li
-            a(href='', title='Termos de uso') Termos de uso
+            a(href='#', title='Termos de uso') Termos de uso
           li
-            a(href='', title='Contato') Contato
+            a(ui-sref='contact', title='Contato') Contato
 
         ul.foot-social
           li
