@@ -14,5 +14,9 @@ angular.module('bitvagas.jobs', ['ui.router'])
         .state('jobs-create', {
             url: '/jobs/create',
             templateUrl: 'modules/jobs/views/job-create'
+        })
+        .state('jobs-show', {
+            url: '/jobs/:jobID',
+            templateUrl: 'modules/jobs/views/job-show'
         });
     });
