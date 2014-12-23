@@ -8,11 +8,17 @@ module.exports = function(sequelize, DataTypes){
             autoIncrement: true,
             field: 'ID'
         }
-        , TITLE:        Sequelize.STRING
-        , DESCRIPTION:  Sequelize.STRING
-        , LOCATION:     Sequelize.STRING
-        , COMPANY_NAME: Sequelize.STRING
-        , COMPANY_URL:  Sequelize.STRING
+        , TITLE        : Sequelize.STRING
+        , DESCRIPTION  : Sequelize.TEXT
+        , LOCATION     : Sequelize.STRING
+        , COMPANY_NAME : Sequelize.STRING
+        , COMPANY_URL  : {
+              type: Sequelize.STRING
+            , allowNull : true
+            , validate  : {
+                isUrl   : true
+            }
+        }
     }, {
         tableName: "JOBS"
     });
