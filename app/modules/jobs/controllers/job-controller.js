@@ -4,8 +4,9 @@ var express = require('express'),
 module.exports = {
 
     findAll: function(request, response){
-        var json = {}
-        response.json(json);
+        db.JOB.findAll().success(function(jobs){
+            response.json(jobs);
+        });
     },
 
     create: function(request, response){
