@@ -1,11 +1,11 @@
 'use strict';
+var Sequelize = require('sequelize');
 
 module.exports = function(sequelize, DataTypes){
 
-    var Job = sequelize.define('Job', {
+    var JOB = sequelize.define('JOB', {
         ID: {
             type: Sequelize.INTEGER,
-            autoIncrement: true,
             field: 'ID'
         }
         , TITLE        : Sequelize.STRING
@@ -20,7 +20,7 @@ module.exports = function(sequelize, DataTypes){
             }
         }
     }, {
-        tableName: "JOBS"
+        tableName: 'JOBS'
     });
-    return Job;
+    return JOB;
 }
