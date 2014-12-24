@@ -1,16 +1,16 @@
 'use strict';
+var Sequelize = require('sequelize');
 
 module.exports = function(sequelize){
 
-    var USERS = sequelize.define('USERS', {
+    var USER = sequelize.define('USER', {
         ID: {
             type: Sequelize.INTEGER,
-            autoIncrement: true,
             field: 'ID'
         }
         , NAME : Sequelize.STRING
         , EMAIL: {
-            , type: Sequelize.STRING
+              type: Sequelize.STRING
             , allowNull : false
             , validades : {
                 isEmail : true
@@ -18,5 +18,8 @@ module.exports = function(sequelize){
         }
         , PASSWORD : Sequelize.STRING
         , ADMIN    : Sequelize.BOOLEAN
+    }, {
+       tableName: 'USERS'
     });
+    return USER;
 }
