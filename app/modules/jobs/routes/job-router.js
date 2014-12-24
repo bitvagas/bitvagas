@@ -3,10 +3,6 @@ var express = require('express')
   , app     = module.exports = express()
   , router  = express.Router();
 
-router.get('/', function(request, response){
-    jobs.findAll(request, response);
-});
-
 router.get('/list', function(request, response){
     jobs.findAll(request,response);
 });
