@@ -31,7 +31,7 @@ module.exports = function(app, config) {
     , main = require(config.root + '/app/modules/main/routes/main-router');
 
   app.use('/',main);
-  app.use('/jobs',jobs);
+  app.use('/api/jobs',jobs);
 
   app.use(function (req, res, next) {
     var err = new Error('Not Found');
