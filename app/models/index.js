@@ -1,17 +1,27 @@
-var fs = require('fs'),
-  path = require('path'),
-  Sequelize = require('sequelize'),
-  lodash = require('lodash'),
-  config = require('../../config/config'),
-  db = {};
+var fs        = require('fs')
+  , path      = require('path')
+  , Sequelize = require('sequelize')
+  , lodash    = require('lodash')
+  , config    = require('../../config/config')
+  , glob      = require('glob')
+  , root      = path.normalize(__dirname + '/../..')
+  , db        = {};
 
-var sequelize = new Sequelize(config.db, config.username, config.password);
+var sequelize = new Sequelize(config.db, config.username, config.password, {
+    dialect : 'postgres'
+  , host    : 'localhost'
+  , port    : 5433
+});
 
-fs.readdirSync(__dirname).filter(function (file) {
-  return (file.indexOf('.') !== 0) && (file !== 'index.js');
-}).forEach(function (file) {
-  var model = sequelize.import(path.join(__dirname, file));
-  db[model.name] = model;
+/*
+ * get all models files from model folders
+ */
+var modules = glob.sync('app/modules/**/model/*.js');
+modules.forEach(function(module){
+    var modelName  = path.basename(module)
+      , modelPath  = path.join(root, module)
+      , model      = sequelize.import(modelPath);
+    db[model.name] = model;
 });
 
 Object.keys(db).forEach(function (modelName) {
