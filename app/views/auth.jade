@@ -1,0 +1,26 @@
+doctype html
+html(lang='pt-br')
+head
+    title
+      | BitVagas — Sign In
+
+    include meta
+    link(rel='stylesheet', href='/css/bitvagas.css')
+
+block content
+
+    .signin
+      .main
+        a(href='/#/', title='BitVagas')
+          img(src='/img/bitvagas.png', alt='BitVagas')
+
+        .auth
+          form(action='', method='post')
+            input.input__text(type='text' placeholder='username')
+            input.input__text(type='password' placeholder='password')
+            input.login__btn.btn.btn--primary(type='submit', value='Sign In')
+            div
+              a.forgot(href='#') Forgot password?
+              br
+              | ainda não é usuario?
+              a.join(ui-sref='signup') Join now
