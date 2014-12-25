@@ -16,6 +16,8 @@
     "lodash": "~2.4.1",
     "method-override": "~2.1.1",
     "morgan": "~1.1.1",
+    "passport": "^0.2.1",
+    "passport-local": "^1.0.0",
     "pg": "^4.1.1",
     "sequelize": "~1.7.9",
     "serve-favicon": "~2.0.1",
