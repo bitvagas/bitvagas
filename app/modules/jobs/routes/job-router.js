@@ -1,6 +1,5 @@
 var express = require('express')
   , jobs    = require('../controllers/job-controller')
-  , app     = module.exports = express()
   , router  = express.Router();
 
 router.get('/list', function(request, response){
