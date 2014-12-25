@@ -1,4 +1,34 @@
 .main
-    .wrapper
-        h1
-            | Create
+  .wrapper
+      h1.slogan
+        | Postar Vaga
+
+      form(action='', method='post')
+        input.input__text(type='text', placeholder='Titulo da Vaga')
+        textarea.input__text(type='text', placeholder='Descrição')
+        h4 Categoria
+        select
+          option(value="Desenvolvimento") 
+            | Desenvolvimento
+          option(value="Design") 
+            | Design
+        .jobType
+          h5 Periodo
+          p
+            input(type='radio' name='job-type' value='full-time' id='rdl-fulltime')
+            label(for='rdl-fulltime') FULL-TIME
+          p
+            input(type='radio' name='job-type' value='part-time' id='rdl-parttime')
+            label(for='rdl-parttime') PART-TIME
+          p
+            input(type='radio' name='job-type' value='part-time' id='rdl-freelance')
+            label(for='rdl-freelance') FREELANCE
+          p
+            input(type='radio' name='job-type' value='temporary' id='rdl-temporary')
+            label(for='rdl-temporary') TEMPORARY
+        p
+          input.input__text(type='text', placeholder='Local')
+          input.input__text(type='text', placeholder='Nome da Empresa')
+          input.input__text(type='text', placeholder='Site da Empresa')
+        p
+          a.btn.btn--medium.btn--primary(href='') Postar Vaga
