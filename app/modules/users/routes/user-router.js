@@ -1,5 +1,7 @@
-var express = require('express')
-  , router  = express.Router();
+var express   = require('express')
+  , passport  = require('passport')
+  , stratergy = require('../controllers/passport')
+  , router    = express.Router();
 
 router.get('/auth', function(request, response){
     response.render('auth');
@@ -7,8 +9,12 @@ router.get('/auth', function(request, response){
 router.get('/auth/signin', function(request, response){
     response.render('auth');
 });
-router.get('/signup', function(request, response){
-    response.render('signup');
-});
+
+router.post('/auth', passport.authenticate('signin',
+    { successRedirect : '/'
+    , failureRedirect : '/auth'
+    , failureFlash    : true
+    })
+);
 
 module.exports = router;
