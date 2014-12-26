@@ -15,9 +15,9 @@ block content
           img(src='/img/bitvagas.png', alt='BitVagas')
 
         .auth
-          form(action='', method='post')
-            input.input__text(type='text' placeholder='username')
-            input.input__text(type='password' placeholder='password')
+          form(action='/auth', method='post')
+            input.input__text(type='text' placeholder='email' name='email')
+            input.input__text(type='password' placeholder='password' name='password')
             input.login__btn.btn.btn--primary(type='submit', value='Sign In')
             div
               a.forgot(href='#') Forgot password?
