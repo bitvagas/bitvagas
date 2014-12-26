@@ -11,4 +11,12 @@ describe('Users modules', function(){
             done();
         })
     })
+    it('find user by email `cesardeazevedo@outlook.com` ', function(done){
+        db.USER.find({ where: { EMAIL: 'cesardeazevedo@outlook.com'}})
+        .success(function(users){
+            console.log(JSON.stringify(users));
+            users.should.be.ok;
+            done();
+        });
+    });
 });
