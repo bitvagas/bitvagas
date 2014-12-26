@@ -5,7 +5,10 @@ var express        = require('express')
   , bodyParser     = require('body-parser')
   , compress       = require('compression')
   , methodOverride = require('method-override')
-  , harp           = require('harp');
+  , harp           = require('harp')
+  , passport       = require('passport')
+  , session        = require('express-session')
+  , flash          = require('connect-flash');
 
 module.exports = function(app, config) {
 
@@ -22,6 +25,10 @@ module.exports = function(app, config) {
   app.use(compress());
   app.use(express.static(config.root + '/public'));
   app.use(methodOverride());
+  app.use(session({secret: 'key',saveUninitialized: true, resave: true}));
+  app.use(passport.initialize());
+  app.use(passport.session());
+  app.use(flash());
 
   //Initialize HarpJS
   app.use(harp.mount(config.root + "/public"));
