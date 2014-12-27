@@ -3,11 +3,11 @@
       h1.slogan
         | Postar Vaga
 
-      form(action='', method='post')
-        input.input__text(type='text', placeholder='Titulo da Vaga')
-        textarea.input__text(type='text', placeholder='Descrição')
+      form(action='/api/jobs/create', method='post')
+        input.input__text(type='text', placeholder='Titulo da Vaga' name='title')
+        textarea.input__text(type='text', placeholder='Descrição' name='description')
         h4 Categoria
-        select
+        select(name='category')
           option(value="Desenvolvimento") 
             | Desenvolvimento
           option(value="Design") 
@@ -15,20 +15,20 @@
         .jobType
           h5 Periodo
           p
-            input(type='radio' name='job-type' value='full-time' id='rdl-fulltime')
+            input(type='radio' name='jobType' value='full-time' id='rdl-fulltime')
             label(for='rdl-fulltime') FULL-TIME
           p
-            input(type='radio' name='job-type' value='part-time' id='rdl-parttime')
+            input(type='radio' name='jobType' value='part-time' id='rdl-parttime')
             label(for='rdl-parttime') PART-TIME
           p
-            input(type='radio' name='job-type' value='part-time' id='rdl-freelance')
+            input(type='radio' name='jobType' value='part-time' id='rdl-freelance')
             label(for='rdl-freelance') FREELANCE
           p
-            input(type='radio' name='job-type' value='temporary' id='rdl-temporary')
+            input(type='radio' name='jobType' value='temporary' id='rdl-temporary')
             label(for='rdl-temporary') TEMPORARY
         p
-          input.input__text(type='text', placeholder='Local')
-          input.input__text(type='text', placeholder='Nome da Empresa')
-          input.input__text(type='text', placeholder='Site da Empresa')
+          input.input__text(type='text' placeholder='Local' name='local')
+          input.input__text(type='text' placeholder='Nome da Empresa' name='companyName')
+          input.input__text(type='text' placeholder='Site da Empresa' name='companyUrl')
         p
-          a.btn.btn--medium.btn--primary(href='') Postar Vaga
+          button.btn.btn--medium.btn--primary(type='submit') Postar Vaga
