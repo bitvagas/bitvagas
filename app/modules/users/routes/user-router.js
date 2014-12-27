@@ -4,10 +4,7 @@ var express   = require('express')
   , router    = express.Router();
 
 router.get('/auth', function(request, response){
-    response.render('auth');
-});
-router.get('/auth/signin', function(request, response){
-    response.render('auth');
+    response.render('auth', { message : request.flash('error') });
 });
 
 router.post('/auth', passport.authenticate('signin',
