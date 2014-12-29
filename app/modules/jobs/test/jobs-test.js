@@ -5,7 +5,7 @@ var assert    = require('assert')
 
 describe('Jobs modules api', function(){
     it('find all jobs', function(done){
-        db.JOB.findAll().success(function(jobs){
+        db.job.findAll().success(function(jobs){
             console.log(JSON.stringify(jobs));
             jobs.should.be.ok;
             done();
