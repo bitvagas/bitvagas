@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node app.js",
-    "test": "mocha test app/modules/**/test/*-test.js"
+    "test": "export NODE_ENV=test; mocha test app/modules/**/test/*-test.js"
   },
   "dependencies": {
     "body-parser": "~1.4.3",
