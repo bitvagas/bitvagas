@@ -1,19 +1,20 @@
-var gulp    = require('gulp'),
-    nodemon = require('gulp-nodemon'),
-    harp    = require('harp'),
-    browserSync = require('browser-sync');
+var gulp    = require('gulp')
+  , nodemon = require('gulp-nodemon')
+  , harp    = require('harp')
+  , browserSync = require('browser-sync');
 
 gulp.task('browser-sync', ['nodemon'], function () {
     browserSync.init(null, {
-        proxy: "localhost:3000",
-        port: 9000,
-        open: false,
+        proxy: "localhost:3000"
+      , port: 9000
+      , open: false
     });
 });
 
 gulp.task('nodemon', function(){
     nodemon({
         script: 'app.js'
+      , env : 'development'
     })
     .on('restart', function () {
         setTimeout(function () {
