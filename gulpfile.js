@@ -14,7 +14,7 @@ gulp.task('browser-sync', ['nodemon'], function () {
 gulp.task('nodemon', function(){
     nodemon({
         script: 'app.js'
-      , env : 'development'
+      , env : { 'NODE_ENV': 'development'}
     })
     .on('restart', function () {
         setTimeout(function () {
