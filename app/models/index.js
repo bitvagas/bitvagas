@@ -10,7 +10,7 @@ var fs        = require('fs')
 var sequelize = new Sequelize(config.db, config.username, config.password, {
     dialect : 'postgres'
   , host    : 'localhost'
-  , port    : 5433
+  , port    : config.PSQLPort
 });
 
 /*
