@@ -5,10 +5,10 @@ block content
         h1.slogan
           | Sign Up
 
-        form(action='', method='post')
-          input.input__text(type='text', placeholder='Nome')
-          input.input__text(type='text', placeholder='Email')
-          input.input__text(type='password', placeholder='Senha')
-          input.input__text(type='password', placeholder='Re. Senha')
+        form(action='/signup', method='post')
+          input.input__text(type='text' placeholder='Nome' name='name')
+          input.input__text(type='text' placeholder='Email' name='email')
+          input.input__text(type='password' placeholder='Senha' name='password')
+          input.input__text(type='password' placeholder='Re. Senha' name='repassword')
           input.login__btn.btn.btn--primary(type='submit', value='Sign Up')
 
