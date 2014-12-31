@@ -1,34 +1,71 @@
-.main
-  .wrapper
-      h1.slogan
-        | Postar Vaga
+.create
+  .create__cell.create__cell--main
+    h1.slogan Postar Vaga
 
-      form(action='/api/jobs/create', method='post')
-        input.input__text(type='text', placeholder='Titulo da Vaga' name='title')
-        textarea.input__text(type='text', placeholder='Descrição' name='description')
-        h4 Categoria
-        select(name='category')
-          option(value="Desenvolvimento") 
-            | Desenvolvimento
-          option(value="Design") 
-            | Design
-        .jobType
-          h5 Periodo
-          p
-            input(type='radio' name='jobType' value='full-time' id='rdl-fulltime')
-            label(for='rdl-fulltime') FULL-TIME
-          p
-            input(type='radio' name='jobType' value='part-time' id='rdl-parttime')
-            label(for='rdl-parttime') PART-TIME
-          p
-            input(type='radio' name='jobType' value='part-time' id='rdl-freelance')
-            label(for='rdl-freelance') FREELANCE
-          p
-            input(type='radio' name='jobType' value='temporary' id='rdl-temporary')
-            label(for='rdl-temporary') TEMPORARY
-        p
-          input.input__text(type='text' placeholder='Local' name='location')
-          input.input__text(type='text' placeholder='Nome da Empresa' name='companyName')
-          input.input__text(type='text' placeholder='Site da Empresa' name='companyUrl')
-        p
-          button.btn.btn--medium.btn--primary(type='submit') Postar Vaga
+    form(action='/api/jobs/create', method='post')
+      fieldset.create-fieldset
+        legend.create-fieldset__legend Sobre sua empresa
+        ul.create-form
+          li
+            label.create-form__label Seu e-mail:
+            .create-form__input
+              input.input.input--full(type='text')
+          li
+            label.create-form__label Nome da empresa:
+            .create-form__input
+              input.input.input--full(type='text' placeholder='' name='companyName')
+          li
+            label.create-form__label Site da empresa:
+            .create-form__input
+              input.input.input--full(type='text' placeholder='' name='companyUrl')
+          li
+            label.create-form__label Logo:
+            .create-form__input
+              input(type='file')
+
+      fieldset.create-fieldset
+        legend.create-fieldset__legend Sobre a vaga
+        ul.create-form
+          li
+            label.create-form__label Título da vaga:
+            .create-form__input
+              input.input.input--full(type='text' name='title')
+          li
+            label.create-form__label Tipo da vaga:
+            .create-form__input
+              ul.create-type-job
+                li
+                  input.create-type-job__input(type='radio' name='jobType' value='full-time' id='rdl-fulltime')
+                  label.create-type-job__label.label.label--fulltime(for='rdl-fulltime') Full-time
+                li
+                  input.create-type-job__input(type='radio' name='jobType' value='part-time' id='rdl-parttime')
+                  label.create-type-job__label.label.label--parttime(for='rdl-parttime') Part-time
+                li
+                  input.create-type-job__input(type='radio' name='jobType' value='part-time' id='rdl-freelance')
+                  label.create-type-job__label.label.label--freelance(for='rdl-freelance') Freelance
+                li
+                  input.create-type-job__input(type='radio' name='jobType' value='temporary' id='rdl-temporary')
+                  label.create-type-job__label.label.label--temporary(for='rdl-temporary') Temporary
+          li
+            label.create-form__label Descrição:
+            .create-form__input
+              textarea.textarea.textarea--full(placeholder='Descrição' name='description' rows='6')
+          li
+            label.create-form__label Categoria:
+            .create-form__input
+              select.select.select--full(name='category')
+                option(value="Desenvolvimento") Desenvolvimento
+                option(value="Design") Design
+          li
+            label.create-form__label Local:
+            .create-form__input
+              input.input.input--full(type='text' placeholder='' name='location')
+          li
+            label.create-form__label Aplicar para a vaga:
+            .create-form__input
+              input.input.input--full(type='text' placeholder='E-mail ou URL' name='')
+
+      .create-action
+        button.create-action__btn.btn.btn--medium.btn--primary(type='submit') Continuar
+  .create__cell.create__cell--aside
+

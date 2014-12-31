@@ -26,7 +26,7 @@ gulp.task('nodemon', function(){
 gulp.task('watch', function() {
 
     //Watch jade files
-    gulp.watch('app/views/**/*.jade', function(){
+    gulp.watch(['app/views/**/*.jade', 'public/modules/**/*.jade'], function(){
         browserSync.reload('index.html', { stream: true });
     });
     //Watch sass files

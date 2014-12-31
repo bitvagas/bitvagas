@@ -1,0 +1,91 @@
+.create
+  +cf
+  +media-query(desk)
+    margin-left: -24px
+
+.create__cell
+  +media-query(desk)
+    float: left
+    padding-left: 24px
+
+.create__cell--main
+  +media-query(desk)
+    width: 70%
+
+.create__cell--aside
+  +media-query(desk)
+    width: 30%
+
+.create-fieldset
+  border: none
+
+.create-fieldset__legend
+  border-bottom: 1px solid #e7e7e7
+  color: #333
+  display: block
+  font-size: 20px
+  line-height: 2
+  margin-bottom: 12px
+  padding: 0
+  width: 100%
+  +media-query(desk)
+    margin-bottom: 24px
+
+.create-form
+  list-style: none
+  margin: 0
+  > li
+    margin-bottom: 12px
+    &:last-child
+      margin-bottom: 0
+  +media-query(desk)
+    > li
+      display: table
+      margin-bottom: 24px
+      width: 100%
+      &:last-child
+        margin-bottom: 0
+
+.create-form__label
+  display: block
+  margin-bottom: 6px
+  +media-query(desk)
+    display: table-cell
+    vertical-align: top
+    width: 25%
+
+.create-form__input
+  +media-query(desk)
+    display: table-cell
+    vertical-align: top
+
+.create-type-job
+  list-style: none
+  margin: 0
+  > li
+    margin-bottom: 6px
+    &:last-child
+      margin-bottom: 0
+
+.create-type-job__input
+  display: table-cell
+  vertical-align: middle
+  margin-right: 6px
+
+.create-type-job__label
+  display: table-cell
+  vertical-align: middle
+
+.create-action
+  background: whitesmoke
+  border-top: 1px solid #e5e5e5
+  padding: 14px 24px
+  +media-query(desk)
+    padding-left: 166px
+
+.create-action__btn
+  display: block
+  width: 100%
+  +media-query(desk)
+    display: inline-block
+    width: auto
