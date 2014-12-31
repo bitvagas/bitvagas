@@ -1,6 +1,5 @@
-angular.module('bitvagas.admin', ['ui.router','angular-flash.service', 'angular-flash.flash-alert-directive'])
-    .config(function($urlRouterProvider, $stateProvider, flashProvider){
-        flashProvider.errorClassnames.push('alert-danger');
+angular.module('bitvagas.admin', ['ui.router'])
+    .config(function($urlRouterProvider, $stateProvider){
         $stateProvider
         .state('dashboard', {
             url: '/dashboard',
