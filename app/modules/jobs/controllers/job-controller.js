@@ -10,7 +10,11 @@ module.exports = {
     },
 
     create: function(request, response){
-        var json = {}
-        response.json(json);
+        db.JOB.create(request.body)
+        .success(function(job){
+            response.json(job);
+        }).error(function(error){
+            response.json(405, error);
+        });
     }
 };

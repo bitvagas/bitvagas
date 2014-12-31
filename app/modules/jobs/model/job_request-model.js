@@ -6,11 +6,11 @@ module.exports = function(sequelize, DataTypes){
           DATE   : DataTypes.DATE
         , EMAIL  : {
             type : DataTypes.STRING
-          , allowNull : true
-          , validate  : {
-            isEmail   : true
-          }
+        , allowNull : true
+        , validate  : {
+        isEmail   : true
         }
+    }
         , DESCRIPTION : DataTypes.TEXT
     }, {
         classMethods  : {
