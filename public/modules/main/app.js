@@ -7,6 +7,10 @@ angular.module('bitvagas.main', ['ui.router'])
             url: '/about',
             templateUrl: 'modules/main/views/about'
         })
+        .state('terms', {
+            url: '/terms',
+            templateUrl: 'modules/main/views/terms'
+        })
         .state('contact', {
             url: '/contact',
             templateUrl: 'modules/main/views/contact'
