@@ -5,10 +5,14 @@ block content
         h1.slogan
           | Sign Up
 
-        form(action='/signup', method='post')
-          input.input__text(type='text' placeholder='Nome' name='name')
-          input.input__text(type='text' placeholder='Email' name='email')
-          input.input__text(type='password' placeholder='Senha' name='password')
-          input.input__text(type='password' placeholder='Re. Senha' name='repassword')
-          input.login__btn.btn.btn--primary(type='submit', value='Sign Up')
+        ul
+          li(ng-repeat='errorMessage in flash.errors')
+            {{ errorMessage }}
+
+        form
+          input.input__text(type='text' ng-model='user.NAME' placeholder='Nome' name='NAME')
+          input.input__text(type='text' ng-model='user.EMAIL' placeholder='Email' name='EMAIL')
+          input.input__text(type='password' ng-model='user.PASSWORD' placeholder='Senha' name='PASSWORD')
+          input.input__text(type='password' ng-model='user.REPASSWORD' placeholder='Re. Senha' name='REPASSWORD')
+          input.login__btn.btn.btn--primary(data-ng-click='create(user)', value='Sign Up')
 
