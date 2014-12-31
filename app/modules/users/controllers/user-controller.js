@@ -9,10 +9,6 @@ module.exports = {
   }
 
   , create: function(request){
-        return db.user.create({ NAME     : request.param('name')
-                              , EMAIL    : request.param('email')
-                              , PASSWORD : request.param('password')
-                              , ADMIN    : false
-        });
+        return db.user.create(request.body);
   }
 }
