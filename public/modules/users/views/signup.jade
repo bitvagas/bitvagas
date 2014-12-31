@@ -1,18 +1,34 @@
 block content
-  .signup
-    .main
-      .wrapper
-        h1.slogan
-          | Sign Up
+  form.signup
+    .signup__cell.signup__cell--main
+      header.signup__head
+        h1.signup__title Sign Up
 
-        ul
-          li(ng-repeat='errorMessage in flash.errors')
-            {{ errorMessage }}
+      ul
+        li(ng-repeat='errorMessage in flash.errors')
+          {{ errorMessage }}
 
-        form
-          input.input__text(type='text' ng-model='user.NAME' placeholder='Nome' name='NAME')
-          input.input__text(type='text' ng-model='user.EMAIL' placeholder='Email' name='EMAIL')
-          input.input__text(type='password' ng-model='user.PASSWORD' placeholder='Senha' name='PASSWORD')
-          input.input__text(type='password' ng-model='user.REPASSWORD' placeholder='Re. Senha' name='REPASSWORD')
-          input.login__btn.btn.btn--primary(data-ng-click='create(user)', value='Sign Up')
+      .signup__body
+        fieldset.signup-fieldset
+          ul.signup-form
+            li
+              <label for="" class="signup-form__label">Nome:</label>
+              .signup-form__input
+                input.input.input--full(type='text' ng-model='user.NAME' placeholder='Nome' name='NAME')
+            li
+              <label for="" class="signup-form__label">E-mail:</label>
+              .signup-form__input
+                input.input.input--full(type='text' ng-model='user.EMAIL' placeholder='Email' name='EMAIL')
+            li
+              <label for="" class="signup-form__label">Senha:</label>
+              .signup-form__input
+                input.input.input--full(type='password' ng-model='user.PASSWORD' placeholder='Senha' name='PASSWORD')
+            li
+              <label for="" class="signup-form__label">Re. Senha:</label>
+              .signup-form__input
+                input.input.input--full(type='password' ng-model='user.REPASSWORD' placeholder='Re. Senha' name='REPASSWORD')
 
+      .signup-action
+        button.signup-action__btn.btn.btn--medium.btn--primary(data-ng-click='create(user)' value='Sign Up') Enviar
+
+    .signup__cell.signup__cell--aside

@@ -1,5 +1,26 @@
 block content
-    .main
-        .wrapper
-            h1.slogan
-                | Contato
+  form.contact
+    .contact__cell.contact__cell--main
+      header.contact__head
+        h1.contact__title Contato
+
+      .contact__body
+        fieldset.contact-fieldset
+          ul.contact-form
+            li
+              <label for="" class="contact-form__label">Nome:</label>
+              .contact-form__input
+                input.input.input--full(type='text')
+            li
+              <label for="" class="contact-form__label">E-mail:</label>
+              .contact-form__input
+                input.input.input--full(type='text')
+            li
+              <label for="" class="contact-form__label">Mensagem:</label>
+              .contact-form__input
+                textarea.textarea.textarea--full(rows='5')
+
+      .contact-action
+        button.contact-action__btn.btn.btn--medium.btn--primary(type='submit') Enviar
+
+    .contact__cell.contact__cell--aside

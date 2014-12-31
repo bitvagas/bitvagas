@@ -1,12 +1,13 @@
 .create
   +cf
+  margin-bottom: 24px
   +media-query(desk)
-    margin-left: -24px
+    margin-left: -48px
 
 .create__cell
   +media-query(desk)
     float: left
-    padding-left: 24px
+    padding-left: 48px
 
 .create__cell--main
   +media-query(desk)
@@ -18,6 +19,8 @@
 
 .create-fieldset
   border: none
+  +media-query(desk)
+    margin-bottom: 32px
 
 .create-fieldset__legend
   border-bottom: 1px solid #e7e7e7
@@ -35,7 +38,7 @@
   list-style: none
   margin: 0
   > li
-    margin-bottom: 12px
+    margin-bottom: 14px
     &:last-child
       margin-bottom: 0
   +media-query(desk)
@@ -89,3 +92,8 @@
   +media-query(desk)
     display: inline-block
     width: auto
+
+.create-form__help
+  color: #858585
+  font-size: 12px
+  padding-top: 6px

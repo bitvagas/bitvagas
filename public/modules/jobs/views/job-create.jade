@@ -10,14 +10,17 @@
             label.create-form__label Seu e-mail:
             .create-form__input
               input.input.input--full(type='text')
+              .create-form__help Este é o email para cadastramento de sua empresa em nosso sistema.
           li
             label.create-form__label Nome da empresa:
             .create-form__input
               input.input.input--full(type='text' placeholder='' name='companyName')
+              .create-form__help O nome da empresa não pode ser divulgado? Cheque ao lado para manter em sigilo.
           li
             label.create-form__label Site da empresa:
             .create-form__input
-              input.input.input--full(type='text' placeholder='' name='companyUrl')
+              input.input.input--full(type='text' placeholder='http://' name='companyUrl')
+              .create-form__help Vagas com o site da empresa atraem mais candidatos.
           li
             label.create-form__label Logo:
             .create-form__input
@@ -64,6 +67,13 @@
             label.create-form__label Aplicar para a vaga:
             .create-form__input
               input.input.input--full(type='text' placeholder='E-mail ou URL' name='')
+          li
+            .create-form__label &nbsp;
+            .create-form__input
+                label(for='terms')
+                  input(type='checkbox' id='terms')
+                  |  Concordo com os
+                  |  <a href="">termos de uso</a>.
 
       .create-action
         button.create-action__btn.btn.btn--medium.btn--primary(type='submit') Continuar
