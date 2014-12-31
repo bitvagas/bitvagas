@@ -43,13 +43,13 @@
     background: #f39c12
 
 .btn--secondary
-  +gradient(lighten(#149cc9, 10%), #149cc9)
+  +gradient(#149cc9, darken(#149cc9, 10%))
   border-color: #149cc9
   border-bottom-color: darken(#149cc9, 6%)
   color: #fff
   text-shadow: 0 -1px 0 rgba(0,0,0,0.25)
   &:hover
-    +gradient(#149cc9, lighten(#149cc9, 10%))
+    +gradient(darken(#149cc9, 10%), #149cc9)
     color: #fff
   &:active,
   &:focus
