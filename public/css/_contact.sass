@@ -1,0 +1,65 @@
+.contact
+  +cf
+  margin-bottom: 24px
+  +media-query(desk)
+    margin-left: -24px
+
+.contact__cell
+  +media-query(desk)
+    float: left
+    padding-left: 24px
+
+.contact__cell--main
+  +media-query(desk)
+    width: 70%
+
+.contact__cell--aside
+  +media-query(desk)
+    width: 30%
+
+.contact-form
+  list-style: none
+  margin: 0
+  > li
+    margin-bottom: 14px
+    &:last-child
+      margin-bottom: 0
+  +media-query(desk)
+    > li
+      display: table
+      margin-bottom: 24px
+      width: 100%
+      &:last-child
+        margin-bottom: 0
+
+.contact-form__label
+  display: block
+  margin-bottom: 6px
+  +media-query(desk)
+    display: table-cell
+    vertical-align: top
+    width: 25%
+
+.contact-form__input
+  +media-query(desk)
+    display: table-cell
+    vertical-align: top
+
+.contact-action
+  background: whitesmoke
+  border-top: 1px solid #e5e5e5
+  padding: 14px 24px
+  +media-query(desk)
+    padding-left: 166px
+
+.contact-action__btn
+  display: block
+  width: 100%
+  +media-query(desk)
+    display: inline-block
+    width: auto
+
+.contact-fieldset
+  border: none
+  +media-query(desk)
+    margin-bottom: 32px
