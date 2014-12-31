@@ -15,10 +15,14 @@ router.post('/auth', passport.authenticate('signin',
     })
 );
 
-router.post('/signup', passport.authenticate('signup',
-    { successRedirect : '/#/dashboard'
-    , failureRedirect : '/#/signup'
-    , failureFlash    : true
-    })
-);
+router.post('/api/signup', function(request, response, next){
+    passport.authenticate('signup', function(err, user, info){
+
+        if(err || info)
+            return response.json(405, err || info.message);
+
+        return response.json(user);
+    })(request, response, next);
+});
+
 module.exports = router;

@@ -29,7 +29,6 @@ passport.use('signin', new LocalStrategy(
 
         })
         .error(function(err){
-            console.log('error: '+err);
             done(err);
         });
     }
@@ -37,8 +36,8 @@ passport.use('signin', new LocalStrategy(
 
 passport.use('signup', new LocalStrategy(
     {
-        usernameField     : 'email'
-      , passwordField     : 'password'
+        usernameField     : 'EMAIL'
+      , passwordField     : 'PASSWORD'
       , passReqToCallback : true
     },
     function(request, username, password, done) {
@@ -50,7 +49,6 @@ passport.use('signup', new LocalStrategy(
                 users.create(request).success(function(user){
                     return done(null, { email: user.EMAIL });
                 }).error(function(err) {
-                    console.log('error: '+err);
                     done(err);
                 });
             }
