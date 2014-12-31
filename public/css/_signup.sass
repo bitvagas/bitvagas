@@ -1,5 +1,65 @@
 .signup
-  input.login__btn
-    width: 100%
-    margin-top: 5px
-    padding: 11px 18px
+  +cf
+  margin-bottom: 24px
+  +media-query(desk)
+    margin-left: -48px
+
+.signup__cell
+  +media-query(desk)
+    float: left
+    padding-left: 48px
+
+.signup__cell--main
+  +media-query(desk)
+    width: 70%
+
+.signup__cell--aside
+  +media-query(desk)
+    width: 30%
+
+.signup-form
+  list-style: none
+  margin: 0
+  > li
+    margin-bottom: 14px
+    &:last-child
+      margin-bottom: 0
+  +media-query(desk)
+    > li
+      display: table
+      margin-bottom: 24px
+      width: 100%
+      &:last-child
+        margin-bottom: 0
+
+.signup-form__label
+  display: block
+  margin-bottom: 6px
+  +media-query(desk)
+    display: table-cell
+    vertical-align: top
+    width: 25%
+
+.signup-form__input
+  +media-query(desk)
+    display: table-cell
+    vertical-align: top
+
+.signup-action
+  background: whitesmoke
+  border-top: 1px solid #e5e5e5
+  padding: 14px 24px
+  +media-query(desk)
+    padding-left: 166px
+
+.signup-action__btn
+  display: block
+  width: 100%
+  +media-query(desk)
+    display: inline-block
+    width: auto
+
+.signup-fieldset
+  border: none
+  +media-query(desk)
+    margin-bottom: 32px
