@@ -1,5 +1,6 @@
 var passport      = require('passport')
   , LocalStrategy = require('passport-local').Strategy
+  , users         = require('../controllers/user-controller')
   , db            = require('../../../models');
 
 passport.serializeUser(function(user, done) {
@@ -12,11 +13,13 @@ passport.deserializeUser(function(user, done) {
 
 passport.use('signin', new LocalStrategy(
     {
-        usernameField : 'email'
-      , passwordField : 'password'
+        usernameField     : 'email'
+      , passwordField     : 'password'
+      , passReqToCallback : true
     },
-    function(username, password, done){
-        db.USER.find({ where : { EMAIL: username}})
+    function(request, username, password, done){
+
+        users.findByEmail(request)
         .success(function(user){
 
             if(!user || user.PASSWORD != password)
@@ -31,4 +34,26 @@ passport.use('signin', new LocalStrategy(
         });
     }
 ));
+
+passport.use('signup', new LocalStrategy(
+    {
+        usernameField     : 'email'
+      , passwordField     : 'password'
+      , passReqToCallback : true
+    },
+    function(request, username, password, done) {
+        users.findByEmail(request)
+        .success(function(user){
+            if(user)
+                return done(null, false, { message: 'User already exists'});
+            else{
+                users.create(request).success(function(user){
+                    return done(null, { email: user.EMAIL });
+                }).error(function(err) {
+                    console.log('error: '+err);
+                    done(err);
+                });
+            }
+        });
+}));
 
