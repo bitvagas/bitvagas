@@ -1,7 +1,6 @@
 .create
   .create__cell.create__cell--main
-    h1.slogan
-      | Postar Vaga
+    h1.slogan Postar Vaga
 
     form(action='/api/jobs/create', method='post')
       fieldset.create-fieldset
@@ -50,7 +49,7 @@
           li
             label.create-form__label Descrição:
             .create-form__input
-              textarea.textarea.textarea--full(placeholder='Descrição' name='description')
+              textarea.textarea.textarea--full(placeholder='Descrição' name='description' rows='6')
           li
             label.create-form__label Categoria:
             .create-form__input
