@@ -12,17 +12,7 @@ head
       link(rel='stylesheet', href='/css/bitvagas.css')
       script(src='components/angular/angular.min.js')
       script(src='components/angular-ui-router/release/angular-ui-router.min.js')
-      //TODO: Concat angular modules files with browserify or something else
-      script(src='modules/app.js')
-      script(src='modules/main/app.js')
-      script(src='modules/jobs/app.js')
-      script(src='modules/jobs/controllers/job-controller.js')
-      script(src='modules/jobs/services/category-service.js')
-      script(src='modules/jobs/services/job-service.js')
-      script(src='modules/users/app.js')
-      script(src='modules/users/controllers/signup-controller.js')
-      script(src='modules/users/services/user-service.js')
-      script(src='modules/admin/app.js')
+      script(src='app-build.js')
 
   body
     header.head

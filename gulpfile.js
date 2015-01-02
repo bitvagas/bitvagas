@@ -1,5 +1,6 @@
 var gulp    = require('gulp')
   , nodemon = require('gulp-nodemon')
+  , concat  = require('gulp-concat')
   , harp    = require('harp')
   , browserSync = require('browser-sync');
 
@@ -23,7 +24,14 @@ gulp.task('nodemon', function(){
     });
 });
 
-gulp.task('watch', function() {
+gulp.task('script', function(){
+    return gulp.src('public/modules/**/*.js')
+    .pipe(concat('app-build.js'))
+    .pipe(gulp.dest('public'));
+});
+
+
+gulp.task('watch', ['script'], function() {
 
     //Watch jade files
     gulp.watch(['app/views/**/*.jade', 'public/modules/**/*.jade'], function(){
@@ -32,6 +40,10 @@ gulp.task('watch', function() {
     //Watch sass files
     gulp.watch('public/css/*.sass', function(){
         browserSync.reload('bitvagas.css', { stream: true });
+    });
+    //Watch js files
+    gulp.watch('public/modules/**/*.js', function(){
+        browserSync.reload('app-build.js', { stream: true });
     });
 });
 
