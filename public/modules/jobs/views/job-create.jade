@@ -1,81 +1,99 @@
 .create
   .create__cell.create__cell--main
-    h1.slogan Postar Vaga
+    header.create__head
+      h1.create__title Postar Vaga
 
-    form(action='/api/jobs/create', method='post')
-      fieldset.create-fieldset
-        legend.create-fieldset__legend Sobre sua empresa
-        ul.create-form
-          li
-            label.create-form__label Seu e-mail:
-            .create-form__input
-              input.input.input--full(type='text')
-              .create-form__help Este é o email para cadastramento de sua empresa em nosso sistema.
-          li
-            label.create-form__label Nome da empresa:
-            .create-form__input
-              input.input.input--full(type='text' placeholder='' name='companyName')
-              .create-form__help O nome da empresa não pode ser divulgado? Cheque ao lado para manter em sigilo.
-          li
-            label.create-form__label Site da empresa:
-            .create-form__input
-              input.input.input--full(type='text' placeholder='http://' name='companyUrl')
-              .create-form__help Vagas com o site da empresa atraem mais candidatos.
-          li
-            label.create-form__label Logo:
-            .create-form__input
-              input(type='file')
+    .create__body
+      form(action='/api/jobs/create', method='post')
+        fieldset.create-fieldset
+          legend.create-fieldset__legend Sobre sua empresa
+          ul.create-form
+            li
+              label.create-form__label Seu email:
+              .create-form__input
+                input.input.input--full(type='text')
+                .create-form__help Este é o email para cadastramento de sua empresa em nosso sistema.
+            li
+              label.create-form__label Nome da empresa:
+              .create-form__input
+                input.input.input--full(type='text' placeholder='' name='companyName')
+                .create-form__help O nome da empresa não pode ser divulgado? Cheque ao lado para manter em sigilo.
+            li
+              label.create-form__label Site da empresa:
+              .create-form__input
+                input.input.input--full(type='text' placeholder='http://' name='companyUrl')
+                .create-form__help Vagas com o site da empresa atraem mais candidatos.
+            li
+              label.create-form__label Logo:
+              .create-form__input
+                input(type='file')
 
-      fieldset.create-fieldset
-        legend.create-fieldset__legend Sobre a vaga
-        ul.create-form
-          li
-            label.create-form__label Título da vaga:
-            .create-form__input
-              input.input.input--full(type='text' name='title')
-          li
-            label.create-form__label Tipo da vaga:
-            .create-form__input
-              ul.create-type-job
-                li
-                  input.create-type-job__input(type='radio' name='jobType' value='full-time' id='rdl-fulltime')
-                  label.create-type-job__label.label.label--fulltime(for='rdl-fulltime') Full-time
-                li
-                  input.create-type-job__input(type='radio' name='jobType' value='part-time' id='rdl-parttime')
-                  label.create-type-job__label.label.label--parttime(for='rdl-parttime') Part-time
-                li
-                  input.create-type-job__input(type='radio' name='jobType' value='part-time' id='rdl-freelance')
-                  label.create-type-job__label.label.label--freelance(for='rdl-freelance') Freelance
-                li
-                  input.create-type-job__input(type='radio' name='jobType' value='temporary' id='rdl-temporary')
-                  label.create-type-job__label.label.label--temporary(for='rdl-temporary') Temporary
-          li
-            label.create-form__label Descrição:
-            .create-form__input
-              textarea.textarea.textarea--full(placeholder='Descrição' name='description' rows='6')
-          li
-            label.create-form__label Categoria:
-            .create-form__input
-              select.select.select--full(name='category')
-                option(value="Desenvolvimento") Desenvolvimento
-                option(value="Design") Design
-          li
-            label.create-form__label Local:
-            .create-form__input
-              input.input.input--full(type='text' placeholder='' name='location')
-          li
-            label.create-form__label Aplicar para a vaga:
-            .create-form__input
-              input.input.input--full(type='text' placeholder='E-mail ou URL' name='')
-          li
-            .create-form__label &nbsp;
-            .create-form__input
-                label(for='terms')
-                  input(type='checkbox' id='terms')
-                  |  Concordo com os
-                  |  <a href="">termos de uso</a>.
+        fieldset.create-fieldset
+          legend.create-fieldset__legend Sobre a vaga
+          ul.create-form
+            li
+              label.create-form__label Título da vaga:
+              .create-form__input
+                input.input.input--full(type='text' name='title')
+            li
+              label.create-form__label Tipo da vaga:
+              .create-form__input
+                ul.create-type-job
+                  li
+                    input.create-type-job__input(type='radio' name='jobType' value='full-time' id='rdl-fulltime')
+                    label.create-type-job__label.label.label--fulltime(for='rdl-fulltime') Full-time
+                  li
+                    input.create-type-job__input(type='radio' name='jobType' value='part-time' id='rdl-parttime')
+                    label.create-type-job__label.label.label--parttime(for='rdl-parttime') Part-time
+                  li
+                    input.create-type-job__input(type='radio' name='jobType' value='part-time' id='rdl-freelance')
+                    label.create-type-job__label.label.label--freelance(for='rdl-freelance') Freelance
+                  li
+                    input.create-type-job__input(type='radio' name='jobType' value='temporary' id='rdl-temporary')
+                    label.create-type-job__label.label.label--temporary(for='rdl-temporary') Temporary
+            li
+              label.create-form__label Descrição:
+              .create-form__input
+                textarea.textarea.textarea--full(placeholder='Descrição' name='description' rows='8')
+            li
+              label.create-form__label Categoria:
+              .create-form__input
+                select.select(name='category')
+                  option(value="Desenvolvimento") Desenvolvimento
+                  option(value="Design") Design
+            li
+              label.create-form__label Local:
+              .create-form__input
+                input.input.input--full(type='text' placeholder='' name='location')
+            li
+              label.create-form__label Como aplicar:
+              .create-form__input
+                .create-how-apply
+                  .create-how-apply__input
+                    label.create-how-apply-label
+                      input.create-how-apply-label__radio(type='radio' name='apply')
+                      .create-how-apply-label__body Apply by Email
+                    label.create-how-apply-label
+                      input.create-how-apply-label__radio(type='radio' name='apply')
+                      .create-how-apply-label__body Apply by URL
+                  input.input.input--full(type='text' placeholder='Email ou URL' name='')
+            li
+              label.create-form__label Destacar essa vaga:
+              .create-form__input
+                label.create-terms
+                  p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                  input.create-terms__input(type='checkbox' id='feature')
+                  .create-terms__text
+                  |  Sim, destacar por $25,00.
+            li
+              .create-form__label.create-form__label--terms &nbsp;
+              .create-form__input
+                  label.create-terms
+                    input.create-terms__input(type='checkbox' id='terms' checked)
+                    .create-terms__text
+                    |  Concordo com os <a ui-sref='terms'>termos de uso</a>.
 
-      .create-action
-        button.create-action__btn.btn.btn--medium.btn--primary(type='submit') Continuar
+        .create-action
+          button.create-action__btn.btn.btn--medium.btn--primary(type='submit') Continuar
   .create__cell.create__cell--aside
 
