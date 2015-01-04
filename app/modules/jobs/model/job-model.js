@@ -3,11 +3,29 @@
 module.exports = function(sequelize, DataTypes){
 
     var JOB = sequelize.define('job', {
-          TITLE         : DataTypes.STRING
-        , DESCRIPTION   : DataTypes.TEXT
-        , LOCATION      : DataTypes.STRING
-        , APPLY_METHOD  : DataTypes.STRING
-        , COMPANY_NAME  : DataTypes.STRING
+          TITLE         : {
+            type        : DataTypes.STRING
+          , allowNull   : false
+        }
+        , DESCRIPTION   : {
+            type        : DataTypes.STRING
+          , allowNull   : false
+        }
+        , LOCATION      : {
+            type        : DataTypes.STRING
+          , allowNull   : false
+        }
+        , APPLY_URL     : {
+              type      : DataTypes.STRING
+            , allowNull : true
+            , validate  : {
+                isUrl   : true
+            }
+        }
+        , COMPANY_NAME  : {
+            type        : DataTypes.STRING
+          , allowNull   : false
+        }
         , COMPANY_URL   : {
               type      : DataTypes.STRING
             , allowNull : true

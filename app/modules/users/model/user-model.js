@@ -3,7 +3,10 @@
 module.exports = function(sequelize, DataTypes){
 
     var USER = sequelize.define('user', {
-          NAME  : DataTypes.STRING
+          NAME  : {
+              type: DataTypes.STRING
+            , allowNull : false
+        }
         , EMAIL : {
               type: DataTypes.STRING
             , allowNull : false
@@ -11,7 +14,10 @@ module.exports = function(sequelize, DataTypes){
                 isEmail : true
             }
         }
-        , PASSWORD : DataTypes.STRING
+        , PASSWORD : {
+              type: DataTypes.STRING
+            , allowNull : false
+        }
         , ADMIN    : DataTypes.BOOLEAN
     }, {
         classMethods  : {
