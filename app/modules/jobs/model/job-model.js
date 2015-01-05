@@ -33,6 +33,13 @@ module.exports = function(sequelize, DataTypes){
                 isUrl   : true
             }
         }
+        , BTC_ADDRESS   : {
+            type        : DataTypes.STRING
+        }
+        , ACTIVE        : {
+              type      : DataTypes.BOOLEAN
+            , allowNull : false
+        }
     }, {
         classMethods  : {
             associate : function(models) {
