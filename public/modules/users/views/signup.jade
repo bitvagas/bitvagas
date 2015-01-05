@@ -14,19 +14,19 @@ block content
             li
               <label for="" class="signup-form__label">Nome:</label>
               .signup-form__input
-                input.input.input--full(type='text' ng-model='user.NAME' placeholder='Nome' name='NAME')
+                input.input.input--full(type='text' ng-model='user.NAME' placeholder='Nome' name='NAME' title='Usuário Obrigatório' required)
             li
               <label for="" class="signup-form__label">E-mail:</label>
               .signup-form__input
-                input.input.input--full(type='text' ng-model='user.EMAIL' placeholder='Email' name='EMAIL')
+                input.input.input--full(type='text' ng-model='user.EMAIL' placeholder='Email' name='EMAIL' title='Email Obrigatório' required)
             li
               <label for="" class="signup-form__label">Senha:</label>
               .signup-form__input
-                input.input.input--full(type='password' ng-model='user.PASSWORD' placeholder='Senha' name='PASSWORD')
+                input.input.input--full(type='password' ng-model='user.PASSWORD' placeholder='Senha' name='PASSWORD' title='Senha Obrigatória' required)
             li
               <label for="" class="signup-form__label">Repetir Senha:</label>
               .signup-form__input
-                input.input.input--full(type='password' ng-model='user.REPASSWORD' placeholder='Repetir Senha' name='REPASSWORD')
+                input.input.input--full(type='password' ng-model='user.REPASSWORD' placeholder='Repetir Senha' name='REPASSWORD' title='Confirme sua Senha' required)
 
       .signup-action
         button.signup-action__btn.btn.btn--medium.btn--primary(data-ng-click='create(user)' value='Sign Up') Cadastrar

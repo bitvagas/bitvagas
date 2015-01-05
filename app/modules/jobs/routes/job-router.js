@@ -6,7 +6,7 @@ router.get('/list', function(request, response){
     jobs.findAll(request,response);
 });
 
-router.get('/create', function(request, response){
+router.post('/create', function(request, response){
     jobs.create(request, response);
 });
 
