@@ -3,11 +3,14 @@
 module.exports = function(sequelize, DataTypes){
 
     var JOB_REQUEST = sequelize.define('job_request', {
-          DATE   : DataTypes.DATE
+          DATE            : {
+             type         : DataTypes.DATE
+           , defaultValue : sequelize.NOW
+        }
         , EMAIL  : {
             type : DataTypes.STRING
-        , allowNull : true
-        , validate  : {
+        , allowNull   : true
+        , validate    : {
             isEmail   : true
         }
     }
