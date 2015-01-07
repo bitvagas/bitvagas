@@ -8,7 +8,10 @@ module.exports = function(sequelize, DataTypes){
         timestamps    : false
       , classMethods  : {
             associate : function(models){
-                JOB_TYPE.hasMany(models.job);
+                JOB_TYPE.hasMany(models.job, {
+                    onDelete   : 'set null'
+                  , foreignKey : 'TYPE_ID'
+                });
             }
       }
     });
