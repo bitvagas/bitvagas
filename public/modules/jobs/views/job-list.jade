@@ -9,6 +9,26 @@ h1.slogan
       input.search__input(name='', type='text', placeholder='Buscar Vagas, Empresas, Locais...')
       a.search__btn.btn(href='') Buscar
 
+    .typejob
+      ul.typejob__list
+        li
+          label(for='').typejob-label
+            .typejob-label__checkbox
+            input(type='checkbox' checked).typejob-label__input
+            .typejob-label__text.label.label--fulltime Full-time
+        li
+          label(for='').typejob-label
+            input(type='checkbox' checked).typejob-label__input
+            .typejob-label__text.label.label--parttime Part-time
+        li
+          label(for='').typejob-label
+            input(type='checkbox' checked).typejob-label__input
+            .typejob-label__text.label.label--freelance Freelance
+        li
+          label(for='').typejob-label
+            input(type='checkbox' checked).typejob-label__input
+            .typejob-label__text.label.label--temporary Temporary
+
     h2.jobs-title Vagas em Destaque
     ul.jobs.jobs--featured
       li
@@ -116,24 +136,10 @@ h1.slogan
       h4.category__title Categorias
       ul.category__list
         li
-          label(for='')
-            input(type='checkbox')
-            |  Design (29)
+          a(href='') Todas as Vagas (50)
         li
-          label(for='')
-            input(type='checkbox')
-            |  Desenvolvimento (21)
-
-    .type-job
-      h4.type-job__title Tipos de Vagas
-      ul.type-job__list
+          a(href='') Design (29)
         li
-          label(for='')
-            input(type='checkbox')
-            |  Freelance (3)
-        li
-          label(for='')
-            input(type='checkbox')
-            |  Full-Time (5)
+          a(href='') Desenvolvimento (21)
 
     h4 Apoiar com Doações
