@@ -3,10 +3,7 @@
 module.exports = function(sequelize, DataTypes){
 
     var USER = sequelize.define('user', {
-          NAME  : {
-              type: DataTypes.STRING
-            , allowNull : false
-        }
+          NAME  : DataTypes.STRING
         , EMAIL : {
               type: DataTypes.STRING
             , allowNull : false
@@ -18,7 +15,10 @@ module.exports = function(sequelize, DataTypes){
               type: DataTypes.STRING
             , allowNull : false
         }
-        , ADMIN    : DataTypes.BOOLEAN
+        , ADMIN    : {
+            type   : DataTypes.BOOLEAN
+          , defaultValue : false
+        }
     }, {
         classMethods  : {
             associate : function(models){
