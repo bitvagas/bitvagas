@@ -11,7 +11,7 @@
             li
               label.create-form__label Seu e-mail:
               .create-form__input
-                input.input.input--full(type='text', name='EMAIL' ng-model='job.EMAIL')
+                input.input.input--full(type='text', name='EMAIL' ng-model='job.user.EMAIL')
                 .create-form__help Este é o email para cadastramento de sua empresa em nosso sistema.
             li
               label.create-form__label Nome da empresa:
@@ -71,18 +71,13 @@
                 .create-how-apply
                   .create-how-apply__input
                     label.create-how-apply-label
-                      input.create-how-apply-label__radio(type='radio' name='applyUrl' checked)
+                      input.create-how-apply-label__radio(type='radio' name='applyBy' checked ng-model='applyMethod' value='email')
                       .create-how-apply-label__body Apply by Email
                     label.create-how-apply-label
-                      input.create-how-apply-label__radio(type='radio' name='applyUrl')
+                      input.create-how-apply-label__radio(type='radio' name='applyBy' ng-model='applyMethod' value='url')
                       .create-how-apply-label__body Apply by URL
-                  input.input.input--full(type='text' placeholder='Email' name='')
-                  input.input.input__input(type='checkbox' name='' ng-model='job.applyUrl' id='apply-method')
-                  label.create-type-job__label.label.label--fulltime(for='apply-method')  Url externa
-            li(ng-show='applyUrl')
-              label.create-form__label
-              .create-form__input
-                input.input.input--full(type='text' placeholder='URL' ng-model='job.APPLY_URL' name='APPLY_URL')
+                  input.input.input--full(type='text' placeholder='Email' name='APPLY_BY' ng-show='applyMethod == "email"')
+                  input.input.input--full(type='text' placeholder='URL' ng-model='job.APPLY_BY' name='APPLY_BY' ng-show='applyMethod == "url"')
             li
               label.create-form__label Destacar essa vaga:
               .create-form__input
@@ -97,7 +92,7 @@
                   label(for='terms')
                     input(type='checkbox' ng-model='terms' id='terms')
                     |  Concordo com os
-                    |  <a href="">termos de uso</a>.
+                    |  <a ui-sref="terms">termos de uso</a>.
 
         .create-action
           button.create-action__btn.btn.btn--medium.btn--primary(ng-disabled='terms' ng-click='create(job)' type='submit') Continuar
