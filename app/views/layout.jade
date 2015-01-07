@@ -29,10 +29,16 @@ head
             a(ui-sref='about', title='Sobre') Sobre
           li
             a(ui-sref='contact', title='Contato') Contato
-          li
-            a(href='/auth/', title='Sign In') Sign In
-          li
-            a(ui-sref='signup', title='Sign Up') Sign Up
+          if !user
+            li
+                a(href='/auth/', title='Sign In') Sign In
+            li
+                a(ui-sref='signup', title='Sign Up') Sign Up
+          if user
+            li
+                a(ui-sref='dashboard', title='User') #{user.name}
+            li
+                a(href='/logout', title='Log Out') Log Out
 
     block content
 
