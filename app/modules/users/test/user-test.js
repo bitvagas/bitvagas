@@ -4,13 +4,6 @@ var assert    = require('assert')
 
 describe('Users modules', function(){
 
-    it('find all users', function(done){
-        db.user.findAll().success(function(users){
-            console.log(JSON.stringify(users));
-            users.should.be.ok;
-            done();
-        })
-    })
     it('create an user with email `test@bitvagas`', function(done){
         db.user.create({ NAME: 'User Test'
                        , EMAIL: 'test@bitvagas.com'
@@ -22,6 +15,24 @@ describe('Users modules', function(){
             done();
         }).error(function(error){
             console.log('error: '+error);
+            done();
+        })
+    })
+    it('apply job', function(done){
+        db.job_request.create({
+            DESCRIPTION : 'i want this job'
+        }).then(function(job_request){
+            job_request.setUser({ id : 1 });
+            job_request.setJob({ id : 1 });
+            console.log(JSON.stringify(job_request));
+            job_request.should.be.ok;
+            done();
+        })
+    })
+    it('find all users', function(done){
+        db.user.findAll().success(function(users){
+            console.log(JSON.stringify(users));
+            users.should.be.ok;
             done();
         })
     })
