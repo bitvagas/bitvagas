@@ -11,9 +11,12 @@ function SignUpController ($scope, $state, UserService) {
             $state.go('dashboard');
         },function(err){
             var errorList = [];
-            console.log(err.data);
-            for(var error in err.data)
-                errorList.push(err.data[error][0]);
+            console.log(err);
+            if(err.data.detail === undefined)
+                for(var error in err.data)
+                    errorList.push(err.data[error][0]);
+            else
+                errorList.push(err.data.detail);
 
             $scope.flash.errors = errorList;
         });
