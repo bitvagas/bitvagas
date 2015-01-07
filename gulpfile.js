@@ -31,7 +31,7 @@ gulp.task('script', function(){
 });
 
 
-gulp.task('watch', ['script'], function() {
+gulp.task('watch', function() {
 
     //Watch jade files
     gulp.watch(['app/views/**/*.jade', 'public/modules/**/*.jade'], function(){
@@ -42,7 +42,7 @@ gulp.task('watch', ['script'], function() {
         browserSync.reload('bitvagas.css', { stream: true });
     });
     //Watch js files
-    gulp.watch('public/modules/**/*.js', function(){
+    gulp.watch('public/modules/**/*.js',['script'], function(){
         browserSync.reload('app-build.js', { stream: true });
     });
 });
