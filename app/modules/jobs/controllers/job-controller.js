@@ -4,16 +4,16 @@ var express = require('express'),
 module.exports = {
 
     findAll: function(request, response){
-        db.JOB.findAll().success(function(jobs){
+        db.job.findAll().then(function(jobs){
             response.json(jobs);
         });
     },
 
     create: function(request, response){
-        db.JOB.create(request.body)
-        .success(function(job){
+        db.job.create(request.body)
+        .then(function(job){
             response.json(job);
-        }).error(function(error){
+        }).catch(function(error){
             response.json(405, error);
         });
     }
