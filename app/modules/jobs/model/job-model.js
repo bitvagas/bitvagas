@@ -15,12 +15,9 @@ module.exports = function(sequelize, DataTypes){
             type        : DataTypes.STRING
           , allowNull   : false
         }
-        , APPLY_URL     : {
+        , APPLY_BY      : {
               type      : DataTypes.STRING
             , allowNull : true
-            , validate  : {
-                isUrl   : true
-            }
         }
         , COMPANY_NAME  : {
             type        : DataTypes.STRING
@@ -43,9 +40,13 @@ module.exports = function(sequelize, DataTypes){
     }, {
         classMethods  : {
             associate : function(models) {
-                JOB.hasMany(models.job_request);
-                JOB.belongsTo(models.category);
-                JOB.belongsTo(models.job_type);
+                JOB.hasMany(models.job_request, {
+                    onDelete   : 'cascade'
+                  , foreignKey : 'JOB_ID'
+                });
+                JOB.belongsTo(models.category, { foreignKey : 'CATEGORY_ID'});
+                JOB.belongsTo(models.job_type, { foreignKey : 'TYPE_ID'});
+                JOB.belongsTo(models.user,     { foreignKey : 'USER_ID'});
             }
         }
     });
