@@ -1,4 +1,5 @@
 var passport      = require('passport')
+  , bcrypt        = require('bcryptjs')
   , LocalStrategy = require('passport-local').Strategy
   , users         = require('../controllers/user-controller')
   , db            = require('../../../models');
@@ -22,11 +23,13 @@ passport.use('signin', new LocalStrategy(
         users.findByEmail(request)
         .success(function(user){
 
-            if(!user || user.PASSWORD != password)
-                return done(null, false, { message: 'Email or Password Invalid'});
-
-            return done(null, { email: user.EMAIL, name : user.NAME });
-
+            bcrypt.compare(password, user.PASSWORD, function(err, res){
+                console.log("ERROR: "+err+" RES: "+res);
+                if(err)
+                    return done(null, false, { message: 'Email or Password Invalid'});
+                else
+                    return done(null, { email: user.EMAIL, name : user.NAME });
+            });
         })
         .error(function(err){
             done(err);
