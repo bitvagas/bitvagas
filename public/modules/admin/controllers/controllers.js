@@ -1,4 +1,4 @@
-angular.module('bitvagas.admin', [])
+angular.module('bitvagas.admin.controllers', [])
 .controller('DashBoardController',['$scope', function($scope){
 
 }]);
