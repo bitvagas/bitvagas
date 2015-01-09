@@ -1,13 +1,16 @@
 var assert    = require('assert')
   , should    = require('should')
+  , bcrypt    = require('bcryptjs')
   , db        = require('../../../models');
 
 describe('Users modules', function(){
 
     it('create an user with email `test@bitvagas`', function(done){
+        var salt = bcrypt.genSaltSync(10);
+        var hash = bcrypt.hashSync('password', salt);
         db.user.create({ NAME: 'User Test'
                        , EMAIL: 'test@bitvagas.com'
-                       , PASSWORD: 'password'
+                       , PASSWORD: hash
                        , ADMIN: false
         }).success(function(user){
             console.log(JSON.stringify(user));
