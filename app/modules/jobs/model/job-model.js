@@ -19,17 +19,6 @@ module.exports = function(sequelize, DataTypes){
               type      : DataTypes.STRING
             , allowNull : true
         }
-        , COMPANY_NAME  : {
-            type        : DataTypes.STRING
-          , allowNull   : false
-        }
-        , COMPANY_URL   : {
-              type      : DataTypes.STRING
-            , allowNull : true
-            , validate  : {
-                isUrl   : true
-            }
-        }
         , BTC_ADDRESS   : {
             type        : DataTypes.STRING
         }
@@ -45,6 +34,7 @@ module.exports = function(sequelize, DataTypes){
                   , foreignKey : 'JOB_ID'
                 });
                 JOB.belongsTo(models.category, { foreignKey : 'CATEGORY_ID'});
+                JOB.belongsTo(models.company,  { foreignKey : 'COMPANY_ID'});
                 JOB.belongsTo(models.job_type, { foreignKey : 'TYPE_ID'});
                 JOB.belongsTo(models.user,     { foreignKey : 'USER_ID'});
             }
