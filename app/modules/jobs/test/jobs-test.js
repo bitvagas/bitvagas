@@ -8,8 +8,7 @@ describe('Jobs modules api', function(){
             id   : 1
           , NAME : 'Development'
         }).then(function(category){
-            console.log(JSON.stringify(category));
-            category.should.be.ok;
+            category.should.be.instanceof(Object);
             done();
         })
     })
@@ -20,37 +19,50 @@ describe('Jobs modules api', function(){
         , { NAME : 'FREELANCE' }
         , { NAME : 'TEMPORARY' }
         ]).then(function(){
-            db.job_type.findAll().then(function(types){
-                console.log(JSON.stringify(types));
-                types.should.be.ok;
-                done();
-            });
+            return db.job_type.findAll();
+        }).then(function(types){
+            types.should.be.instanceof(Object).and.have.lengthOf(4);
+            done();
+        }).catch(function(err){
+            done(err);
+        });
+    })
+    it('create companies', function(done){
+        db.company.create({
+            NAME : 'bitvagas'
+          , URL  : 'http://www.bitvagas.com'
+        }).then(function(company){
+            company.should.be.instanceof(Object);
+            done();
         });
     })
     it('create job', function(done){
         db.job.create({
-              TITLE : 'Job Title Test'
-            , DESCRIPTION  : 'Lorem ipsum dolor sit amet,'+
-                            'consectetur adipiscing elit'
-            , EMAIL        : 'test@bitvagas.com'
-            , LOCATION     : 'SP - São Paulo'
-            , APPLY_BY     : null
-            , COMPANY_NAME : 'BitVagas.com'
-            , COMPANY_URL  : null
-            , BTC_ADDRESS  : null
-            , ACTIVE       : true
+              TITLE       : 'Job Title Test'
+            , DESCRIPTION : 'Lorem ipsum dolor sit amet'
+            , EMAIL       : 'test@bitvagas.com'
+            , LOCATION    : 'SP - São Paulo'
+            , APPLY_BY    : null
+            , BTC_ADDRESS : null
+            , ACTIVE      : true
         }).then(function(job){
-            job.setCategory({ id : 1 }).then(function(job){
-                console.log(JSON.stringify(job));
-                job.should.be.ok;
-                done();
-            });
+            job.should.be.ok;
+            return job.setCategory({ id : 1 });
+        }).then(function(job){
+            job.should.be.ok;
+            return job.setCompany({ id : 1 });
+        }).then(function(job){
+            job.should.be.ok;
+            done();
+        }).catch(function(err){
+            done(err);
         });
     })
     it('find all jobs', function(done){
-        db.job.findAll({include : [db.category]}).then(function(jobs){
-            console.log(JSON.stringify(jobs));
+        db.job.findAll({ include : [db.category, db.company]})
+        .then(function(jobs){
             jobs.should.be.ok;
+            console.log('\nResults: '+JSON.stringify(jobs));
             done();
         });
     })
