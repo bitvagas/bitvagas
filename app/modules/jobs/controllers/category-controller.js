@@ -4,7 +4,7 @@ var express = require('express')
 module.exports = {
 
     findAll: function(request, response){
-        db.category.findAll().success(function(categories){
+        db.category.findAll().then(function(categories){
             response.json(categories);
         });
     }

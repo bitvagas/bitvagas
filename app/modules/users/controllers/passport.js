@@ -21,17 +21,17 @@ passport.use('signin', new LocalStrategy(
     function(request, username, password, done){
 
         users.findByEmail(request)
-        .success(function(user){
+        .then(function(user){
 
             bcrypt.compare(password, user.PASSWORD, function(err, res){
                 console.log("ERROR: "+err+" RES: "+res);
-                if(err)
+                if(err || !res)
                     return done(null, false, { message: 'Email or Password Invalid'});
                 else
                     return done(null, { email: user.EMAIL, name : user.NAME });
             });
         })
-        .error(function(err){
+        .catch(function(err){
             done(err);
         });
     }
@@ -45,16 +45,15 @@ passport.use('signup', new LocalStrategy(
     },
     function(request, username, password, done) {
         users.findByEmail(request)
-        .success(function(user){
+        .then(function(user){
             if(user)
                 return done(null, false, { message: 'User already exists'});
-            else{
-                users.create(request).success(function(user){
-                    return done(null, { email: user.EMAIL });
-                }).error(function(err) {
-                    done(err);
-                });
-            }
+            else
+                return users.create(request);
+        }).then(function(user){
+                return done(null, { email: user.EMAIL });
+        }).catch(function(err){
+                done(err);
         });
 }));
 
