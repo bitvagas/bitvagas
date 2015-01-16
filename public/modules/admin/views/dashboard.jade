@@ -1,3 +1,10 @@
-.main
-  .wrapper
-      h1 DashBoard
+h1 DashBoard
+aside
+  ul
+    li
+      a(ui-sref='dashboard.overview') Visao Geral
+    li
+      a(ui-sref='dashboard.profile') Minha Conta
+    aside
+      section
+        div(ui-view='')
