@@ -10,9 +10,9 @@ head
     block css
       link(href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700', rel='stylesheet', type='text/css')
       link(rel='stylesheet', href='/css/bitvagas.css')
-      script(src='components/angular/angular.min.js')
-      script(src='components/angular-ui-router/release/angular-ui-router.min.js')
-      script(src='app-build.js')
+      script(src='/components/angular/angular.min.js')
+      script(src='/components/angular-ui-router/release/angular-ui-router.min.js')
+      script(src='/app-build.js')
 
   body
     header.head
@@ -31,12 +31,12 @@ head
             a(ui-sref='contact', title='Contato') Contato
           if !user
             li
-                a(href='/auth/', title='Sign In') Sign In
+                a(ui-sref='signin', title='Sign In') Sign In
             li
                 a(ui-sref='signup', title='Sign Up') Sign Up
           if user
             li
-                a(ui-sref='dashboard', title='User') #{user.name}
+                a(ui-sref='dashboard.overview', href='dashboard' title='User') #{user.name}
             li
                 a(href='/logout', title='Log Out') Log Out
 
