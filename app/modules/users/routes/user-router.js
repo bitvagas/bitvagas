@@ -4,12 +4,16 @@ var express   = require('express')
   , stratergy = require('../controllers/passport')
   , router    = express.Router();
 
+router.get('/isAuthenticated', function(request, response){
+    response.send(request.isAuthenticated() ? request.user : 0);
+});
+
 router.get('/auth', function(request, response){
     response.render('auth', { message : request.flash('error') });
 });
 
 router.post('/auth', passport.authenticate('signin',
-    { successRedirect : '/#/dashboard'
+    { successRedirect : '/#/dashboard/overview'
     , failureRedirect : '/auth'
     , failureFlash    : true
     })
