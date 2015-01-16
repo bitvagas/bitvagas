@@ -1,0 +1,21 @@
+block content
+form.signin.signin__cell.signup__cell--main(action='/auth' method='post')
+
+  header.signup__head
+    h1.signup__title Sign Up
+
+  .signin__body
+      fieldset.signup-fieldset
+          ul.signup-form
+            li
+              input.input.input--full(type='text' placeholder='email' name='email' required)
+            li
+              input.input.input--full(type='password' placeholder='password' name='password' required)
+
+            .signup-action
+                input.signup-action__btn.btn.btn--medium.btn--primary(type='submit' value='Sign In') 
+            div
+              a.forgot(href='#') Forgot password?
+              br
+              | ainda não é usuario?
+              a.join(href='/#/signup')  Join now
