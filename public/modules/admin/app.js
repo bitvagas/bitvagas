@@ -8,18 +8,29 @@ angular.module('bitvagas.admin',
         .state('dashboard', {
             abstract : true
           , url: '/dashboard'
-          , templateUrl: '/modules/admin/views/dashboard'
-          , controller: 'DashBoardController'
-          , resolve : ['AuthenticationService', function(AuthenticationService) {
-                logged : AuthenticationService
-            }]
+          , templateUrl  : '/modules/admin/views/dashboard'
+          , controller   : 'DashBoardController'
+          , authenticate : true
         })
         .state('dashboard.overview', {
             url : '/overview'
-          , templateUrl : '/modules/admin/views/overview'
+          , templateUrl  : '/modules/admin/views/overview'
+          , authenticate : true
         })
         .state('dashboard.profile', {
             url : '/profile'
           , templateUrl : '/modules/admin/views/profile'
+          , authenticate : true
+        });
+    }).run(function($rootScope, $state, AuthenticationService, UserService){
+        $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
+            AuthenticationService.isAuthenticated().then(function(result){
+                UserService.current = result.data;
+            },function(err){
+                if(toState.authenticate){
+                    $state.transitionTo('signin');
+                    event.preventDefault();
+                }
+            });
         });
     });

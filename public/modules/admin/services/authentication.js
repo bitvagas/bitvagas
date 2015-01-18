@@ -1,15 +1,21 @@
 angular.module('bitvagas.admin.services', [])
-.service('AuthenticationService', AuthenticationService);
+.factory('AuthenticationService', AuthenticationService);
 
 AuthenticationService.$inject = ['$q', '$http', '$state'];
 function AuthenticationService($q, $http, $state){
-    var deferred = $q.defer();
-    $http.get('/isAuthenticated').success(function(user){
-        if(user !== 0)
-            deferred.resolve();
-        else
-            $state.go('jobs.list');
+    return {
+        isAuthenticated : function() {
+            var deferred = $q.defer();
+            $http.get('/isAuthenticated').then(function(user){
+                if(user !== 0)
+                    deferred.resolve(user);
+                else
+                    deferred.reject();
 
-    });
-    return deferred.promise;
+            },function(err){
+                deferred.reject(err);
+            });
+            return deferred.promise;
+        }
+    }
 }
