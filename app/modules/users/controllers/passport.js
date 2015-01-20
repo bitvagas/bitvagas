@@ -24,11 +24,11 @@ passport.use('signin', new LocalStrategy(
         .then(function(user){
 
             bcrypt.compare(password, user.PASSWORD, function(err, res){
-                console.log("ERROR: "+err+" RES: "+res);
+                console.log("INCLUDE: "+JSON.stringify(user.jobs));
                 if(err || !res)
                     return done(null, false, { message: 'Email or Password Invalid'});
                 else
-                    return done(null, { email: user.EMAIL, name : user.NAME });
+                    return done(null, user);
             });
         })
         .catch(function(err){

@@ -34,9 +34,9 @@ head
                 a(ui-sref='signin', title='Sign In') Sign In
             li
                 a(ui-sref='signup', title='Sign Up') Sign Up
-          if user
+          else
             li
-                a(ui-sref='dashboard.overview', href='dashboard' title='User') #{user.name}
+                a(ui-sref='dashboard.overview', href='dashboard' title='User') #{user.NAME}
             li
                 a(href='/logout', title='Log Out') Log Out
 
