@@ -24,7 +24,6 @@ passport.use('signin', new LocalStrategy(
         .then(function(user){
 
             bcrypt.compare(password, user.PASSWORD, function(err, res){
-                console.log("INCLUDE: "+JSON.stringify(user.jobs));
                 if(err || !res)
                     return done(null, false, { message: 'Email or Password Invalid'});
                 else
@@ -44,6 +43,10 @@ passport.use('signup', new LocalStrategy(
       , passReqToCallback : true
     },
     function(request, username, password, done) {
+
+        if(request.body.PASSWORD != request.body.REPASSWORD)
+            return done(null, false, { message: 'These passwords don\'t match.'});
+
         users.findByEmail(request)
         .then(function(user){
             if(user)
