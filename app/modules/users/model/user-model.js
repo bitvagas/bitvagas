@@ -9,7 +9,9 @@ module.exports = function(sequelize, DataTypes){
             , allowNull : false
             , unique    : true
             , validate  : {
-                isEmail : true
+                isEmail : {
+                    msg : 'Email is not valid'
+                }
             }
         }
         , PASSWORD : {
