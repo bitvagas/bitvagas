@@ -8,7 +8,7 @@ function SignUpController ($scope, $state, UserService) {
 
     $scope.create = function(user){
         UserService.create(user).then(function(data){
-            $state.go('dashboard');
+            $state.go('dashboard.overview');
         },function(err){
             var errorList = [];
             console.log(err);
