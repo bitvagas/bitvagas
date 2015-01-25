@@ -6,7 +6,10 @@ module.exports = {
 
     findByEmail: function(request){
         var email = request.param('email');
-        return db.user.find({ where : { EMAIL : email }});
+        return db.user.find({
+            where   : { EMAIL : email }
+          , include : [db.job]
+          });
   }
 
   , create: function(request){

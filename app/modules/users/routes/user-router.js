@@ -23,7 +23,7 @@ router.post('/api/signup', function(request, response, next){
     passport.authenticate('signup', function(err, user, info){
 
         if(err || info)
-            return response.json(405, err || info.message);
+            return response.json(405, err || info);
 
         return response.json(user);
     })(request, response, next);
