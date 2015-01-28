@@ -23,6 +23,7 @@
     "passport-local": "^1.0.0",
     "pg": "^4.1.1",
     "sequelize": "~1.7.9",
+    "sequelize-fixtures": "^0.3.4",
     "serve-favicon": "~2.0.1",
     "should": "^4.4.1"
   },
