@@ -5,8 +5,7 @@ var assert    = require('assert')
 describe('Jobs modules api', function(){
     it('create categories', function(done){
         db.category.create({
-            id   : 1
-          , NAME : 'Development'
+            NAME : 'Development'
         }).then(function(category){
             category.should.be.instanceof(Object);
             done();
@@ -47,10 +46,12 @@ describe('Jobs modules api', function(){
             , ACTIVE      : true
         }).then(function(job){
             job.should.be.ok;
-            return job.setCategory({ id : 1 });
+            return job.setCategory(1);
+        }).then(function(job){
+            return job.setCompany(1);
         }).then(function(job){
             job.should.be.ok;
-            return job.setCompany({ id : 1 });
+            return job.setJob_type(1);
         }).then(function(job){
             job.should.be.ok;
             done();

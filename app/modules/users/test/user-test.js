@@ -23,10 +23,10 @@ describe('Users modules', function(){
             DESCRIPTION : 'i want this job'
         }).then(function(job_request){
             job_request.should.be.ok;
-            return job_request.setUser({ id : 1 });
+            return job_request.setUser(1);
         }).then(function(job_request){
             job_request.should.be.ok;
-            return job_request.setJob({ id : 1 });
+            return job_request.setJob(1);
         }).then(function(job_request){
             job_request.should.be.ok;
             done();
