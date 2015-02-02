@@ -29,22 +29,6 @@ h1.slogan
             input(type='checkbox' checked).typejob-label__input
             .typejob-label__text.label.label--temporary Temporary
 
-    h2.jobs-title Vagas em Destaque
-    ul.jobs.jobs--featured
-      li
-        a.jobs-item.jobs-item--fulltime(ui-sref='jobs-show', title='')
-          .jobs-item__cell.jobs-item__cell--img
-            img.jobs-item__img(src='/img/company-default.png', alt='')
-
-          .jobs-item__cell.jobs-item__cell--body
-            h2.jobs-item__title Front-End Developer
-            h3.jobs-item__company Blockchain (London)
-
-          .jobs-item__cell.jobs-item__cell--meta
-            .jobs-item__type
-              .label.label--fulltime Full-Time
-            .jobs-item__date 01 Nov
-
       li
         a.jobs-item.jobs-item--parttime(ui-sref='jobs-show', title='')
           .jobs-item__cell.jobs-item__cell--img
@@ -61,61 +45,19 @@ h1.slogan
 
     h2.jobs-title Últimas Vagas
     ul.jobs
-      li
-        a.jobs-item(href='', title='')
+      li(ng-repeat='job in jobs')
+        a.jobs-item(ui-sref='jobs-show({id : job.id})', title='')
           .jobs-item__cell.jobs-item__cell--img
             img.jobs-item__img(src='/img/company-default.png', alt='')
 
           .jobs-item__cell.jobs-item__cell--body
-            h2.jobs-item__title Front-End Developer
-            h3.jobs-item__company Blockchain (London)
+            h2.jobs-item__title {{ job.TITLE }}
+            h3.jobs-item__company {{ job.LOCATION }}
 
           .jobs-item__cell.jobs-item__cell--meta
             .jobs-item__type
-              .label.label--fulltime Full-Time
-            .jobs-item__date 01 Nov
-
-      li
-        a.jobs-item(href='', title='')
-          .jobs-item__cell.jobs-item__cell--img
-            img.jobs-item__img(src='/img/company-default.png', alt='')
-
-          .jobs-item__cell.jobs-item__cell--body
-            h2.jobs-item__title Front-End Developer
-            h3.jobs-item__company Blockchain (London)
-
-          .jobs-item__cell.jobs-item__cell--meta
-            .jobs-item__type
-              .label.label--parttime Part-Time
-            .jobs-item__date 01 Nov
-
-      li
-        a.jobs-item(href='', title='')
-          .jobs-item__cell.jobs-item__cell--img
-            img.jobs-item__img(src='/img/company-default.png', alt='')
-
-          .jobs-item__cell.jobs-item__cell--body
-            h2.jobs-item__title Front-End Developer
-            h3.jobs-item__company Blockchain (London)
-
-          .jobs-item__cell.jobs-item__cell--meta
-            .jobs-item__type
-              .label.label--freelance Freelance
-            .jobs-item__date 01 Nov
-
-      li
-        a.jobs-item(href='', title='')
-          .jobs-item__cell.jobs-item__cell--img
-            img.jobs-item__img(src='/img/company-default.png', alt='')
-
-          .jobs-item__cell.jobs-item__cell--body
-            h2.jobs-item__title Front-End Developer
-            h3.jobs-item__company Blockchain (London)
-
-          .jobs-item__cell.jobs-item__cell--meta
-            .jobs-item__type
-              .label.label--temporary Temporary
-            .jobs-item__date 01 Nov
+              .label.label--fulltime {{ job.jobType.NAME }}
+            .jobs-item__date {{ job.createdAt | date }}
 
     ul.pagination
       li.current

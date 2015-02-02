@@ -2,7 +2,7 @@ var express = require('express')
   , jobs    = require('../controllers/job-controller')
   , router  = express.Router();
 
-router.get('/list', function(request, response){
+router.get('/', function(request, response){
     jobs.findAll(request,response);
 });
 

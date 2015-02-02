@@ -8,4 +8,7 @@ function JobService($http){
     this.create = function(job){
         return $http.post(baseUrl + 'create', job);
     };
+    this.findAll = function(){
+        return $http.get(baseUrl);
+    }
 }

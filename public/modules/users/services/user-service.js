@@ -9,4 +9,8 @@ function UserService($http) {
     this.create = function(user){
         return $http.post(baseUrl, user);
     };
+
+    this.auth  = function(user){
+        return $http.post("/auth", user);
+    };
 }
