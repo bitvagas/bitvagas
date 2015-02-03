@@ -3,16 +3,17 @@
     .job
       .job__cell.job__cell--main
         header.job-head
-          h1.job-head__title Network Engineer
-          h2.job-head-local Blockchain (Anywhere)
-          .job-head__date Publicado 10 Dez
-          .job-head__type Full Time
+            h1.job-head__title {{ job.TITLE }}
+          h2.job-head-local {{ job.LOCATION }}
+          .job-head__date {{ job.createdAt | date }}
+          .job-head__type {{ job.jobType.NAME }}
           ul.job-head-nav
+
             li
               a Website
         .job-body
           h6 Descrição do trabalho:
-          p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          p {{ job.DESCRIPTION }}
           p
             a.btn.btn--medium.btn--primary(href='') Candidatar-se à vaga
         footer.job-foot
