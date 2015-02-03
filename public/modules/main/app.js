@@ -5,7 +5,8 @@ angular.module('bitvagas.main', ['ui.router'])
         $stateProvider
         .state('index', {
             url: '/'
-          , templateUrl: 'modules/jobs/views/job-list'
+          , templateUrl : 'modules/jobs/views/job-list'
+          , controller  : 'JobListController'
         })
         .state('about', {
             url: '/about'
