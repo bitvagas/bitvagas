@@ -9,11 +9,13 @@ angular.module('bitvagas.jobs',
         $stateProvider
         .state('jobs', {
             url: '/jobs'
-          , templateUrl: '/modules/jobs/views/job-list',
+          , templateUrl : '/modules/jobs/views/job-list'
+          , controller  : 'JobListController'
         })
         .state('jobs-list', {
             url: 'jobs/list'
-          , templateUrl: '/modules/jobs/views/job-list'
+          , templateUrl : '/modules/jobs/views/job-list'
+          , controller  : 'JobListController'
         })
         .state('jobs-create', {
             url: 'jobs/create'
@@ -21,7 +23,8 @@ angular.module('bitvagas.jobs',
           , controller  : 'JobCreateController'
         })
         .state('jobs-show', {
-            url: '/jobs/:jobID'
+            url: '/jobs/:id'
           , templateUrl: '/modules/jobs/views/job-show'
+          , controller : 'JobShowController'
         });
     });

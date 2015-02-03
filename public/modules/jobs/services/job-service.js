@@ -11,4 +11,7 @@ function JobService($http){
     this.findAll = function(){
         return $http.get(baseUrl);
     }
+    this.findById = function(id){
+        return $http.get(baseUrl+id);
+    }
 }
