@@ -26,11 +26,17 @@ module.exports = function(sequelize, DataTypes){
         classMethods  : {
             associate : function(models){
                 USER.hasMany(models.job_request, {
-                    foreignKey : 'JOB_ID' 
+                    foreignKey    : {
+                        name      : 'JOB_ID'
+                      , allowNull : true
+                      }
                 });
                 USER.hasMany(models.job, {
-                    onDelete   : 'cascade'
-                  , foreignKey : 'USER_ID'
+                    onDelete    : 'cascade'
+                  , foreignKey  : {
+                      name      : 'USER_ID'
+                    , allowNull : false
+                    }
                 });
             }
       }

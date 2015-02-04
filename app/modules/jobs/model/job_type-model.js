@@ -8,13 +8,16 @@ module.exports = function(sequelize, DataTypes){
         timestamps    : false
       , classMethods  : {
             associate : function(models){
-                JOB_TYPE.hasMany(models.job, {
-                    onDelete   : 'set null'
-                  , foreignKey : 'TYPE_ID'
+                JOB_TYPE.hasOne(models.job, {
+                    onDelete    : 'set null'
+                  , foreignKey  : {
+                      name      : 'TYPE_ID'
+                    , allowNull : false
+                    }
                 });
             }
       }
     });
 
     return JOB_TYPE;
-};
+}

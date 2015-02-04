@@ -16,8 +16,11 @@ module.exports = function(sequelize, DataTypes){
       , classMethods  : {
             associate   : function(models){
                 COMPANY.hasMany(models.job, {
-                      onDelete   : 'set null'
-                    , foreignKey : 'COMPANY_ID'
+                      onDelete    : 'set null'
+                    , foreignKey  : {
+                        name      : 'COMPANY_ID'
+                      , allowNull : false
+                      }
                 });
             }
       }
