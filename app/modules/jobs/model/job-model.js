@@ -25,6 +25,7 @@ module.exports = function(sequelize, DataTypes){
         , ACTIVE        : {
               type      : DataTypes.BOOLEAN
             , allowNull : false
+            , defaultValue : false
         }
     }, {
         classMethods  : {
