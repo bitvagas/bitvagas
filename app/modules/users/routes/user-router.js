@@ -19,15 +19,8 @@ router.post('/auth', passport.authenticate('signin',
     })
 );
 
-router.post('/api/signup', function(request, response, next){
-    passport.authenticate('signup', function(err, user, info){
-
-        if(err || info)
-            return response.json(405, err || info);
-
-        // response.redirect('/auth');
-        return response.json(user);
-    })(request, response, next);
+router.post('/api/signup', function(request, response){
+    users.signup(request, response);
 });
 
 module.exports = router;

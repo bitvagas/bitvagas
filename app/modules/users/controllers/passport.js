@@ -14,8 +14,8 @@ passport.deserializeUser(function(user, done) {
 
 passport.use('signin', new LocalStrategy(
     {
-        usernameField     : 'email'
-      , passwordField     : 'password'
+        usernameField     : 'EMAIL'
+      , passwordField     : 'PASSWORD'
       , passReqToCallback : true
     },
     function(request, username, password, done){
@@ -35,28 +35,3 @@ passport.use('signin', new LocalStrategy(
         });
     }
 ));
-
-passport.use('signup', new LocalStrategy(
-    {
-        usernameField     : 'EMAIL'
-      , passwordField     : 'PASSWORD'
-      , passReqToCallback : true
-    },
-    function(request, username, password, done) {
-
-        if(request.body.PASSWORD != request.body.REPASSWORD)
-            return done(null, false, { message: 'These passwords don\'t match.'});
-
-        users.findByEmail(request)
-        .then(function(user){
-            if(user)
-                return done(null, false, { message: 'User already exists'});
-            else
-                return users.create(request);
-        }).then(function(user){
-                return done(null, { email: user.EMAIL });
-        }).catch(function(err){
-                done(err);
-        });
-}));
-
