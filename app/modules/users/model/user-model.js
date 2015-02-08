@@ -18,10 +18,8 @@ module.exports = function(sequelize, DataTypes){
               type: DataTypes.STRING
             , allowNull : false
         }
-        , ADMIN    : {
-            type   : DataTypes.BOOLEAN
-          , defaultValue : false
-        }
+        , RESETTOKEN   : DataTypes.STRING
+        , RESETEXPIRES : DataTypes.DATE
     }, {
         classMethods  : {
             associate : function(models){
@@ -38,6 +36,7 @@ module.exports = function(sequelize, DataTypes){
                     , allowNull : false
                     }
                 });
+                USER.belongsTo(models.user_status, { foreignKey : 'USER_STATUS' });
             }
       }
     });
