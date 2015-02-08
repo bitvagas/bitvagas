@@ -26,8 +26,12 @@ passport.use('signin', new LocalStrategy(
             bcrypt.compare(password, user.PASSWORD, function(err, res){
                 if(err || !res)
                     return done(null, false, { message: 'Email or Password Invalid'});
-                else
+                else {
+                    if(user.USER_STATUS == 1)
+                        return done(null, false, { message : 'Verify your account, check your email' })
+
                     return done(null, user);
+                }
             });
         })
         .catch(function(err){
