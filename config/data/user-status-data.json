@@ -1,0 +1,20 @@
+[
+    {
+        "model": "user_status",
+        "data": {
+            "NAME": "pending"
+        }
+    },
+    {
+        "model": "user_status",
+        "data": {
+            "NAME": "verified"
+        }
+    },
+    {
+        "model": "user_status",
+        "data": {
+            "NAME": "admin"
+        }
+    }
+]
