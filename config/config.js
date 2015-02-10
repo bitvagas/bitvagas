@@ -5,11 +5,17 @@ var path     = require('path')
   , password = process.env.password || ''
   , PSQLPort = process.env.port     || 5432;
 
+global.root = rootPath;
+
 var config = {
   development: {
     root: rootPath
     , app: {
         name: 'bitvagas'
+    }
+    , mailer   : {
+        email  : process.env.email
+      , pass   : process.env.mailPass
     }
     , port     : 3000
     , PSQLPort : PSQLPort
