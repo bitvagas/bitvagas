@@ -22,21 +22,21 @@ head
 
         ul.head-nav
           li
-            a(ui-sref='jobs-list', title='Todas as Vagas') Todas as Vagas
+            a(href='/#/jobs-list', title='Todas as Vagas') Todas as Vagas
           li
-            a(ui-sref='jobs-create', title='Postar Vaga') Postar Vaga
+            a(href='/#/jobs/create', title='Postar Vaga') Postar Vaga
           li
-            a(ui-sref='about', title='Sobre') Sobre
+            a(href='/#/about', title='Sobre') Sobre
           li
-            a(ui-sref='contact', title='Contato') Contato
+            a(href='/#/contact', title='Contato') Contato
           if !user
             li
-                a(ui-sref='signin', title='Sign In') Sign In
+                a(href='/#/signin', title='Sign In') Sign In
             li
-                a(ui-sref='signup', title='Sign Up') Sign Up
+                a(href='/#/signup', title='Sign Up') Sign Up
           else
             li
-                a(ui-sref='dashboard.overview', href='dashboard' title='User') #{user.NAME}
+                a(href='/#/dashboard/overview', href='dashboard' title='User') #{user.NAME}
             li
                 a(href='/logout', title='Log Out') Log Out
 
@@ -49,13 +49,13 @@ head
 
         ul.foot-nav
           li
-            a(ui-sref='jobs-create', title='Postar Vaga') Postar Vaga
+            a(href='/#/jobs/create', title='Postar Vaga') Postar Vaga
           li
-            a(ui-sref='about', title='Sobre') Sobre
+            a(href='/#/about', title='Sobre') Sobre
           li
-            a(ui-sref='terms', title='Termos de uso') Termos de uso
+            a(href='/#/terms', title='Termos de uso') Termos de uso
           li
-            a(ui-sref='contact', title='Contato') Contato
+            a(href='/#/contact', title='Contato') Contato
 
         ul.foot-social
           li
