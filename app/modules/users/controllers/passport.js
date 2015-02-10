@@ -27,7 +27,7 @@ passport.use('signin', new LocalStrategy(
                 if(err || !res)
                     return done(null, false, { message: 'Email or Password Invalid'});
                 else {
-                    if(user.USER_STATUS == 1)
+                    if(user.USER_STATUS != 3)
                         return done(null, false, { message : 'Verify your account, check your email' })
 
                     return done(null, user);

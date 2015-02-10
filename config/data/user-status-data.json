@@ -2,6 +2,12 @@
     {
         "model": "user_status",
         "data": {
+            "NAME": "invited"
+        }
+    },
+    {
+        "model": "user_status",
+        "data": {
             "NAME": "pending"
         }
     },
