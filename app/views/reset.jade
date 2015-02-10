@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  .main
+    .wrapper
+      h1 Reset your password
+      if message
+          h3= message
+      form(action='/reset' method='POST')
+        input.input.input--full(type='password' placeholder='Senha' name='PASSWORD')
+        br
+        input.input.input--full(type='password' placeholder='Repetir Senha' name='REPASSWORD')
+        br
+        input(type='hidden' value='#{token}' name='token')
+
+        input.btn.btn--medium.btn--primary(type='submit' value='Reset Password')

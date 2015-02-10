@@ -1,0 +1,11 @@
+extends layout
+
+block content
+  .main
+    .wrapper
+      h1 Forgot your password?
+
+      form(action="/forgot" method="POST")
+        input.input.input--full(type='text' value='#{email}' placeholder='email' name='EMAIL')
+        br
+        input.btn.btn--medium.btn--primary(type='submit', value='Email me recovery link')
