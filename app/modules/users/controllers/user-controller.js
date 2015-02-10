@@ -2,7 +2,8 @@ var express  = require('express')
   , bcrypt   = require('bcryptjs')
   , crypto   = require('crypto')
   , passport = require('passport')
-  , db       = require('../../../models');
+  , mailer   = require(root + '/config/mail')
+  , db       = require(root + '/app/models');
 
 module.exports = {
 
@@ -26,14 +27,19 @@ module.exports = {
 
                 var salt = bcrypt.genSaltSync(4);
                 var hash = bcrypt.hashSync(request.body.PASSWORD, salt);
+
+                //Define a token for email verification
                 var hashEmail = bcrypt.hashSync(request.body.EMAIL, salt);
                 request.body.PASSWORD = hash;
                 request.body.TOKEN = hashEmail;
                 db.user.create(request.body).then(function(user){
 
                     user.PASSWORD = undefined;
-                    //TODO: Send a email to user.
-                    response.json(201, { data : user, token : hashEmail});
+                    //Send Welcome Message to user by email :D
+                    mailer.sendWelcome(user);
+                    //Send a link to email to verification
+                    mailer.sendEmailVerification(user);
+                    response.json(201, { data : user, token : hashEmail });
 
                 }).catch(function(err){
                     response.json(400, err);
@@ -42,36 +48,37 @@ module.exports = {
         });
   }
 
+  /*
+   * Signup an user indirect just by your email, and send a password reset
+   */
   , invite: function(request, response){
-      this.findByEmail(request).then(function(user){
+      //bind `this` scope to able access inside promises and avoiding `self` variable.
+      this.findByEmail(request).bind(this).then(function(user){
           if(user)
-                response.send(400, 'User already exists');
-          else{
-
-              crypto.randomBytes(20, function(err, bytes){
-                  var user = request.body;
-                  var token = bytes.toString('hex');
-                  user.RESETTOKEN   = token;
-                  user.RESETEXPIRES = Date.now() + 360000;
-                  user.PASSWORD = '';
-                  //User invited
-                  user.USER_STATUS = 1;
-                  db.user.create(user).then(function(user){
-                      response.json(201, user);
-                  }).catch(function(err){
-                      response.json(400, err);
-                  });
-              });
+              response.send(400, 'User already exists');
+          else {
+              request.body.USER_STATUS = 1; //User invited
+              request.body.PASSWORD = '';
+              //Create User
+              return db.user.create(request.body).bind(this);
           }
-      })
+      }).then(function(user){
+          //Reset password automatically
+          this.forgotPassword(request, response);
+      }).catch(function(err){
+          response.json(400, err);
+      });
   }
 
+  /*
+   * Verify an user account after receive an email to confirmation
+   */
   , verifyAccount: function(request, response){
 
       var hashedEmail = request.body.token;
       db.user.find({ where : { TOKEN : hashedEmail }})
       .then(function(user){
-          return user.update({ USER_STATUS : 3 });
+          return user.update({ USER_STATUS : 3, TOKEN : null });
       })
       .then(function(user){
 
@@ -84,6 +91,58 @@ module.exports = {
       })
       .catch(function(err){
           response.json(400, err);
+      });
+  }
+
+  /*
+   * Generate a token for reset password
+   * Expire after 1 hour.
+   */
+  , forgotPassword: function(request, response){
+
+      this.findByEmail(request).then(function(user){
+          crypto.randomBytes(20, function(err, bytes){
+              var token = bytes.toString('hex');
+
+              user.update({
+                  RESETTOKEN   : token
+                , RESETEXPIRES : Date.now() + 3600000
+              }).then(function(user){
+                  //Send link to email to reset password
+                  mailer.sendForgotPassword(user);
+                  response.render('index');
+              }).catch(function(err){
+                  response.render('forgot', { message : err });
+              })
+          })
+      })
+  }
+
+  /*
+   * Check if token is not expired and update password user.
+   * If expired generate another token.
+   */
+  , resetPassword: function(request, response){
+      db.user.find({ where : { RESETTOKEN : request.body.token }})
+      .then(function(user){
+
+          if(user.RESETEXPIRES > Date.now()){
+
+              if(request.body.PASSWORD != request.body.REPASSWORD)
+                  return response.render('reset', { message : 'These passwords don\'t match.' });
+
+              var salt = bcrypt.genSaltSync(4);
+              var hash = bcrypt.hashSync(request.body.PASSWORD, salt);
+              user.PASSWORD = hash;
+              user.update({ PASSWORD : hash, USER_STATUS : 3 });
+              response.render('auth');
+          }else{
+              //Token Expired
+              //keep email on request
+              request.body.EMAIL = user.EMAIL;
+              //Generate another token.
+              this.forgotPassword(request, response);
+          }
       });
   }
 }

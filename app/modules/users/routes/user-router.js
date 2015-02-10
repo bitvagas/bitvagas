@@ -42,11 +42,22 @@ router.post('/verify', function(request, response){
 });
 
 router.get('/forgot', function(request, response){
-    response.render('forgot', { email : request.params.email || '' });
+    response.render('forgot', { email : request.query.email || '' });
+});
+
+router.post('/forgot', function(request, response){
+    users.forgotPassword(request, response);
 });
 
 router.get('/reset', function(request, response){
-    response.render('reset');
+    response.render('reset', { token : request.query.token });
 });
+
+router.post('/reset', function(request, response){
+    if(request.body.token === undefined)
+        return response.render('reset', { message : 'Check your email' });
+
+    users.resetPassword(request, response);
+})
 
 module.exports = router;
