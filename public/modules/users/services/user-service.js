@@ -10,6 +10,10 @@ function UserService($http) {
         return $http.post(baseUrl, user);
     };
 
+    this.invite = function(user){
+        return $http.post('/invite', user);
+    };
+
     this.auth  = function(user){
         return $http.post("/auth", user);
     };
