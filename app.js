@@ -8,7 +8,8 @@ var app = express();
 require('./config/express')(app, config);
 
 db.sequelize
-  // .sync({ force : true})
+  // Uncomment this line to force regenerate database;
+  // .sync({ force : true })
   .sync()
   .complete(function (err) {
     if(err){
@@ -16,6 +17,7 @@ db.sequelize
     }else{
       fixtures.loadFile("config/data/job-type-data.json", db);
       fixtures.loadFile("config/data/category-data.json", db);
+      fixtures.loadFile("config/data/user-status-data.json", db);
       app.listen(config.port);
     }
   });
