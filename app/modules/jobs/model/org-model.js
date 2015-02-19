@@ -6,6 +6,9 @@ module.exports = function(sequelize, DataTypes){
         NAME          : {
             type      : DataTypes.STRING
           , allowNull : false
+          , validate  : {
+              notEmpty: true
+          }
         }
       , URL           : {
             type      : DataTypes.STRING
