@@ -2,8 +2,11 @@
 
 module.exports = function(sequelize, DataTypes){
 
-    var COMPANY = sequelize.define('company', {
-        NAME          : DataTypes.STRING
+    var ORG = sequelize.define('org', {
+        NAME          : {
+            type      : DataTypes.STRING
+          , allowNull : false
+        }
       , URL           : {
             type      : DataTypes.STRING
           , allowNull : true
@@ -13,12 +16,13 @@ module.exports = function(sequelize, DataTypes){
       }
     },{
         updatedAt     : false
+      , tableName     : 'organizations'
       , classMethods  : {
-            associate   : function(models){
-                COMPANY.hasMany(models.job, {
+            associate : function(models){
+                ORG.hasMany(models.job, {
                       onDelete    : 'set null'
                     , foreignKey  : {
-                        name      : 'COMPANY_ID'
+                        name      : 'ORG_ID'
                       , allowNull : false
                       }
                 });
@@ -26,6 +30,6 @@ module.exports = function(sequelize, DataTypes){
       }
     });
 
-    return COMPANY;
+    return ORG;
 
 };

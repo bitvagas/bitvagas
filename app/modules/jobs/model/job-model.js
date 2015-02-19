@@ -35,7 +35,7 @@ module.exports = function(sequelize, DataTypes){
                   , foreignKey : 'JOB_ID'
                 });
                 JOB.belongsTo(models.category, { foreignKey : 'CATEGORY_ID'});
-                JOB.belongsTo(models.company,  { foreignKey : 'COMPANY_ID'});
+                JOB.belongsTo(models.org,      { foreignKey : 'ORG_ID'});
                 JOB.belongsTo(models.job_type, { foreignKey : 'TYPE_ID'});
                 JOB.belongsTo(models.user,     { foreignKey : 'USER_ID'});
             }
