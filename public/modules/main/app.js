@@ -1,4 +1,4 @@
-angular.module('bitvagas.main', ['ui.router'])
+angular.module('bitvagas.main', ['ui.router', 'bitvagas.main.factory'])
     .config(function($urlRouterProvider, $stateProvider){
 
         $urlRouterProvider.otherwise('/');
