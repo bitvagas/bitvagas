@@ -37,11 +37,13 @@ module.exports = function(app, config) {
   var jobs = require(config.root + '/app/modules/jobs/routes/job-router')
     , main = require(config.root + '/app/modules/main/routes/main-router')
     , user = require(config.root + '/app/modules/users/routes/user-router')
-    , category = require(config.root + '/app/modules/jobs/routes/category-router');
+    , category = require(config.root + '/app/modules/jobs/routes/category-router')
+    , org      = require(config.root + '/app/modules/jobs/routes/org-router');
 
   app.use('/',main);
   app.use('/api/jobs',jobs);
   app.use('/api/categories',category);
+  app.use('/api/organizations', org);
   app.use(user);
 
   app.use(function (req, res, next) {
