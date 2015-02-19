@@ -30,6 +30,12 @@ module.exports = function(sequelize, DataTypes){
                       , allowNull : true
                       }
                 });
+                USER.hasMany(models.org, {
+                    foreignKey    : {
+                        name      : 'USER_ID'
+                      , allowNull : false
+                    }
+                });
                 USER.hasMany(models.job, {
                     onDelete    : 'cascade'
                   , foreignKey  : {
