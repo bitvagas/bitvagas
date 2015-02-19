@@ -1,0 +1,17 @@
+h1 Edit an organization
+
+ul
+  li(ng-repeat='error in errors')
+    label {{ error }}
+
+form
+  ul
+    li
+      label Organization Name
+      input.input.input--full(type='text' ng-model='org.NAME' name='NAME' )
+    li
+      label Url
+      input.input.input--full(type='text' ng-model='org.URL' name='URL')
+
+  a.btn.btn--medium.btn--primary(ui-sref="dashboard.organization.list") Voltar
+  button.btn.btn--medium.btn--primary(type="submit" ng-click='edit(org)') Alterar Organização

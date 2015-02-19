@@ -1,0 +1,17 @@
+h1 Your organizations
+
+table
+  thead
+    tr
+      th Organization Name
+      th URL
+      th
+      th
+  tbody
+    tr(ng-repeat='org in orgs')
+      td {{ org.NAME}}
+      td {{ org.URL }}
+      td
+        a(ui-sref="dashboard.organization.edit({ OrgID : org.id })") Editar
+      td
+        a(href="#" ng-click="delete(org.id)") Excluir
