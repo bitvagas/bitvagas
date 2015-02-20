@@ -26,12 +26,12 @@ module.exports = {
         });
     }
 
-    , create: function(request, response){
+    , create: function(request, response, t){
         if(request.user === undefined)
             return response.send(401, 'user invalid');
 
         request.body.USER_ID = request.user.id;
-        db.org.create(request.body).then(function(org){
+        db.org.create(request.body, { transaction : t}).then(function(org){
             response.json(org);
         }).catch(function(error){
             response.json(400, error);
