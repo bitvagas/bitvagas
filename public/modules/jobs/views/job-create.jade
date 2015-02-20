@@ -3,7 +3,7 @@
     header.create__head
       h1.create__title Postar Vaga
 
-    .ul
+    ul
       li(ng-repeat='error in errors')
         label {{ error }}
 
@@ -15,17 +15,17 @@
             li
               label.create-form__label Seu e-mail:
               .create-form__input
-                input.input.input--full(type='text', name='EMAIL' ng-model='user.EMAIL')
+                input.input.input--full(type='text', name='EMAIL' ng-model='data.EMAIL')
                 .create-form__help Este é o email para cadastramento de sua empresa em nosso sistema.
             li
               label.create-form__label Nome da empresa:
               .create-form__input
-                input.input.input--full(type='text' placeholder='' name='COMPANY_NAME' ng-model='company.NAME')
+                input.input.input--full(type='text' placeholder='' name='ORG_NAME' ng-model='data.ORG_NAME')
                 .create-form__help O nome da empresa não pode ser divulgado? Cheque ao lado para manter em sigilo.
             li
               label.create-form__label Site da empresa:
               .create-form__input
-                input.input.input--full(type='text' placeholder='http://' name='COMPANY_URL' ng-model='company.URL')
+                input.input.input--full(type='text' placeholder='http://' name='URL' ng-model='data.URL')
                 .create-form__help Vagas com o site da empresa atraem mais candidatos.
             li
               label.create-form__label Logo:
@@ -38,37 +38,37 @@
             li
               label.create-form__label Título da vaga:
               .create-form__input
-                input.input.input--full(type='text' name='TITLE' ng-model='job.TITLE' required)
+                input.input.input--full(type='text' name='TITLE' ng-model='data.TITLE' required)
             li
               label.create-form__label Tipo da vaga:
               .create-form__input
                 ul.create-type-job
                   li
-                    input.create-type-job__input(type='radio' name='job_typeID' value='1' id='rdl-fulltime' ng-model='job.TYPE_ID')
+                    input.create-type-job__input(type='radio' name='job_typeID' value='1' id='rdl-fulltime' ng-model='data.TYPE_ID')
                     label.create-type-job__label.label.label--fulltime(for='rdl-fulltime') Full-time
                   li
-                    input.create-type-job__input(type='radio' name='job_typeID' value='2' id='rdl-parttime' ng-model='job.TYPE_ID')
+                    input.create-type-job__input(type='radio' name='job_typeID' value='2' id='rdl-parttime' ng-model='data.TYPE_ID')
                     label.create-type-job__label.label.label--parttime(for='rdl-parttime') Part-time
                   li
-                    input.create-type-job__input(type='radio' name='job_typeID' value='3' id='rdl-freelance' ng-model='job.TYPE_ID')
+                    input.create-type-job__input(type='radio' name='job_typeID' value='3' id='rdl-freelance' ng-model='data.TYPE_ID')
                     label.create-type-job__label.label.label--freelance(for='rdl-freelance') Freelance
                   li
-                    input.create-type-job__input(type='radio' name='job_typeID' value='4' id='rdl-temporary' ng-model='job.TYPE_ID')
+                    input.create-type-job__input(type='radio' name='job_typeID' value='4' id='rdl-temporary' ng-model='data.TYPE_ID')
                     label.create-type-job__label.label.label--temporary(for='rdl-temporary') Temporary
             li
               label.create-form__label Descrição:
               .create-form__input
-                textarea.textarea.textarea--full(placeholder='Descrição' name='DESCRIPTION' ng-model='job.DESCRIPTION' rows='6')
+                textarea.textarea.textarea--full(placeholder='Descrição' name='DESCRIPTION' ng-model='data.DESCRIPTION' rows='6')
             li
               label.create-form__label Categoria:
               .create-form__input
-                select.select.select--full(name='categoryId' ng-model='job.CATEGORY_ID' required)
-                    option(ng-repeat='(id, category) in categories' value='{{id}}')
+                select.select.select--full(name='categoryId' ng-model='data.CATEGORY_ID' required)
+                    option(ng-repeat='category in categories' value='{{category.id}}')
                         {{category.NAME}}
             li
               label.create-form__label Local:
               .create-form__input
-                input.input.input--full(type='text' placeholder='' name='location' ng-model='job.LOCATION' required)
+                input.input.input--full(type='text' placeholder='' name='location' ng-model='data.LOCATION' required)
             li
               label.create-form__label Como aplicar
               .create-form__input
@@ -80,8 +80,8 @@
                     label.create-how-apply-label
                       input.create-how-apply-label__radio(type='radio' name='applyBy' ng-model='applyMethod' value='url')
                       .create-how-apply-label__body Apply by URL
-                  input.input.input--full(type='text' placeholder='Email' ng-model='job.APPLY_BY' name='APPLY_BY' ng-show='applyMethod == "email"')
-                  input.input.input--full(type='text' placeholder='URL' ng-model='job.APPLY_BY' name='APPLY_BY' ng-show='applyMethod == "url"')
+                  input.input.input--full(type='text' placeholder='Email' ng-model='data.APPLY_BY' name='APPLY_BY' ng-show='applyMethod == "email"')
+                  input.input.input--full(type='text' placeholder='URL' ng-model='data.APPLY_BY' name='APPLY_BY' ng-show='applyMethod == "url"')
             li
               label.create-form__label Destacar essa vaga:
               .create-form__input
@@ -99,6 +99,6 @@
                     |  <a ui-sref="terms">termos de uso</a>.
 
         .create-action
-          button.create-action__btn.btn.btn--medium.btn--primary(ng-disabled='!terms' ng-click='create(user, org, job)' type='submit') Continuar
+          button.create-action__btn.btn.btn--medium.btn--primary(ng-disabled='!terms' ng-click='create(data)' type='submit') Continuar
   .create__cell.create__cell--aside
 
