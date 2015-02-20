@@ -51,24 +51,19 @@ module.exports = {
   /*
    * Signup an user indirect just by your email, and send a password reset
    */
-  , invite: function(request, response){
-      //bind `this` scope to able access inside promises and avoiding `self` variable.
-      this.findByEmail(request).bind(this).then(function(user){
+  , invite: function(request, response, t){
+
+      return this.findByEmail(request).then(function(user){
           if(user)
               response.send(400, 'User already exists');
           else {
               request.body.USER_STATUS = 1; //User invited
               request.body.PASSWORD = '';
               //Create User
-              return db.user.create(request.body).bind(this);
+              return db.user.create(request.body, { transaction : t });
           }
-      }).then(function(user){
-          //Reset password automatically
-          this.forgotPassword(request, response);
-      }).catch(function(err){
-          response.json(400, err);
       });
-  }
+    }
 
   /*
    * Verify an user account after receive an email to confirmation
