@@ -3,7 +3,6 @@ angular.module('bitvagas.jobs',
     , 'bitvagas.jobs.controllers'
     , 'bitvagas.jobs.services'
     , 'bitvagas.jobs.category.services'
-    , 'bitvagas.jobs.organization.services'
     ])
     .config(function($urlRouterProvider, $stateProvider){
 
