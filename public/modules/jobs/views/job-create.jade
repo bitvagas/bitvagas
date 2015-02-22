@@ -8,24 +8,24 @@
         label {{ error }}
 
     .create__body
-      form
+      form(name="form")
         fieldset.create-fieldset
           legend.create-fieldset__legend Sobre sua empresa
           ul.create-form
             li
               label.create-form__label Seu e-mail:
               .create-form__input
-                input.input.input--full(type='text', name='EMAIL' ng-model='data.EMAIL')
+                input.input.input--full(type='email', name='EMAIL' ng-model='data.EMAIL' required)
                 .create-form__help Este é o email para cadastramento de sua empresa em nosso sistema.
             li
               label.create-form__label Nome da empresa:
               .create-form__input
-                input.input.input--full(type='text' placeholder='' name='ORG_NAME' ng-model='data.ORG_NAME')
+                input.input.input--full(type='text' placeholder='' name='ORG_NAME' ng-model='data.ORG_NAME' required)
                 .create-form__help O nome da empresa não pode ser divulgado? Cheque ao lado para manter em sigilo.
             li
               label.create-form__label Site da empresa:
               .create-form__input
-                input.input.input--full(type='text' placeholder='http://' name='URL' ng-model='data.URL')
+                input.input.input--full(type='url' placeholder='http://' name='URL' ng-model='data.URL')
                 .create-form__help Vagas com o site da empresa atraem mais candidatos.
             li
               label.create-form__label Logo:
@@ -44,21 +44,21 @@
               .create-form__input
                 ul.create-type-job
                   li
-                    input.create-type-job__input(type='radio' name='job_typeID' value='1' id='rdl-fulltime' ng-model='data.TYPE_ID')
+                    input.create-type-job__input(type='radio' name='job_typeID' value='1' id='rdl-fulltime' ng-model='data.TYPE_ID' required)
                     label.create-type-job__label.label.label--fulltime(for='rdl-fulltime') Full-time
                   li
-                    input.create-type-job__input(type='radio' name='job_typeID' value='2' id='rdl-parttime' ng-model='data.TYPE_ID')
+                    input.create-type-job__input(type='radio' name='job_typeID' value='2' id='rdl-parttime' ng-model='data.TYPE_ID' required)
                     label.create-type-job__label.label.label--parttime(for='rdl-parttime') Part-time
                   li
-                    input.create-type-job__input(type='radio' name='job_typeID' value='3' id='rdl-freelance' ng-model='data.TYPE_ID')
+                    input.create-type-job__input(type='radio' name='job_typeID' value='3' id='rdl-freelance' ng-model='data.TYPE_ID' required)
                     label.create-type-job__label.label.label--freelance(for='rdl-freelance') Freelance
                   li
-                    input.create-type-job__input(type='radio' name='job_typeID' value='4' id='rdl-temporary' ng-model='data.TYPE_ID')
+                    input.create-type-job__input(type='radio' name='job_typeID' value='4' id='rdl-temporary' ng-model='data.TYPE_ID' required)
                     label.create-type-job__label.label.label--temporary(for='rdl-temporary') Temporary
             li
               label.create-form__label Descrição:
               .create-form__input
-                textarea.textarea.textarea--full(placeholder='Descrição' name='DESCRIPTION' ng-model='data.DESCRIPTION' rows='6')
+                textarea.textarea.textarea--full(placeholder='Descrição' name='DESCRIPTION' ng-model='data.DESCRIPTION' rows='6' required)
             li
               label.create-form__label Categoria:
               .create-form__input
@@ -99,6 +99,6 @@
                     |  <a ui-sref="terms">termos de uso</a>.
 
         .create-action
-          button.create-action__btn.btn.btn--medium.btn--primary(ng-disabled='!terms' ng-click='create(data)' type='submit') Continuar
+          button.create-action__btn.btn.btn--medium.btn--primary(ng-disabled='!terms' ng-click="create()" type='submit') Continuar
   .create__cell.create__cell--aside
 
