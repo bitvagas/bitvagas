@@ -27,6 +27,17 @@ angular.module('bitvagas.jobs',
           }
           , controller   : 'JobCreateController'
         })
+        .state('jobs-confirm', {
+            url: '/jobs/create/confirm'
+          , templateUrl  : '/modules/jobs/views/job-confirm'
+          , resolve      : {
+              Categories : function(CategoryService){
+                  return CategoryService.findAll();
+              }
+          }
+          , params       : { data : null }
+          , controller   : 'JobCreateController'
+        })
         .state('jobs-show', {
             url: '/jobs/:id'
           , templateUrl: '/modules/jobs/views/job-show'
