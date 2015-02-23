@@ -5,6 +5,7 @@ JobCreateController.$inject = ['$scope', '$state', '$stateParams', 'JobService',
 function JobCreateController($scope, $state, $stateParams, JobService, Categories, ErrorHandling){
 
     $scope.data = $stateParams.data;
+    $scope.errors = $stateParams.errors || [];
 
     $scope.categories = Categories.data;
 
@@ -21,7 +22,11 @@ function JobCreateController($scope, $state, $stateParams, JobService, Categorie
             $state.go('jobs-show', { 'id': data.data.id});
         }, function(err){
             console.log(err);
-            $scope.errors = ErrorHandling.getErrors(err.data);
+            //back to crate state and show errors
+            $state.go('jobs-create', {
+                data   : $scope.data
+              , errors : ErrorHandling.getErrors(err.data)
+            });
         });
     }
 }

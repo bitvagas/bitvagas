@@ -25,6 +25,7 @@ angular.module('bitvagas.jobs',
                   return CategoryService.findAll();
               }
           }
+          , params       : { data : {}, errors : [] }
           , controller   : 'JobCreateController'
         })
         .state('jobs-confirm', {
@@ -35,7 +36,7 @@ angular.module('bitvagas.jobs',
                   return CategoryService.findAll();
               }
           }
-          , params       : { data : null }
+          , params       : { data : {}}
           , controller   : 'JobCreateController'
         })
         .state('jobs-show', {
