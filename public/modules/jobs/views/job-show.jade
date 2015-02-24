@@ -7,10 +7,10 @@
           h2.job-head-local {{ job.LOCATION }}
           .job-head__date {{ job.createdAt | date }}
           .job-head__type {{ job.jobType.NAME }}
+          h3.job-head-local {{ job.org.NAME }}
           ul.job-head-nav
-
             li
-              a Website
+              a(href="{{ job.org.URL }}") {{ job.org.URL }} 
         .job-body
           h6 Descrição do trabalho:
           p {{ job.DESCRIPTION }}
