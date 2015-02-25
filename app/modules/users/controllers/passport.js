@@ -1,8 +1,8 @@
-var passport      = require('passport')
-  , bcrypt        = require('bcryptjs')
-  , LocalStrategy = require('passport-local').Strategy
-  , users         = require('../controllers/user-controller')
-  , db            = require('../../../models');
+var passport         = require('passport')
+  , bcrypt           = require('bcryptjs')
+  , LocalStrategy    = require('passport-local').Strategy
+  , users            = require('../controllers/user-controller')
+  , db               = require(root+'/app/models');
 
 passport.serializeUser(function(user, done) {
   done(null, user);
@@ -22,17 +22,19 @@ passport.use('signin', new LocalStrategy(
 
         users.findByEmail(request)
         .then(function(user){
+            if(user){
+              bcrypt.compare(password, user.PASSWORD, function(err, res){
+                  if(err || !res)
+                      return done(null, false, { message: 'Email or Password Invalid'});
+                  else {
+                      if(user.USER_STATUS != 3)
+                          return done(null, false, { message : 'Verify your account, check your email' })
 
-            bcrypt.compare(password, user.PASSWORD, function(err, res){
-                if(err || !res)
-                    return done(null, false, { message: 'Email or Password Invalid'});
-                else {
-                    if(user.USER_STATUS != 3)
-                        return done(null, false, { message : 'Verify your account, check your email' })
-
-                    return done(null, user);
-                }
-            });
+                      return done(null, user);
+                  }
+              });
+            } else
+                return done(null, false, { message: 'Email or Password Invalid'});
         })
         .catch(function(err){
             done(err);
