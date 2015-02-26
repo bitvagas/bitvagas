@@ -1,3 +1,5 @@
+*.swn
+*.swo
 *.swp
 node_modules/
 public/components/
