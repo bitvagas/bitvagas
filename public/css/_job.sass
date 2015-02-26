@@ -1,18 +1,163 @@
 .job
   +cf
-  margin-left: -48px
-
-.job__cell
-  float: left
-  padding-left: 48px
+  font-size: 14px
+  margin-bottom: 24px
 
 .job__cell--main
-  width: 65%
+  margin: 0 auto
+  +media-query(desk)
+    width: 70%
 
-.job__cell--aside
-  width: 35%
+.job__head
+  border-bottom: 1px solid #cdcdcd
 
-.job-head__title
-  color: lighten(#5f5f5f, 12%)
+.job__title
+  font-size: 28px
   line-height: 1.2
-  text-shadow: 1px 1px 1px white
+  margin-bottom: 0
+  +media-query(lap)
+    font-size: 36px
+  +media-query(desk)
+    font-size: 41px
+    line-height: 1.2
+    margin-bottom: 0
+
+.job-media
+  +cf
+  margin-bottom: 24px
+
+.job-media__img
+  display: block
+  > img
+    box-shadow: 0 1px 2px rgba(#000, .1)
+    background-color: #FFF
+    border: 1px solid #ddd
+    border-radius: 4px
+    display: block
+    padding: 4px
+    display: block
+    float: left
+    margin-right: 24px
+
+.job-media__body
+  overflow: hidden
+  padding-top: 6px
+
+.job__body
+  border-top: 1px solid #fff
+  padding-top: 24px
+  > h6
+    margin-bottom: 12px
+
+.job-info
+  +cf
+  list-style: none
+  margin-left: 0
+  > li
+    +cf
+    float: left
+    margin-right: 18px
+    &:last-child
+      margin-right: 0
+
+.job__icon
+  display: inline-block
+  height: 24px
+  vertical-align: middle
+  margin-right: 2px
+  width: 24px
+
+.job__local,
+.job__date
+  display: inline-block
+  vertical-align: middle
+
+.job__company
+  font-weight: 400
+
+.job-social
+  list-style: none
+  margin-left: 0
+  margin-bottom: 12px
+  > li
+    border-bottom: none
+    display: inline-block
+    margin-bottom: 12px
+    padding: 0 8px
+    &:first-child
+      padding-left: 0
+    &:last-child
+      padding-right: 0
+    > a,
+    > iframe
+      padding: 0
+  +media-query(lap)
+    margin-bottom: 24px
+    > li
+      margin-bottom: 0
+
+.job-form
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+  border-radius: 4px
+  background: whitesmoke
+  border: 1px solid #e5e5e5
+  margin-top: 24px
+  padding: 24px
+
+.job-form__list
+  list-style: none
+  margin-left: 0
+  > li
+    margin-bottom: 14px
+    &:last-child
+      margin-bottom: 0
+  +media-query(desk)
+    > li
+      display: table
+      margin-bottom: 24px
+      width: 100%
+      &:last-child
+        margin-bottom: 0
+
+.job-form__label
+  display: block
+  margin-bottom: 6px
+  +media-query(desk)
+    display: table-cell
+    vertical-align: top
+    width: 25%
+
+.job-form__field
+  +media-query(desk)
+    display: table-cell
+    vertical-align: top
+
+.job-form__field--name
+  +cf
+  margin-left: -24px
+  .job-form__cell
+    float: left
+    padding-left: 24px
+    width: 50%
+  +media-query(desk)
+    margin-left: 0
+    .job-form__cell
+      &:first-child
+        padding-left: 0
+
+.job-action
+  background: lighten(whitesmoke, 1%)
+  border-top: 1px solid #e5e5e5
+  padding: 14px 24px
+  +media-query(desk)
+    padding-left: 155px
+
+.job-action__btn
+  display: block
+  width: 100%
+  +media-query(desk)
+    display: inline-block
+    width: auto
+
