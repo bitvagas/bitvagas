@@ -1,6 +1,6 @@
 doctype html
 html(lang='pt-br', ng-app='bitvagas')
-head
+  head
     title
       | BitVagas — Plataforma de Vagas para usuários Bitcoin
 
@@ -29,6 +29,8 @@ head
             a(href='/#/about', title='Sobre') Sobre
           li
             a(href='/#/contact', title='Contato') Contato
+
+        ul.head-nav.head-nav--right
           if !user
             li
                 a(href='/#/signin', title='Sign In') Sign In
@@ -70,3 +72,5 @@ head
           li
             a(href='')
               img(src='', alt='RSS')
+
+    script(src="https://apis.google.com/js/platform.js" async defer)
