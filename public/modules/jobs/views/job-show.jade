@@ -2,54 +2,63 @@
   .wrapper
     .job
       .job__cell.job__cell--main
-        header.job-head
-            h1.job-head__title {{ job.TITLE }}
-          h2.job-head-local {{ job.LOCATION }}
-          .job-head__date {{ job.createdAt | date }}
-          .job-head__type {{ job.jobType.NAME }}
-          h3.job-head-local {{ job.org.NAME }}
-          ul.job-head-nav
+        header.job__head
+          .job-media
+            a(href='{{ job.org.URL }}' target='_blank').job-media__img
+              img(src='http://placehold.it/100x100')
+            .job-media__body
+              h1.job__title {{ job.TITLE }} <span class="job__company">na {{ job.org.NAME }}</span>
+          ul.job-info
             li
-              a(href="{{ job.org.URL }}") {{ job.org.URL }} 
-        .job-body
+              |  <div class="label label--fulltime">Full-Time{{ job.jobType.NAME }}</div>
+            li
+              img(src='#{ site_img }local.svg').job__icon
+              .job__local {{ job.LOCATION }}
+            li
+              img(src='#{ site_img }calendar.svg').job__icon
+              .job__date {{ job.createdAt | date }}
+
+        .job__body
+          ul.job-social
+            li
+              |  <iframe src="http://platform.twitter.com/widgets/tweet_button.1359159993.html#_=1360010161235&amp;count=horizontal&amp;id=twitter-widget-0&amp;lang=pt-BR&amp;size=m&amp;url=http://bitvagas.com/&amp;text=BitVagas - " class="twitter-share-button twitter-count-horizontal" data-twttr-rendered="true" allowtransparency="true" frameborder="0" scrolling="no" width="82" height="20"></iframe>
+            li
+              |  <iframe src="//www.facebook.com/plugins/like.php?href=http://bitvagas.com/&amp;send=false&amp;layout=button_count&amp;width=100&amp;show_faces=false&amp;colorscheme=light&amp;action=like&amp;height=20" allowtransparency="true" frameborder="0" scrolling="no" width="82" height="20"></iframe>
+            li(style='width: 74px;')
+              |  <iframe src="https://plusone.google.com/_/+1/fastbutton?bsv&amp;size=medium&amp;hl=en-US&amp;url=http://bitvagas.com/&amp;parent=http://bitvagas.com/" allowtransparency="true" frameborder="0" scrolling="no" width="70" height="20"></iframe>
+
           h6 Descrição do trabalho:
           p {{ job.DESCRIPTION }}
-          p
-            a.btn.btn--medium.btn--primary(href='') Candidatar-se à vaga
+
         footer.job-foot
-      .job__cell.job__cell--aside
-        .last-jobs
-          h3.last-jobs-title Últimas Vagas
+          a#btn-apply.btn.btn--medium.btn--primary(href='#') Candidatar-se à vaga
 
-          ul.last-jobs-list
-            li
-              a.last-jobs-list-item(href='')
-                h6.last-jobs-list-item__title Back-End Developer
-                ul.last-jobs-list-item__breadcrumb
-                  li Presidente Prudente
-                  li Empresa
-                  li Freelance
+          form#form-apply.job-form(action="https://docs.google.com/forms/d/1AIBX-zjbQ_edm4ZdCqqrUixKj7Cpvb2tjwFSTWpzSpw/formResponse" method="POST" target="_self")
+            .job-form__head
+              h6.job-form__title Aplicar para {{ job.TITLE }} na {{ job.org.NAME }}
+            .job-form__body
+              ul.job-form__list
+                li
+                  label.job-form__label Email:<strong>*</strong>
+                  .job-form__field
+                    input#entry_955005878.job-form__input.input.input--full(type='email', placeholder='Email', name='entry.955005878', value='', dir='auto', aria-label='Email:  Precisa ser um endereço de e-mail válido', aria-required='true', required='', title='Precisa ser um endereço de e-mail válido')
 
-            li
-              a.last-jobs-list-item(href='')
-                h6.last-jobs-list-item__title Designer
-                ul.last-jobs-list-item__breadcrumb
-                  li Presidente Prudente
-                  li Empresa
-                  li Fixo
+                li
+                  label.job-form__label Nome:<strong>*</strong>
+                  .job-form__field.job-form__field--name
+                    .job-form__cell
+                      input#entry_1558225822.job-form__input.input.input--full(type='text', placeholder='Nome', name='entry.1558225822', value='', dir='auto', aria-label='Name:  Precisa conter ', aria-required='true', required='', pattern='.*.*', title='Precisa conter ')
+                    .job-form__cell
+                      input#entry_713180040.job-form__input.input.input--full(type='text', placeholder='Sobre nome', name='entry.713180040', value='', dir='auto', aria-label='Last Name:  Precisa conter ', aria-required='true', required='', pattern='.*.*', title='Precisa conter ')
+                li
+                  label.job-form__label Links de Referência:<strong>*</strong>
+                  .job-form__field
+                    textarea#entry_944889134.job-form__input.textarea.textarea--full(name='entry.944889134', placeholder='Linkedin, myportfolio.com...', rows='1', cols='0', dir='auto', aria-label='Reference Links:  Precisa ter pelo menos 20 caracteres.', aria-required='true', required='')
+                li
+                  label.job-form__label Apresentação:<strong>*</strong>
+                  .job-form__field
+                    textarea#entry_1496250376.job-form__input.textarea.textarea--full(name='entry.1496250376', rows='5', cols='0', dir='auto', aria-label='Cover Letter:  Precisa ter pelo menos 100 caracteres.', aria-required='true', required='')
 
-            li
-              a.last-jobs-list-item(href='')
-                h6.last-jobs-list-item__title Full Stack Developer
-                ul.last-jobs-list-item__breadcrumb
-                  li Presidente Prudente
-                  li Empresa
-                  li Estágio
+            .job-action
+              input#ss-submit.job-action__btn.btn.btn--primary.btn--medium(type="submit" name="submit" value="Enviar")
 
-        .category
-          h4.category__title Categorias
-          ul.category__list
-            li
-              a(href='', title='Design (29)') Design (29)
-            li
-              a(href='', title='Desenvolvimento (21)') Desenvolvimento (21)
