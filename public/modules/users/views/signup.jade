@@ -1,5 +1,5 @@
 block content
-  form.signup
+  form.signup(name="form")
     .signup__cell.signup__cell--main
       header.signup__head
         h1.signup__title Sign Up
@@ -18,7 +18,7 @@ block content
             li
               <label for="" class="signup-form__label">E-mail:</label>
               .signup-form__input
-                input.input.input--full(type='text' ng-model='user.EMAIL' placeholder='Email' name='EMAIL' title='Email Obrigatório' required)
+                input.input.input--full(type='email' ng-model='user.EMAIL' placeholder='Email' name='EMAIL' title='Email Obrigatório' required)
             li
               <label for="" class="signup-form__label">Senha:</label>
               .signup-form__input
