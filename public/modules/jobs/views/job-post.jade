@@ -9,15 +9,32 @@
 
     .create__body
       form(name="form")
+        fieldset.create-fieldset
+          legend.create-fieldset__legend Sobre sua empresa
+          ul.create-form
+            li
+              label.create-form__label Seu e-mail:
+              .create-form__input
+                input.input.input--full(type='email', name='EMAIL' ng-model='data.EMAIL' required)
+                .create-form__help Este é o email para cadastramento de sua empresa em nosso sistema.
+            li
+              label.create-form__label Nome da empresa:
+              .create-form__input
+                input.input.input--full(type='text' placeholder='' name='ORG_NAME' ng-model='data.ORG_NAME' required)
+                .create-form__help O nome da empresa não pode ser divulgado? Cheque ao lado para manter em sigilo.
+            li
+              label.create-form__label Site da empresa:
+              .create-form__input
+                input.input.input--full(type='url' placeholder='http://' name='URL' ng-model='data.URL')
+                .create-form__help Vagas com o site da empresa atraem mais candidatos.
+            li
+              label.create-form__label Logo:
+              .create-form__input
+                input(type='file')
 
         fieldset.create-fieldset
           legend.create-fieldset__legend Sobre a vaga
           ul.create-form
-            li
-              label.create-form__label Organização
-              select.select.select--full(name="ORG_ID" ng-model="data.ORG_ID")
-                option(ng-repeat="org in orgs" value="{{ org.id }}")
-                  {{ org.NAME }}
             li
               label.create-form__label Título da vaga:
               .create-form__input
