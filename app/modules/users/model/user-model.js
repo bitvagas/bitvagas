@@ -18,9 +18,11 @@ module.exports = function(sequelize, DataTypes){
               type: DataTypes.STRING
             , allowNull : false
         }
-        , TOKEN        : DataTypes.STRING
-        , RESETTOKEN   : DataTypes.STRING
-        , RESETEXPIRES : DataTypes.DATE
+        , TOKEN          : DataTypes.STRING
+        , RESETTOKEN     : DataTypes.STRING
+        , RESETEXPIRES   : DataTypes.DATE
+        , LINKEDIN_ID    : DataTypes.STRING
+        , LINKEDIN_TOKEN : DataTypes.STRING
     }, {
         classMethods  : {
             associate : function(models){

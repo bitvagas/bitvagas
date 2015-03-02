@@ -7,7 +7,14 @@ var express  = require('express')
 
 module.exports = {
 
-    findByEmail: function(request){
+    findById : function(id){
+        return db.user.find({
+            where   : { id : id }
+          , include : [db.job]
+        });
+  }
+
+  , findByEmail: function(request){
         var email = request.body.EMAIL;
         return db.user.find({
             where   : { EMAIL : email }

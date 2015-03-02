@@ -1,6 +1,7 @@
 var express   = require('express')
   , passport  = require('passport')
   , users     = require('../controllers/user-controller')
+  , cv        = require('../controllers/user-cv-controller')
   , stratergy = require('../controllers/passport')
   , router    = express.Router();
 
@@ -22,6 +23,17 @@ router.post('/auth', passport.authenticate('signin',
 router.post('/api/signup', function(request, response){
     users.signup(request, response);
 });
+
+router.get('/auth/linkedin', passport.authenticate('linkedin', { state : 'state' }), function(request, response){});
+
+router.get('/auth/linkedin/callback', passport.authenticate('linkedin',
+    { successRedirect : '/#/dashboard/profile'
+    , failureRedirect : '/auth'
+    , failureFlash    : true
+    })
+);
+
+router.get('/api/cv', cv.getCV);
 
 /*
  * Signup an user indirect
@@ -45,8 +57,8 @@ router.get('/forgot', function(request, response){
     response.render('forgot', { email : request.query.email || '' });
 });
 
-router.post('/forgot', function(request, response){
-    users.forgotPassword(request, response);
+router.get('/forgot', function(request, response){
+    response.render('forgot', { email : request.query.email || '' });
 });
 
 router.get('/reset', function(request, response){
