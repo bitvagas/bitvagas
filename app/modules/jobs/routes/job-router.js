@@ -11,6 +11,7 @@ router.get('/:id', function(request, response){
 });
 
 router.post('/', function(request, response){
+    request.body.USER_ID = request.user.id;
     jobs.create(request, response);
 });
 
