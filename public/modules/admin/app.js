@@ -19,9 +19,20 @@ angular.module('bitvagas.admin',
         })
         .state('dashboard.profile', {
             url : '/profile'
-          , templateUrl : '/modules/admin/views/profile'
-          , authenticate : true
-        });
+          , views : {
+              ''  : {
+                  templateUrl : '/modules/users/views/profile'
+              }
+            , 'cv@dashboard.profile' : {
+                  templateUrl : '/modules/users/views/cv'
+                , controller  : 'CVController'
+              }
+            , 'change-password@dashboard.profile' : {
+                  templateUrl : '/modules/users/views/change-password'
+              }
+          }
+          , authenticate  : true
+        })
     }).run(function($rootScope, $state, AuthenticationService, UserService){
         $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
             AuthenticationService.isAuthenticated().then(function(result){

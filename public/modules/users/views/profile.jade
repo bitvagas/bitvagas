@@ -1,0 +1,16 @@
+h1 Minha Conta
+
+ul
+  li
+    label Nome
+     {{user.NAME}}
+  li
+    label Email
+     {{user.EMAIL}}
+
+
+h3 Curriculo
+div(ui-view="cv")
+
+
+div(ui-view="change-password")
