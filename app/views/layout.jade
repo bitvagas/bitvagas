@@ -23,8 +23,12 @@ html(lang='pt-br', ng-app='bitvagas')
         ul.head-nav
           li
             a(href='/#/jobs-list', title='Todas as Vagas') Todas as Vagas
-          li
-            a(href='/#/jobs/create', title='Postar Vaga') Postar Vaga
+          if !user
+            li
+              a(href='/#/jobs/post', title='Postar Vaga') Postar Vaga
+          else
+            li
+              a(href="/#/dashboard/jobs/create", title="Postar Vaga") Postar Vaga
           li
             a(href='/#/about', title='Sobre') Sobre
           li
