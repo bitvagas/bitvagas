@@ -17,4 +17,8 @@ function UserService($http) {
     this.auth  = function(user){
         return $http.post("/auth", user);
     };
+
+    this.cv = function(){
+        return $http.get('/api/cv');
+    };
 }
