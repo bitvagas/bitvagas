@@ -17,16 +17,16 @@ angular.module('bitvagas.jobs',
           , templateUrl : '/modules/jobs/views/job-list'
           , controller  : 'JobListController'
         })
-        .state('jobs-create', {
-            url: '/jobs/create'
-          , templateUrl  : '/modules/jobs/views/job-create'
+        .state('jobs-post', {
+            url: '/jobs/post'
+          , templateUrl  : '/modules/jobs/views/job-post'
           , resolve      : {
               Categories : function(CategoryService){
                   return CategoryService.findAll();
               }
           }
           , params       : { data : {}, errors : [] }
-          , controller   : 'JobCreateController'
+          , controller   : 'JobPostController'
         })
         .state('jobs-confirm', {
             url: '/jobs/create/confirm'
@@ -37,11 +37,54 @@ angular.module('bitvagas.jobs',
               }
           }
           , params       : { data : {}}
-          , controller   : 'JobCreateController'
+          , controller   : 'JobPostController'
         })
         .state('jobs-show', {
             url: '/jobs/:id'
           , templateUrl: '/modules/jobs/views/job-show'
           , controller : 'JobShowController'
-        });
+        })
+        //Dashboard views
+        .state('dashboard.jobs', {
+            url : '/jobs'
+          , abstract     : true
+          , templateUrl  : '/modules/jobs/views/job-dashboard'
+          , authenticate : true
+        })
+        .state('dashboard.jobs.list', {
+            url          : '/'
+          , templateUrl  : '/modules/jobs/views/job-list'
+          , authenticate : true
+          , controller   : 'JobListController'
+        })
+        .state('dashboard.jobs.create', {
+            url          : '/create'
+          , templateUrl  : '/modules/jobs/views/job-create'
+          , resolve      : {
+                Categories : function(CategoryService){
+                  return CategoryService.findAll();
+              }
+              , Organizations : function(OrgService){
+                  return OrgService.findByUser();
+              }
+          }
+          , params       : { data : {}, errors : [] }
+          , controller   : 'JobCreateController'
+          , authenticate : true
+        })
+        .state('dashboard.jobs.confirm', {
+            url          : '/create'
+          , templateUrl  : '/modules/jobs/views/job-confirm'
+          , resolve      : {
+              Categories : function(CategoryService){
+                  return CategoryService.findAll();
+              }
+              , Organizations : function(OrgService){
+                  return OrgService.findByUser();
+              }
+          }
+          , params       : { data : {} }
+          , controller   : 'JobCreateController'
+          , authenticate : true
+        })
     });

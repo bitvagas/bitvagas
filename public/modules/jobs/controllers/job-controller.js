@@ -2,14 +2,17 @@ angular.module('bitvagas.jobs.controllers',[])
 .controller('JobListController', JobListController)
 .controller('JobShowController', JobShowController);
 
-JobListController.$inject = ['$scope','$state','JobService', 'CategoryService'];
-JobShowController.$inject = ['$scope','$state','JobService', 'CategoryService'];
+JobListController.$inject = ['$scope','$state','JobService', 'UserService'];
+JobShowController.$inject = ['$scope','$state','JobService'];
 
-function JobListController($scope, $state, JobService){
+function JobListController($scope, $state, JobService, UserService){
 
-    JobService.findAll().then(function(data){
-        $scope.jobs = data.data;
-    });
+    if(Object.getOwnPropertyNames(UserService.current).length === 0){
+        JobService.findAll().then(function(data){
+            $scope.jobs = data.data;
+        });
+    } else
+        $scope.jobs = UserService.current.jobs;
 }
 
 function JobShowController($scope, $state, JobService){
