@@ -8,12 +8,16 @@ form.signin.signin__cell.signup__cell--main(action='/auth' method='post')
       fieldset.signup-fieldset
           ul.signup-form
             li
-              input.input.input--full(type='text' placeholder='email' name='EMAIL' ng-model='email' required)
+              <label for="" class="signup-form__label">Email:</label>
+              .signup-form__input
+                input.input.input--full(type='text' placeholder='email' name='EMAIL' ng-model='email' required)
             li
-              input.input.input--full(type='password' placeholder='password' name='PASSWORD' required)
+              <label for="" class="signup-form__label">Senha:</label>
+              .signup-form__input
+                input.input.input--full(type='password' placeholder='password' name='PASSWORD' required)
 
             .signup-action
-                input.signup-action__btn.btn.btn--medium.btn--primary(type='submit' value='Sign In') 
+                input.signup-action__btn.btn.btn--medium.btn--primary(type='submit' value='Sign In')
             div
               a.forgot(ng-href='/forgot?email={{email}}') Forgot password?
               br
