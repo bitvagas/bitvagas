@@ -10,7 +10,7 @@ module.exports = {
     findById : function(id){
         return db.user.find({
             where   : { id : id }
-          , include : [db.job]
+          , include : [{ model : db.job, include : [db.job_type] }]
         });
   }
 
@@ -18,7 +18,7 @@ module.exports = {
         var email = request.body.EMAIL;
         return db.user.find({
             where   : { EMAIL : email }
-          , include : [db.job]
+          , include : [{ model : db.job, include : [db.job_type] }]
           });
   }
 
