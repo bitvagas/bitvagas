@@ -31,9 +31,9 @@
           p {{ job.DESCRIPTION }}
 
         footer.job-foot
-          a#btn-apply.btn.btn--medium.btn--primary(href='#') Candidatar-se à vaga
+          a#btn-apply.btn.btn--medium.btn--primary(href='#' ng-click="apply()" ng-show="!applied") Candidatar-se à vaga
 
-          form#form-apply.job-form(action="https://docs.google.com/forms/d/1AIBX-zjbQ_edm4ZdCqqrUixKj7Cpvb2tjwFSTWpzSpw/formResponse" method="POST" target="_self")
+          form#form-apply.job-form(action="https://docs.google.com/forms/d/1AIBX-zjbQ_edm4ZdCqqrUixKj7Cpvb2tjwFSTWpzSpw/formResponse" method="POST" target="_self" ng-show="applied")
             .job-form__head
               h6.job-form__title Aplicar para {{ job.TITLE }} na {{ job.org.NAME }}
             .job-form__body

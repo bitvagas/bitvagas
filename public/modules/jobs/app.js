@@ -48,18 +48,18 @@ angular.module('bitvagas.jobs',
         .state('dashboard.jobs', {
             url : '/jobs'
           , abstract     : true
-          , templateUrl  : '/modules/jobs/views/job-dashboard'
+          , templateUrl  : '/modules/jobs/views/dashboard/job-dashboard'
           , authenticate : true
         })
         .state('dashboard.jobs.list', {
             url          : '/'
-          , templateUrl  : '/modules/jobs/views/job-list'
+          , templateUrl  : '/modules/jobs/views/dashboard/job-dashboard-list'
           , authenticate : true
           , controller   : 'JobListController'
         })
         .state('dashboard.jobs.create', {
             url          : '/create'
-          , templateUrl  : '/modules/jobs/views/job-create'
+          , templateUrl  : '/modules/jobs/views/dashboard/job-dashboard-create'
           , resolve      : {
                 Categories : function(CategoryService){
                   return CategoryService.findAll();

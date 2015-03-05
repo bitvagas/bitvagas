@@ -1,0 +1,16 @@
+a.btn.btn--medium.btn--primary(ui-sref='dashboard.jobs.create') New Job
+
+ul.jobs
+  li(ng-repeat='job in jobs')
+    a.jobs-item(ui-sref='jobs-show({id : job.id})', title='')
+      .jobs-item__cell.jobs-item__cell--img
+        img.jobs-item__img(src='/img/company-default.png', alt='')
+
+      .jobs-item__cell.jobs-item__cell--body
+        h2.jobs-item__title {{ job.TITLE }}
+        h3.jobs-item__company {{ job.LOCATION }}
+
+      .jobs-item__cell.jobs-item__cell--meta
+        .jobs-item__type
+          .label.label--fulltime {{ job.job_type.NAME }}
+        .jobs-item__date {{ job.createdAt | date }}
