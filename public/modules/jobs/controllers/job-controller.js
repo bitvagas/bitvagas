@@ -7,12 +7,13 @@ JobShowController.$inject = ['$scope','$state','JobService'];
 
 function JobListController($scope, $state, JobService, UserService){
 
-    if(Object.getOwnPropertyNames(UserService.current).length === 0){
+    if(!$state.current.authenticate){
         JobService.findAll().then(function(data){
             $scope.jobs = data.data;
         });
     } else
         $scope.jobs = UserService.current.jobs;
+
 }
 
 function JobShowController($scope, $state, JobService){
@@ -20,5 +21,9 @@ function JobShowController($scope, $state, JobService){
     JobService.findById(id).then(function(data){
         $scope.job = data.data;
     });
+
+    $scope.apply = function(){
+        $scope.applied = true;
+    }
 }
 
