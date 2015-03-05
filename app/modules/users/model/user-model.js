@@ -18,6 +18,7 @@ module.exports = function(sequelize, DataTypes){
               type: DataTypes.STRING
             , allowNull : false
         }
+        , PICTURE        : DataTypes.STRING
         , TOKEN          : DataTypes.STRING
         , RESETTOKEN     : DataTypes.STRING
         , RESETEXPIRES   : DataTypes.DATE
