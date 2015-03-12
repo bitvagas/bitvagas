@@ -1,17 +1,21 @@
-h1 DashBoard
-img(src="{{ user.PICTURE }}")
-h3
-  a(href="/auth/linkedin") Conectar CV
-aside
-  ul
-    li
-      a(ui-sref='dashboard.overview') Visao Geral
-    li
-      a(ui-sref='dashboard.profile') Minha Conta
-    li
-      a(ui-sref='dashboard.jobs.list') Minhas Vagas
-    li
-      a(ui-sref='dashboard.organization.list') Minhas Organizações
-    aside
-      section
-        div(ui-view='')
+.dashboard
+  header.dashboard__head
+    h1 DashBoard
+  .dashboard__body
+    aside.dashboard__cell.dashboard__cell--aside
+      img(src="{{ user.PICTURE }}").dashboard__img
+
+      p
+        a(href="/auth/linkedin") Conectar CV
+
+      ul
+        li
+          a(ui-sref='dashboard.overview') Visao Geral
+        li
+          a(ui-sref='dashboard.profile') Minha Conta
+        li
+          a(ui-sref='dashboard.jobs.list') Minhas Vagas
+        li
+          a(ui-sref='dashboard.organization.list') Minhas Organizações
+
+    section(ui-view='').dashboard__cell.dashboard__cell--main

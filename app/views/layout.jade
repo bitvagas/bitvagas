@@ -28,7 +28,7 @@ html(lang='pt-br', ng-app='bitvagas')
               a(href='/#/jobs/post', title='Postar Vaga') Postar Vaga
           else
             li
-              a(href="/#/dashboard/jobs/create", title="Postar Vaga") Postar Vaga
+              a(href="/#/dashboard/jobs/create", title="Criar Vaga") Criar Vaga
           li
             a(href='/#/about', title='Sobre') Sobre
           li
@@ -37,14 +37,14 @@ html(lang='pt-br', ng-app='bitvagas')
         ul.head-nav.head-nav--right
           if !user
             li
-                a(href='/#/signin', title='Sign In') Sign In
+                a(href='/#/signin', title='Sign In') Sign in
             li
-                a(href='/#/signup', title='Sign Up') Sign Up
+                a(href='/#/signup', title='Sign Up') Sign up
           else
             li
                 a(href='/#/dashboard/overview' title='User') #{user.NAME}
             li
-                a(href='/logout', title='Log Out') Log Out
+                a(href='/logout', title='Log Out') Log out
 
     block content
 
