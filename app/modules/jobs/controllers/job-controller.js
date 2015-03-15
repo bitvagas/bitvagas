@@ -1,5 +1,4 @@
 var express = require('express')
-  , async   = require('async')
   , org     = require('./org-controller')
   , user    = require('../../users/controllers/user-controller')
   , db      = require(root + '/app/models');
