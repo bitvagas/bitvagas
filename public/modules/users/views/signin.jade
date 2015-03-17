@@ -15,11 +15,11 @@ form.signin.signin__cell.signup__cell--main(action='/auth' method='post')
               <label for="" class="signup-form__label">Senha:</label>
               .signup-form__input
                 input.input.input--full(type='password' placeholder='password' name='PASSWORD' required)
+            li
+              <label for="" class="signup-form__label">&nbsp;</label>
+              a.forgot(ng-href='/forgot?email={{email}}') Forgot password?
+              | &nbsp;Ainda não é usuario?
+              a.join(href='/#/signup')  Join now!
 
             .signup-action
                 input.signup-action__btn.btn.btn--medium.btn--primary(type='submit' value='Sign In')
-            div
-              a.forgot(ng-href='/forgot?email={{email}}') Forgot password?
-              br
-              | ainda não é usuario?
-              a.join(href='/#/signup')  Join now
