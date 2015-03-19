@@ -3,7 +3,8 @@
     h1 DashBoard
   .dashboard__body
     aside.dashboard__cell.dashboard__cell--aside
-      img(src="{{ user.PICTURE }}").dashboard__img
+      img(ng-src="{{ user.PICTURE ? user.PICTURE : 'https://m1.behance.net/rendition/modules/83055723/disp/729ebe0c689023040b7eb03fe48e7792.png' }}").dashboard__img
+
 
       p
         a(href="/auth/linkedin") Conectar CV
@@ -13,6 +14,8 @@
           a(ui-sref='dashboard.overview') Visao Geral
         li
           a(ui-sref='dashboard.profile') Minha Conta
+        li
+          a(ui-sref='dashboard.cv({id : user.id})') Meu Curriculo
         li
           a(ui-sref='dashboard.jobs.list') Minhas Vagas
         li
