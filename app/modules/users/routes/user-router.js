@@ -35,6 +35,12 @@ router.get('/auth/linkedin/callback', passport.authenticate('linkedin',
 
 router.get('/api/cv', cv.getCV);
 
+router.post('/api/cv', cv.getCV);
+
+router.get('/api/users', cv.getFreelancers);
+
+router.get('/api/users/:id', cv.getFreelancerById);
+
 /*
  * Signup an user indirect
  */

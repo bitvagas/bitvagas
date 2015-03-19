@@ -7,7 +7,14 @@ var express  = require('express')
 
 module.exports = {
 
-    findById : function(id){
+    findAll : function(){
+        return db.user.findAll({
+            where   : { USER_STATUS : 3 }
+          , include : [{ model : db.job, include : [db.job_type] }]
+        });
+    }
+
+  , findById : function(id){
         return db.user.find({
             where   : { id : id }
           , include : [{ model : db.job, include : [db.job_type] }]
