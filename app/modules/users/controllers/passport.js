@@ -54,7 +54,10 @@ if(process.env.LINKEDIN_ID && process.env.LINKEDIN_SECRET) {
                 } else {
                     users.findById(request.user.id).then(function(user){
                         user.update({
-                            PICTURE        : profile._json.pictureUrl
+                            HEADLINE       : profile._json.headline
+                          , SUMMARY        : profile._json.summary
+                          , LOCATION       : profile._json.location.name
+                          , PICTURE        : profile._json.pictureUrl
                           , LINKEDIN_ID    : profile.id
                           , LINKEDIN_TOKEN : accessToken
                         }).then(function(user){
