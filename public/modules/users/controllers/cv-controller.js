@@ -1,15 +1,24 @@
 angular.module('bitvagas.users.controllers', [])
+.controller('FreelancerController', FreelancerController)
 .controller('CVController', CVController);
 
+FreelancerController.$inject = ['$scope', 'UserService'];
 CVController.$inject = ['$scope', '$state', '$stateParams', 'UserService'];
 function CVController($scope, $state, $stateParams, UserService){
-    console.log($scope.skills);
-    if(UserService.current.LINKEDIN_TOKEN){
-        UserService.cv().then(function(data){
-            console.log(data);
-            $scope.skills = data.data.skills.values;
-        }, function(err){
-            console.log(err);
+        UserService.findById($stateParams.id).then(function(user){
+            $scope.user = user.data;
+            var linkedIn = user.data.LINKEDIN_TOKEN;
+            if(linkedIn){
+                UserService.getCV({ token : linkedIn}).then(function(data){
+                    $scope.user.cv = data.data;
+                });
+            }
         });
-    }
+}
+
+function FreelancerController ($scope, UserService) {
+
+    UserService.findAll().then(function(data){
+        $scope.freelancers = data.data;
+    });
 }

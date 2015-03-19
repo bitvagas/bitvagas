@@ -10,6 +10,14 @@ function UserService($http) {
         return $http.post(baseUrl, user);
     };
 
+    this.findAll = function(){
+        return $http.get('/api/users');
+    };
+
+    this.findById = function(id){
+        return $http.get('/api/users/'+id);
+    };
+
     this.invite = function(user){
         return $http.post('/invite', user);
     };
@@ -18,7 +26,12 @@ function UserService($http) {
         return $http.post("/auth", user);
     };
 
-    this.cv = function(){
+    this.myCV = function(){
         return $http.get('/api/cv');
+    };
+
+    this.getCV = function(token){
+        console.log(token);
+        return $http.post('/api/cv', token);
     };
 }
