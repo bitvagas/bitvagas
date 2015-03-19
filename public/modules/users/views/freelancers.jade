@@ -1,0 +1,9 @@
+h1 FreeLancers
+
+div(ng-repeat="freelancer in freelancers")
+  a(ui-sref="freelancers-cv({ id : freelancer.id })")
+    img(ng-src="{{ freelancer.PICTURE ? freelancer.PICTURE : 'https://m1.behance.net/rendition/modules/83055723/disp/729ebe0c689023040b7eb03fe48e7792.png' }}" style="max-width:100px")
+
+  div {{ freelancer.NAME }}
+  div {{ freelancer.HEADLINE }}
+  div {{ freelancer.createdAt }}
