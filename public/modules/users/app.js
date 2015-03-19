@@ -14,4 +14,14 @@ angular.module('bitvagas.users', [
             url: '/signin'
           , templateUrl : 'modules/users/views/signin'
         })
+        .state('freelancers', {
+            url: '/freelancers'
+          , templateUrl : 'modules/users/views/freelancers'
+          , controller  : 'FreelancerController'
+        })
+        .state('freelancers-cv', {
+            url: 'freelancers/:id'
+          , templateUrl : 'modules/users/views/cv'
+          , controller  : 'CVController'
+        })
     });
