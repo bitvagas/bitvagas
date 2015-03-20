@@ -45,6 +45,10 @@ var config = {
     , app: {
         name: 'bitvagas'
     }
+    , mailer   : {
+        email  : process.env.email
+      , pass   : process.env.mailPass
+    }
     , host     : host
     , port     : 3000
     , PSQLPort : PSQLPort
