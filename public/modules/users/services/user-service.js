@@ -26,10 +26,6 @@ function UserService($http) {
         return $http.post("/auth", user);
     };
 
-    this.myCV = function(){
-        return $http.get('/api/cv');
-    };
-
     this.getCV = function(token){
         console.log(token);
         return $http.post('/api/cv', token);
