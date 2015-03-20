@@ -5,13 +5,23 @@ var fs        = require('fs')
   , config    = require('../../config/config')
   , glob      = require('glob')
   , root      = path.normalize(__dirname + '/../..')
-  , db        = {};
+  , db        = {}
+  , sequelize = null;
 
-var sequelize = new Sequelize(config.db, config.username, config.password, {
-    dialect : 'postgres'
-  , host    : config.host
-  , port    : config.PSQLPort
-});
+if(process.env.DATABASE_URL){
+    sequelize = new Sequelize(process.env.DATABASE_URL, {
+        dialect  : 'postgres'
+      , protocol : 'postgres'
+      , host     : config.host
+      , port     : config.PSQLPort
+    });
+} else {
+    sequelize = new Sequelize(config.db, config.username, config.password, {
+        dialect : 'postgres'
+      , host    : config.host
+      , port    : config.PSQLPort
+    });
+}
 
 /*
  * get all models files from model folders
