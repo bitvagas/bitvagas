@@ -1,6 +1,6 @@
 {
   "name": "bitvagas-com",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "private": true,
   "scripts": {
     "start": "node app.js",
@@ -41,5 +41,9 @@
     "gulp-concat": "^2.4.3",
     "gulp-nodemon": "~1.0.4",
     "should": "^4.4.1"
+  },
+  "engines" : {
+      "node": "0.10.x",
+      "npm": "2.1.x"
   }
 }
