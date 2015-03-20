@@ -2,6 +2,7 @@ var path     = require('path')
   , rootPath = path.normalize(__dirname + '/..')
   , env      = process.env.NODE_ENV || 'development'
   , host     = process.env.host     || 'localhost'
+  , database = process.env.database || 'bitvagas_dev'
   , user     = process.env.user     || 'postgres'
   , password = process.env.password || ''
   , PSQLPort = process.env.port     || 5432;
@@ -49,7 +50,7 @@ var config = {
     , PSQLPort : PSQLPort
     , username : user
     , password : password
-    , db: 'bitvagas'
+    , db: database
   }
 };
 
