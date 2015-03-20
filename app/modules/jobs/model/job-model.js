@@ -15,9 +15,14 @@ module.exports = function(sequelize, DataTypes){
             type        : DataTypes.STRING
           , allowNull   : false
         }
-        , APPLY_BY      : {
+        , APPLY_URL     : {
               type      : DataTypes.STRING
             , allowNull : true
+            , validate  : {
+                isUrl   : {
+                    msg : 'URL is not valid'
+                }
+            }
         }
         , BTC_ADDRESS   : {
             type        : DataTypes.STRING
