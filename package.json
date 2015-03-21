@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node app.js",
-    "test": "export NODE_ENV=test; mocha test app/modules/**/test/*-test.js"
+    "test": "export NODE_ENV=test; mocha test app/modules/**/test/*-test.js",
+    "postinstall": "bower install"
   },
   "dependencies": {
     "bcryptjs": "^2.1.0",
