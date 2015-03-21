@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node app.js",
     "test": "export NODE_ENV=test; mocha test app/modules/**/test/*-test.js",
-    "postinstall": "bower install"
+    "postinstall": "bower install && gulp build"
   },
   "dependencies": {
     "bcryptjs": "^2.1.0",
@@ -35,13 +35,13 @@
     "pg-hstore": "^2.3.1",
     "sequelize": "2.0.0-rc8",
     "sequelize-fixtures": "^0.3.4",
+    "gulp": "~3.8.8",
+    "gulp-concat": "^2.4.3",
+    "browser-sync": "^1.7.0",
+    "gulp-nodemon": "~1.0.4",
     "serve-favicon": "~2.0.1"
   },
   "devDependencies": {
-    "browser-sync": "^1.7.0",
-    "gulp": "~3.8.8",
-    "gulp-concat": "^2.4.3",
-    "gulp-nodemon": "~1.0.4",
     "should": "^4.4.1"
   },
   "engines": {

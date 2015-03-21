@@ -1,7 +1,6 @@
 var gulp    = require('gulp')
   , nodemon = require('gulp-nodemon')
   , concat  = require('gulp-concat')
-  , harp    = require('harp')
   , browserSync = require('browser-sync');
 
 gulp.task('browser-sync', ['nodemon'], function () {
@@ -46,5 +45,7 @@ gulp.task('watch', function() {
         browserSync.reload('app-build.js', { stream: true });
     });
 });
+
+gulp.task('build', ['script']);
 
 gulp.task('default', ['browser-sync','script', 'watch']);
