@@ -18,7 +18,7 @@ db.sequelize
       fixtures.loadFile("config/data/job-type-data.json", db);
       fixtures.loadFile("config/data/category-data.json", db);
       fixtures.loadFile("config/data/user-status-data.json", db);
-      app.listen(config.port);
+      app.listen(process.env.PORT || 3000);
     }
   });
 
