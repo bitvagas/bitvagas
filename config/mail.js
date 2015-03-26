@@ -10,6 +10,11 @@ module.exports = {
       , pass  : config.mailer.pass
     }
 
+    , mailGunAuth : {
+          user : process.env.MAILGUN_SMTP_LOGIN
+        , pass : process.env.MAILGUN_SMTP_PASSWORD
+    }
+
     , sendWelcome : function(user){
 
         var subject   = 'Welcome to BitVagas';
@@ -53,7 +58,7 @@ module.exports = {
 
     , sendMail : function(to, subject, template, context){
 
-        if(!this.auth.user)
+        if(!this.auth.user && process.env.NODE_ENV === "development")
             return console.log('email not configurated');
 
         var mailOptions = {
@@ -64,20 +69,33 @@ module.exports = {
           , context  : context
         }
 
-        var smtpTransport = nodemailer.createTransport(smtp({
-            host : 'smtp.gmail.com'
-          , service : 'Gmail'
-          , port : 465
-          , auth : this.auth
-        }));
+        var Transport = null;
 
-        smtpTransport.use('compile', handleBar({
+        if(process.env.NODE_ENV === "development"){
+            //Local SMTP configuration
+            Transport = nodemailer.createTransport(smtp({
+                host    : 'smtp.gmail.com'
+              , service : 'Gmail'
+              , port    : 465
+              , auth    : this.auth
+            }));
+        } else {
+            //MailGun configuration
+            Transport = nodemailer.createTransport(smtp({
+                host    : process.env.MAILGUN_SMTP_SERVER
+              , service : 'Mailgun'
+              , port    : process.env.MAINGUN_SMTP_PORT
+              , auth    : this.mailGunAuth
+            }));
+        }
+
+        Transport.use('compile', handleBar({
             viewEngine : 'html'
           , viewPath   : 'app/views/mail-template'
           , extName    : '.html'
         }));
 
-        smtpTransport.sendMail(mailOptions, function(err, info){
+        Transport.sendMail(mailOptions, function(err, info){
             if(err)
                 console.log('Error on sending email: ' + JSON.stringify(err));
             else
