@@ -59,7 +59,7 @@ module.exports = {
 
         var mailOptions = {
             to       : to
-          , from     : this.auth.email
+          , from     : config.mailer.email
           , subject  : subject
           , template : template
           , context  : context
@@ -73,7 +73,7 @@ module.exports = {
                 host    : 'smtp.gmail.com'
               , service : 'Gmail'
               , port    : 465
-              , auth    : this.auth
+              , auth    : options.auth
             }));
         } else {
             //SendGrid configuration
