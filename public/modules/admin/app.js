@@ -38,13 +38,13 @@ angular.module('bitvagas.admin',
         });
     }).run(function($rootScope, $state, AuthenticationService, UserService){
         $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
-            AuthenticationService.isAuthenticated().then(function(result){
-                UserService.current = result.data;
-            },function(err){
-                if(toState.authenticate){
-                    $state.transitionTo('signin');
-                    event.preventDefault();
-                }
-            });
+            if(toState.authenticate){
+                AuthenticationService.isAuthenticated().then(function(result){
+                    UserService.current = result.data;
+                },function(err){
+                        $state.transitionTo('signin');
+                        event.preventDefault();
+                });
+            }
         });
     });

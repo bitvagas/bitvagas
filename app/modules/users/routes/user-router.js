@@ -6,7 +6,11 @@ var express   = require('express')
   , router    = express.Router();
 
 router.get('/isAuthenticated', function(request, response){
-    response.send(request.isAuthenticated() ? request.user : 0);
+    if(request.isAuthenticated())
+        response.status(200).send(request.user);
+    else
+        //Unauthorized request
+        response.status(401).send(0);
 });
 
 router.get('/auth', function(request, response){
