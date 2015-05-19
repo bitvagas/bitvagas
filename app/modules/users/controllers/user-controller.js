@@ -32,11 +32,11 @@ module.exports = {
   , signup: function(request, response, next){
 
         if(request.body.PASSWORD != request.body.REPASSWORD)
-             response.send(400, 'These passwords don\'t match.');
+             response.status(400).send('These passwords don\'t match.');
 
         this.findByEmail(request).then(function(user){
             if(user)
-                response.send(400, 'User already exists');
+                response.status(400).send('User already exists');
             else {
 
                 var salt = bcrypt.genSaltSync(4);
