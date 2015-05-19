@@ -13,7 +13,7 @@ module.exports = {
               , db.org
             ]
         }).then(function(jobs){
-            response.json(jobs);
+            response.status(200).json(jobs);
         });
     }
 
@@ -27,7 +27,7 @@ module.exports = {
             , db.org
           ]
         }).then(function(job){
-            response.json(job);
+            response.status(200).json(job);
         });
     }
 
@@ -35,9 +35,9 @@ module.exports = {
 
         return db.job.create(request.body)
         .then(function(job){
-            response.json(job);
+            response.status(201).json(job);
         }).catch(function(error){
-            response.json(400, error);
+            response.status(400).json(error);
         });
     }
 
@@ -60,9 +60,9 @@ module.exports = {
             .then(function(org){
                 //create a job
                 request.body.ORG_ID = org.id;
-                return db.job.create(request.body, { transaction : t})
+                return db.job.create(request.body, { transaction : t});
             }).catch(function(err){
-                response.json(400, err);
+                response.status(400).json(err);
                 //throw an error to rollback
                 throw new Error(err);
             });
@@ -70,10 +70,10 @@ module.exports = {
         }).then(function(result){
             //Transaction commited
             user.forgotPassword(request, response);
-            return response.json(result);
+            return response.status(201).json(result);
         }).catch(function(err){
             //Trasaction rollbacked
-            response.json(400, err);
+            response.status(400).json(err);
         });
     }
 };

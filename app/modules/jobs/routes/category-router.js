@@ -4,6 +4,6 @@ var express  = require('express')
 
 router.get('/', function(request, response){
     category.findAll(request, response);
-})
+});
 
 module.exports = router;

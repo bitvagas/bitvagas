@@ -20,4 +20,4 @@ module.exports = function(sequelize, DataTypes){
     });
 
     return JOB_TYPE;
-}
+};

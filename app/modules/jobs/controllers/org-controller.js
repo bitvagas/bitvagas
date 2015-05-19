@@ -5,7 +5,7 @@ module.exports = {
 
     findAll: function(request, response){
         db.org.findAll().then(function(orgs){
-            response.json(orgs);
+            response.status(200).json(orgs);
         });
     }
 
@@ -14,7 +14,7 @@ module.exports = {
         db.org.findAll({
             where : { id : request.params.OrgID }
         }).then(function(org){
-            response.json(org);
+            response.status(200).json(org);
         });
     }
 
@@ -22,7 +22,7 @@ module.exports = {
         db.org.findAll({
             where : { USER_ID : request.user.id  }
         }).then(function(orgs){
-            response.json(orgs);
+            response.status(200).json(orgs);
         });
     }
 
@@ -32,9 +32,9 @@ module.exports = {
 
         request.body.USER_ID = request.user.id;
         db.org.create(request.body, { transaction : t}).then(function(org){
-            response.json(org);
+            response.status(201).json(org);
         }).catch(function(error){
-            response.json(400, error);
+            response.status(400).json(error);
         });
     }
 
@@ -42,9 +42,9 @@ module.exports = {
         db.org.update(request.body, { where : {
             id : request.params.OrgID
         }}).then(function(org){
-            response.json(org);
+            response.status(200).json(org);
         }).catch(function(error){
-            response.json(400, error);
+            response.status(400).json(error);
         });
     }
 
@@ -52,9 +52,9 @@ module.exports = {
         db.org.destroy({ where : {
             id : request.params.OrgID
         }}).then(function(){
-            return response.send('deleted');
+            return response.status(200).send('deleted');
         }).catch(function(error){
-            return response.json(400, error);
+            return response.status(400).json(error);
         });
     }
 };

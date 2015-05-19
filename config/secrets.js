@@ -6,4 +6,4 @@ module.exports = {
       , scope             : ['r_fullprofile', 'r_emailaddress']
       , passReqToCallback : true
     }
-}
+};

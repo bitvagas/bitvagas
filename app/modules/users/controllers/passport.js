@@ -30,7 +30,7 @@ passport.use('signin', new LocalStrategy(
                       return done(null, false, { message: 'Email or Password Invalid'});
                   else {
                       if(user.USER_STATUS != 3)
-                          return done(null, false, { message : 'Verify your account, check your email' })
+                          return done(null, false, { message : 'Verify your account, check your email' });
 
                       user.PASSWORD = undefined;
                       return done(null, user);
@@ -67,8 +67,8 @@ if(process.env.LINKEDIN_ID && process.env.LINKEDIN_SECRET) {
                         });
                     });
                 }
-            })
+            });
         }else
-            return done(null, false, { message : 'You need be logged' })
+            return done(null, false, { message : 'You need be logged' });
     }));
 }

@@ -76,6 +76,6 @@ router.post('/reset', function(request, response){
         return response.render('reset', { message : 'Check your email' });
 
     users.resetPassword(request, response);
-})
+});
 
 module.exports = router;

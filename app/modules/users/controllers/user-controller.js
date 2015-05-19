@@ -53,10 +53,10 @@ module.exports = {
                     mailer.sendWelcome(user);
                     //Send a link to email to verification
                     mailer.sendEmailVerification(user);
-                    response.json(201, { data : user, token : hashEmail });
+                    response.status(201).json({ data : user, token : hashEmail });
 
-                }).catch(function(err){
-                    response.json(400, err);
+                }).catch(function(error){
+                    response.status(400).json(error);
                 });
             }
         });
@@ -69,7 +69,7 @@ module.exports = {
 
       return this.findByEmail(request).then(function(user){
           if(user)
-              response.send(400, 'User already exists');
+              response.status(400).send('User already exists');
           else {
               request.body.USER_STATUS = 1; //User invited
               request.body.PASSWORD = '';
@@ -93,13 +93,13 @@ module.exports = {
 
           request.logIn(user, function(err){
               if(err)
-                  response.json(400, err);
+                  response.status(400).json(err);
               else
                   response.redirect('/#/dashboard/overview');
           });
       })
       .catch(function(err){
-          response.json(400, err);
+          response.status(400).json(err);
       });
   }
 
@@ -122,9 +122,9 @@ module.exports = {
                   response.render('index');
               }).catch(function(err){
                   response.render('forgot', { message : err });
-              })
-          })
-      })
+              });
+          });
+      });
   }
 
   /*
@@ -154,4 +154,4 @@ module.exports = {
           }
       });
   }
-}
+};

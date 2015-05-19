@@ -11,16 +11,16 @@ module.exports = {
     getFreelancers: function(request, response){
         Users.findAll().then(function(users){
             lodash.forEach(users, function(user){
-                user.PASSWORD = undefined
+                user.PASSWORD = undefined;
             });
-            response.json(users);
+            response.status(200).json(users);
         });
     }
 
     , getFreelancerById: function(request, response){
         Users.findById(request.params.id).then(function(user){
             user.PASSWORD = undefined;
-            response.json(user);
+            response.status(200).json(user);
         });
     }
 
@@ -29,11 +29,11 @@ module.exports = {
                     request.user.LINKEDIN_TOKEN;
 
         var data  = linkedin.init(token);
-        data.people.me(function(err, profile){
+        data.people.me(function(error, profile){
             if(err)
-                return response.json(400, err || profile);
+                return response.status(400).json(error || profile);
 
-            response.json(profile);
+            response.status(200).json(profile);
         });
     }
 };
