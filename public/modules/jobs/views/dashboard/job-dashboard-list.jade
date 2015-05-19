@@ -4,7 +4,7 @@ a.btn.btn--medium.btn--primary(ui-sref='dashboard.jobs.create') New Job
 
 ul.jobs
   li(ng-repeat='job in jobs')
-    a.jobs-item(ui-sref='jobs-show({id : job.id})', title='')
+    a.jobs-item(href="#" ng-click="toggle($index, job.id)" ng-model="open" title='')
       .jobs-item__cell.jobs-item__cell--img
         img.jobs-item__img(src='/img/company-default.png', alt='')
 
@@ -16,3 +16,14 @@ ul.jobs
         .jobs-item__type
           .label.label--fulltime {{ job.job_type.NAME }}
         .jobs-item__date {{ job.createdAt | date }}
+    .accodion(ng-show="$parent.open == $index")
+      p Nenhuma pessoa aplicou para esta vaga ainda
+      .premium(ng-show="{{ !job.PREMIUM }}")
+        h5
+          a(href="#") Destacar vaga $ 25,00
+        qrcode(size="164" data="{{ qrcode }}")
+        h5 {{ qrcode }}
+      .premium(ng-show="{{ job.PREMIUM }}")
+        h2 Vaga Premium
+        h5
+          a(href="https://blockchain.info/tx/{{ job.TRANSACTION }}") Transação {{ job.TRANSACTION }}

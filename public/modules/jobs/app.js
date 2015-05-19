@@ -1,5 +1,6 @@
 angular.module('bitvagas.jobs',
     [ 'ui.router'
+    , 'monospaced.qrcode'
     , 'bitvagas.jobs.controllers'
     , 'bitvagas.jobs.services'
     , 'bitvagas.jobs.category.services'
@@ -86,5 +87,5 @@ angular.module('bitvagas.jobs',
           , params       : { data : {} }
           , controller   : 'JobCreateController'
           , authenticate : true
-        })
+        });
     });

@@ -76,4 +76,35 @@ module.exports = {
             response.status(400).json(err);
         });
     }
+
+    , premium : function(request, response) {
+
+        console.log(JSON.stringify(request.query));
+        if(typeof request.query.input_address    === 'undefined' ||
+           typeof request.query.transaction_hash === 'undefined' ||
+           typeof request.query.value            === 'undefined' ||
+           typeof request.params.id              === 'undefined')
+           return response.status(400).json("Missing values");
+
+        var premium = true;
+        var id = request.params.id;
+        var value = request.query.value;
+        var input_address = request.query.input_address;
+        var transaction = request.query.transaction_hash;
+
+        if(value < parseFloat(process.env.PRICE))
+            premium = false;
+
+        db.job.update({ TRANSACTION : transaction
+                      , BTC_ADDRESS : input_address
+                      , PREMIUM     : premium
+                      }, { where    : { id : id } })
+        .then(function(job) {
+            console.log(JSON.stringify(job));
+            response.status(200).json(job);
+        }).catch(function(err) {
+            console.log(JSON.stringify(err));
+            response.status(400).json(err);
+        });
+    }
 };

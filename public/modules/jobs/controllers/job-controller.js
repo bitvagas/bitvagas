@@ -2,18 +2,34 @@ angular.module('bitvagas.jobs.controllers',[])
 .controller('JobListController', JobListController)
 .controller('JobShowController', JobShowController);
 
-JobListController.$inject = ['$scope','$state','JobService', 'UserService'];
-JobShowController.$inject = ['$scope','$state','JobService'];
+JobListController.$inject = ['$scope', '$interval', '$state', 'JobService', 'UserService'];
+JobShowController.$inject = ['$scope', '$state','JobService'];
 
-function JobListController($scope, $state, JobService, UserService){
+function JobListController($scope, $interval, $state, JobService, UserService){
 
-    if(!$state.current.authenticate){
-        JobService.findAll().then(function(data){
-            $scope.jobs = data.data;
+    JobService.findAll().then(function(data){
+        $scope.jobs = data.data;
+    });
+
+    $scope.toggle = function(index, id) {
+        if($scope.$parent.open == index)
+            return;
+
+        $scope.$parent.open = index;
+
+        var ticker = $interval(function() {
+            JobService.findById(id).then(function(job){
+                if(job.PREMIUM) {
+                    $scope.jobs.id = job;
+                    $interval.cancel(ticker);
+                }
+            });
+        }, 10000);
+
+        JobService.receive(id).then(function(data) {
+            $scope.qrcode = data.data.input_address;
         });
-    } else
-        $scope.jobs = UserService.current.jobs;
-
+    };
 }
 
 function JobShowController($scope, $state, JobService){
@@ -24,6 +40,6 @@ function JobShowController($scope, $state, JobService){
 
     $scope.apply = function(){
         $scope.applied = true;
-    }
+    };
 }
 

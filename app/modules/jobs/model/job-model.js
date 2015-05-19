@@ -27,6 +27,14 @@ module.exports = function(sequelize, DataTypes){
         , BTC_ADDRESS   : {
             type        : DataTypes.STRING
         }
+        , PREMIUM       : {
+            type        : DataTypes.BOOLEAN
+          , allowNull   : false
+          , defaultValue : false
+        }
+        , TRANSACTION   : {
+            type        : DataTypes.STRING
+        }
         , ACTIVE        : {
               type      : DataTypes.BOOLEAN
             , allowNull : false

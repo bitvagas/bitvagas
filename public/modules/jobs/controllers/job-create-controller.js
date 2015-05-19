@@ -3,7 +3,7 @@ angular.module('bitvagas.jobs.controllers')
 .controller('JobCreateController', JobCreateController);
 
 JobPostController.$inject   = ['$scope', '$state', '$stateParams', 'JobService', 'Categories', 'ErrorHandling'];
-JobCreateController.$inject = ['$scope', '$state', '$stateParams', 'JobService', 'Categories', 'Organizations', 'ErrorHandling'];
+JobCreateController.$inject = ['$scope', '$state', '$stateParams', 'JobService', 'UserService', 'Categories', 'Organizations', 'ErrorHandling'];
 function JobPostController($scope, $state, $stateParams, JobService, Categories, ErrorHandling){
 
     $scope.data = $stateParams.data;
@@ -13,8 +13,8 @@ function JobPostController($scope, $state, $stateParams, JobService, Categories,
 
     $scope.create = function(){
         if($scope.form.$valid)
-            $state.go('jobs-confirm', { data : $scope.data })
-    }
+            $state.go('jobs-confirm', { data : $scope.data });
+    };
 
     $scope.confirm = function(data){
 
@@ -30,10 +30,10 @@ function JobPostController($scope, $state, $stateParams, JobService, Categories,
               , errors : ErrorHandling.getErrors(err.data)
             });
         });
-    }
+    };
 }
 
-function JobCreateController($scope, $state, $stateParams, JobService, Categories, Organizations, ErrorHandling){
+function JobCreateController($scope, $state, $stateParams, JobService, UserService, Categories, Organizations, ErrorHandling){
 
     $scope.data = $stateParams.data;
     $scope.errors = $stateParams.errors || [];
@@ -43,16 +43,15 @@ function JobCreateController($scope, $state, $stateParams, JobService, Categorie
 
     $scope.create = function(){
         if($scope.form.$valid)
-            $state.go('dashboard.jobs.confirm', { data : $scope.data })
+            $state.go('dashboard.jobs.confirm', { data : $scope.data });
         else
             console.log($scope.form.$errors);
-    }
+    };
 
     $scope.confirm = function(data){
 
         JobService.create(data)
         .then(function(data){
-            console.log(data);
             $state.go('dashboard.jobs.list');
         }, function(err){
             console.log(err);
@@ -62,5 +61,5 @@ function JobCreateController($scope, $state, $stateParams, JobService, Categorie
               , errors : ErrorHandling.getErrors(err.data)
             });
         });
-    }
+    };
 }

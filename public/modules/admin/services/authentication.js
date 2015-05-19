@@ -17,5 +17,5 @@ function AuthenticationService($q, $http, $state){
             });
             return deferred.promise;
         }
-    }
+    };
 }

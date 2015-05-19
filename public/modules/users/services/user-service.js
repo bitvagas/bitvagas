@@ -5,7 +5,7 @@ UserService.$inject = ['$http'];
 function UserService($http) {
     var baseUrl = 'api/signup';
 
-    this.current = {}
+    this.current = {};
     this.create = function(user){
         return $http.post(baseUrl, user);
     };
