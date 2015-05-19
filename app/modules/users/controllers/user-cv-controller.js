@@ -30,7 +30,7 @@ module.exports = {
 
         var data  = linkedin.init(token);
         data.people.me(function(error, profile){
-            if(err)
+            if(error)
                 return response.status(400).json(error || profile);
 
             response.status(200).json(profile);
