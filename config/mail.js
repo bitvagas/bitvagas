@@ -1,21 +1,19 @@
 var nodemailer = require('nodemailer')
   , smtp       = require('nodemailer-smtp-transport')
+  , sendGrid   = require('nodemailer-sendgrid-transport')
   , handleBar  = require('nodemailer-express-handlebars')
   , config     = require('./config');
 
+var options = {
+    auth : {
+        api_user : config.mailer.username
+      , api_key  : config.mailer.pass
+    }
+};
+
 module.exports = {
 
-    auth      : {
-        user  : config.mailer.email
-      , pass  : config.mailer.pass
-    }
-
-    , mailGunAuth : {
-          user : process.env.MAILGUN_SMTP_LOGIN
-        , pass : process.env.MAILGUN_SMTP_PASSWORD
-    }
-
-    , sendWelcome : function(user){
+    sendWelcome : function(user){
 
         var subject   = 'Welcome to BitVagas';
 
@@ -23,7 +21,7 @@ module.exports = {
         var context  = {
             name  : user.NAME
           , email : user.EMAIL
-        }
+        };
 
         this.sendMail(user.EMAIL, subject, template, context);
     }
@@ -37,7 +35,7 @@ module.exports = {
             name  : user.NAME
           , email : user.EMAIL
           , token : user.RESETTOKEN
-        }
+        };
 
         this.sendMail(user.EMAIL, subject, template, context);
     }
@@ -51,15 +49,13 @@ module.exports = {
             name  : user.NAME
           , email : user.EMAIL
           , token : user.TOKEN
-        }
+          , url   : config.url
+        };
 
         this.sendMail(user.EMAIL, subject, template, context);
     }
 
     , sendMail : function(to, subject, template, context){
-
-        if(!this.auth.user && process.env.NODE_ENV === "development")
-            return console.log('email not configurated');
 
         var mailOptions = {
             to       : to
@@ -67,7 +63,7 @@ module.exports = {
           , subject  : subject
           , template : template
           , context  : context
-        }
+        };
 
         var Transport = null;
 
@@ -80,13 +76,8 @@ module.exports = {
               , auth    : this.auth
             }));
         } else {
-            //MailGun configuration
-            Transport = nodemailer.createTransport(smtp({
-                host    : process.env.MAILGUN_SMTP_SERVER
-              , service : 'Mailgun'
-              , port    : process.env.MAINGUN_SMTP_PORT
-              , auth    : this.mailGunAuth
-            }));
+            //SendGrid configuration
+            Transport = nodemailer.createTransport(sendGrid(options));
         }
 
         Transport.use('compile', handleBar({
@@ -102,4 +93,4 @@ module.exports = {
                 console.log('Email sent: '+JSON.stringify(info));
         });
     }
-}
+};
