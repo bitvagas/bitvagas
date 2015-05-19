@@ -69,11 +69,15 @@ module.exports = {
 
         if(process.env.NODE_ENV === "development"){
             //Local SMTP configuration
+            var auth = {
+                user : options.auth.api_user
+              , pass : options.auth.api_key
+            };
             Transport = nodemailer.createTransport(smtp({
                 host    : 'smtp.gmail.com'
               , service : 'Gmail'
               , port    : 465
-              , auth    : options.auth
+              , auth    : auth
             }));
         } else {
             //SendGrid configuration
