@@ -7,9 +7,16 @@ JobShowController.$inject = ['$scope', '$state','JobService'];
 
 function JobListController($scope, $interval, $state, JobService, UserService){
 
-    JobService.findAll().then(function(data){
-        $scope.jobs = data.data;
-    });
+    if(!$state.current.authenticate){
+        JobService.findAll().then(function(data){
+            $scope.jobs = data.data;
+        });
+    } else {
+        JobService.findByUser().then(function(data){
+            console.log(data);
+            $scope.jobs = data.data;
+        });
+    }
 
     $scope.toggle = function(index, id) {
         if($scope.$parent.open == index)

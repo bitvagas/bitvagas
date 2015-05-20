@@ -15,6 +15,10 @@ router.post('/', function(request, response){
     jobs.create(request, response);
 });
 
+router.post('/current', function(request, response){
+    jobs.findByUser(request, response);
+});
+
 router.post('/post', function(request, response){
     jobs.post(request, response);
 });

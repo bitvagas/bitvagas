@@ -18,6 +18,9 @@ function JobService($http){
     this.findById = function(id){
         return $http.get(baseUrl+id);
     };
+    this.findByUser = function(){
+        return $http.post(baseUrl+'current');
+    };
 
     this.receive = function(id) {
         //generate a new address from 1Mck... will be changed with websocket integration

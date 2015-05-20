@@ -6,6 +6,8 @@ var express = require('express')
 module.exports = {
 
     findAll: function(request, response){
+        console.log('\n\n\n\n');
+        console.log(JSON.stringify(request.user));
         db.job.findAll({
             include : [
                 db.job_type
@@ -21,6 +23,23 @@ module.exports = {
         var id = request.params.id;
         db.job.find({
             where   : { id : id }
+          , include : [
+              db.job_type
+            , db.category
+            , db.org
+          ]
+        }).then(function(job){
+            response.status(200).json(job);
+        });
+    }
+
+    , findByUser: function(request, response){
+
+        if(!request.user)
+            response.status(403).send("Unauthorized");
+
+        db.job.findAll({
+            where   : { USER_ID : request.user.id }
           , include : [
               db.job_type
             , db.category
