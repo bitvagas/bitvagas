@@ -1,0 +1,201 @@
+{
+    "layout": {
+        "site_nav" : {
+            "all_jobs": "All Jobs",
+            "about": "About",
+            "team": "Team",
+            "support": "Support",
+            "post": "Post Job",
+            "freelancers": "freelancers",
+            "explore": "Explore",
+            "contact": "Contact",
+            "privacy": "Privacy Policy",
+            "signin": "Sign In",
+            "signup": "Sign Up",
+            "logout": "Log Out"
+        }
+    },
+    "home": {
+        "banner": {
+            "slogan": {
+                "strong": "Platform of jobs",
+                "title": " for Bitcoin users"
+            },
+            "text": "Explore the Bitcoin universe and help stimulate the decentralized economy. Hire using digital coins.",
+            "btnPost": "Post a Job",
+            "btnExplore": "Explore"
+        }
+    },
+    "about": {
+        "title": "About Us",
+        "text": "We are a startup that offers modernity in job advertisement. Our goal is to promote the use of Bitcoin in the global job market."
+    },
+    "index": {
+        "source": "index",
+        "lang": "en",
+        "facebooklang": "en_US",
+        "site_url": "/",
+        "site_subtitle":  "Platform of jobs for Bitcoin users",
+        "description": "Explore the Bitcoin universe and help stimulate the decentralized economy. Hire using digital coins.",
+        "tweet": "Platform of jobs for #Bitcoin users. @bitvagas #bitvagas #startup",
+        "started": {
+            "opensource": {
+                "title": "Open Source",
+                "text": "We are under construction, follow the development of the project on Github.",
+                "btn": "View on Github"
+            },
+            "team": {
+                "title": "The Team",
+                "text": "We form a decentralized team of maintainers with great skills.",
+                "btn": "Meet us"
+            },
+            "support": {
+                "title": "Support the Project",
+                "text": "Did you like BitVagas? Help us strengthen the project with your donation.",
+                "btn": "Support"
+            }
+        },
+        "team": {
+            "title": "The Team",
+            "anderson": {
+                "text": "Responsive Design and Redesign Specialist. Passionate about open-source, visual design and cryptocurrencies."
+            },
+            "cesar": {
+                "text": "Game Developer enthusiast, passionate about open-source Web Technologies, Cryptocurrencies and curious at Programming Languages Research."
+            },
+            "randson": {
+                "text": "Passionate about technology and programming including Web Development, Open Source and Unix Systems."
+            },
+            "rodrigo": {
+                "subtitle": "Advisor",
+                "text": "C++, Python programmer and bitcoin enthusiast. A veteran of the financial sector, he worked as a software developer at the NYSE and BFM Bovespa."
+            }
+        },
+        "share": {
+            "title": "Connect with us"
+        },
+        "support": {
+            "title": "Support BitVagas"
+        },
+        "invite": {
+            "title": "Receive News",
+            "text": "Join our pre-launch!",
+            "input": {
+                "placeholder": "Your email",
+                "title": "Must be a valid email address"
+            },
+            "btn": "Subscribe"
+        }
+    },
+    "post":{
+        "source": "post",
+        "lang": "en",
+        "site_url": "/",
+        "site_subtitle":  "Post a Job",
+        "title": "Post a Job",
+        "description": "Explore the Bitcoin universe and help stimulate the decentralized economy. Hire using digital coins.",
+        "form": {
+            "legend_1": "About Company",
+            "legend_2": "About Job",
+            "name": {
+                "label": "Company Name",
+                "title": "Must contain"
+            },
+            "email": {
+                "label": "Contact Email",
+                "title": "Must be a valid email address",
+                "placeholder": "For internal use only, will not display anywhere on the site"
+            },
+            "url": {
+                "label": "Site URL",
+                "title": "Must be a valid URL"
+            },
+            "logo": {
+                "label": "Logo",
+                "title": "Must be a valid URL",
+                "help_1": "Use the",
+                "help_2": "and send the link with the logo in 100x100"
+            },
+            "company_description": {
+                "label": "Company Description",
+                "title": "Must be at least 50 characters"
+            },
+            "title": {
+                "label": "Job Title",
+                "title": "Must contain"
+            },
+            "location": {
+                "label": "Location",
+                "title": "Must contain",
+                "placeholder": "Example: 'New York, NY', 'London', 'Anywhere'"
+            },
+            "type": {
+                "label": "Job Type"
+            },
+            "description": {
+                "label": "Job Description",
+                "title": "Must be at least 100 characters"
+            },
+            "terms": {
+                "label": "I agree with the",
+                "link": "Privacy Policy"
+            },
+            "btn": "Submit"
+        }
+    },
+    "contact": {
+        "source": "contact",
+        "lang": "en",
+        "facebooklang": "en_US",
+        "site_url": "/",
+        "site_subtitle":  "Contact",
+        "description": "Explore the Bitcoin universe and help stimulate the decentralized economy. Hire using digital coins.",
+        "title": "Contact",
+        "form": {
+            "name": {
+                "label": "Name",
+                "title": "Must contain a name"
+            },
+            "email": {
+                "label": "Email",
+                "title": "Must be a valid email address"
+            },
+            "msg": {
+                "label": "Message",
+                "title": "Message must have at least 20 characters"
+            },
+            "btn": "Send"
+        }
+    },
+    "privacy": {
+        "source": "privacy",
+        "lang": "en",
+        "site_url": "/",
+        "site_subtitle": "Privacy Policy",
+        "description": "Explore the Bitcoin universe and help stimulate the decentralized economy. Hire using digital coins.",
+        "title": "Privacy Policy",
+        "p1": "Their pre registration information will not be used or reproduced in any way by our team, these being used only to contact via email, about BitVagas, such as opening of pre-release, newsletter, research, etc.",
+        "p2": "These policies can and will be updated as the development of BitVagas to meet the platform's legal needs. When these changes occur, you will be notified via email of the changes."
+    },
+    "explore": {
+        "source": "explore",
+        "lang": "en",
+        "site_url": "/",
+        "site_subtitle": "Explorar",
+        "description": "Explore the Bitcoin universe and help stimulate the decentralized economy. Hire using digital coins.",
+        "title": "Explorar",
+        "explorePost": {
+            "btn": "Post a Job",
+            "info": "Advertise for 30 days free"
+        },
+        "invite": {
+            "title": "Receive News",
+            "text": "Join our pre-launch!",
+            "input": {
+                "placeholder": "Your email",
+                "title": "Must be a valid email address"
+            },
+            "btn": "Subscribe"
+        }
+    }
+}

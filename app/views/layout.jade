@@ -12,6 +12,11 @@ html(lang='pt-br', ng-app='bitvagas')
       link(rel='stylesheet', href='/css/bitvagas.css')
       script(src='/components/angular/angular.min.js')
       script(src='/components/angular-ui-router/release/angular-ui-router.min.js')
+      script(src='/components/angular-cookies/angular-cookies.min.js')
+      script(src='/components/angular-translate/angular-translate.min.js')
+      script(src='/components/angular-translate-loader-static-files/angular-translate-loader-static-files.js')
+      script(src='/components/angular-translate-storage-cookie/angular-translate-storage-cookie.min.js')
+      script(src='/components/angular-translate-storage-local/angular-translate-storage-local.min.js')
       script(src='/app-build.js')
 
   body
@@ -22,27 +27,27 @@ html(lang='pt-br', ng-app='bitvagas')
 
         ul.head-nav
           li
-            a(href='/#/jobs-list', title='Todas as Vagas') Todas as Vagas
+            a(href='/#/jobs-list', title='{{ "layout.site_nav.all_jobs" | translate }}' translate="layout.site_nav.all_jobs")
           if !user
             li
-              a(href='/#/jobs/post', title='Postar Vaga') Postar Vaga
+              a(href='/#/jobs/post', title='{{ "layout.site_nav.post" | translate }}' translate="layout.site_nav.post")
           else
             li
-              a(href="/#/dashboard/jobs/create", title="Criar Vaga") Criar Vaga
+              a(href='/#/dashboard/jobs/create', title='{{ "layout.site_nav.post" | translate }}' translate="layout.site_nav.post")
           li
-            a(href='/#/freelancers', title='Freelancers') Freelancers
+            a(href='/#/freelancers', title='{{ "layout.site_nav.freelancers" | translate }}' translate="layout.site_nav.freelancers")
 
         ul.head-nav.head-nav--right
           if !user
             li
-                a(href='/#/signin', title='Sign In') Sign in
+              a(href='/#/signin', title='{{ layout.site_nav.signin | translate }}' translate="layout.site_nav.signin")
             li
-                a(href='/#/signup', title='Sign Up') Sign up
+              a(href='/#/signup', title='{{ layout.site_nav.signup }}' translate="layout.site_nav.signup")
           else
             li
-                a(href='/#/dashboard/overview' title='User') #{user.NAME}
+                a(href='/#/dashboard/overview') #{user.NAME}
             li
-                a(href='/logout', title='Log Out') Log out
+              a(href='/logout', title='{{ layout.site_nav.logout}}' translate="layout.site_nav.logout")
 
     block content
 
