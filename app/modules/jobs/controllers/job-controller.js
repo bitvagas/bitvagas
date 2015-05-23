@@ -1,4 +1,5 @@
 var express = require('express')
+  , bitcore = require('bitcore')
   , org     = require('./org-controller')
   , user    = require('../../users/controllers/user-controller')
   , db      = require(root + '/app/models');
@@ -6,11 +7,10 @@ var express = require('express')
 module.exports = {
 
     findAll: function(request, response){
-        console.log('\n\n\n\n');
-        console.log(JSON.stringify(request.user));
         db.job.findAll({
             include : [
                 db.job_type
+              , db.job_transaction
               , db.category
               , db.org
             ]
@@ -25,6 +25,7 @@ module.exports = {
             where   : { id : id }
           , include : [
               db.job_type
+            , db.job_transaction
             , db.category
             , db.org
           ]
@@ -42,6 +43,7 @@ module.exports = {
             where   : { USER_ID : request.user.id }
           , include : [
               db.job_type
+            , db.job_transaction
             , db.category
             , db.org
           ]
@@ -98,32 +100,28 @@ module.exports = {
 
     , premium : function(request, response) {
 
-        console.log(JSON.stringify(request.query));
-        if(typeof request.query.input_address    === 'undefined' ||
-           typeof request.query.transaction_hash === 'undefined' ||
-           typeof request.query.value            === 'undefined' ||
-           typeof request.params.id              === 'undefined')
-           return response.status(400).json("Missing values");
+        //Job ID
+        var id = request.body.order.custom;
+        var transaction = request.body.order.transaction.hash;
+        var input_address = request.body.order.receive_address;
 
-        var premium = true;
-        var id = request.params.id;
-        var value = request.query.value;
-        var input_address = request.query.input_address;
-        var transaction = request.query.transaction_hash;
+        //Units BTC
+        var valueBTC = new bitcore.Unit.fromSatoshis(request.body.order.total_btc.cents).BTC;
 
-        if(value < parseFloat(process.env.PRICE))
-            premium = false;
+        db.job.find({ where : { id : id }}).then(function(job){
 
-        db.job.update({ TRANSACTION : transaction
-                      , BTC_ADDRESS : input_address
-                      , PREMIUM     : premium
-                      }, { where    : { id : id } })
-        .then(function(job) {
-            console.log(JSON.stringify(job));
-            response.status(200).json(job);
-        }).catch(function(err) {
-            console.log(JSON.stringify(err));
-            response.status(400).json(err);
+            db.job_transaction.create({
+                BTC_ADDRESS : input_address
+              , TRANSACTION : transaction
+              , VALUE       : valueBTC
+              , JOB_ID      : id
+            }).then(function(transaction){
+                return job.update({ PREMIUM : true });
+            }).then(function(job){
+                response.status(200).json(job);
+            }).catch(function(err){
+                response.status(400).json(err);
+            });
         });
     }
 };

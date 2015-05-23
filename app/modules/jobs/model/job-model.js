@@ -24,27 +24,25 @@ module.exports = function(sequelize, DataTypes){
                 }
             }
         }
-        , BTC_ADDRESS   : {
-            type        : DataTypes.STRING
-        }
-        , PREMIUM       : {
-            type        : DataTypes.BOOLEAN
-          , allowNull   : false
+        , PREMIUM        : {
+            type         : DataTypes.BOOLEAN
+          , allowNull    : false
           , defaultValue : false
         }
-        , TRANSACTION   : {
-            type        : DataTypes.STRING
-        }
-        , ACTIVE        : {
-              type      : DataTypes.BOOLEAN
-            , allowNull : false
-            , defaultValue : false
+        , ACTIVE         : {
+            type         : DataTypes.BOOLEAN
+          , allowNull    : false
+          , defaultValue : false
         }
     }, {
         classMethods  : {
             associate : function(models) {
                 JOB.hasMany(models.job_request, {
                     onDelete   : 'cascade'
+                  , foreignKey : 'JOB_ID'
+                });
+                JOB.hasMany(models.job_transaction, {
+                    onDelete   : 'restrict'
                   , foreignKey : 'JOB_ID'
                 });
                 JOB.belongsTo(models.category, { foreignKey : 'CATEGORY_ID'});

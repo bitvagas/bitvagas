@@ -21,9 +21,9 @@ ul.jobs
       .premium(ng-show="{{ !job.PREMIUM }}")
         h5
           a(href="#") Destacar vaga $ 25,00
-        qrcode(size="164" data="{{ qrcode }}")
-        h5 {{ qrcode }}
+        iframe(id="coinbase_inline_iframe_6d111844c2041be4fdbdd1b3df5eaab5" src="{{url}}" style="width: 460px; height: 350px; border: none; box-shadow: 0 1px 3px rgba(0,0,0,0.25);" allowtransparency="true" frameborder="0")
+
       .premium(ng-show="{{ job.PREMIUM }}")
         h2 Vaga Premium
-        h5
-          a(href="https://blockchain.info/tx/{{ job.TRANSACTION }}") Transação {{ job.TRANSACTION }}
+        h5(ng-repeat="t in job.job_transactions")
+          a(href="https://blockchain.info/tx/{{ t.TRANSACTION }}") Transação {{ t.TRANSACTION }}

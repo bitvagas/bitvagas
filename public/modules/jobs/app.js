@@ -56,7 +56,7 @@ angular.module('bitvagas.jobs',
             url          : '/'
           , templateUrl  : '/modules/jobs/views/dashboard/job-dashboard-list'
           , authenticate : true
-          , controller   : 'JobListController'
+          , controller   : 'JobDashListController'
         })
         .state('dashboard.jobs.create', {
             url          : '/create'

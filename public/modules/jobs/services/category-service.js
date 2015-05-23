@@ -6,7 +6,5 @@ function CategoryService($http){
     var baseUrl = 'api/categories';
     this.findAll = function(){
         return $http.get(baseUrl);
-    }
+    };
 }
-
-

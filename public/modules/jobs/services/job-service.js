@@ -21,12 +21,4 @@ function JobService($http){
     this.findByUser = function(){
         return $http.post(baseUrl+'current');
     };
-
-    this.receive = function(id) {
-        //generate a new address from 1Mck... will be changed with websocket integration
-        var address = "1MckjA4yZWgwo4kXFnE6ikbfPPuB3yCcx3";
-        var callback = window.location.origin+"/api/jobs/premium/callback/"+id;
-        var url = blockChainUrl + "/receive?method=create&cors=true&format=plain&address="+address+"&shared=false&callback="+callback;
-        return $http.get(url);
-    };
 }

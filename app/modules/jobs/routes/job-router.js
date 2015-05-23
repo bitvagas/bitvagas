@@ -23,7 +23,7 @@ router.post('/post', function(request, response){
     jobs.post(request, response);
 });
 
-router.get('/premium/callback', function(request, response){
+router.post('/premium/callback', function(request, response){
     jobs.premium(request, response);
 });
 
