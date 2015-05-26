@@ -216,5 +216,43 @@
             },
             "btn": "Assinar"
         }
+    },
+     "post_job": {
+        "title": "Postar Vaga",
+        "company": {
+            "title": "Sua Empresa",
+            "email": {
+                "title": "Seu Email",
+                "addon": "Este email é para seu cadastro no bitvagas.com"
+            },
+            "name": "Nome da sua empresa",
+            "website": {
+                "title": "Site da empresa",
+                "addon": "Vagas com website podem atrair mais usuarios"
+            }
+        },
+        "job": {
+            "title": "Sobre a Vaga",
+            "name": "Titulo da Vaga",
+            "type": {
+                "title": "Tipo da Vaga",
+                "full": "Full-time",
+                "part": "Part-time",
+                "temp": "Temporário"
+            },
+            "description": "Descrição da Vaga",
+            "category": "Categoria",
+            "local": "Local",
+            "how_apply": {
+                "title": "Como aplicar",
+                "value": "Aplicar pela URL"
+            },
+            "premium": {
+                "title": "Vaga Premium",
+                "value": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+            },
+            "terms": "Concordo com a Política de Privacidade.",
+            "continue": "Próximo"
+        }
     }
 }

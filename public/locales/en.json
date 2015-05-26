@@ -202,5 +202,43 @@
             },
             "btn": "Subscribe"
         }
+    },
+    "post_job": {
+        "title": "Post a Job",
+        "company": {
+            "title": "About your company",
+            "email": {
+                "title": "Your e-mail",
+                "addon": "This is the email for signup your company on our system."
+            },
+            "name": "Name of your Company",
+            "website": {
+                "title": "Company URL",
+                "addon": "Jobs with website attract more users"
+            }
+        },
+        "job": {
+            "title": "About the Job",
+            "name": "Title Job",
+            "type": {
+                "title": "Type of Job",
+                "full": "Full-time",
+                "part": "Part-time",
+                "temp": "Temporary"
+            },
+            "description": "Job Description",
+            "category": "Category",
+            "local": "Local",
+            "how_apply": {
+                "title": "How to Apply",
+                "value": "Apply by URL"
+            },
+            "premium": {
+                "title": "Premium Job",
+                "value": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+            },
+            "terms": "I Agree to the BitVagas terms",
+            "continue": "Next"
+        }
     }
 }
