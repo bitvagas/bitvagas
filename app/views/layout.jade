@@ -1,8 +1,7 @@
 doctype html
 html(lang='pt-br', ng-app='bitvagas')
   head
-    title
-      | BitVagas — Plataforma de Vagas para usuários Bitcoin
+    title(translate="layout.head.title")
 
     include meta
     link(rel='shortcut icon', href='')
@@ -26,6 +25,8 @@ html(lang='pt-br', ng-app='bitvagas')
           img(src='/img/bitvagas.png', alt='BitVagas')
 
         ul.head-nav
+          li
+            a(href='/#/about', title='{{ layout.site_nav.about }}' translate="layout.site_nav.about")
           li
             a(href='/#/jobs-list', title='{{ "layout.site_nav.all_jobs" | translate }}' translate="layout.site_nav.all_jobs")
           if !user
@@ -57,14 +58,18 @@ html(lang='pt-br', ng-app='bitvagas')
           img.logo-foot__img(src='/img/bitvagas-white.png', alt='BitVagas')
 
         ul.foot-nav
+          if !user
+            li
+              a(href='/#/jobs/post', title='{{ "layout.site_nav.post" | translate }}' translate="layout.site_nav.post")
+          else
+            li
+              a(href='/#/dashboard/jobs/create', title='{{ "layout.site_nav.post" | translate }}' translate="layout.site_nav.post")
           li
-            a(href='/#/jobs/create', title='Postar Vaga') Postar Vaga
+            a(href='/#/about', title='{{ layout.site_nav.about }}' translate="layout.site_nav.about")
           li
-            a(href='/#/about', title='Sobre') Sobre
+            a(href='/#/terms', title='{{ layout.site_nav.terms }}' translate="layout.site_nav.terms")
           li
-            a(href='/#/terms', title='Termos de uso') Termos de uso
-          li
-            a(href='/#/contact', title='Contato') Contato
+            a(href='/#/contact', title='{{ layout.site_nav.contact }}' translate="layout.site_nav.contact")
 
         ul.foot-social
           li

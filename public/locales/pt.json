@@ -1,5 +1,8 @@
 {
     "layout": {
+        "head":{
+            "title": "BitVagas — Platform of jobs for Bitcoin users"
+        },
         "site_nav" : {
             "all_jobs": "Todas as Vagas",
             "about": "Sobre",
@@ -10,6 +13,8 @@
             "explore": "Explorar",
             "contact": "Contato",
             "privacy": "Política de Privacidade",
+            "terms": "Terms of use",
+            "contact": "Contact",
             "signin": "Sign In",
             "signup": "Sign Up",
             "logout": "Log Out"
