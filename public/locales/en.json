@@ -92,62 +92,6 @@
             "btn": "Subscribe"
         }
     },
-    "post":{
-        "source": "post",
-        "lang": "en",
-        "site_url": "/",
-        "site_subtitle":  "Post a Job",
-        "title": "Post a Job",
-        "description": "Explore the Bitcoin universe and help stimulate the decentralized economy. Hire using digital coins.",
-        "form": {
-            "legend_1": "About Company",
-            "legend_2": "About Job",
-            "name": {
-                "label": "Company Name",
-                "title": "Must contain"
-            },
-            "email": {
-                "label": "Contact Email",
-                "title": "Must be a valid email address",
-                "placeholder": "For internal use only, will not display anywhere on the site"
-            },
-            "url": {
-                "label": "Site URL",
-                "title": "Must be a valid URL"
-            },
-            "logo": {
-                "label": "Logo",
-                "title": "Must be a valid URL",
-                "help_1": "Use the",
-                "help_2": "and send the link with the logo in 100x100"
-            },
-            "company_description": {
-                "label": "Company Description",
-                "title": "Must be at least 50 characters"
-            },
-            "title": {
-                "label": "Job Title",
-                "title": "Must contain"
-            },
-            "location": {
-                "label": "Location",
-                "title": "Must contain",
-                "placeholder": "Example: 'New York, NY', 'London', 'Anywhere'"
-            },
-            "type": {
-                "label": "Job Type"
-            },
-            "description": {
-                "label": "Job Description",
-                "title": "Must be at least 100 characters"
-            },
-            "terms": {
-                "label": "I agree with the",
-                "link": "Privacy Policy"
-            },
-            "btn": "Submit"
-        }
-    },
     "contact": {
         "source": "contact",
         "lang": "en",
@@ -183,24 +127,22 @@
         "p2": "These policies can and will be updated as the development of BitVagas to meet the platform's legal needs. When these changes occur, you will be notified via email of the changes."
     },
     "explore": {
-        "source": "explore",
-        "lang": "en",
-        "site_url": "/",
-        "site_subtitle": "Explorar",
         "description": "Explore the Bitcoin universe and help stimulate the decentralized economy. Hire using digital coins.",
         "title": "Explorar",
-        "explorePost": {
+        "search": {
+            "placeholder": "Find Job, Companies, Places...",
+            "btn": "Find",
+            "type": {
+                "title": "Type of Job",
+                "full": "Full-time",
+                "part": "Part-time",
+                "temp": "Temporary"
+            }
+        },
+        "last": "Last Jobs",
+        "side_bar": {
             "btn": "Post a Job",
             "info": "Advertise for 30 days free"
-        },
-        "invite": {
-            "title": "Receive News",
-            "text": "Join our pre-launch!",
-            "input": {
-                "placeholder": "Your email",
-                "title": "Must be a valid email address"
-            },
-            "btn": "Subscribe"
         }
     },
     "post_job": {

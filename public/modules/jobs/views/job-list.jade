@@ -1,6 +1,6 @@
 .search
-  input.search__input(name='', type='text', placeholder='Buscar Vagas, Empresas, Locais...')
-  a.search__btn.btn(href='') Buscar
+  input.search__input(name='', type='text', placeholder='{{ "explore.search.placeholder" | translate }}')
+  a.search__btn.btn(href='' translate='explore.search.button')
 
 .typejob
   ul.typejob__list
@@ -8,17 +8,17 @@
       label(for='').typejob-label
         .typejob-label__checkbox
         input(type='checkbox' checked).typejob-label__input
-        .typejob-label__text.label.label--fulltime Full-time
+        .typejob-label__text.label.label--fulltime(translate="explore.search.type.full")
     li
       label(for='').typejob-label
         input(type='checkbox' checked).typejob-label__input
-        .typejob-label__text.label.label--parttime Part-time
+        .typejob-label__text.label.label--parttime(translate="explore.search.type.part")
     li
       label(for='').typejob-label
         input(type='checkbox' checked).typejob-label__input
-        .typejob-label__text.label.label--temporary Temporary
+        .typejob-label__text.label.label--temporary(translate="explore.search.type.temp")
 
-h2.jobs-title Últimas Vagas
+h2.jobs-title(translate="explore.last")
 ul.jobs
   li(ng-repeat='job in jobs')
     a.jobs-item(ui-sref='jobs-show({id : job.id})', title='')

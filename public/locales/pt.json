@@ -32,12 +32,6 @@
         }
     },
     "about": {
-        "title": "Sobre nós",
-        "text": "Somos uma startup que oferece modernidade na área de anúncios de vagas de emprego. Nossa meta é impulsionar o uso do Bitcoin no mercado mundial de trabalho."
-    },
-    "index": {
-        "source": "index",
-        "lang": "pt-br",
         "facebooklang": "pt_BR",
         "site_url": "/pt-br/",
         "site_subtitle":  "Plataforma de vagas de trabalho para usuários Bitcoin",
@@ -140,81 +134,27 @@
         "p1": "Seus dados pré cadastrais não serão utilizados ou reproduzidos de qualquer maneira por nossa equipe, sendo estes utilizados apenas para contato via email, a respeito do BitVagas, tais como abertura do pré-lançamento, newsletter, pesquisa e etc.",
         "p2": "Essas políticas podem e serão atualizadas conforme o desenvolvimento do BitVagas, para atender as necessidades legais da plataforma. Quando essas mudanças ocorrerem, você será avisado via email sobre as mudanças."
     },
-    "post":{
-        "source": "post",
-        "lang": "pt-br",
-        "site_url": "/pt-br/",
-        "site_subtitle":  "Postar Vaga",
-        "title": "Postar Vaga",
-        "description": "Explore o universo Bitcoin e ajude a estimular a economia descentralizada. Contrate utilizando moedas digitais.",
-        "form": {
-            "legend_1": "Sobre a Empresa",
-            "legend_2": "Sobre a Vaga",
-            "name": {
-                "label": "Nome da empresa",
-                "title": "Precisa conter"
-            },
-            "email": {
-                "label": "Email para contato",
-                "title": "Precisa conter um endereço de email válido",
-                "placeholder": "Somente para uso interno, não será exibido em qualquer lugar no site"
-            },
-            "url": {
-                "label": "Site da empresa",
-                "title": "Precisa conter uma URL válida"
-            },
-            "logo": {
-                "label": "Logo",
-                "title": "Precisa conter uma URL válida",
-                "help_1": "Use o",
-                "help_2": "e envie o link com o logo em 100x100"
-            },
-            "company_description": {
-                "label": "Descrição da empresa",
-                "title": "Precisa ter pelo menos 50 caracteres"
-            },
-            "title": {
-                "label": "Título da vaga",
-                "title": "Precisa conter"
-            },
-            "location": {
-                "label": "Local",
-                "title": "Precisa conter",
-                "placeholder": "Exemplo: 'Rio de Janeiro, RJ', 'São Paulo, SP', 'Em qualquer lugar'"
-            },
-            "type": {
-                "label": "Tipo da vaga"
-            },
-            "description": {
-                "label": "Descrição da vaga",
-                "title": "Precisa conter pelo menos 100 caracteres"
-            },
-            "terms": {
-                "label": "Concordo com a ",
-                "link": "Política de Privacidade"
-            },
-            "btn": "Enviar"
-        }
-    },
     "explore": {
-        "source": "explore",
-        "lang": "pt-br",
-        "site_url": "/pt-br/",
-        "site_subtitle": "Explorar",
         "description": "Explore the Bitcoin universe and help stimulate the decentralized economy. Hire using digital coins.",
         "title": "Explorar",
+        "search": {
+            "placeholder": "Buscar Vaga, Empresas, Locais...",
+            "button": "Buscar",
+            "type": {
+                "title": "Tipo da Vaga",
+                "full": "Full-time",
+                "part": "Part-time",
+                "temp": "Temporário"
+            }
+        },
+        "last": "Últimas Vagas",
         "explorePost": {
             "btn": "Postar Vaga",
             "info": "Anuncie Grátis"
         },
-        "invite": {
-            "title": "Receba novidades",
-            "text": "Faça parte do nosso pré-lançamento!",
-            "input": {
-                "placeholder": "Seu email",
-                "title": "Precisa ser um endereço de e-mail válido"
-            },
-            "btn": "Assinar"
+        "side_bar": {
+            "btn": "Postar Vaga",
+            "info": "Anuncie Grátis"
         }
     },
      "post_job": {
