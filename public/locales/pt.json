@@ -134,6 +134,15 @@
         "p1": "Seus dados pré cadastrais não serão utilizados ou reproduzidos de qualquer maneira por nossa equipe, sendo estes utilizados apenas para contato via email, a respeito do BitVagas, tais como abertura do pré-lançamento, newsletter, pesquisa e etc.",
         "p2": "Essas políticas podem e serão atualizadas conforme o desenvolvimento do BitVagas, para atender as necessidades legais da plataforma. Quando essas mudanças ocorrerem, você será avisado via email sobre as mudanças."
     },
+    "signin": {
+        "title": "Sign In",
+        "email": "Email",
+        "password": "Password",
+        "forgot": "Esqueceu sua senha?",
+        "new": "Ainda não é usuario?",
+        "join": "Inscreva-se Agora",
+        "button": "Entrar"
+    },
     "explore": {
         "description": "Explore the Bitcoin universe and help stimulate the decentralized economy. Hire using digital coins.",
         "title": "Explorar",

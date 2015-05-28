@@ -2,24 +2,21 @@ block content
 form.signin.signin__cell.signup__cell--main(action='/auth' method='post')
 
   header.signup__head
-    h1.signup__title Sign In
+    h1.signup__title(translate="signin.title")
 
   .signin__body
       fieldset.signup-fieldset
           ul.signup-form
             li
-              <label for="" class="signup-form__label">Email:</label>
               .signup-form__input
-                input.input.input--full(type='text' placeholder='email' name='EMAIL' ng-model='email' required)
+                input.input.input--full(type='text' placeholder='{{ "signin.email" | translate }}' name='EMAIL' ng-model='email' required)
             li
-              <label for="" class="signup-form__label">Senha:</label>
               .signup-form__input
-                input.input.input--full(type='password' placeholder='password' name='PASSWORD' required)
+                input.input.input--full(type='password' placeholder='{{ "sigin.password" | translate }}' name='PASSWORD' required)
             li
-              <label for="" class="signup-form__label">&nbsp;</label>
-              a.forgot(ng-href='/forgot?email={{email}}') Forgot password?
-              | &nbsp;Ainda não é usuario?
-              a.join(href='/#/signup')  Join now!
+              a.forgot(ng-href='/forgot?email={{email}}' translate="signin.forgot")
+              span(translate="signin.new")
+              a.join(href='/#/signup' translate="signin.join")
 
             .signup-action
-                input.signup-action__btn.btn.btn--medium.btn--primary(type='submit' value='Sign In')
+              input.signup-action__btn.btn.btn--medium.btn--primary(type='submit' value='{{ "signin.button" | translate }}')

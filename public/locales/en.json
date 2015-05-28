@@ -126,6 +126,15 @@
         "p1": "Their pre registration information will not be used or reproduced in any way by our team, these being used only to contact via email, about BitVagas, such as opening of pre-release, newsletter, research, etc.",
         "p2": "These policies can and will be updated as the development of BitVagas to meet the platform's legal needs. When these changes occur, you will be notified via email of the changes."
     },
+    "signin": {
+        "title": "Sign In",
+        "email": "Email",
+        "password": "Password",
+        "forgot": "Forgot Password?",
+        "new": "New to Bivagas?",
+        "join": "Join Now",
+        "button": "Sign In"
+    },
     "explore": {
         "description": "Explore the Bitcoin universe and help stimulate the decentralized economy. Hire using digital coins.",
         "title": "Explorar",
