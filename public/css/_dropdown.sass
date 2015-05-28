@@ -1,0 +1,70 @@
+.dropdown
+  background: #fff
+  padding: 0 6px 4px
+  position: relative
+  +media-query(desk)
+    background: transparent
+    padding: 0
+    &:hover
+      .dropdown-active
+        background: #fff
+        border-color: rgba(#000, .2)
+      .dropdown__body
+        display: block
+
+.dropdown-active
+  +cf
+  border-bottom: 1px solid rgba(#000, .08)
+  font-weight: 700
+  padding: 12px 6px 6px
+  text-transform: uppercase
+  +media-query(desk)
+    border-width: 1px 1px 0
+    border-style: solid
+    border-color: transparent
+    border-bottom: none
+    color: #7d7d7d
+    cursor: default
+    padding: 12px
+    position: relative
+    z-index: 333
+
+.dropdown-active__icon
+  float: left
+  margin-right: 4px
+  > img
+    display: block
+    height: 14px
+    width: 14px
+
+.dropdown-active__text
+  float: left
+
+.dropdown__body
+  list-style: none
+  margin: 0
+  > li
+    border-bottom: 1px dotted rgba(#000, .08)
+    &:last-child
+      border-bottom: none
+    > a
+      color: #7d7d7d
+      display: block
+      padding: 8px 6px
+      &:hover
+        background: #29B5DF
+        color: #fff
+  +media-query(desk)
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2)
+    background: #fff
+    border: 1px solid rgba(#000, .2)
+    display: none
+    padding: 6px 0
+    position: absolute
+    top: 40px
+    right: 0
+    min-width: 120px
+    z-index: 222
+    > li
+      > a
+        padding: 6px 18px

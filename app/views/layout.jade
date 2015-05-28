@@ -39,6 +39,16 @@ html(lang='pt-br', ng-app='bitvagas')
             a(href='/#/freelancers', title='{{ "layout.site_nav.freelancers" | translate }}' translate="layout.site_nav.freelancers")
 
         ul.head-nav.head-nav--right
+          li.dropdown(ng-controller="MainController")
+            .dropdown-active
+              .dropdown-active__icon
+                img(src="/img/icon-lang.svg")
+              .dropdown-active__text(translate="lang")
+            ul.dropdown__body(ng-style="style")
+              li
+                a(href="#" ng-click="setLang('en')") EN
+              li
+                a(href="#" ng-click="setLang('pt')") PT
           if !user
             li
               a(href='/#/signin', title='{{ layout.site_nav.signin | translate }}' translate="layout.site_nav.signin")
