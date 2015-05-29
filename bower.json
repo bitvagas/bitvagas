@@ -12,6 +12,8 @@
     "angular-qrcode": "~5.1.0",
     "angular-translate": "~2.7.0",
     "angular-translate-loader-static-files": "~2.7.0",
-    "angular-translate-storage-local": "~2.7.0"
+    "angular-translate-storage-local": "~2.7.0",
+    "pg-ng-dropdown": "*",
+    "ng-lodash": "~0.2.3"
   }
 }

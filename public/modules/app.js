@@ -1,5 +1,6 @@
 angular.module('bitvagas',
     ['pascalprecht.translate'
+    ,'ngLodash'
     ,'ngCookies'
     ,'bitvagas.main'
     ,'bitvagas.jobs'
@@ -15,4 +16,17 @@ angular.module('bitvagas',
         .preferredLanguage('en')
         .fallbackLanguage(['pt', 'en'])
         .useLocalStorage();
+    })
+    .config(function(lodash){
+        //Added text property to match dropdown
+        lodash.mixin({ 'dropdown' : function(array, value){
+            return lodash.map(array, function(obj) {
+                return lodash.assign(obj, { "text": obj[value] });
+            });
+        }});
+
+        //find selected : true property
+        lodash.mixin({ 'selected' : function(array, property){
+            return lodash.result(lodash.find(array, { selected : true }), property);
+        }});
     });
