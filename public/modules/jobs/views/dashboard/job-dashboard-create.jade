@@ -13,9 +13,7 @@
         ul.create-form
           li
             label.create-form__label Organização
-            select.select.select--full(name="ORG_ID" ng-model="data.ORG_ID")
-              option(ng-repeat="org in orgs" value="{{ org.id }}")
-                {{ org.NAME }}
+            div(data-pg-ng-dropdown name='ORG_ID' data-options='orgs')
           li
             label.create-form__label Título da vaga:
             .create-form__input
@@ -43,9 +41,7 @@
           li
             label.create-form__label Categoria:
             .create-form__input
-              select.select.select--full(name='categoryId' ng-model='data.CATEGORY_ID' required)
-                  option(ng-repeat='category in categories' value='{{category.id}}')
-                      {{category.NAME}}
+              div(data-pg-ng-dropdown name='categoryId' data-options='categories')
           li
             label.create-form__label Local:
             .create-form__input

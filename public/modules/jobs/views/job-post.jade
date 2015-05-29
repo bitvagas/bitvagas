@@ -47,9 +47,7 @@
                 textarea.textarea.textarea--full(placeholder='{{ "post_job.job.description" | translate }}' name='DESCRIPTION' ng-model='data.DESCRIPTION' rows='6' required)
             li
               .create-form__input
-                select.select.select--full(name='categoryId' ng-model='data.CATEGORY_ID' required)
-                    option(ng-repeat='category in categories' value='{{category.id}}')
-                        {{category.NAME}}
+                div(data-pg-ng-dropdown name='categoryId' data-options='categories')
             li
               .create-form__input
                 input.input.input--full(type='text' placeholder='{{ "post_job.job.local" | translate }} ' name='location' ng-model='data.LOCATION' required)

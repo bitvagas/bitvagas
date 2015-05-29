@@ -1,0 +1,112 @@
+$initialHeight: 40px
+$openedHeight: 175px
+$sidePadding: 12px
+$borderColor: #ccc
+$backgroundColor: white
+$arrowColor: #29B5DF
+$dropdownEasing: cubic-bezier(0.230, 1.000, 0.320, 1.000)
+
+.pg-dropdown
+  position: relative
+  height: $initialHeight
+  width: 100%
+  border:1px solid $borderColor
+  background-color: $backgroundColor
+  border-radius: 4px
+  cursor:pointer
+  overflow: hidden
+  transition: height 425ms $dropdownEasing
+  float:left
+
+  .arrow-wrapper
+
+    position: absolute
+    top:0
+    right:0
+    width: $initialHeight
+    height: $initialHeight
+
+    .arrow
+
+      $_size: 10px
+
+      position: absolute
+      top:0
+      left:0
+      width: 0
+      height: 0
+      top:50%
+      left:50%
+      transform: translate(-50%, -50%)
+      border-left: 4px solid transparent
+      border-right: 4px solid transparent
+      border-top: 7px solid $arrowColor
+
+
+  .current-selected-option
+
+    height: $initialHeight
+    padding: 0 $initialHeight 0 $sidePadding
+    line-height: 39px
+    -webkit-user-select: none
+    -moz-user-select: none
+    -ms-user-select: none
+
+    i
+      margin: 4px 0 0 0
+
+  .dropdown-content
+
+    $_padding: 6px
+    position:relative
+    display:block
+    overflow-y: auto
+    overflow-x: hidden
+    margin: 0
+    padding: $_padding 0px $_padding 0
+    height: calc(100% - #{($initialHeight + ($_padding * 2))})
+    border-top: 1px solid rgba($borderColor, 0.35)
+
+  li
+    position: relative
+    display: block
+    height: 30px
+    width: 100%
+    list-style:none
+    padding: 0 $sidePadding
+    line-height: 29.5px
+    transition: all 100ms ease
+
+    &:hover
+      background-color:#29B5DF
+      color:white
+
+    &.selected *
+      opacity: 0.4
+
+
+  li, .current-selected-option
+
+    i, span
+
+      position: relative
+      float: left
+      display:inline-block
+
+    span
+      height: 100%
+
+    i
+
+      position: relative
+      height: 30px
+      width: 17px
+      margin: 0 7px 0 0
+      top:50%
+      transform: translateY(-50%)
+      background-size: 17px 17px
+      background-position: 50% 48%
+      background-repeat: no-repeat
+
+  &.opened
+    height: $openedHeight

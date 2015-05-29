@@ -1,17 +1,18 @@
-angular.module('bitvagas.jobs.controllers')
+angular.module('bitvagas.jobs.controllers', ['pg-ng-dropdown'])
 .controller('JobPostController', JobPostController)
 .controller('JobCreateController', JobCreateController);
 
-JobPostController.$inject   = ['$scope', '$state', '$stateParams', 'JobService', 'Categories', 'ErrorHandling'];
-JobCreateController.$inject = ['$scope', '$state', '$stateParams', 'JobService', 'UserService', 'Categories', 'Organizations', 'ErrorHandling'];
-function JobPostController($scope, $state, $stateParams, JobService, Categories, ErrorHandling){
+JobPostController.$inject   = ['$scope', '$state', '$stateParams', 'JobService', 'Categories', 'ErrorHandling', 'lodash'];
+JobCreateController.$inject = ['$scope', '$state', '$stateParams', 'JobService', 'UserService', 'Categories', 'Organizations', 'lodash', 'ErrorHandling'];
+function JobPostController($scope, $state, $stateParams, JobService, Categories, ErrorHandling, _){
 
     $scope.data = $stateParams.data;
     $scope.errors = $stateParams.errors || [];
 
-    $scope.categories = Categories.data;
+    $scope.categories = _.dropdown(Categories.data, "NAME");
 
     $scope.create = function(){
+        $scope.data.CATEGORY_ID = _.selected($scope.categories, 'id');
         if($scope.form.$valid)
             $state.go('jobs-confirm', { data : $scope.data });
     };
@@ -33,15 +34,19 @@ function JobPostController($scope, $state, $stateParams, JobService, Categories,
     };
 }
 
-function JobCreateController($scope, $state, $stateParams, JobService, UserService, Categories, Organizations, ErrorHandling){
+function JobCreateController($scope, $state, $stateParams, JobService, UserService, Categories, Organizations, _, ErrorHandling){
 
     $scope.data = $stateParams.data;
     $scope.errors = $stateParams.errors || [];
 
-    $scope.categories = Categories.data;
+    // $scope.categories = Categories.data;
+    $scope.categories = _.dropdown(Categories.data, "NAME");
+    $scope.orgs = _.dropdown(Organizations.data, "NAME");
     $scope.orgs = Organizations.data;
 
     $scope.create = function(){
+        $scope.data.CATEGORY_ID = _.selected($scope.categories, 'id');
+        $scope.data.ORG_ID = _.selected($scope.orgs, 'id');
         if($scope.form.$valid)
             $state.go('dashboard.jobs.confirm', { data : $scope.data });
         else
