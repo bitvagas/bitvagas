@@ -145,6 +145,7 @@
             "type": {
                 "title": "Type of Job",
                 "full": "Full-time",
+                "freelancer": "Freelancer",
                 "part": "Part-time",
                 "temp": "Temporary"
             }
@@ -177,6 +178,7 @@
                 "title": "Type of Job",
                 "full": "Full-time",
                 "part": "Part-time",
+                "freelancer": "Freelancer",
                 "temp": "Temporary"
             },
             "description": "Job Description",

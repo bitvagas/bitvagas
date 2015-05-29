@@ -154,6 +154,7 @@
                 "title": "Tipo da Vaga",
                 "full": "Full-time",
                 "part": "Part-time",
+                "freelancer": "Freelancer",
                 "temp": "Temporário"
             }
         },
@@ -189,6 +190,7 @@
                 "title": "Tipo da Vaga",
                 "full": "Full-time",
                 "part": "Part-time",
+                "freelancer": "Freelancer",
                 "temp": "Temporário"
             },
             "description": "Descrição da Vaga",

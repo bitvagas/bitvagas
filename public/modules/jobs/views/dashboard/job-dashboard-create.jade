@@ -1,5 +1,5 @@
 .create(style="margin-left: 0;")
-  h2 Criar Vaga
+  h2.create__title(translate="post_job.title")
 
   ul
     li(ng-repeat='error in errors')
@@ -9,7 +9,7 @@
     form(name="form")
 
       fieldset.create-fieldset
-        legend.create-fieldset__legend Sobre a vaga
+        legend.create-fieldset__legend(translate="post_job.job.title")
         ul.create-form
           li
             label.create-form__label Organização
