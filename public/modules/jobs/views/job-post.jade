@@ -40,6 +40,9 @@
                     input.create-type-job__input(type='radio' name='job_typeID' value='2' id='rdl-parttime' ng-model='data.TYPE_ID' required)
                     label.create-type-job__label.label.label--parttime(for='rdl-parttime' translate="post_job.job.type.part")
                   li
+                    input.create-type-job__input(type='radio' name='job_typeID' value='3' id='rdl-freelancer' ng-model='data.TYPE_ID' required)
+                    label.create-type-job__label.label.label--freelance(for='rdl-freelancer' translate="post_job.job.type.freelancer")
+                  li
                     input.create-type-job__input(type='radio' name='job_typeID' value='4' id='rdl-temporary' ng-model='data.TYPE_ID' required)
                     label.create-type-job__label.label.label--temporary(for='rdl-temporary' translate="post_job.job.type.temp")
             li
@@ -59,12 +62,12 @@
                     input.create-how-apply-label__radio(type='checkbox' name='applyUrl' ng-model='applyUrl' value='url')
                     .create-how-apply-label__body(translate="post_job.job.how_apply.value")
                 input.input.input--full(type='text' placeholder='URL' ng-model='data.APPLY_BY' name='APPLY_URL' ng-show='applyUrl ')
-            li
-              label.create-form__label(translate="post_job.job.premium.title")
-            li
-              .create-form__input
-                label.create-terms
-                  p(translate="post_job.job.premium.value")
+            //- li
+              //- label.create-form__label(translate="post_job.job.premium.title")
+            //- li
+              //- .create-form__input
+                //- label.create-terms
+                  //- p(translate="post_job.job.premium.value")
                   //- input.create-terms__input(type='checkbox' id='feature')
                   //- .create-terms__text
                   //- |  Sim, destacar por $25,00.
