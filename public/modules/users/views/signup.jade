@@ -2,7 +2,7 @@ block content
   form.signup(name="form")
     .signup__cell.signup__cell--main
       header.signup__head
-        h1.signup__title Sign Up
+        h1.signup__title(translate="signup.title")
 
       ul
         li(ng-repeat='errorMessage in errors')
@@ -12,23 +12,19 @@ block content
         fieldset.signup-fieldset
           ul.signup-form
             li
-              <label for="" class="signup-form__label">Nome:</label>
               .signup-form__input
-                input.input.input--full(type='text' ng-model='user.NAME' placeholder='Nome' name='NAME' title='Usuário Obrigatório' required)
+                input.input.input--full(type='text' ng-model='user.NAME' placeholder='{{ "signup.name" | translate }}' name='NAME' title='Usuário Obrigatório' required)
             li
-              <label for="" class="signup-form__label">E-mail:</label>
               .signup-form__input
-                input.input.input--full(type='email' ng-model='user.EMAIL' placeholder='Email' name='EMAIL' title='Email Obrigatório' required)
+                input.input.input--full(type='email' ng-model='user.EMAIL' placeholder='{{ "signup.email" | translate }}' name='EMAIL' title='Email Obrigatório' required)
             li
-              <label for="" class="signup-form__label">Senha:</label>
               .signup-form__input
-                input.input.input--full(type='password' pattern='.{8,}' title='Pelo menos 8 caracteres' ng-model='user.PASSWORD' placeholder='Senha' name='PASSWORD' required)
+                input.input.input--full(type='password' pattern='.{8,}' title='Pelo menos 8 caracteres' ng-model='user.PASSWORD' placeholder='{{ "signup.password" | translate }}' name='PASSWORD' required)
             li
-              <label for="" class="signup-form__label">Repetir Senha:</label>
               .signup-form__input
-                input.input.input--full(type='password' pattern='.{8,}' title='Pelo menos 8 caracteres' ng-model='user.REPASSWORD' placeholder='Repetir Senha' name='REPASSWORD' required)
+                input.input.input--full(type='password' pattern='.{8,}' title='Pelo menos 8 caracteres' ng-model='user.REPASSWORD' placeholder='{{ "signup.repassword" | translate }}' name='REPASSWORD' required)
 
       .signup-action
-        button.signup-action__btn.btn.btn--medium.btn--primary(data-ng-click='create(user)' value='Sign Up') Cadastrar
+        button.signup-action__btn.btn.btn--medium.btn--primary(data-ng-click='create(user)' value='{{ "signup.button" | translate }}' translate="signup.button")
 
     .signup__cell.signup__cell--aside

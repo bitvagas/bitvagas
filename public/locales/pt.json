@@ -143,6 +143,14 @@
         "join": "Inscreva-se Agora",
         "button": "Entrar"
     },
+    "signup": {
+        "title": "Entrar",
+        "name": "Nome",
+        "email": "E-mail",
+        "password": "Senha",
+        "repassword": "Repetir Senha",
+        "button": "Inscrever-se"
+    },
     "explore": {
         "description": "Explore the Bitcoin universe and help stimulate the decentralized economy. Hire using digital coins.",
         "title": "Explorar",

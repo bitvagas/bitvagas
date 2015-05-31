@@ -136,6 +136,14 @@
         "join": "Join Now",
         "button": "Sign In"
     },
+    "signup": {
+        "title": "Sign Up",
+        "name": "Name",
+        "email": "E-mail",
+        "password": "Password",
+        "repassword": "Repeat Password",
+        "button": "Sign up for Bitvagas"
+    },
     "explore": {
         "description": "Explore the Bitcoin universe and help stimulate the decentralized economy. Hire using digital coins.",
         "title": "Explorar",
