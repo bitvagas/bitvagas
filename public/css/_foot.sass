@@ -1,45 +1,72 @@
 .foot
-  background: url(../img/foot-bg.png) repeat-x top center
-  padding: 30px 0 48px
-  > .wrapper
-    position: relative
+  +cf
+  background: #1283b0
+  color: #fff
+  padding: 24px 0
   a
-    text-decoration: none
-    &:hover
-      text-decoration: underline
+    color: #fff
+  +media-query(desk)
+    padding: 48px 0
+    // text-align: center
+    a
+      &:hover
+        text-decoration: underline
+
+.foot-top
+  margin-bottom: 12px
+  +media-query(desk)
+    margin-bottom: 24px
 
 .foot-nav
-  +cf
-
-  line-height: 1
+  font-size: 14px
   list-style: none
-  margin-left: 0
+  margin-left: 10%
+  width: 15%
+  display:inline-block
+  vertical-align: top
   > li
     border-bottom: 1px dotted #fff
     > a
-      color: #fff
       display: block
       padding: 12px
     &:last-child
       border-bottom: none
   +media-query(desk)
-    position: absolute
-    left: 340px
-    top: 6px
-    margin-bottom: 0
+    font-size: 16px
     > li
       border-bottom: none
-      border-right: 1px solid #fff
-      float: left
-      padding: 0 6px
+      display: block
+      padding: 0 8px
       > a
         padding: 0
-      &:first-child
-        padding-left: 0
-      &:last-child
-        border-right: none
-        padding-right: 0
 
 .foot-social
-  display: none
+  list-style: none
+  margin-left: 0
+  margin-bottom: 12px
+  text-align: center
+  > li
+    border-bottom: none
+    display: inline-block
+    margin-bottom: 12px
+    padding: 0 8px
+    > a,
+    > iframe
+      padding: 0
+  +media-query(lap)
+    margin-bottom: 24px
+    > li
+      margin-bottom: 0
 
+.foot-copy
+  font-size: 13px
+  text-align: center
+
+.foot-logo
+  display: block
+
+hr
+  border: 0;
+  height: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);

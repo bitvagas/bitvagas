@@ -1,5 +1,6 @@
 {
     "lang": "EN",
+    "tweet": "Platform of jobs for #Bitcoin users. @bitvagas #bitvagas #startup",
     "layout": {
         "head":{
             "title": "BitVagas — Platform of jobs for Bitcoin users"
@@ -9,8 +10,9 @@
             "about": "About",
             "team": "Team",
             "support": "Support",
-            "post": "Post Job",
-            "freelancers": "freelancers",
+            "post": "Post a Job",
+            "freelancers": "Freelancers",
+            "cv": "Post your CV",
             "explore": "Explore",
             "contact": "Contact",
             "privacy": "Privacy Policy",
@@ -38,8 +40,17 @@
         "facebooklang": "en_US",
         "site_url": "/",
         "site_subtitle":  "Platform of jobs for Bitcoin users",
+        "banner_img": "banner-en-img",
         "description": "Explore the Bitcoin universe and help stimulate the decentralized economy. Hire using digital coins.",
-        "tweet": "Platform of jobs for #Bitcoin users. @bitvagas #bitvagas #startup",
+        "banner": {
+            "slogan": {
+                "strong": "Platform of jobs",
+                "title": " for Bitcoin users"
+            },
+            "text": "Explore the Bitcoin universe and help stimulate the decentralized economy. Hire using digital coins.",
+            "btnPost": "Post a Job",
+            "btnExplore": "Explore"
+        },
         "about": {
             "title": "About Us",
             "text": "We are a startup that offers modernity in job advertisement. Our goal is to promote the use of Bitcoin in the global job market."

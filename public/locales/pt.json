@@ -1,5 +1,6 @@
 {
     "lang": "PT",
+    "tweet": "Plataforma de vagas de trabalho para usuários #Bitcoin. @bitvagas #bitvagas #startup",
     "layout": {
         "head":{
             "title": "BitVagas — Platform of jobs for Bitcoin users"
@@ -11,6 +12,7 @@
             "support": "Apoiar",
             "post": "Postar Vaga",
             "freelancers": "freelancers",
+            "cv": "Cadastre seu CV",
             "explore": "Explorar",
             "contact": "Contato",
             "privacy": "Política de Privacidade",
@@ -36,7 +38,6 @@
         "site_url": "/pt-br/",
         "site_subtitle":  "Plataforma de vagas de trabalho para usuários Bitcoin",
         "description": "Explore o universo Bitcoin e ajude a estimular a economia descentralizada. Contrate utilizando moedas digitais.",
-        "tweet": "Plataforma de vagas de trabalho para usuários #Bitcoin. @bitvagas #bitvagas #startup",
         "banner": {
             "slogan": {
                 "strong": "Plataforma de vagas de trabalho",

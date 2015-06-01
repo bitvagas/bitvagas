@@ -1,0 +1,45 @@
+.invite
+  padding: 48px 0 (24px * 4)
+  text-align: center
+
+.invite__title
+  font-size: 38px
+  line-height: 1.15
+  margin-bottom: 0
+  +media-query(desk)
+    font-size: 41px
+    line-height: 1.5
+
+.invite__img
+  display: inline-block
+  > svg
+    fill: #f39c12
+    height: 120px
+    width: 120px
+  &:hover
+    > svg
+      fill: mix(#f39c12, lighten(red, 12%))
+
+.invite-form
+  +cf
+  +media-query(lap)
+    display: inline-block
+
+.invite-form__input
+  +media-query(palm)
+    border-radius: 4px 4px 0 0
+    border-bottom: none
+    display: block
+    width: 100%
+  +media-query(lap)
+    border-radius: 4px 0 0 4px
+    float: left
+
+.invite-form__btn
+  +media-query(palm)
+    border-radius: 0 0 4px 4px
+    display: block
+    width: 100%
+  +media-query(lap)
+    border-radius: 0 4px 4px 0
+    float: left

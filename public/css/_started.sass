@@ -1,0 +1,24 @@
+.started__body
+  +cf
+  margin-left: -48px
+
+.started-item
+  display: inline-block
+  padding-left: 48px
+  margin-right: -0.28em
+  margin-bottom: 36px
+  vertical-align: top
+  width: 100%
+
+  &:last-child
+    margin-bottom: 0
+
+  +media-query(lap)
+    width: 50%
+
+  +media-query(desk)
+    margin-bottom: 0
+    width: 33.333%
+
+.started-item__title
+  margin-bottom: 12px
