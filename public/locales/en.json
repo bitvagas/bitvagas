@@ -21,6 +21,10 @@
             "signin": "Sign In",
             "signup": "Sign Up",
             "logout": "Log Out"
+        },
+        "foot":{
+            "develop": "Development",
+            "jobs": "Jobs"
         }
     },
     "home": {
