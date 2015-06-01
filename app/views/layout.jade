@@ -9,6 +9,18 @@ html(lang='pt-br', ng-app='bitvagas')
     block css
       link(href='https://fonts.googleapis.com/css?family=Droid+Sans:400,700', rel='stylesheet', type='text/css')
       link(rel='stylesheet', href='/css/bitvagas.css')
+      // WebComponents
+      script(src='/components/webcomponentsjs/webcomponents.min.js')
+      //Twitter button
+      link(rel='import' href='/components/twitter-button/dist/twitter-button.html')
+      //Facebook button
+      link(rel='import' href='/components/facebook-button/dist/facebook-button.html')
+      //G+ button. fix: confict with polymer versions
+      //- link(rel='import' href='/components/gplus-elements/dist/gplus-one.html')
+      //Github button fix: confict with polymer versions
+      //- link(rel='import' href='/components/github-button/dist/github-button.html')
+
+      //Angular Dependencies
       script(src='/components/angular/angular.min.js')
       script(src='/components/ng-lodash/build/ng-lodash.min.js')
       script(src='/components/angular-ui-router/release/angular-ui-router.min.js')
@@ -18,9 +30,12 @@ html(lang='pt-br', ng-app='bitvagas')
       script(src='/components/angular-translate-storage-cookie/angular-translate-storage-cookie.min.js')
       script(src='/components/angular-translate-storage-local/angular-translate-storage-local.min.js')
       script(src='/components/pg-ng-dropdown/dest/pg-ng-dropdown.min.js')
+
+      //App
       script(src='/app-build.js')
 
   body
+    #{ tweet }
     header.head
       .wrapper.cf
         a.logo(href='/#/', title='BitVagas')
@@ -70,6 +85,33 @@ html(lang='pt-br', ng-app='bitvagas')
           img.logo-foot__img(src='/img/bitvagas-white.png', alt='BitVagas')
 
         ul.foot-nav
+          li
+            h5 BitVagas
+          li
+            a(href="/#/about" translate="layout.site_nav.about" )
+          li
+            a(href="/#/about#team" translate="layout.site_nav.team" )
+          li
+            a(href='/#/terms', title='{{ layout.site_nav.terms }}' translate="layout.site_nav.terms")
+          li
+            a(href='/#/contact', title='{{ layout.site_nav.contact }}' translate="layout.site_nav.contact")
+
+
+        ul.foot-nav
+          li
+            h5 Support
+          li
+            a(href="/#/about#support" translate="layout.site_nav.support" )
+          li
+            a(href="http://github.com/bitvagas/bitvagas" target="_BLANK") Github
+          li
+            a(href="https://tip4commit.com/github/bitvagas/bitvagas" target="_BLANK") Tip4Commit
+
+        ul.foot-nav
+          li
+            h5 Jobs
+          li
+            a(href='/#/' title='{{ "layout.site_nav.all_jobs"' translate="layout.site_nav.all_jobs")
           if !user
             li
               a(href='/#/jobs/post', title='{{ "layout.site_nav.post" | translate }}' translate="layout.site_nav.post")
@@ -77,25 +119,27 @@ html(lang='pt-br', ng-app='bitvagas')
             li
               a(href='/#/dashboard/jobs/create', title='{{ "layout.site_nav.post" | translate }}' translate="layout.site_nav.post")
           li
-            a(href='/#/about', title='{{ layout.site_nav.about }}' translate="layout.site_nav.about")
+            a(href='/#/signup' title='{{ "layout.site_nav.cv" | translate }}' translate="layout.site_nav.cv")
           li
-            a(href='/#/terms', title='{{ layout.site_nav.terms }}' translate="layout.site_nav.terms")
+            a(href='/#/freelancers' title='{{ "layout.site_nav.freelancers" | translate }}' translate="layout.site_nav.freelancers")
           li
-            a(href='/#/contact', title='{{ layout.site_nav.contact }}' translate="layout.site_nav.contact")
 
+        hr
         ul.foot-social
           li
             a(href='')
-              img(src='', alt='Facebook')
+              twitter-button(user='bitvagas' href='http://bitvagas.com' text="{{ 'tweet' | translate }}" type="share")
           li
             a(href='')
-              img(src='', alt='Twitter')
+              facebook-button(href="http://bitvagas.com" type="like")
           li
             a(href='')
-              img(src='', alt='Google+')
+              //TODO: replace with webcomponents
+              | <div class="g-plusone" data-size="medium" data-href="http://bitvagas.com/#{ lang == "en" ? "" : lang + "/" }" data-href="http://bitvagas.com/"></div>
           li
             a(href='')
-              img(src='', alt='RSS')
+              //TODO: replace with webcomponents
+              | <iframe src="http://ghbtns.com/github-btn.html?user=bitvagas&amp;repo=bitvagas&amp;type=watch&amp;count=true&amp;size=small" allowtransparency="true" frameborder="0" scrolling="0" width="85" height="20"></iframe>
 
     script(src="https://apis.google.com/js/platform.js" async defer)
     script(src='/components/qrcode-generator/js/qrcode.js')
