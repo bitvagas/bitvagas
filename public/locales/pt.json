@@ -3,7 +3,7 @@
     "tweet": "Plataforma de vagas de trabalho para usuários #Bitcoin. @bitvagas #bitvagas #startup",
     "layout": {
         "head":{
-            "title": "BitVagas — Platform of jobs for Bitcoin users"
+            "title": "BitVagas — Plataforma de vagas de trabalho para usuários Bitcoin"
         },
         "site_nav" : {
             "all_jobs": "Todas as Vagas",
@@ -142,7 +142,7 @@
     "signin": {
         "title": "Sign In",
         "email": "Email",
-        "password": "Password",
+        "password": "Senha",
         "forgot": "Esqueceu sua senha?",
         "new": "Ainda não é usuario?",
         "join": "Inscreva-se Agora",
@@ -151,7 +151,7 @@
     "signup": {
         "title": "Entrar",
         "name": "Nome",
-        "email": "E-mail",
+        "email": "Email",
         "password": "Senha",
         "repassword": "Repetir Senha",
         "button": "Inscrever-se"

@@ -1,6 +1,5 @@
 angular.module('bitvagas.jobs',
     [ 'ui.router'
-    , 'monospaced.qrcode'
     , 'bitvagas.jobs.controllers'
     , 'bitvagas.jobs.services'
     , 'bitvagas.jobs.category.services'

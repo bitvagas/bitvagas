@@ -154,7 +154,7 @@
     "signup": {
         "title": "Sign Up",
         "name": "Name",
-        "email": "E-mail",
+        "email": "Email",
         "password": "Password",
         "repassword": "Repeat Password",
         "button": "Sign up for Bitvagas"

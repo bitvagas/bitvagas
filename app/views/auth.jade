@@ -1,11 +1,15 @@
 doctype html
-html(lang='pt-br')
+html(ng-app='bitvagas')
 head
-    title
-      | BitVagas — Sign In
+    title(translate="layout.head.title")
 
     include meta
     link(rel='stylesheet', href='/css/bitvagas.css')
+    link(href='https://fonts.googleapis.com/css?family=Droid+Sans:400,700', rel='stylesheet', type='text/css')
+    include script
+
+    style.
+      body{ background-image:none; }
 
 block content
 
@@ -17,11 +21,12 @@ block content
         .errorMessage= message
         .auth
           form(action='/auth', method='post')
-            input.input.input--full(type='text' placeholder='email' name='EMAIL')
-            input.input.input--full(type='password' placeholder='password' name='PASSWORD')
-            input.login__btn.btn.btn--primary(type='submit', value='Sign In')
-            div
-              a.forgot(href='#') Forgot password?
-              br
-              | ainda não é usuario?
-              a.join(href='/#/signup')  Join now
+            input.input.input--full(type='text' placeholder='{{ "signin.email" | translate }}' name='EMAIL')
+            input.input.input--full(type='password' placeholder='{{ "signin.password" | translate }}' name='PASSWORD')
+            input.login__btn.btn.btn--primary(type='submit', value='{{ "signin.button" | translate }}')
+          hr
+          div
+            a.forgot(href='/forgot' translate='signin.forgot')
+            br
+            span(translate='signin.new')
+            a.join(href='/#/signup' translate='signin.join')

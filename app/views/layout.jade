@@ -6,33 +6,20 @@ html(lang='pt-br', ng-app='bitvagas')
     include meta
     link(rel='shortcut icon', href='')
 
-    block css
-      link(href='https://fonts.googleapis.com/css?family=Droid+Sans:400,700', rel='stylesheet', type='text/css')
-      link(rel='stylesheet', href='/css/bitvagas.css')
-      // WebComponents
-      script(src='/components/webcomponentsjs/webcomponents.min.js')
-      //Twitter button
-      link(rel='import' href='/components/twitter-button/dist/twitter-button.html')
-      //Facebook button
-      link(rel='import' href='/components/facebook-button/dist/facebook-button.html')
-      //G+ button. fix: confict with polymer versions
-      //- link(rel='import' href='/components/gplus-elements/dist/gplus-one.html')
-      //Github button fix: confict with polymer versions
-      //- link(rel='import' href='/components/github-button/dist/github-button.html')
+    link(href='https://fonts.googleapis.com/css?family=Droid+Sans:400,700', rel='stylesheet', type='text/css')
+    link(rel='stylesheet', href='/css/bitvagas.css')
+    // WebComponents
+    script(src='/components/webcomponentsjs/webcomponents.min.js')
+    //Twitter button
+    link(rel='import' href='/components/twitter-button/dist/twitter-button.html')
+    //Facebook button
+    link(rel='import' href='/components/facebook-button/dist/facebook-button.html')
+    //G+ button. fix: confict with polymer versions
+    //- link(rel='import' href='/components/gplus-elements/dist/gplus-one.html')
+    //Github button fix: confict with polymer versions
+    //- link(rel='import' href='/components/github-button/dist/github-button.html')
 
-      //Angular Dependencies
-      script(src='/components/angular/angular.min.js')
-      script(src='/components/ng-lodash/build/ng-lodash.min.js')
-      script(src='/components/angular-ui-router/release/angular-ui-router.min.js')
-      script(src='/components/angular-cookies/angular-cookies.min.js')
-      script(src='/components/angular-translate/angular-translate.min.js')
-      script(src='/components/angular-translate-loader-static-files/angular-translate-loader-static-files.js')
-      script(src='/components/angular-translate-storage-cookie/angular-translate-storage-cookie.min.js')
-      script(src='/components/angular-translate-storage-local/angular-translate-storage-local.min.js')
-      script(src='/components/pg-ng-dropdown/dest/pg-ng-dropdown.min.js')
-
-      //App
-      script(src='/app-build.js')
+    include script
 
   body
     #{ tweet }
@@ -142,6 +129,3 @@ html(lang='pt-br', ng-app='bitvagas')
               | <iframe src="http://ghbtns.com/github-btn.html?user=bitvagas&amp;repo=bitvagas&amp;type=watch&amp;count=true&amp;size=small" allowtransparency="true" frameborder="0" scrolling="0" width="85" height="20"></iframe>
 
     script(src="https://apis.google.com/js/platform.js" async defer)
-    script(src='/components/qrcode-generator/js/qrcode.js')
-    script(src='/components/qrcode-generator/js/qrcode_UTF8.js')
-    script(src='/components/angular-qrcode/qrcode.js')
