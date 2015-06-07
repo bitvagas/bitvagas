@@ -19,19 +19,8 @@ module.exports = {
         });
     }
 
-    , findById: function(request, response){
-        var id = request.params.id;
-        db.job.find({
-            where   : { id : id }
-          , include : [
-              db.job_type
-            , db.job_transaction
-            , db.category
-            , db.org
-          ]
-        }).then(function(job){
-            response.status(200).json(job);
-        });
+    , read: function(request, response){
+        response.status(200).json(request.job);
     }
 
     , findByUser: function(request, response){
@@ -53,7 +42,7 @@ module.exports = {
     }
 
     , create: function(request, response){
-
+        request.body.USER_ID = request.user.id;
         return db.job.create(request.body)
         .then(function(job){
             response.status(201).json(job);
@@ -68,17 +57,17 @@ module.exports = {
     , post : function(request, response){
         //begin transaction
         return db.sequelize.transaction(function(t){
-
             //invite an user
             return user.invite(request, response, t)
             .then(function(user){
                 //create an organization
+                request.user = user;
                 request.body.USER_ID = user.id;
                 //removes ambiguity between organization.name and user.name
                 request.body.NAME = request.body.ORG_NAME;
                 return db.org.create(request.body,{ transaction : t});
-            })
-            .then(function(org){
+            }).then(function(org){
+                //create an organization
                 //create a job
                 request.body.ORG_ID = org.id;
                 return db.job.create(request.body, { transaction : t});
@@ -124,4 +113,26 @@ module.exports = {
             });
         });
     }
+
+    /*
+     * Middleware job for id parameter
+     */
+    , findById : function(request, response, next, id){
+        db.job.find({
+            where   : { id : id }
+          , include : [
+              db.job_type
+            , db.job_transaction
+            , db.category
+            , db.org
+          ]
+        }).then(function(job){
+            if(!job) response.status(404).json({ error : "Job not found" });
+            request.job = job;
+            next();
+        }).catch(function(err){
+            next(err);
+        });
+    }
+
 };

@@ -20,8 +20,8 @@ angular.module('bitvagas.users', [
           , controller  : 'FreelancerController'
         })
         .state('freelancers-cv', {
-            url: 'freelancers/:id'
+            url: '/freelancers/:id'
           , templateUrl : 'modules/users/views/cv'
           , controller  : 'CVController'
-        })
+        });
     });

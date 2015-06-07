@@ -21,45 +21,35 @@ module.exports = {
         });
   }
 
-  , findByEmail: function(request){
-        var email = request.body.EMAIL;
-        return db.user.find({
-            where   : { EMAIL : email }
-          , include : [{ model : db.job, include : [db.job_type] }]
-          });
-  }
-
   , signup: function(request, response, next){
 
         if(request.body.PASSWORD != request.body.REPASSWORD)
              response.status(400).send('These passwords don\'t match.');
 
-        this.findByEmail(request).then(function(user){
-            if(user)
-                response.status(400).send('User already exists');
-            else {
+        if(request.user)
+            response.status(400).send('User already exists');
+        else {
 
-                var salt = bcrypt.genSaltSync(4);
-                var hash = bcrypt.hashSync(request.body.PASSWORD, salt);
+            var salt = bcrypt.genSaltSync(4);
+            var hash = bcrypt.hashSync(request.body.PASSWORD, salt);
 
-                //Define a token for email verification
-                var hashEmail = bcrypt.hashSync(request.body.EMAIL, salt);
-                request.body.PASSWORD = hash;
-                request.body.TOKEN = hashEmail;
-                db.user.create(request.body).then(function(user){
+            //Define a token for email verification
+            var hashEmail = bcrypt.hashSync(request.body.EMAIL, salt);
+            request.body.PASSWORD = hash;
+            request.body.TOKEN = hashEmail;
+            db.user.create(request.body).then(function(user){
 
-                    user.PASSWORD = undefined;
-                    //Send Welcome Message to user by email :D
-                    mailer.sendWelcome(user);
-                    //Send a link to email to verification
-                    mailer.sendEmailVerification(user);
-                    response.status(201).json({ data : user, token : hashEmail });
+                user.PASSWORD = undefined;
+                //Send Welcome Message to user by email :D
+                mailer.sendWelcome(user);
+                //Send a link to email to verification
+                mailer.sendEmailVerification(user);
+                response.status(201).json({ data : user, token : hashEmail });
 
-                }).catch(function(error){
-                    response.status(400).json(error);
-                });
-            }
-        });
+            }).catch(function(error){
+                response.status(400).json(error);
+            });
+        }
   }
 
   /*
@@ -67,17 +57,16 @@ module.exports = {
    */
   , invite: function(request, response, t){
 
-      return this.findByEmail(request).then(function(user){
-          if(user)
-              response.status(400).send('User already exists');
-          else {
-              request.body.USER_STATUS = 1; //User invited
-              request.body.PASSWORD = '';
-              //Create User
-              return db.user.create(request.body, { transaction : t });
-          }
-      });
-    }
+      // return this.findByEmail(request).then(function(user){
+      if(request.user)
+          response.status(400).send('User already exists');
+      else {
+          request.body.USER_STATUS = 1; //User invited
+          request.body.PASSWORD = '';
+          //Create User
+          return db.user.create(request.body, { transaction : t });
+      }
+  }
 
   /*
    * Verify an user account after receive an email to confirmation
@@ -108,12 +97,11 @@ module.exports = {
    * Expire after 1 hour.
    */
   , forgotPassword: function(request, response){
-
-      this.findByEmail(request).then(function(user){
+      if(request.user) {
           crypto.randomBytes(20, function(err, bytes){
               var token = bytes.toString('hex');
 
-              user.update({
+              request.user.update({
                   RESETTOKEN   : token
                 , RESETEXPIRES : Date.now() + 3600000
               }).then(function(user){
@@ -124,7 +112,7 @@ module.exports = {
                   response.render('forgot', { message : err });
               });
           });
-      });
+      }
   }
 
   /*
@@ -143,15 +131,31 @@ module.exports = {
               var salt = bcrypt.genSaltSync(4);
               var hash = bcrypt.hashSync(request.body.PASSWORD, salt);
               user.PASSWORD = hash;
-              user.update({ PASSWORD : hash, USER_STATUS : 3 });
+              user.update({ PASSWORD     : hash
+                          , USER_STATUS  : 3
+                          , RESETTOKEN   : null
+                          , RESETEXPIRES : null
+              });
               response.render('auth');
-          }else{
+          } else {
               //Token Expired
-              //keep email on request
-              request.body.EMAIL = user.EMAIL;
-              //Generate another token.
-              this.forgotPassword(request, response);
+              response.render('forgot', { email: user.EMAIL });
           }
+      });
+  }
+
+    /*
+     * Middleware for catch email o request body
+     */
+  , findByEmail: function(request, response, next){
+      if(!request.body.EMAIL)
+          response.status(404).json({ error: 'missing email'});
+
+      db.user.find({ where : { EMAIL : request.body.EMAIL }}).then(function(user){
+          request.user = user || undefined;
+          next();
+      }).catch(function(err){
+          next(err);
       });
   }
 };

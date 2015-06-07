@@ -1,85 +1,40 @@
-var express   = require('express')
-  , passport  = require('passport')
-  , users     = require('../controllers/user-controller')
-  , cv        = require('../controllers/user-cv-controller')
-  , stratergy = require('../controllers/passport')
-  , router    = express.Router();
+var passport  = require('passport')
+  , user     = require('../controllers/user-controller');
 
-router.get('/isAuthenticated', function(request, response){
-    if(request.isAuthenticated())
-        response.status(200).send(request.user);
-    else
-        //Unauthorized request
-        response.status(401).send(0);
-});
+module.exports = function(app){
 
-router.get('/auth', function(request, response){
-    response.render('auth', { message : request.flash('error') });
-});
+    app.route('/signup')
+    .post(user.findByEmail, user.signup);
 
-router.post('/auth', passport.authenticate('signin',
-    { successRedirect : '/#/dashboard/overview'
-    , failureRedirect : '/auth'
-    , failureFlash    : true
+    /*
+    * Signup an user indirect
+    */
+    app.route('/invite')
+    .post(user.invite);
+
+    app.route('/verify')
+    .get(function(request, response){
+        if(request.query.token === undefined)
+            return response.redirect('/#/signup');
+
+        response.render('verify', { token : request.query.token });
     })
-);
+    .post(user.verifyAccount);
 
-router.post('/api/signup', function(request, response){
-    users.signup(request, response);
-});
-
-router.get('/auth/linkedin', passport.authenticate('linkedin', { state : 'state' }), function(request, response){});
-
-router.get('/auth/linkedin/callback', passport.authenticate('linkedin',
-    { successRedirect : '/#/dashboard/profile'
-    , failureRedirect : '/auth'
-    , failureFlash    : true
+    app.route('/forgot')
+    .get(function(request, response){
+        response.render('forgot', { email : request.query.email || '' });
     })
-);
+    .post(user.findByEmail, user.forgotPassword);
 
-router.get('/api/cv', cv.getCV);
+    app.route('/reset')
+    .get(function(request, response){
+        response.render('reset', { token : request.query.token });
+    })
+    .post(function(request, response){
+        if(request.body.token === undefined)
+            return response.render('reset', { message : 'Check your email' });
 
-router.post('/api/cv', cv.getCV);
-
-router.get('/api/users', cv.getFreelancers);
-
-router.get('/api/users/:id', cv.getFreelancerById);
-
-/*
- * Signup an user indirect
- */
-router.post('/invite', function(request, response){
-    users.invite(request, response);
-});
-
-router.get('/verify', function(request, response){
-    if(request.query.token === undefined)
-        return response.redirect('/#/signup');
-
-    response.render('verify', { token : request.query.token });
-});
-
-router.post('/verify', function(request, response){
-    users.verifyAccount(request, response);
-});
-
-router.get('/forgot', function(request, response){
-    response.render('forgot', { email : request.query.email || '' });
-});
-
-router.get('/forgot', function(request, response){
-    response.render('forgot', { email : request.query.email || '' });
-});
-
-router.get('/reset', function(request, response){
-    response.render('reset', { token : request.query.token });
-});
-
-router.post('/reset', function(request, response){
-    if(request.body.token === undefined)
-        return response.render('reset', { message : 'Check your email' });
-
-    users.resetPassword(request, response);
-});
-
-module.exports = router;
+        user.resetPassword(request, response);
+    });
+};

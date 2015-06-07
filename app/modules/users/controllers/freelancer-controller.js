@@ -8,8 +8,8 @@ var secrets  = require(root + '/config/secrets')
 
 module.exports = {
 
-    getFreelancers: function(request, response){
-        Users.findAll().then(function(users){
+    list: function(request, response){
+        db.user.findAll({ where: { LINKEDIN_ID: { $ne: null }}}).then(function(users){
             lodash.forEach(users, function(user){
                 user.PASSWORD = undefined;
             });
@@ -17,11 +17,10 @@ module.exports = {
         });
     }
 
-    , getFreelancerById: function(request, response){
-        Users.findById(request.params.id).then(function(user){
-            user.PASSWORD = undefined;
-            response.status(200).json(user);
-        });
+    , read: function(request, response){
+        var freelancer = request.freelancer;
+        freelancer.PASSWORD = undefined;
+        response.status(200).json(freelancer);
     }
 
     , getCV : function(request, response){
@@ -34,6 +33,20 @@ module.exports = {
                 return response.status(400).json(error || profile);
 
             response.status(200).json(profile);
+        });
+    }
+
+    /*
+     * Middleware for freelancer (user) id
+     */
+    , getFreelancerById: function(request, response, next, id){
+        db.user.find({ where : { id : id }}).then(function(user){
+            if(!user) response.status(404).json({ error : 'Freelancer not found' });
+
+            request.freelancer = user;
+            next();
+        }).catch(function(err){
+            next(err);
         });
     }
 };

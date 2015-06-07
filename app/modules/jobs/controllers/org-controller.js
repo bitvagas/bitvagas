@@ -1,20 +1,12 @@
-var express = require('express'),
-    db      = require('../../../models');
+var express = require('express')
+  , db      = require('../../../models')
+  , _       = require('lodash');
 
 module.exports = {
 
     findAll: function(request, response){
         db.org.findAll().then(function(orgs){
             response.status(200).json(orgs);
-        });
-    }
-
-    , findById: function(request, response){
-
-        db.org.findAll({
-            where : { id : request.params.OrgID }
-        }).then(function(org){
-            response.status(200).json(org);
         });
     }
 
@@ -26,12 +18,16 @@ module.exports = {
         });
     }
 
-    , create: function(request, response, t){
+    , read: function(request, response){
+        response.json(request.org);
+    }
+
+    , create: function(request, response){
         if(request.user === undefined)
-            return response.send(401, 'user invalid');
+            return response.status(401).send('user invalid');
 
         request.body.USER_ID = request.user.id;
-        db.org.create(request.body, { transaction : t}).then(function(org){
+        db.org.create(request.body).then(function(org){
             response.status(201).json(org);
         }).catch(function(error){
             response.status(400).json(error);
@@ -39,9 +35,9 @@ module.exports = {
     }
 
     , edit: function(request, response){
-        db.org.update(request.body, { where : {
-            id : request.params.OrgID
-        }}).then(function(org){
+        var org = request.org;
+        org = _.extend(org, request.body);
+        org.save().then(function(org){
             response.status(200).json(org);
         }).catch(function(error){
             response.status(400).json(error);
@@ -49,12 +45,24 @@ module.exports = {
     }
 
     , delete: function(request, response){
-        db.org.destroy({ where : {
-            id : request.params.OrgID
-        }}).then(function(){
+        var org = request.org;
+        org.destroy().then(function(){
             return response.status(200).send('deleted');
         }).catch(function(error){
             return response.status(400).json(error);
+        });
+    }
+
+    /*
+     * Middleware for OrgID parameter
+     */
+    , findById: function(request, response, next, OrgID){
+        db.org.find({ where : { id : OrgID }}).then(function(org){
+            if(!org) response.status(404).json({ error : 'Org not Found' });
+            request.org = org;
+            next();
+        }).catch(function(err){
+            next(err);
         });
     }
 };

@@ -1,9 +1,9 @@
 'use strict';
 
 var express  = require('express')
-, config   = require('./config/config')
-, db       = require('./app/models')
-, fixtures = require('sequelize-fixtures');
+  , config   = require('./config/config')
+  , db       = require('./app/models')
+  , fixtures = require('sequelize-fixtures');
 
 var app = express();
 

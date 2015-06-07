@@ -8,6 +8,7 @@ var express        = require('express')
   , harp           = require('harp')
   , passport       = require('passport')
   , session        = require('express-session')
+  , glob           = require('glob')
   , flash          = require('connect-flash');
 
 module.exports = function(app, config) {
@@ -33,18 +34,16 @@ module.exports = function(app, config) {
   //Initialize HarpJS
   app.use(harp.mount(config.root + "/public"));
 
-  //Routes
-  var jobs = require(config.root + '/app/modules/jobs/routes/job-router')
-    , main = require(config.root + '/app/modules/main/routes/main-router')
-    , user = require(config.root + '/app/modules/users/routes/user-router')
-    , category = require(config.root + '/app/modules/jobs/routes/category-router')
-    , org      = require(config.root + '/app/modules/jobs/routes/org-router');
+  var api    = glob.sync(config.root + "/app/modules/**/api/*.js");
+  var routes = glob.sync(config.root + "/app/modules/**/routes/*.js");
+  routes.forEach(function(route){
+      require(route)(app);
+  });
 
-  app.use('/',main);
-  app.use('/api/jobs',jobs);
-  app.use('/api/categories',category);
-  app.use('/api/organizations', org);
-  app.use(user);
+  api.forEach(function(route){
+      //get api name prefix
+      app.use('/api', require(route)(app));
+  });
 
   app.use(function (req, res, next) {
     var err = new Error('Not Found');

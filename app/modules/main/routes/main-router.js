@@ -1,13 +1,16 @@
-var express = require('express')
-  , router  = express.Router();
+var express = require('express');
 
-router.get('/', function(request, response){
-    response.render("index", { user : request.user });
-});
+module.exports = function(app){
 
-router.get('/logout', function(request, response){
-    request.logout();
-    response.redirect('/');
-});
+    app.route('/')
+    .get(function(request, response){
+        response.render("index", { user : request.user });
+    });
 
-module.exports = router;
+    app.route('/logout')
+    .get(function(request, response){
+        request.logout();
+        response.redirect('/');
+    });
+
+};
