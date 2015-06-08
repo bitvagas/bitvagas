@@ -18,12 +18,10 @@
     "github-button": "~0.1.5",
     "twitter-button": "~0.2.0",
     "facebook-button": "~0.2.0",
-    "gplus-elements": "~0.3.0",
-    "webcomponentsjs": "~0.7.2",
+    "webcomponentsjs": "~0.7.3",
     "polymer": "~1.0.2"
   },
   "resolutions": {
-    "webcomponentsjs": "0.7.2",
     "polymer": "~0.9.0"
   }
 }
