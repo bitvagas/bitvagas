@@ -16,6 +16,8 @@ angular.module('bitvagas',
         .preferredLanguage('en')
         .fallbackLanguage(['pt', 'en'])
         .useLocalStorage();
+
+        $translateProvider.useSanitizeValueStrategy('escaped');
     })
     .config(function(lodash){
         //Added text property to match dropdown
