@@ -5,17 +5,21 @@
 .typejob
   ul.typejob__list
     li
-      label(for='').typejob-label
+      label(for='check--full').typejob-label
         .typejob-label__checkbox
-        input(type='checkbox' checked).typejob-label__input
+        input(type='checkbox' checked id="check--full").typejob-label__input
         .typejob-label__text.label.label--fulltime(translate="explore.search.type.full")
     li
-      label(for='').typejob-label
-        input(type='checkbox' checked).typejob-label__input
+      label(for='check--part').typejob-label
+        input(type='checkbox' checked id="check--part").typejob-label__input
         .typejob-label__text.label.label--parttime(translate="explore.search.type.part")
     li
-      label(for='').typejob-label
-        input(type='checkbox' checked).typejob-label__input
+      label(for='check--freelancer').typejob-label
+        input(type='checkbox' checked id="check--freelancer").typejob-label__input
+        .typejob-label__text.label.label--freelance(translate="explore.search.type.freelancer")
+    li
+      label(for='check--temp').typejob-label
+        input(type='checkbox' checked id="check--temp").typejob-label__input
         .typejob-label__text.label.label--temporary(translate="explore.search.type.temp")
 
 h2.jobs-title(translate="explore.last")
@@ -31,7 +35,7 @@ ul.jobs
 
       .jobs-item__cell.jobs-item__cell--meta
         .jobs-item__type
-          .label.label--fulltime {{ job.job_type.NAME }}
+          .label(class="label--{{job.job_type.NAME}}") {{ job.job_type.NAME }}
         .jobs-item__date {{ job.createdAt | date }}
 
 ul.pagination
