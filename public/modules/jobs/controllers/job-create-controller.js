@@ -9,7 +9,7 @@ function JobPostController($scope, $state, $stateParams, JobService, Categories,
     $scope.data = $stateParams.data;
     $scope.errors = $stateParams.errors || [];
 
-    $scope.categories = _.dropdown(Categories.data, "NAME");
+    $scope.categories = Categories.data;
 
     $scope.create = function(){
         $scope.data.CATEGORY_ID = _.selected($scope.categories, 'id');
@@ -37,8 +37,8 @@ function JobCreateController($scope, $state, $stateParams, JobService, Categorie
     $scope.data = $stateParams.data;
     $scope.errors = $stateParams.errors || [];
 
-    $scope.categories = _.dropdown(Categories.data, "NAME");
-    $scope.orgs = _.dropdown(Organizations.data, "NAME");
+    $scope.categories = Categories.data;
+    $scope.orgs = Organizations.data;
 
     $scope.create = function(){
         $scope.data.CATEGORY_ID = _.selected($scope.categories, 'id');

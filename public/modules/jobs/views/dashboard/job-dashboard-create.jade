@@ -12,7 +12,7 @@
         legend.create-fieldset__legend(translate="post_job.job.title")
         ul.create-form
           li
-            div(data-pg-ng-dropdown name='ORG_ID' data-options='orgs')
+            div(data-pg-ng-dropdown name='ORG_ID' data-text-property="NAME" data-selected="0" data-options='orgs')
           li
             .create-form__input
               input.input.input--full(type='text' placeholder='{{ "post_job.job.name" | translate }}' name='TITLE' ng-model='data.TITLE' required)
@@ -36,7 +36,7 @@
               textarea.textarea.textarea--full(placeholder='{{ "post_job.job.description" | translate }}' name='DESCRIPTION' ng-model='data.DESCRIPTION' rows='6' required)
           li
             .create-form__input
-              div(data-pg-ng-dropdown name='categoryId' data-options='categories')
+              div(data-pg-ng-dropdown name='categoryId' data-text-property="NAME" data-selected="0" data-options='categories')
           li
             .create-form__input
               input.input.input--full(type='text' placeholder='{{ "post_job.job.local" | translate }} ' name='location' ng-model='data.LOCATION' required)
