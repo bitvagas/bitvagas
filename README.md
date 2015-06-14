@@ -1,5 +1,8 @@
+
 bitvagas
 ================
+[![Dependency Status](https://gemnasium.com/bitvagas/bitvagas.svg)](https://gemnasium.com/bitvagas/bitvagas)
+
 Platform of Jobs for Bitcoin Users.
 
 ##Tools
