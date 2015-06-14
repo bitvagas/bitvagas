@@ -12,18 +12,20 @@
             li
               |  <div class="label label--fulltime">Full-Time{{ job.jobType.NAME }}</div>
             li
-              img(src='#{ site_img }local.svg').job__icon
+              img(src='/img/local.svg').job__icon
               .job__local {{ job.LOCATION }}
             li
-              img(src='#{ site_img }calendar.svg').job__icon
+              img(src='/img/calendar.svg').job__icon
               .job__date {{ job.createdAt | date }}
 
         .job__body
           ul.job-social
             li
+              //- twitter-button(user='bitvagass' class="twitter-share-button twitter-count-horizontal" href='http://bitvagas.com' text="Vaga" type="share")
               |  <iframe src="http://platform.twitter.com/widgets/tweet_button.1359159993.html#_=1360010161235&amp;count=horizontal&amp;id=twitter-widget-0&amp;lang=pt-BR&amp;size=m&amp;url=http://bitvagas.com/&amp;text=BitVagas - " class="twitter-share-button twitter-count-horizontal" data-twttr-rendered="true" allowtransparency="true" frameborder="0" scrolling="no" width="82" height="20"></iframe>
             li
-              |  <iframe src="//www.facebook.com/plugins/like.php?href=http://bitvagas.com/&amp;send=false&amp;layout=button_count&amp;width=100&amp;show_faces=false&amp;colorscheme=light&amp;action=like&amp;height=20" allowtransparency="true" frameborder="0" scrolling="no" width="82" height="20"></iframe>
+              a(href='')
+                facebook-button(href="http://bitvagas.com" type="like")
             li(style='width: 74px;')
               |  <iframe src="https://plusone.google.com/_/+1/fastbutton?bsv&amp;size=medium&amp;hl=en-US&amp;url=http://bitvagas.com/&amp;parent=http://bitvagas.com/" allowtransparency="true" frameborder="0" scrolling="no" width="70" height="20"></iframe>
 
