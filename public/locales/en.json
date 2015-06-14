@@ -218,5 +218,18 @@
             "terms": "I Agree to the BitVagas terms",
             "continue": "Next"
         }
+    },
+    "job": {
+        "in": "in",
+        "description": "Job Description",
+        "button": "Apply for this Job",
+        "apply": {
+            "title": "Apply for",
+            "name": "Name",
+            "last_name": "Last Name",
+            "links": "Linkedin, myportfolio.com...",
+            "description": "Description",
+            "button": "Apply for this Job"
+        }
     }
 }

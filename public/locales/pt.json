@@ -219,5 +219,18 @@
             "terms": "Concordo com a Política de Privacidade.",
             "continue": "Próximo"
         }
+    },
+    "job": {
+        "in": "na",
+        "description": "Descrição da Vaga",
+        "button": "Candidatar-se à vaga",
+        "apply": {
+            "title": "Aplicar para",
+            "name": "Nome",
+            "last_name": "Sobrenome",
+            "links": "Linkedin, myportfolio.com...",
+            "description": "Descrição",
+            "button": "Candidatar-se à vaga"
+        }
     }
 }

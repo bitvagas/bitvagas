@@ -20,12 +20,6 @@ angular.module('bitvagas',
         $translateProvider.useSanitizeValueStrategy('escaped');
     })
     .config(function(lodash){
-        //Added text property to match dropdown
-        lodash.mixin({ 'dropdown' : function(array, value){
-            return lodash.map(array, function(obj) {
-                return lodash.assign(obj, { "text": obj[value] });
-            });
-        }});
 
         //find selected : true property
         lodash.mixin({ 'selected' : function(array, property){
