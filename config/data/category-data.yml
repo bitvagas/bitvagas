@@ -1,0 +1,13 @@
+fixtures:
+    - model: category
+      data:
+        NAME: Design
+    - model: category
+      data:
+        NAME: Development
+    - model: category
+      data:
+        NAME: Marketing
+    - model: category
+      data:
+        NAME: Other

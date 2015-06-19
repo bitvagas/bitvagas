@@ -1,0 +1,13 @@
+fixtures:
+    - model: job_type
+      data:
+        NAME: FULL-TIME
+    - model: job_type
+      data:
+        NAME: PART-TIME
+    - model: job_type
+      data:
+        NAME: FREELANCE
+    - model: job_type
+      data:
+        NAME: TEMPORARY

@@ -14,9 +14,9 @@ db.sequelize
 // .sync({ force : true })
 .sync()
 .then(function () {
-        fixtures.loadFile("config/data/job-type-data.json", db);
-        fixtures.loadFile("config/data/category-data.json", db);
-        fixtures.loadFile("config/data/user-status-data.json", db);
+        fixtures.loadFile("config/data/job-type-data.yml", db);
+        fixtures.loadFile("config/data/category-data.yml", db);
+        fixtures.loadFile("config/data/user-status-data.yml", db);
         app.listen(process.env.PORT || 3000);
 });
 
