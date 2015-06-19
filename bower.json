@@ -17,5 +17,46 @@
     "polymer": "~0.9.4",
     "twitter-button": "~0.2.1",
     "facebook-button": "~0.2.1"
+  },
+  "overrides": {
+      "angular": {
+          "main": "angular.min.js"
+      },
+      "angular-ui-router": {
+          "main": "release/angular-ui-router.min.js"
+      },
+      "angular-cookies": {
+          "main": "angular-cookies.min.js"
+      },
+      "angular-translate": {
+          "main": "angular-translate.min.js"
+      },
+      "angular-translate-loader-static-files": {
+          "main": "angular-translate-loader-static-files.min.js"
+      },
+      "angular-translate-storage-cookie": {
+          "main": "angular-translate-storage-cookie.min.js"
+      },
+      "angular-translate-storage-local": {
+          "main": "angular-translate-storage-local.min.js"
+      },
+      "ng-lodash": {
+          "main": "build/ng-lodash.min.js"
+      },
+      "pg-ng-dropdown": {
+          "main": "dest/js/pg-ng-dropdown.min.js"
+      },
+      "webcomponentsjs": {
+          "main": "webcomponents.min.js"
+      },
+      "polymer": {
+          "ignore": true
+      },
+      "twitter-button": {
+          "ignore": true
+      },
+      "facebook-button": {
+          "ignore": true
+      }
   }
 }

@@ -8,8 +8,9 @@ html(lang='pt-br', ng-app='bitvagas')
 
     link(href='https://fonts.googleapis.com/css?family=Droid+Sans:400,700', rel='stylesheet', type='text/css')
     link(rel='stylesheet', href='/css/bitvagas.css')
-    // WebComponents
-    script(src='/components/webcomponentsjs/webcomponents.min.js')
+
+    include script
+
     //Twitter button
     link(rel='import' href='/components/twitter-button/dist/twitter-button.html')
     //Facebook button
@@ -18,8 +19,6 @@ html(lang='pt-br', ng-app='bitvagas')
     //- link(rel='import' href='/components/gplus-elements/dist/gplus-one.html')
     //Github button fix: confict with polymer versions
     //- link(rel='import' href='/components/github-button/dist/github-button.html')
-
-    include script
 
   body
     #{ tweet }

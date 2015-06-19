@@ -1,6 +1,7 @@
 var gulp    = require('gulp')
   , nodemon = require('gulp-nodemon')
   , concat  = require('gulp-concat')
+  , bower   = require('main-bower-files')
   , browserSync = require('browser-sync');
 
 gulp.task('browser-sync', ['nodemon'], function () {
@@ -23,10 +24,18 @@ gulp.task('nodemon', function(){
     });
 });
 
-gulp.task('script', function(){
+gulp.task('bower', function(){
+    return gulp.src(bower(), {
+        base: 'public/components'
+    })
+    .pipe(concat('components.min.js'))
+    .pipe(gulp.dest('public/dest'));
+});
+
+gulp.task('script', ['bower'], function(){
     return gulp.src('public/modules/**/*.js')
     .pipe(concat('app-build.js'))
-    .pipe(gulp.dest('public'));
+    .pipe(gulp.dest('public/dest'));
 });
 
 
