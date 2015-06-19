@@ -2,8 +2,7 @@
 
 var express  = require('express')
   , config   = require('./config/config')
-  , db       = require('./app/models')
-  , fixtures = require('sequelize-fixtures');
+  , db       = require('./app/models');
 
 var app = express();
 
@@ -13,10 +12,7 @@ db.sequelize
 // Uncomment this line to force regenerate database;
 // .sync({ force : true })
 .sync()
-.then(function () {
-        fixtures.loadFile("config/data/job-type-data.yml", db);
-        fixtures.loadFile("config/data/category-data.yml", db);
-        fixtures.loadFile("config/data/user-status-data.yml", db);
+.then(function() {
         app.listen(process.env.PORT || 3000);
 });
 

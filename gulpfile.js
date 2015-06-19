@@ -1,10 +1,11 @@
-var gulp    = require('gulp')
-  , nodemon = require('gulp-nodemon')
-  , concat  = require('gulp-concat')
-  , bower   = require('main-bower-files')
+var gulp        = require('gulp')
+  , nodemon     = require('gulp-nodemon')
+  , concat      = require('gulp-concat')
+  , bower       = require('main-bower-files')
+  , fixtures    = require('sequelize-fixtures')
   , browserSync = require('browser-sync');
 
-gulp.task('browser-sync', ['nodemon'], function () {
+gulp.task('browser-sync', ['nodemon'], function() {
     browserSync.init(null, {
         proxy: "localhost:3000"
       , port: 9000
@@ -17,8 +18,8 @@ gulp.task('nodemon', function(){
         script: 'app.js'
       , env : { 'NODE_ENV': 'development'}
     })
-    .on('restart', function () {
-        setTimeout(function () {
+    .on('restart', function() {
+        setTimeout(function() {
             browserSync.reload({stream: true});
         }, 500);
     });
@@ -38,6 +39,9 @@ gulp.task('script', ['bower'], function(){
     .pipe(gulp.dest('public/dest'));
 });
 
+gulp.task('fixtures', function(){
+    fixtures.loadFile("config/data/**.yml", require('./app/models'));
+});
 
 gulp.task('watch', function() {
 
@@ -50,7 +54,7 @@ gulp.task('watch', function() {
         browserSync.reload('bitvagas.css', { stream: true });
     });
     //Watch js files
-    gulp.watch('public/modules/**/*.js',['script'], function(){
+    gulp.watch('public/modules/**/*.js', ['script'], function(){
         browserSync.reload('app-build.js', { stream: true });
     });
 });
