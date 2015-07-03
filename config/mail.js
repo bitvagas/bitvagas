@@ -4,12 +4,13 @@ var nodemailer = require('nodemailer')
   , handleBar  = require('nodemailer-express-handlebars')
   , config     = require('./config');
 
-var options = {
-    auth : {
-        api_user : config.mailer.username
-      , api_key  : config.mailer.pass
-    }
-};
+if(process.env.NODE_ENV !== 'test')
+    var options = {
+        auth : {
+            api_user : config.mailer.username
+          , api_key  : config.mailer.pass
+        }
+    };
 
 module.exports = {
 
@@ -35,6 +36,7 @@ module.exports = {
             name  : user.NAME
           , email : user.EMAIL
           , token : user.RESETTOKEN
+          , url   : config.url
         };
 
         this.sendMail(user.EMAIL, subject, template, context);
