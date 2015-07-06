@@ -4,16 +4,13 @@ angular.module('bitvagas.users.services')
 UserService.$inject = ['$http'];
 function UserService($http) {
 
-    this.current = {};
-    this.create = function(user){
-        return $http.post('/signup', user);
+    this.currentUser = {};
+
+    this.me = function(){
+        return $http.get('/me');
     };
 
     this.invite = function(user){
         return $http.post('/invite', user);
-    };
-
-    this.auth  = function(user){
-        return $http.post("/auth", user);
     };
 }

@@ -13,10 +13,6 @@ function OrgService($http){
         return $http.get(baseUrl+id);
     };
 
-    this.findByUser = function(){
-        return $http.get(baseUrl);
-    };
-
     this.create = function(org){
         return $http.post(baseUrl, org);
     };

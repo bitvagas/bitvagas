@@ -3,7 +3,7 @@ angular.module('bitvagas.jobs.controllers', ['pg-ng-dropdown'])
 .controller('JobCreateController', JobCreateController);
 
 JobPostController.$inject   = ['$scope', '$state', '$stateParams', 'JobService', 'Categories', 'ErrorHandling', 'lodash'];
-JobCreateController.$inject = ['$scope', '$state', '$stateParams', 'JobService', 'Categories', 'Organizations', 'lodash', 'ErrorHandling'];
+JobCreateController.$inject = ['$scope', '$state', '$stateParams', 'JobService', 'Categories', 'lodash', 'ErrorHandling'];
 function JobPostController($scope, $state, $stateParams, JobService, Categories,  ErrorHandling, _){
 
     $scope.data = $stateParams.data;
@@ -32,19 +32,17 @@ function JobPostController($scope, $state, $stateParams, JobService, Categories,
     };
 }
 
-function JobCreateController($scope, $state, $stateParams, JobService, Categories, Organizations, _, ErrorHandling){
+function JobCreateController($scope, $state, $stateParams, JobService, Categories, _, ErrorHandling){
 
     $scope.data = $stateParams.data;
     $scope.errors = $stateParams.errors || [];
 
     $scope.categories = Categories.data;
-    $scope.orgs = Organizations.data;
 
     $scope.create = function(){
         $scope.data.CATEGORY_ID = _.selected($scope.categories, 'id');
         $scope.data.ORG_ID = _.selected($scope.orgs, 'id');
-        if($scope.form.$valid)
-            $state.go('dashboard.jobs.confirm', { data : $scope.data });
+        $state.go('dashboard.jobs.confirm', { data : $scope.data });
     };
 
     $scope.confirm = function(data){

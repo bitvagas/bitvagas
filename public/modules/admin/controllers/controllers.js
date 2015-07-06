@@ -3,5 +3,4 @@ angular.module('bitvagas.admin.controllers', [])
 
 DashBoardController.$inject = ['$scope', '$state', 'UserService'];
 function DashBoardController($scope, $state, UserService){
-    $scope.user = UserService.current;
 }

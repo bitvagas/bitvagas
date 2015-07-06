@@ -9,25 +9,24 @@ angular.module('bitvagas.org',
             url: '/organization'
           , abstract : true
           , templateUrl  : '/modules/organizations/views/organizations'
-          , controller   : 'OrgController'
           , authenticate : true
         })
         .state('dashboard.organization.list', {
             url : '/'
-          , templateUrl : '/modules/organizations/views/org.list'
-          , controller  : 'OrgController'
+          , templateUrl  : '/modules/organizations/views/org.list'
           , authenticate : true
+          , controller   : 'OrgController'
         })
         .state('dashboard.organization.create', {
             url : '/create'
-          , templateUrl : '/modules/organizations/views/org.create'
-          , controller  : 'OrgController'
+          , templateUrl  : '/modules/organizations/views/org.create'
           , authenticate : true
+          , controller   : 'OrgController'
         })
         .state('dashboard.organization.edit', {
             url : '/edit/:OrgID'
-          , templateUrl : '/modules/organizations/views/org.edit'
-          , controller  : 'OrgController'
+          , templateUrl  : '/modules/organizations/views/org.edit'
           , authenticate : true
+          , controller   : 'OrgController'
         });
     });

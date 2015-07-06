@@ -1,8 +1,8 @@
 block content
-form.signin.signin__cell.signup__cell--main(action='/auth' method='post')
+form.signin.signin__cell.signup__cell--main(method='POST' ng-submit='form.$valid && login()' name='form')
 
   header.signup__head
-    h1.signup__title(translate="signin.title")
+    h1.signup__title(translate='signin.title')
 
   .signin__body
       fieldset.signup-fieldset
@@ -12,12 +12,12 @@ form.signin.signin__cell.signup__cell--main(action='/auth' method='post')
                 input.input.input--full(type='text' placeholder='{{ "signin.email" | translate }}' name='EMAIL' ng-model='email' required)
             li
               .signup-form__input
-                input.input.input--full(type='password' placeholder='{{ "signin.password" | translate }}' name='PASSWORD' required)
+                input.input.input--full(type='password' placeholder='{{ "signin.password" | translate }}' name='PASSWORD' ng-model='password' required)
             li
               a.forgot(ng-href='/forgot?email={{email}}' translate="signin.forgot")
               br
-              span(translate="signin.new")
-              a.join(href='/#/signup' translate="signin.join")
+              span(translate='signin.new')
+              a.join(href='/#/signup' translate='signin.join')
 
             .signup-action
               input.signup-action__btn.btn.btn--medium.btn--primary(type='submit' value='{{ "signin.button" | translate }}')

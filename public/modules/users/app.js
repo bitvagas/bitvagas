@@ -8,11 +8,12 @@ angular.module('bitvagas.users', [
         .state('signup', {
             url: '/signup'
           , templateUrl : 'modules/users/views/signup'
-          , controller  : 'SignUpController'
+          , controller  : 'AuthController'
         })
         .state('signin', {
             url: '/signin'
           , templateUrl : 'modules/users/views/signin'
+          , controller  : 'AuthController'
         })
         .state('freelancers', {
             url: '/freelancers'

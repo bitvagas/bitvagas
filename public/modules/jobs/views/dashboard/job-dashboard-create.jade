@@ -6,13 +6,13 @@
       label {{ error }}
 
   .create__body
-    form(name="form")
+    form(name="form" ng-submit='form.$valid && create()')
 
       fieldset.create-fieldset
         legend.create-fieldset__legend(translate="post_job.job.title")
         ul.create-form
           li
-            div(data-pg-ng-dropdown name='ORG_ID' data-text-property="NAME" data-selected="0" data-options='orgs')
+            div(data-pg-ng-dropdown name='ORG_ID' data-text-property="NAME" data-selected="0" data-options='currentUser.orgs')
           li
             .create-form__input
               input.input.input--full(type='text' placeholder='{{ "post_job.job.name" | translate }}' name='TITLE' ng-model='data.TITLE' required)

@@ -3,7 +3,7 @@ h2 Jobs
 a.btn.btn--medium.btn--primary(ui-sref='dashboard.jobs.create') New Job
 
 ul.jobs
-  li(ng-repeat='job in jobs')
+  li(ng-repeat='job in currentUser.jobs')
     a.jobs-item(href="#" ng-click="toggle($index, job.id)" ng-model="open" title='')
       .jobs-item__cell.jobs-item__cell--img
         img.jobs-item__img(src='/img/company-default.png', alt='')

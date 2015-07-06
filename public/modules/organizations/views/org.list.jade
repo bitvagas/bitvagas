@@ -8,7 +8,7 @@ table
       th
       th
   tbody
-    tr(ng-repeat='org in orgs')
+    tr(ng-repeat='org in currentUser.orgs')
       td {{ org.NAME}}
       td {{ org.URL }}
       td

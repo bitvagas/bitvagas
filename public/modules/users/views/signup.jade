@@ -1,5 +1,5 @@
 block content
-  form.signup(name="form")
+  form.signup(name="form" ng-submit="form.$valid && signup(user)")
     .signup__cell.signup__cell--main
       header.signup__head
         h1.signup__title(translate="signup.title")
@@ -13,18 +13,18 @@ block content
           ul.signup-form
             li
               .signup-form__input
-                input.input.input--full(type='text' ng-model='user.NAME' placeholder='{{ "signup.name" | translate }}' name='NAME' title='Usuário Obrigatório' required)
+                input.input.input--full(type='text' ng-model='NAME' placeholder='{{ "signup.name" | translate }}' name='NAME' title='Usuário Obrigatório' required)
             li
               .signup-form__input
-                input.input.input--full(type='email' ng-model='user.EMAIL' placeholder='{{ "signup.email" | translate }}' name='EMAIL' title='Email Obrigatório' required)
+                input.input.input--full(type='email' ng-model='EMAIL' placeholder='{{ "signup.email" | translate }}' name='EMAIL' title='Email Obrigatório' required)
             li
               .signup-form__input
-                input.input.input--full(type='password' pattern='.{8,}' title='Pelo menos 8 caracteres' ng-model='user.PASSWORD' placeholder='{{ "signup.password" | translate }}' name='PASSWORD' required)
+                input.input.input--full(type='password' pattern='.{8,}' title='Pelo menos 8 caracteres' ng-model='PASSWORD' placeholder='{{ "signup.password" | translate }}' name='PASSWORD' required)
             li
               .signup-form__input
-                input.input.input--full(type='password' pattern='.{8,}' title='Pelo menos 8 caracteres' ng-model='user.REPASSWORD' placeholder='{{ "signup.repassword" | translate }}' name='REPASSWORD' required)
+                input.input.input--full(type='password' pattern='.{8,}' title='Pelo menos 8 caracteres' ng-model='REPASSWORD' placeholder='{{ "signup.repassword" | translate }}' name='REPASSWORD' required)
 
       .signup-action
-        button.signup-action__btn.btn.btn--medium.btn--primary(data-ng-click='create(user)' value='{{ "signup.button" | translate }}' translate="signup.button")
+        button.signup-action__btn.btn.btn--medium.btn--primary(value='{{ "signup.button" | translate }}' translate="signup.button")
 
     .signup__cell.signup__cell--aside
