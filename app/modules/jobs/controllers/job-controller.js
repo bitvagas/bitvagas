@@ -1,44 +1,25 @@
-var express = require('express')
-  , bitcore = require('bitcore')
-  , org     = require('./org-controller')
-  , user    = require('../../users/controllers/user-controller')
-  , db      = require(root + '/app/models');
+var express  = require('express')
+  , bitcore  = require('bitcore')
+  , org      = require('./org-controller')
+  , user     = require('../../users/controllers/user-controller')
+  , db       = require(root + '/app/models')
+  , includes = [
+      db.job_type
+    , db.job_transaction
+    , db.category
+    , db.org
+  ];
 
 module.exports = {
 
     findAll: function(request, response){
-        db.job.findAll({
-            include : [
-                db.job_type
-              , db.job_transaction
-              , db.category
-              , db.org
-            ]
-        }).then(function(jobs){
+        db.job.findAll({ include : includes }).then(function(jobs){
             response.status(200).json(jobs);
         });
     }
 
     , read: function(request, response){
         response.status(200).json(request.job);
-    }
-
-    , findByUser: function(request, response){
-
-        if(!request.user)
-            response.status(403).send("Unauthorized");
-
-        db.job.findAll({
-            where   : { USER_ID : request.user.id }
-          , include : [
-              db.job_type
-            , db.job_transaction
-            , db.category
-            , db.org
-          ]
-        }).then(function(job){
-            response.status(200).json(job);
-        });
     }
 
     , create: function(request, response){
@@ -107,7 +88,7 @@ module.exports = {
             }).then(function(transaction){
                 return job.update({ PREMIUM : true });
             }).then(function(job){
-                response.status(200).json(job);
+                response.status(201).json(job);
             }).catch(function(err){
                 response.status(400).json(err);
             });
@@ -120,19 +101,15 @@ module.exports = {
     , findById : function(request, response, next, id){
         db.job.find({
             where   : { id : id }
-          , include : [
-              db.job_type
-            , db.job_transaction
-            , db.category
-            , db.org
-          ]
+          , include : includes
         }).then(function(job){
-            if(!job) response.status(404).json({ error : "Job not found" });
+            if(!job)
+                response.status(404).json({ error : "Job not found" });
+
             request.job = job;
             next();
         }).catch(function(err){
             next(err);
         });
     }
-
 };

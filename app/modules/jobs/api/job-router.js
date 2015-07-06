@@ -7,19 +7,16 @@ module.exports = function(app){
 
     router.route('/jobs')
     .get(jobs.findAll)
-    .post(jobs.create);
+    .post(user.ensureAuthenticated, jobs.create);
 
     router.route('/jobs/:id')
     .get(jobs.read);
-
-    router.route('/jobs/current')
-    .post(jobs.findByUser);
 
     router.route('/jobs/post')
     .post(user.findByEmail, jobs.post);
 
     router.route('/jobs/premium/callback')
-    .post(jobs.premium);
+    .post(user.ensureAuthenticated, jobs.premium);
 
     router.param('id', jobs.findById);
 

@@ -31,12 +31,10 @@ html(lang='pt-br', ng-app='bitvagas')
             a(href='/#/about', title='{{ layout.site_nav.about }}' translate="layout.site_nav.about")
           li
             a(href='/#/jobs-list', title='{{ "layout.site_nav.all_jobs" | translate }}' translate="layout.site_nav.all_jobs")
-          if !user
-            li
-              a(href='/#/jobs/post', title='{{ "layout.site_nav.post" | translate }}' translate="layout.site_nav.post")
-          else
-            li
-              a(href='/#/dashboard/jobs/create', title='{{ "layout.site_nav.post" | translate }}' translate="layout.site_nav.post")
+          li(ng-if='!isAuthenticated()')
+            a(href='/#/jobs/post', title='{{ "layout.site_nav.post" | translate }}' translate="layout.site_nav.post")
+          li(ng-if='isAuthenticated()')
+            a(href='/#/dashboard/jobs/create', title='{{ "layout.site_nav.post" | translate }}' translate="layout.site_nav.post")
           li
             a(href='/#/freelancers', title='{{ "layout.site_nav.freelancers" | translate }}' translate="layout.site_nav.freelancers")
 
@@ -51,16 +49,15 @@ html(lang='pt-br', ng-app='bitvagas')
                 a(href="#" ng-click="setLang('en')") EN
               li
                 a(href="#" ng-click="setLang('pt')") PT
-          if !user
-            li
+
+            li(ng-if="!isAuthenticated()")
               a(href='/#/signin', title='{{ layout.site_nav.signin | translate }}' translate="layout.site_nav.signin")
-            li
+            li(ng-if="!isAuthenticated()")
               a(href='/#/signup', title='{{ layout.site_nav.signup }}' translate="layout.site_nav.signup")
-          else
             li
-                a(href='/#/dashboard/overview') #{user.NAME}
-            li
-              a(href='/logout', title='{{ layout.site_nav.logout}}' translate="layout.site_nav.logout")
+              a(href='/#/dashboard/overview') {{ currentUser.NAME }}
+            li(ng-if="isAuthenticated()")
+              a(ng-click='logout()' href="#" title='{{ layout.site_nav.logout}}' translate="layout.site_nav.logout")
 
     block content
 
@@ -97,12 +94,10 @@ html(lang='pt-br', ng-app='bitvagas')
             h5(translate="layout.foot.jobs")
           li
             a(href='/#/' title='{{ "layout.site_nav.all_jobs"' translate="layout.site_nav.all_jobs")
-          if !user
-            li
-              a(href='/#/jobs/post', title='{{ "layout.site_nav.post" | translate }}' translate="layout.site_nav.post")
-          else
-            li
-              a(href='/#/dashboard/jobs/create', title='{{ "layout.site_nav.post" | translate }}' translate="layout.site_nav.post")
+          li(ng-if='!isAuthenticated()')
+            a(href='/#/jobs/post', title='{{ "layout.site_nav.post" | translate }}' translate="layout.site_nav.post")
+          li(ng-if='isAuthenticated()')
+            a(href='/#/dashboard/jobs/create', title='{{ "layout.site_nav.post" | translate }}' translate="layout.site_nav.post")
           li
             a(href='/#/signup' title='{{ "layout.site_nav.cv" | translate }}' translate="layout.site_nav.cv")
           li

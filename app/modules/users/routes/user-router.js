@@ -3,12 +3,15 @@ var passport  = require('passport')
 
 module.exports = function(app){
 
+    app.route('/me')
+    .get(user.ensureAuthenticated, user.me);
+
     app.route('/signup')
     .post(user.findByEmail, user.signup);
 
     /*
-    * Signup an user indirect
-    */
+     * Signup an user indirect
+     */
     app.route('/invite')
     .post(user.invite);
 

@@ -3,21 +3,32 @@ var express  = require('express')
   , crypto   = require('crypto')
   , passport = require('passport')
   , mailer   = require(root + '/config/mail')
-  , db       = require(root + '/app/models');
+  , token    = require('./token-jwt')
+  , db       = require(root + '/app/models')
+  , includes = [
+        { model : db.job, include : [db.job_type] }
+      , { model : db.org }
+  ];
 
 module.exports = {
 
-    findAll : function(){
-        return db.user.findAll({
-            where   : { USER_STATUS : 3 }
-          , include : [{ model : db.job, include : [db.job_type] }]
-        });
-    }
-
-  , findById : function(id){
+    findById : function(id){
         return db.user.find({
             where   : { id : id }
-          , include : [{ model : db.job, include : [db.job_type] }]
+          , include : includes
+          });
+  }
+
+  , me: function(request, response){
+
+        if(!request.user)
+            return response.status(401).send('User has not found');
+
+        db.user.find({
+            where   : { id : request.user.id }
+          , include : includes
+          }).then(function(user){
+            response.status(200).json(user);
         });
   }
 
@@ -44,7 +55,7 @@ module.exports = {
                 mailer.sendWelcome(user);
                 //Send a link to email to verification
                 mailer.sendEmailVerification(user);
-                response.status(201).json({ data : user, token : hashEmail });
+                response.status(201).json({ data : user, token : token.createJWT(user) });
 
             }).catch(function(error){
                 response.status(400).json(error);
@@ -151,11 +162,41 @@ module.exports = {
       if(!request.body.EMAIL)
           response.status(404).json({ error: 'missing email'});
 
-      db.user.find({ where : { EMAIL : request.body.EMAIL }}).then(function(user){
+      db.user.find({
+          where   : { EMAIL : request.body.EMAIL }
+        , include : [
+            { model : db.job, include : [db.job_type] }
+          , { model : db.org }
+        ]}).then(function(user){
           request.user = user || undefined;
           next();
       }).catch(function(err){
           next(err);
       });
+  }
+
+  /*
+   * Middleware for ensure authentication token
+   */
+  , ensureAuthenticated: function(request, response, next){
+      if(!request.headers.authorization)
+          return response.status(401).json({ message: 'Missing Authorization header' });
+
+      var headerToken = request.headers.authorization.split(' ')[1];
+
+      var payload = null;
+
+      try {
+          payload = token.decode(headerToken);
+      } catch(err) {
+          console.log(err);
+          return response.status(401).json({ message: err.message });
+      }
+
+      if(token.verify(payload.exp))
+          return response.status(401).send({ message: 'Token has expired' });
+
+      request.user = payload.sub;
+      next();
   }
 };

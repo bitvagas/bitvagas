@@ -5,7 +5,7 @@ var gulp        = require('gulp')
   , fixtures    = require('sequelize-fixtures')
   , browserSync = require('browser-sync');
 
-gulp.task('browser-sync', ['nodemon'], function() {
+gulp.task('browser-sync', ['nodemon'], function(){
     browserSync.init(null, {
         proxy: "localhost:3000"
       , port: 9000
@@ -18,8 +18,8 @@ gulp.task('nodemon', function(){
         script: 'app.js'
       , env : { 'NODE_ENV': 'development'}
     })
-    .on('restart', function() {
-        setTimeout(function() {
+    .on('restart', function(){
+        setTimeout(function(){
             browserSync.reload({stream: true});
         }, 500);
     });
@@ -43,7 +43,7 @@ gulp.task('fixtures', function(){
     fixtures.loadFile("config/data/**.yml", require('./app/models'));
 });
 
-gulp.task('watch', function() {
+gulp.task('watch', function(){
 
     //Watch jade files
     gulp.watch(['app/views/**/*.jade', 'public/modules/**/*.jade'], function(){

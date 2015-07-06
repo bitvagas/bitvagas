@@ -23,10 +23,11 @@ module.exports = {
     }
 
     , create: function(request, response){
-        if(request.user === undefined)
-            return response.status(401).send('user invalid');
+        if(!request.user)
+            return response.status(401).send('User has not found');
 
         request.body.USER_ID = request.user.id;
+
         db.org.create(request.body).then(function(org){
             response.status(201).json(org);
         }).catch(function(error){
@@ -38,7 +39,7 @@ module.exports = {
         var org = request.org;
         org = _.extend(org, request.body);
         org.save().then(function(org){
-            response.status(200).json(org);
+            response.status(201).json(org);
         }).catch(function(error){
             response.status(400).json(error);
         });
@@ -47,7 +48,7 @@ module.exports = {
     , delete: function(request, response){
         var org = request.org;
         org.destroy().then(function(){
-            return response.status(200).send('deleted');
+            return response.status(204).send('deleted');
         }).catch(function(error){
             return response.status(400).json(error);
         });

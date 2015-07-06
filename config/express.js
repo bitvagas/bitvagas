@@ -8,8 +8,7 @@ var express        = require('express')
   , harp           = require('harp')
   , passport       = require('passport')
   , session        = require('express-session')
-  , glob           = require('glob')
-  , flash          = require('connect-flash');
+  , glob           = require('glob');
 
 module.exports = function(app, config) {
 
@@ -26,10 +25,7 @@ module.exports = function(app, config) {
   app.use(compress());
   app.use(express.static(config.root + '/public'));
   app.use(methodOverride());
-  app.use(session({secret: 'key',saveUninitialized: true, resave: true}));
   app.use(passport.initialize());
-  app.use(passport.session());
-  app.use(flash());
 
   //Initialize HarpJS
   app.use(harp.mount(config.root + "/public"));

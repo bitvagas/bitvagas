@@ -6,14 +6,6 @@ var passport         = require('passport')
   , secrets          = require(root+'/config/secrets')
   , db               = require(root+'/app/models');
 
-passport.serializeUser(function(user, done) {
-    done(null, user);
-});
-
-passport.deserializeUser(function(user, done) {
-    done(null, user);
-});
-
 passport.use('signin', new LocalStrategy(
     {
         usernameField     : 'EMAIL'
@@ -26,12 +18,13 @@ passport.use('signin', new LocalStrategy(
             var user  = request.user;
             bcrypt.compare(password, user.PASSWORD, function(err, res) {
                 if(err || !res)
-                    return done(null, false, { message: 'Email or Password Invalid'});
+                    return done(null, false, { message: 'Email or Password Invalid' });
                 else {
                     if(user.USER_STATUS != 3)
                         return done(null, false, { message : 'Verify your account, check your email' });
 
                     user.PASSWORD = undefined;
+                    user.LINKEDIN_TOKEN = undefined;
                     return done(null, user);
                 }
             });
