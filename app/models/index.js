@@ -14,12 +14,14 @@ if(process.env.DATABASE_URL){
       , protocol : 'postgres'
       , host     : config.host
       , port     : config.PSQLPort
+      , logging  : false
     });
 } else {
     sequelize = new Sequelize(config.db, config.username, config.password, {
         dialect : 'postgres'
       , host    : config.host
       , port    : config.PSQLPort
+      , logging : false
     });
 }
 

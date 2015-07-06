@@ -11,7 +11,7 @@ require('./config/express')(app, config);
 db.sequelize
 // Uncomment this line to force regenerate database;
 // .sync({ force : true })
-.sync()
+.sync({ logging: false })
 .then(function() {
         app.listen(process.env.PORT || 3000);
 });
