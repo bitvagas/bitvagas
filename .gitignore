@@ -8,3 +8,4 @@ public/components/
 npm-debug.log
 public/app-build.js
 config.sh
+.env

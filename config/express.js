@@ -8,7 +8,8 @@ var express        = require('express')
   , harp           = require('harp')
   , passport       = require('passport')
   , session        = require('express-session')
-  , glob           = require('glob');
+  , glob           = require('glob')
+  , env            = require('dotenv').load();
 
 module.exports = function(app, config) {
 
