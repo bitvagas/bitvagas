@@ -3,6 +3,7 @@ var gulp        = require('gulp')
   , concat      = require('gulp-concat')
   , bower       = require('main-bower-files')
   , fixtures    = require('sequelize-fixtures')
+  , mocha       = require('gulp-mocha')
   , browserSync = require('browser-sync');
 
 gulp.task('browser-sync', ['nodemon'], function(){
@@ -41,6 +42,17 @@ gulp.task('script', ['bower'], function(){
 
 gulp.task('fixtures', function(){
     fixtures.loadFile("config/data/**.yml", require('./app/models'));
+});
+
+gulp.task('test', function(){
+    process.env.NODE_ENV = 'test';
+    return gulp.src('test/*.test.js', { read: false })
+    .pipe(mocha())
+    .once('error', function(){
+        process.exit(1);
+    }).once('end', function(){
+        process.exit();
+    });
 });
 
 gulp.task('watch', function(){

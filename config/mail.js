@@ -2,9 +2,10 @@ var nodemailer = require('nodemailer')
   , smtp       = require('nodemailer-smtp-transport')
   , sendGrid   = require('nodemailer-sendgrid-transport')
   , handleBar  = require('nodemailer-express-handlebars')
-  , config     = require('./config');
+  , config     = require('./config')
+  , env        = process.env.NODE_ENV;
 
-if(process.env.NODE_ENV !== 'test')
+if(env !== 'test')
     var options = {
         auth : {
             api_user : config.mailer.username
@@ -59,6 +60,9 @@ module.exports = {
 
     , sendMail : function(to, subject, template, context){
 
+        if(env === 'test')
+            return;
+
         var mailOptions = {
             to       : to
           , from     : config.mailer.email
@@ -69,7 +73,7 @@ module.exports = {
 
         var Transport = null;
 
-        if(process.env.NODE_ENV === "development"){
+        if(env === "development"){
             //Local SMTP configuration
             var auth = {
                 user : options.auth.api_user
