@@ -90,13 +90,7 @@ module.exports = {
           return user.update({ USER_STATUS : 3, TOKEN : null });
       })
       .then(function(user){
-
-          request.logIn(user, function(err){
-              if(err)
-                  response.status(400).json(err);
-              else
-                  response.redirect('/#/dashboard/overview');
-          });
+          response.status(201).json({ message: 'verified', USER_STATUS: user.USER_STATUS });
       })
       .catch(function(err){
           response.status(400).json(err);
