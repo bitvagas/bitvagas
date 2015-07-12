@@ -1,9 +1,8 @@
 extends layout
 
 block content
-  .main
+  .main(ng-controller='AuthController')
     .wrapper
       h1 Verify your account
-      form(action='/verify' method='POST')
-        input(type='hidden' value='#{token}' name='token')
+      form(name='form' ng-submit='verify("#{token}")')
         input.btn.btn--medium.btn--primary(type='submit' value='Verify now!')

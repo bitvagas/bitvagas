@@ -190,6 +190,10 @@ module.exports = {
       if(token.verify(payload.exp))
           return response.status(401).send({ message: 'Token has expired' });
 
+      if(payload.sub.USER_STATUS !== 3 &&
+         payload.sub.USER_STATUS !== 4)
+          return response.status(401).send({ message: 'Verify your account, check your email' });
+
       request.user = payload.sub;
       next();
   }

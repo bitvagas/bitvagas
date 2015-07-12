@@ -1,8 +1,8 @@
 angular.module('bitvagas.users.controllers', [])
 .controller('AuthController', AuthController);
 
-AuthController.$inject = ['$rootScope', '$scope', '$state', '$window', '$auth'];
-function AuthController ($rootScope, $scope, $state, $window, $auth) {
+AuthController.$inject = ['$rootScope', '$scope', '$state', '$window', '$auth', 'UserService'];
+function AuthController ($rootScope, $scope, $state, $window, $auth, UserService) {
 
     if($auth.isAuthenticated())
         $state.transitionTo('dashboard.overview');
@@ -28,6 +28,14 @@ function AuthController ($rootScope, $scope, $state, $window, $auth) {
           , EMAIL: $scope.EMAIL
           , PASSWORD: $scope.PASSWORD
           , REPASSWORD: $scope.REPASSWORD
+        }).catch(function(err){
+            console.log(err);
+        });
+    };
+
+    $scope.verify = function(token){
+        UserService.verify(token).then(function(data){
+            $window.location.href = '/#/signin';
         }).catch(function(err){
             console.log(err);
         });

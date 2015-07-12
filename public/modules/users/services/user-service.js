@@ -13,4 +13,8 @@ function UserService($http) {
     this.invite = function(user){
         return $http.post('/invite', user);
     };
+
+    this.verify = function(token){
+        return $http.post('/verify', { token: token });
+    };
 }

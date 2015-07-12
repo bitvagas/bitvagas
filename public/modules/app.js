@@ -4,6 +4,7 @@ angular.module('bitvagas',
     ,'satellizer'
     ,'ngLodash'
     ,'ngCookies'
+    ,'ngInput'
     ,'bitvagas.main'
     ,'bitvagas.jobs'
     ,'bitvagas.org'
@@ -29,11 +30,13 @@ angular.module('bitvagas',
 
     }).config(function($authProvider, $httpProvider){
 
+        $authProvider.loginOnSignup = false;
+
         $authProvider.loginUrl = '/auth/login';
         $authProvider.loginRedirect = '/dashboard/overview';
 
         $authProvider.signupUrl = '/signup';
-        $authProvider.signupRedirect = '/login';
+        $authProvider.signupRedirect = '/signup/verify';
 
         $httpProvider.interceptors.push('Interceptor');
 
