@@ -1,6 +1,7 @@
 angular.module('bitvagas',
     ['ui.router'
     ,'pascalprecht.translate'
+    ,'angular-loading-bar'
     ,'satellizer'
     ,'ngLodash'
     ,'ngCookies'
