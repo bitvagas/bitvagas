@@ -43,9 +43,29 @@ describe('Jobs modules api', function(){
                 .expect('Content-Type', 'application/json; charset=utf-8')
                 .end(function(err, response){
                     if(err)
-                        done();
-                    token = response.body.token;
-                    done();
+                        done(new Error(err));
+
+                    request(app)
+                    .post('/verify')
+                    .send({ token: response.body.data.TOKEN })
+                    .expect(201)
+                    .expect('Content-Type', 'application/json; charset=utf-8')
+                    .end(function(err, response){
+                        if(err)
+                            done(new Error(err));
+
+                        request(app)
+                        .post('/auth/login')
+                        .send(user)
+                        .expect(200)
+                        .end(function(err, response){
+                            if(err)
+                                done(new Error(err));
+
+                            token = response.body.token;
+                            done();
+                        });
+                    });
                 });
             });
         });
@@ -93,5 +113,4 @@ describe('Jobs modules api', function(){
             });
         });
     });
-
 });
