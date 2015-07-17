@@ -22,6 +22,7 @@
     "express-session": "^1.9.3",
     "glob": "5.0.10",
     "gulp": "3.9.0",
+    "gulp-mocha": "^2.1.2",
     "gulp-concat": "^2.4.3",
     "gulp-nodemon": "2.0.3",
     "harp": "^0.17.0",
@@ -48,7 +49,6 @@
     "serve-favicon": "^2.3.0"
   },
   "devDependencies": {
-    "gulp-mocha": "^2.1.2",
     "should": "^4.4.1",
     "supertest": "^1.0.1"
   },
