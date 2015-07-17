@@ -12,34 +12,34 @@
         legend.create-fieldset__legend(translate="post_job.job.title")
         ul.create-form
           li
-            div(data-pg-ng-dropdown name='ORG_ID' data-text-property="NAME" data-selected="0" data-options='currentUser.orgs')
+            div(data-pg-ng-dropdown name='ORG_ID' data-dynamic-height="true" data-text-property="NAME" data-selected="0" data-options='orgs')
           li
             .create-form__input
-              input.input.input--full(type='text' placeholder='{{ "post_job.job.name" | translate }}' name='TITLE' ng-model='data.TITLE' required)
+              ng-input(theme='fumi' type='text' icon='icon icon--fumi mdi mdi-tie' label='{{ "post_job.job.name" | translate }}' name='TITLE' ng-model='data.TITLE' ng-required='true')
           li
             .create-form__input
               ul.create-type-job
                 li
-                  input.create-type-job__input(type='radio' name='job_typeID' value='1' id='rdl-fulltime' ng-model='data.TYPE_ID' required)
+                  input.create-type-job__input(type='radio' name='job_typeID' value='1' id='rdl-fulltime' ng-model='data.TYPE_ID' ng-required='true')
                   label.create-type-job__label.label.label--fulltime(for='rdl-fulltime' translate="post_job.job.type.full")
                 li
-                  input.create-type-job__input(type='radio' name='job_typeID' value='2' id='rdl-parttime' ng-model='data.TYPE_ID' required)
+                  input.create-type-job__input(type='radio' name='job_typeID' value='2' id='rdl-parttime' ng-model='data.TYPE_ID' ng-required='true')
                   label.create-type-job__label.label.label--parttime(for='rdl-parttime' translate="post_job.job.type.part")
                 li
-                  input.create-type-job__input(type='radio' name='job_typeID' value='3' id='rdl-freelancer' ng-model='data.TYPE_ID' required)
+                  input.create-type-job__input(type='radio' name='job_typeID' value='3' id='rdl-freelancer' ng-model='data.TYPE_ID' ng-required='true')
                   label.create-type-job__label.label.label--freelance(for='rdl-freelancer' translate="post_job.job.type.freelancer")
                 li
-                  input.create-type-job__input(type='radio' name='job_typeID' value='4' id='rdl-temporary' ng-model='data.TYPE_ID' required)
+                  input.create-type-job__input(type='radio' name='job_typeID' value='4' id='rdl-temporary' ng-model='data.TYPE_ID' ng-required='true')
                   label.create-type-job__label.label.label--temporary(for='rdl-temporary' translate="post_job.job.type.temp")
           li
             .create-form__input
-              textarea.textarea.textarea--full(placeholder='{{ "post_job.job.description" | translate }}' name='DESCRIPTION' ng-model='data.DESCRIPTION' rows='6' required)
+              textarea.textarea.textarea--full(placeholder='{{ "post_job.job.description" | translate }}' name='DESCRIPTION' ng-model='data.DESCRIPTION' rows='6' cols='50' ng-required='true')
           li
             .create-form__input
-              div(data-pg-ng-dropdown name='categoryId' data-text-property="NAME" data-selected="0" data-options='categories')
+              div(data-pg-ng-dropdown name='categoryId' data-dynamic-height="true" data-text-property="NAME" data-selected="1" data-options='categories')
           li
             .create-form__input
-              input.input.input--full(type='text' placeholder='{{ "post_job.job.local" | translate }} ' name='location' ng-model='data.LOCATION' required)
+              ng-input(theme='fumi' type='text' icon='icon icon--fumi mdi mdi-map-marker-radius' label='{{ "post_job.job.local" | translate }}' name='location' ng-model='data.LOCATION' ng-required='true')
           li
             .create-form__input
               .create-how-apply
@@ -47,7 +47,7 @@
                   label.create-how-apply-label
                     input.create-how-apply-label__radio(type='checkbox' name='applyUrl' ng-model='applyUrl' value='url')
                     .create-how-apply-label__body(translate="post_job.job.how_apply.value")
-                input.input.input--full(type='text' placeholder='URL' ng-model='data.APPLY_BY' name='APPLY_URL' ng-show='applyUrl ')
+                ng-input(theme='fumi' type='text' icon='icon icon--fumi mdi mdi-link' label='URL' ng-model='data.APPLY_BY' name='APPLY_URL' ng-show='applyUrl')
           //- li
             //- label.create-form__label Destacar essa vaga:
             //- .create-form__input
@@ -63,4 +63,4 @@
                   |  <a ui-sref="terms" target="_blank" translate="post_job.job.terms"></a>
 
       .create-action
-        button.create-action__btn.btn.btn--medium.btn--primary(ng-disabled='!terms' ng-click="create()" type='submit' translate="post_job.job.continue")
+        button.create-action__btn.btn.btn--medium.btn--primary(ng-disabled='!terms' type='submit' translate="post_job.job.continue")

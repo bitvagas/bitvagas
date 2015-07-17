@@ -30,7 +30,7 @@
               | <div class="g-plusone" data-size="medium" data-href="http://bitvagas.com/#{ lang == "en" ? "" : lang + "/" }" data-href="http://bitvagas.com/"></div>
 
           h6(translate="job.description")
-          p {{ job.DESCRIPTION }}
+          p.job__description {{ job.DESCRIPTION }}
 
         footer.job-foot
           button#btn-apply.btn.btn--medium.btn--primary(ng-click="apply()" ng-show="!applied") Candidatar-se à vaga
@@ -44,13 +44,7 @@
               ul.job-form__list
                 li
                   .job-form__field
-                    input#entry_955005878.job-form__input.input.input--full(type='email', placeholder='Email', name='entry.955005878', value='', dir='auto', aria-label='Email:  Precisa ser um endereço de e-mail válido', aria-required='true', required='', title='Precisa ser um endereço de e-mail válido')
-                li
-                  .job-form__field.job-form__field--name
-                    .job-form__cell
-                      input#entry_1558225822.job-form__input.input.input--full(type='text', placeholder='{{ "job.apply.name" | translate }}', name='entry.1558225822', value='', dir='auto', aria-label='Name:  Precisa conter ', aria-required='true', required='', pattern='.*.*', title='Precisa conter ')
-                    .job-form__cell
-                      input#entry_713180040.job-form__input.input.input--full(type='text', placeholder='{{ "job.apply.last_name" | translate }}', name='entry.713180040', value='', dir='auto', aria-label='Last Name:  Precisa conter ', aria-required='true', required='', pattern='.*.*', title='Precisa conter ')
+                    ng-input.job-form__input(theme='fumi' icon='icon icon--fumi mdi mdi-email' type='email', label='Email', name='EMAIL', ng-required='true')
                 li
                   .job-form__field
                     textarea#entry_944889134.job-form__input.textarea.textarea--full(name='entry.944889134', placeholder='{{ "job.apply.links" | translate }}', rows='1', cols='0', dir='auto', aria-label='Reference Links:  Precisa ter pelo menos 20 caracteres.', aria-required='true', required='')

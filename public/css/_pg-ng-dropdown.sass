@@ -1,6 +1,6 @@
-$initialHeight: 40px
+$initialHeight: 60px
 $openedHeight: 215px
-$sidePadding: 12px
+$sidePadding: 25px
 $borderColor: #ccc
 $backgroundColor: white
 $arrowColor: #29B5DF
@@ -9,8 +9,8 @@ $dropdownEasing: cubic-bezier(0.230, 1.000, 0.320, 1.000)
 .pg-dropdown
   position: relative
   height: $initialHeight
-  width: 100%
-  border:1px solid $borderColor
+  width: 400px
+  border:none
   background-color: $backgroundColor
   border-radius: 4px
   cursor:pointer
@@ -46,7 +46,7 @@ $dropdownEasing: cubic-bezier(0.230, 1.000, 0.320, 1.000)
   .current-selected-option
 
     height: $initialHeight
-    padding: 0 $initialHeight 0 $sidePadding
+    padding: 10px $initialHeight 0 $sidePadding
     line-height: 39px
     -webkit-user-select: none
     -moz-user-select: none
@@ -57,11 +57,10 @@ $dropdownEasing: cubic-bezier(0.230, 1.000, 0.320, 1.000)
 
   .dropdown-content
 
-    $_padding: 6px
+    $_padding: 0px
     position:relative
     display:block
-    overflow-y: auto
-    overflow-x: hidden
+    overflow: hidden!important
     margin: 0
     padding: $_padding 0px $_padding 0
     height: calc(100% - #{($initialHeight + ($_padding * 2))})
@@ -109,4 +108,4 @@ $dropdownEasing: cubic-bezier(0.230, 1.000, 0.320, 1.000)
       background-repeat: no-repeat
 
   &.opened
-    height: auto
+    height: $openedHeight

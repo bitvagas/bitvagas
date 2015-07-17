@@ -5,13 +5,14 @@ ul
     label {{ error }}
 
 form
-  ul
+  ul.create-form
     li
-      label Organization Name
-      input.input.input--full(type='text' ng-model='org.NAME' name='NAME' )
+      .create-form__input
+      ng-input(theme='fumi' icon='icon icon--fumi mdi mdi-bank' label='Organization' type='text' ng-model='org.NAME' name='NAME')
     li
-      label Url
-      input.input.input--full(type='text' ng-model='org.URL' name='URL')
+      .create-form__input
+      ng-input(theme='fumi' icon='icon icon--fumi mdi mdi-link' label='Url' type='text' ng-model='org.URL' name='URL')
+    hr
 
   a.btn.btn--medium.btn--primary(ui-sref="dashboard.organization.list") Voltar
   button.btn.btn--medium.btn--primary(type="submit" ng-click='edit(org)') Alterar Organização

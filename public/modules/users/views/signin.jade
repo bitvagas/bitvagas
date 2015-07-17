@@ -1,5 +1,5 @@
 block content
-form.signin.signin__cell.signup__cell--main(method='POST' ng-submit='form.$valid && login()' name='form')
+form.signin.signin__cell.signup__cell--main(ng-submit='form.$valid && login()' name='form')
 
   header.signup__head
     h1.signup__title(translate='signin.title')
@@ -9,10 +9,10 @@ form.signin.signin__cell.signup__cell--main(method='POST' ng-submit='form.$valid
           ul.signup-form
             li
               .signup-form__input
-                input.input.input--full(type='text' placeholder='{{ "signin.email" | translate }}' name='EMAIL' ng-model='email' required)
+                ng-input(type='text' icon='icon icon--fumi mdi mdi-account' theme='fumi' label='{{ "signin.email" | translate }}' name='EMAIL' ng-model='email' ng-required='true')
             li
               .signup-form__input
-                input.input.input--full(type='password' placeholder='{{ "signin.password" | translate }}' name='PASSWORD' ng-model='password' required)
+                ng-input(type='password' icon='icon icon--fumi mdi mdi-lock' theme='fumi' label='{{ "signin.password" | translate }}' name='PASSWORD' ng-model='password' ng-required='true')
             li
               a.forgot(ng-href='/forgot?email={{email}}' translate="signin.forgot")
               br

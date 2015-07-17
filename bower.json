@@ -7,7 +7,7 @@
     "components"
   ],
   "dependencies": {
-    "angular": "~1.4.0",
+    "angular": "~1.4.2",
     "angular-ui-router": "~0.2.15",
     "angular-translate": "~2.7.2",
     "angular-translate-loader-static-files": "~2.7.2",
@@ -17,7 +17,9 @@
     "polymer": "~0.9.4",
     "twitter-button": "~0.2.1",
     "facebook-button": "~0.2.1",
-    "satellizer": "~0.11.2"
+    "satellizer": "~0.11.2",
+    "ng-input": "~0.0.5",
+    "mdi": "~1.1.70"
   },
   "overrides": {
     "angular": {
@@ -27,7 +29,7 @@
       "main": "release/angular-ui-router.min.js"
     },
     "satellizer": {
-        "main": "satellizer.min.js"
+      "main": "satellizer.min.js"
     },
     "angular-cookies": {
       "main": "angular-cookies.min.js"
@@ -48,10 +50,16 @@
       "main": "build/ng-lodash.min.js"
     },
     "pg-ng-dropdown": {
-      "main": "dest/js/pg-ng-dropdown.min.js"
+      "main": "dest/js/pg-ng-dropdown.js"
+    },
+    "ng-input": {
+      "main": "dist/ng-input.js"
     },
     "webcomponentsjs": {
       "main": "webcomponents.min.js"
+    },
+    "mdi": {
+      "ignore": true
     },
     "polymer": {
       "ignore": true

@@ -76,9 +76,6 @@ angular.module('bitvagas.jobs',
               Categories : function(CategoryService){
                   return CategoryService.findAll();
               }
-              , Organizations : function(OrgService){
-                  return OrgService.findByUser();
-              }
           }
           , params       : { data : {} }
           , controller   : 'JobCreateController'

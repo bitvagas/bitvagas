@@ -10,6 +10,7 @@ function JobPostController($scope, $state, $stateParams, JobService, Categories,
     $scope.errors = $stateParams.errors || [];
 
     $scope.categories = Categories.data;
+    $scope.categories[0].selected = true;
 
     $scope.create = function(){
         $scope.data.CATEGORY_ID = _.selected($scope.categories, 'id');
@@ -38,11 +39,15 @@ function JobCreateController($scope, $state, $stateParams, JobService, Categorie
     $scope.errors = $stateParams.errors || [];
 
     $scope.categories = Categories.data;
+    $scope.orgs = $scope.currentUser.orgs;
+
+    $scope.categories[0].selected = true;
+    $scope.orgs[0].selected = true;
 
     $scope.create = function(){
         $scope.data.CATEGORY_ID = _.selected($scope.categories, 'id');
         $scope.data.ORG_ID = _.selected($scope.orgs, 'id');
-        $state.go('dashboard.jobs.confirm', { data : $scope.data });
+        $state.transitionTo('dashboard.jobs.confirm', { data : $scope.data });
     };
 
     $scope.confirm = function(data){

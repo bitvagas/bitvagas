@@ -4,6 +4,7 @@ angular.module('bitvagas',
     ,'satellizer'
     ,'ngLodash'
     ,'ngCookies'
+    ,'ngInput'
     ,'bitvagas.main'
     ,'bitvagas.jobs'
     ,'bitvagas.org'
@@ -29,11 +30,13 @@ angular.module('bitvagas',
 
     }).config(function($authProvider, $httpProvider){
 
+        $authProvider.loginOnSignup = false;
+
         $authProvider.loginUrl = '/auth/login';
         $authProvider.loginRedirect = '/dashboard/overview';
 
         $authProvider.signupUrl = '/signup';
-        $authProvider.signupRedirect = '/login';
+        $authProvider.signupRedirect = '/signup/verify';
 
         $httpProvider.interceptors.push('Interceptor');
 
@@ -204,9 +207,6 @@ angular.module('bitvagas.jobs',
               Categories : function(CategoryService){
                   return CategoryService.findAll();
               }
-              , Organizations : function(OrgService){
-                  return OrgService.findByUser();
-              }
           }
           , params       : { data : {} }
           , controller   : 'JobCreateController'
@@ -301,6 +301,10 @@ angular.module('bitvagas.users', [
           , templateUrl : 'modules/users/views/signin'
           , controller  : 'AuthController'
         })
+        .state('verify', {
+            url: '/signup/verify'
+          , templateUrl : 'modules/users/views/verify-message'
+        })
         .state('freelancers', {
             url: '/freelancers'
           , templateUrl : 'modules/users/views/freelancers'
@@ -356,6 +360,7 @@ function JobPostController($scope, $state, $stateParams, JobService, Categories,
     $scope.errors = $stateParams.errors || [];
 
     $scope.categories = Categories.data;
+    $scope.categories[0].selected = true;
 
     $scope.create = function(){
         $scope.data.CATEGORY_ID = _.selected($scope.categories, 'id');
@@ -384,11 +389,15 @@ function JobCreateController($scope, $state, $stateParams, JobService, Categorie
     $scope.errors = $stateParams.errors || [];
 
     $scope.categories = Categories.data;
+    $scope.orgs = $scope.currentUser.orgs;
+
+    $scope.categories[0].selected = true;
+    $scope.orgs[0].selected = true;
 
     $scope.create = function(){
         $scope.data.CATEGORY_ID = _.selected($scope.categories, 'id');
         $scope.data.ORG_ID = _.selected($scope.orgs, 'id');
-        $state.go('dashboard.jobs.confirm', { data : $scope.data });
+        $state.transitionTo('dashboard.jobs.confirm', { data : $scope.data });
     };
 
     $scope.confirm = function(data){
@@ -640,8 +649,8 @@ function OrgService($http){
 angular.module('bitvagas.users.controllers', [])
 .controller('AuthController', AuthController);
 
-AuthController.$inject = ['$rootScope', '$scope', '$state', '$window', '$auth'];
-function AuthController ($rootScope, $scope, $state, $window, $auth) {
+AuthController.$inject = ['$rootScope', '$scope', '$state', '$window', '$auth', 'UserService'];
+function AuthController ($rootScope, $scope, $state, $window, $auth, UserService) {
 
     if($auth.isAuthenticated())
         $state.transitionTo('dashboard.overview');
@@ -667,6 +676,14 @@ function AuthController ($rootScope, $scope, $state, $window, $auth) {
           , EMAIL: $scope.EMAIL
           , PASSWORD: $scope.PASSWORD
           , REPASSWORD: $scope.REPASSWORD
+        }).catch(function(err){
+            console.log(err);
+        });
+    };
+
+    $scope.verify = function(token){
+        UserService.verify(token).then(function(data){
+            $window.location.href = '/#/signin';
         }).catch(function(err){
             console.log(err);
         });
@@ -732,5 +749,9 @@ function UserService($http) {
 
     this.invite = function(user){
         return $http.post('/invite', user);
+    };
+
+    this.verify = function(token){
+        return $http.post('/verify', { token: token });
     };
 }
