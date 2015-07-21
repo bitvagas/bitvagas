@@ -41,6 +41,7 @@ gulp.task('script', ['bower'], function(){
 });
 
 gulp.task('fixtures', function(){
+    require('dotenv').load();
     fixtures.loadFile("config/data/**.yml", require('./app/models'));
 });
 
