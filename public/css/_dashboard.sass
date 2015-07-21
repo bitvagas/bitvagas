@@ -1,20 +1,35 @@
+.dashboard
+  background: #fff
+
 .dashboard__body
   +cf
   margin-bottom: 24px
   +media-query(desk)
-    margin-left: -24px
+    display: table
 
 .dashboard__cell
   +media-query(desk)
-    float: left
+    display: table-cell
     padding-left: 24px
+    vertical-align: top
 
 .dashboard__cell--main
   +media-query(desk)
+    padding: 36px
     width: 70%
 
 .dashboard__cell--aside
+  background: darken(#1283b0, 10%)
+  color: #fff
+  text-align: center
+  a
+    color: #fff
+    display: block
+    padding: 12px
+    &:hover
+      background: #1283b0
   +media-query(desk)
+    padding: 36px 0
     width: 30%
 
 .dashboard__img
@@ -29,6 +44,3 @@
   margin: 0
   padding: 0
   > li
-    > a
-      display: block
-      padding: 12px
