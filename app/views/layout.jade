@@ -51,15 +51,26 @@ html(lang='pt-br', ng-app='bitvagas')
                 a(href="#" ng-click="setLang('en')") EN
               li
                 a(href="#" ng-click="setLang('pt')") PT
-
-            li(ng-if="!isAuthenticated()")
-              a(href='/#/signin', title='{{ layout.site_nav.signin | translate }}' translate="layout.site_nav.signin")
-            li(ng-if="!isAuthenticated()")
-              a(href='/#/signup', title='{{ layout.site_nav.signup }}' translate="layout.site_nav.signup")
-            li
-              a(href='/#/dashboard/overview') {{ currentUser.NAME }}
-            li(ng-if="isAuthenticated()")
-              a(ng-click='logout()' href="#" title='{{ layout.site_nav.logout}}' translate="layout.site_nav.logout")
+          li(ng-if="!isAuthenticated()")
+            a(href='/#/signin', title='{{ layout.site_nav.signin | translate }}' translate="layout.site_nav.signin")
+          li(ng-if="!isAuthenticated()")
+            a(href='/#/signup', title='{{ layout.site_nav.signup }}' translate="layout.site_nav.signup")
+          li(ng-if="isAuthenticated()").dropdown
+            .dropdown-active(href='/#/dashboard/overview')
+              {{ currentUser.NAME }}
+            ul(ng-style="style").dropdown__body.dropdown__body--user
+              li
+                a(ui-sref='dashboard.overview') Visao Geral
+              li
+                a(ui-sref='dashboard.profile') Minha Conta
+              li
+                a(ui-sref='dashboard.cv({id : user.id})') Meu Curriculo
+              li
+                a(ui-sref='dashboard.jobs.list') Minhas Vagas
+              li
+                a(ui-sref='dashboard.organization.list') Minhas Organizações
+              li
+                a(ng-click='logout()' href="#" title='{{ layout.site_nav.logout}}' translate="layout.site_nav.logout")
 
     block content
 
