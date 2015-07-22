@@ -1,6 +1,6 @@
 ul.breadcrumb
   li
-    a Home
+    a(href='/#/') Home
   li
     span >
   li
@@ -12,8 +12,6 @@ ul.breadcrumb
       .dashboard-aside
         img(ng-src="{{ user.PICTURE ? user.PICTURE : 'https://m1.behance.net/rendition/modules/83055723/disp/729ebe0c689023040b7eb03fe48e7792.png' }}").dashboard__img
         h5 {{ currentUser.NAME }}
-        p
-          a(href="/auth/linkedin") Conectar CV
         ul.dashboard-nav
           li
             a(ui-sref='dashboard.overview') Visao Geral
