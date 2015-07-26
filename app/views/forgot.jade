@@ -1,11 +1,13 @@
 extends layout
 
 block content
-  .main
+  .main(ng-controller='AuthController')
     .wrapper
       h1 Forgot your password?
 
-      form(action="/forgot" method="POST")
-        input.input.input--full(type='text' value='#{email}' placeholder='email' name='EMAIL')
-        br
-        input.btn.btn--medium.btn--primary(type='submit', value='Email me recovery link')
+      form(name='form' ng-submit='form.$valid && forgot()')
+        ul.signup-form
+          li
+            ng-input(theme='fumi' icon='icon icon--fumi mdi mdi-email' type='text' value='#{email}' label='Email' name='EMAIL' ng-model='data.EMAIL' ng-required='true')
+          li
+            button.btn.btn--medium.btn--primary(value='Email me recovery link') Email me recovery link

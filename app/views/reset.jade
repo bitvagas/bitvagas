@@ -2,15 +2,17 @@ extends layout
 
 block content
   .main
-    .wrapper
-      h1 Reset your password
-      if message
-          h3= message
-      form(action='/reset' method='POST')
-        input.input.input--full(type='password' placeholder='Senha' name='PASSWORD')
-        br
-        input.input.input--full(type='password' placeholder='Repetir Senha' name='REPASSWORD')
-        br
-        input(type='hidden' value='#{token}' name='token')
+    .wrapper(ng-controller='AuthController')
+      header.signup__head
+      h1.signup__tiel Reset your password
 
-        input.btn.btn--medium.btn--primary(type='submit' value='Reset Password')
+      form(name='form' ng-submit='form.$valid && reset("#{token}")')
+        .signup__body
+          ul.signup-form
+            li
+              ng-input(theme='fumi' icon='icon icon--fumi mdi mdi-lock' type='password' label='Senha' name='PASSWORD' ng-model='data.PASSWORD')
+            li
+
+              ng-input(theme='fumi' icon='icon icon--fumi mdi mdi-lock' type='password' label='Repetir Senha' name='REPASSWORD' ng-model='data.REPASSWORD')
+
+            button.btn.btn--medium.btn--primary(value='Reset Password') Reset Password

@@ -35,7 +35,33 @@ function AuthController ($rootScope, $scope, $state, $window, $auth, UserService
 
     $scope.verify = function(token){
         UserService.verify(token).then(function(data){
-            $window.location.href = '/#/signin';
+            //locations href crashes on chrome
+            setTimeout(function(){
+                $window.location.href = '/#/signin';
+            }, 500);
+        }).catch(function(err){
+            console.log(err);
+        });
+    };
+
+    $scope.forgot = function(){
+        UserService.forgot($scope.data).then(function(data){
+            console.log(data);
+            setTimeout(function(){
+                $window.location.href = '/#/signup/verify';
+            }, 500);
+        }).catch(function(err){
+            console.log(err);
+        });
+    };
+
+    $scope.reset = function(token){
+        $scope.data.token = token;
+        UserService.reset($scope.data).then(function(data){
+            console.log(data);
+            setTimeout(function(){
+                $window.location.href = '/#/signin';
+            }, 500);
         }).catch(function(err){
             console.log(err);
         });

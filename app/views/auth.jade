@@ -9,6 +9,8 @@ html(lang='pt-br', ng-app='bitvagas')
 
     link(href='https://fonts.googleapis.com/css?family=Droid+Sans:400,700', rel='stylesheet', type='text/css')
     link(rel='stylesheet', href='/css/bitvagas.css')
+    link(rel='stylesheet' href='/components/mdi/css/materialdesignicons.min.css' media='all')
+    link(rel='stylesheet' href='/components/ng-input/dist/css/ng-input.css')
 
     include script
 
@@ -17,16 +19,24 @@ html(lang='pt-br', ng-app='bitvagas')
 
 block content
 
-    .signin
+    .auth
       .main
         a(href='/#/', title='BitVagas')
           img(src='/img/bitvagas.png', alt='BitVagas')
-
+        hr.line
         .auth(ng-controller="AuthController")
-          form(novalidate ng-submit='form.$valid && login()' name="form")
-            input.input.input--full(type='text' placeholder='{{ "signin.email" | translate }}' ng-model='email' name='EMAIL')
-            input.input.input--full(type='password' placeholder='{{ "signin.password" | translate }}' ng-model='password' name='PASSWORD')
-            input.login__btn.btn.btn--primary(type='submit', value='{{ "signin.button" | translate }}')
+          form.signup-form(novalidate ng-submit='form.$valid && login()' name="form")
+            fieldset.signup-fieldset
+              ul.signup-form
+                li
+                  .signup-form__input
+                    ng-input(theme='fumi' icon='icon icon--fumi mdi mdi-email' label='{{ "signin.email" | translate }}' ng-model='email' name='EMAIL')
+                li
+                  .signup-form__input
+                    ng-input(theme='fumi' type='password' icon='icon icon--fumi mdi mdi-lock' label='{{ "signin.password" | translate }}' ng-model='password' name='PASSWORD')
+
+            .signup-action
+              input.btn.btn--primary.btn--large(type='submit', value='{{ "signin.button" | translate }}')
           hr
           div
             a.forgot(href='/forgot' translate='signin.forgot')

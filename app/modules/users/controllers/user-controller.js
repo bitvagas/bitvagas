@@ -6,8 +6,9 @@ var express  = require('express')
   , token    = require('./token-jwt')
   , db       = require(root + '/app/models')
   , includes = [
-        { model : db.job, include : [db.job_type] }
+        { model : db.job, include : [db.job_type, db.job_apply] }
       , { model : db.org }
+      , { model : db.job_apply, include: [db.job] }
   ];
 
 module.exports = {
@@ -24,12 +25,32 @@ module.exports = {
         if(!request.user)
             return response.status(401).send('User has not found');
 
-        db.user.find({
+        db.user.findOne({
             where   : { id : request.user.id }
           , include : includes
           }).then(function(user){
             response.status(200).json(user);
         });
+  }
+
+  , updateMe: function(request, response){
+      if(!request.user)
+          return response.status(401).send('User has not found');
+
+      db.user.findOne({
+          where : { id : request.user.id }
+      }).then(function(user){
+
+          user.NAME = request.body.NAME;
+          user.NOTIFY_JOBS = request.body.NOTIFY_JOBS;
+          user.NOTIFY_APPLIES = request.body.NOTIFY_APPLIES;
+
+          user.save().then(function(user){
+              response.status(201).json(user);
+          }).catch(function(err){
+              response.status(400).json({ error: err });
+          });
+      });
   }
 
   , signup: function(request, response, next){
@@ -55,7 +76,7 @@ module.exports = {
                 mailer.sendWelcome(user);
                 //Send a link to email to verification
                 mailer.sendEmailVerification(user);
-                response.status(201).json({ data : user, token : token.createJWT(user) });
+                response.status(200).json({ data : user, token : token.createJWT(user) });
 
             }).catch(function(error){
                 response.status(400).json(error);
@@ -68,7 +89,6 @@ module.exports = {
    */
   , invite: function(request, response, t){
 
-      // return this.findByEmail(request).then(function(user){
       if(request.user)
           response.status(400).send('User already exists');
       else {
@@ -112,9 +132,9 @@ module.exports = {
               }).then(function(user){
                   //Send link to email to reset password
                   mailer.sendForgotPassword(user);
-                  response.render('index');
+                  response.status(200).json({ message: 'A link has been send to your email' });
               }).catch(function(err){
-                  response.render('forgot', { message : err });
+                  response.status(400).json({ message : err });
               });
           });
       }
@@ -130,8 +150,8 @@ module.exports = {
 
           if(user.RESETEXPIRES > Date.now()){
 
-              if(request.body.PASSWORD != request.body.REPASSWORD)
-                  return response.render('reset', { message : 'These passwords don\'t match.' });
+              if(request.body.PASSWORD !== request.body.REPASSWORD)
+                  return response.status(400).json({ message : 'These passwords don\'t match.' });
 
               var salt = bcrypt.genSaltSync(4);
               var hash = bcrypt.hashSync(request.body.PASSWORD, salt);
@@ -141,10 +161,10 @@ module.exports = {
                           , RESETTOKEN   : null
                           , RESETEXPIRES : null
               });
-              response.render('auth');
+              response.status(200).send('Password Changed');
           } else {
               //Token Expired
-              response.render('forgot', { email: user.EMAIL });
+              response.status(400).json({ message: 'Token Expired', email: user.EMAIL });
           }
       });
   }
@@ -154,7 +174,7 @@ module.exports = {
      */
   , findByEmail: function(request, response, next){
       if(!request.body.EMAIL)
-          response.status(404).json({ error: 'missing email'});
+          response.status(404).json({ error: 'Missing email'});
 
       db.user.find({
           where   : { EMAIL : request.body.EMAIL }
@@ -184,7 +204,7 @@ module.exports = {
           payload = token.decode(headerToken);
       } catch(err) {
           console.log(err);
-          return response.status(401).json({ message: err.message });
+          return response.status(401).json({ message: err.message, destroy: true });
       }
 
       if(token.verify(payload.exp))
@@ -196,5 +216,30 @@ module.exports = {
 
       request.user = payload.sub;
       next();
+  }
+
+  /*
+   * Middleware to check authentication optionally
+   */
+  , checkAuthentication: function(request, response, next){
+      if(request.headers.authorization) {
+          var headerToken = request.headers.authorization.split(' ')[1];
+
+          var payload = null;
+
+          try {
+              payload = token.decode(headerToken);
+          } catch(err){
+              next();
+          }
+
+          if(payload.sub.USER_STATUS !== 3 &&
+             payload.sub.USER_STATUS !== 4)
+             next();
+
+          request.user = payload.sub;
+          next();
+
+      } else next();
   }
 };
