@@ -17,4 +17,12 @@ function JobService($http){
     this.findById = function(id){
         return $http.get(baseUrl+id);
     };
+
+    //Apply job
+    this.apply = function(job, apply){
+        return $http.post(baseUrl + job.id + '/apply', apply);
+    };
+
+    this.appliers = function(job){
+    };
 }

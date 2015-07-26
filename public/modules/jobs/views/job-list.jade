@@ -36,7 +36,7 @@ ul.jobs
       .jobs-item__cell.jobs-item__cell--meta
         .jobs-item__type
           .label(class="label--{{job.job_type.NAME}}") {{ job.job_type.NAME }}
-        .jobs-item__date {{ job.createdAt | date }}
+        .jobs-item__date(am-time-ago='job.createdAt')
 
 ul.pagination
   li.current

@@ -3,14 +3,16 @@ angular.module('bitvagas',
     ,'pascalprecht.translate'
     ,'angular-loading-bar'
     ,'satellizer'
+    ,'ngSanitize'
     ,'ngLodash'
     ,'ngCookies'
     ,'ngInput'
+    ,'angularMoment'
     ,'bitvagas.main'
     ,'bitvagas.jobs'
     ,'bitvagas.org'
     ,'bitvagas.users'
-    ,'bitvagas.admin'
+    ,'bitvagas.dashboard'
     ]).config(function($translateProvider){
         //Angular translation configuration
         $translateProvider.useStaticFilesLoader({
@@ -63,7 +65,7 @@ angular.module('bitvagas',
                 updateUser();
         };
 
-        $rootScope.$on('unauthorize', function(){
+        $rootScope.$on('unauthorized', function(){
             $state.transitionTo('signin');
         });
 
@@ -83,6 +85,7 @@ angular.module('bitvagas',
 
         function updateUser(){
             UserService.me().then(function(data){
+                console.log(data);
                 $window.localStorage.currentUser = $window.btoa(JSON.stringify(data.data));
                 $rootScope.currentUser = data.data;
             });

@@ -36,6 +36,7 @@
   border-radius: 50%
   box-shadow: 0 3px 2px rgba(0,0,0,0.3)
   border: 5px solid #eee
+  background-color: #eee
   height: 150px
   width: 150px
 
@@ -44,3 +45,84 @@
   margin: 0
   padding: 0
   > li
+
+.profile--info
+  font-size: 14px
+
+.linkedin
+  width: 240px
+  border: 1px solid
+  border-radius: 4px
+  margin: auto
+  background-image: linear-gradient(#007BB6,#00699B)
+  border: 1px solid #0073AE
+  box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, .2)
+
+.dashboard__overview--sections
+  display: table
+  width: 100%
+
+  .jobs-item__cell--body
+    width: 70%
+
+.dashboard__overview
+  padding-right: 10px
+  +media-query(desk)
+    display: table-cell
+
+
+.dashboard__overview--list-scroll
+  max-height: 220px
+  overflow: scroll
+
+
+.dashboard__overview--applicant
+  border-top: 1px solid #eee
+  border-bottom: 1px solid #EEE
+  margin-top: 20px
+  margin-left: -5px
+  margin-bottom: -1px
+  padding-left: 25px
+  padding-top: 10px
+  padding-bottom: 5px
+  border-left: 2px solid #29B5DF
+  border-top-left-radius: 5px
+  border-bottom-left-radius: 5px
+
+  .right
+    float: right
+
+  .applicant--links
+    background: url(../img/head-bg.png) repeat;
+    border-bottom: 2px solid #29B5DF
+    border-radius: 5px
+    padding: 10px
+    padding-left: 25px
+    margin-top: 15px
+    margin-bottom: 10px
+
+    ul
+      margin: 0
+      width: 100%
+      font-size: 18px
+      li
+        width: 25%
+        display: inline-block
+
+  ul
+    list-style: none
+
+.badge
+  background-color: #29B5DF
+  width: 30px
+  text-align: center
+  padding: 4px
+  margin-left: 10px
+  position: relative
+  border-radius: 100%
+  font-weight: bold
+  font-size: 14px
+  vertical-align: middle
+  display: inline-block
+  color: #FFF
+

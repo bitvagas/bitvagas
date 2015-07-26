@@ -16,7 +16,13 @@
               .job__local {{ job.LOCATION }}
             li
               img(src='/img/calendar.svg').job__icon
-              .job__date {{ job.createdAt | date }}
+              .job__date
+                span(am-time-ago="job.createdAt")
+            li.right
+              .job__appliers
+                strong
+                  {{ job.job_appliers.length }}
+                ng-pluralize(count="job.job_appliers.length" when="{'0': ' Applicant', '1': ' Applicant', 'other': ' Applicants'}")
 
         .job__body
           ul.job-social
@@ -33,9 +39,15 @@
           p.job__description {{ job.DESCRIPTION }}
 
         footer.job-foot
-          button#btn-apply.btn.btn--medium.btn--primary(ng-click="apply()" ng-show="!applied") Candidatar-se à vaga
+          div(ng-if='job.APPLY_URL === null')
+            div(ng-if='!alreadyApplied')
+              button#btn-apply.btn.btn--medium.btn--primary(ng-click="toggle()" ng-show="!toggled") Candidatar-se à vaga
+            div(ng-if='alreadyApplied')
+              p You have already applied to this job
+          div(ng-if='job.APPLY_URL !== null')
+            a.btn.btn--medium.btn--primary(href='{{ job.APPLY_URL }}' target='_blank') Candidatar-se à vaga
 
-          form#form-apply.job-form(action="https://docs.google.com/forms/d/1AIBX-zjbQ_edm4ZdCqqrUixKj7Cpvb2tjwFSTWpzSpw/formResponse" method="POST" target="_self" ng-show="applied")
+          form.job-form(ng-show="toggled" name='form' ng-submit='form.$valid && applyJob()')
             .job-form__head
               h6.job-apply__title
                 | {{ "job.apply.title" | translate }} <span class="job-form__bold"> {{ job.TITLE }} </span> {{ "job.in" | translate }} <span class="job-form__bold">{{ job.org.NAME }}</span>
@@ -43,15 +55,27 @@
             .job-form__body
               ul.job-form__list
                 li
-                  .job-form__field
-                    ng-input.job-form__input(theme='fumi' icon='icon icon--fumi mdi mdi-email' type='email', label='Email', name='EMAIL', ng-required='true')
+                  .job-form__field(ng-if='isAuthenticated()')
+                    {{ currentUser.NAME }}
+                    div(ng-if="otherEmail === false")
+                      {{ currentUser.EMAIL }}
+                    p
+                      a(href='#' ng-if="otherEmail === false" ng-click='other()')
+                        Try other email
+                      div(ng-if="otherEmail")
+                        ng-input(theme='fumi' icon='icon icon--fumi mdi mdi-email' type='email' label='Email' name='EMAIL' ng-model='apply.EMAIL' ng-required='true')
+                  .job-form__field(ng-if='!isAuthenticated()')
+                    ng-input.job-form__input(theme='fumi' icon='icon icon--fumi mdi mdi-account' label='Name' name='NAME' ng-model='apply.NAME' ng-required='true')
+                    br
+                    br
+                    ng-input.job-form__input(theme='fumi' icon='icon icon--fumi mdi mdi-email' type='email' label='Email' name='EMAIL' ng-model='apply.EMAIL' ng-required='true')
                 li
                   .job-form__field
-                    textarea#entry_944889134.job-form__input.textarea.textarea--full(name='entry.944889134', placeholder='{{ "job.apply.links" | translate }}', rows='1', cols='0', dir='auto', aria-label='Reference Links:  Precisa ter pelo menos 20 caracteres.', aria-required='true', required='')
+                    textarea.job-form__input.textarea.textarea--full(name='LINKS' rows='2' cols='45' ng-model='apply.LINKS' placeholder="{{ 'job.apply.links' | translate }}")
                 li
                   .job-form__field
-                    textarea#entry_1496250376.job-form__input.textarea.textarea--full(name='entry.1496250376', rows='5', cols='0', dir='auto', placeholder="{{ 'job.apply.description' | translate }}" aria-label='Cover Letter:  Precisa ter pelo menos 100 caracteres.', aria-required='true', required='')
+                    textarea.job-form__input.textarea.textarea--full(name='DESCRIPTION' rows='5' cols='45' ng-model='apply.DESCRIPTION' placeholder="{{ 'job.apply.description' | translate }}")
 
             .job-action
-              input#ss-submit.job-action__btn.btn.btn--primary.btn--medium(type="submit" name="submit" value="{{ 'job.apply.button' | translate }}")
+              input.job-action__btn.btn.btn--primary.btn--medium(type="submit" name="submit" value="{{ 'job.apply.button' | translate }}")
 

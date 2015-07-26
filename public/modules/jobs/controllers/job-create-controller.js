@@ -42,7 +42,9 @@ function JobCreateController($scope, $state, $stateParams, JobService, Categorie
     $scope.orgs = $scope.currentUser.orgs;
 
     $scope.categories[0].selected = true;
-    $scope.orgs[0].selected = true;
+
+    if($scope.orgs[0])
+        $scope.orgs[0].selected = true;
 
     $scope.create = function(){
         $scope.data.CATEGORY_ID = _.selected($scope.categories, 'id');

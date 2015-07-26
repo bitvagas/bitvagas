@@ -15,6 +15,10 @@ module.exports = function(sequelize, DataTypes){
             type        : DataTypes.STRING
           , allowNull   : false
         }
+        , VALUE         : {
+            type        : DataTypes.ENUM('None', 'Less than 1BTC', '1BTC - 10 BTCs', '11BTCs - 25BTCs', 'More than 25BTCs', 'Negotiable')
+          , allowNull   : 'Negotiable'
+        }
         , APPLY_URL     : {
               type      : DataTypes.STRING
             , allowNull : true
@@ -29,6 +33,7 @@ module.exports = function(sequelize, DataTypes){
           , allowNull    : false
           , defaultValue : false
         }
+        , TAGS           : DataTypes.ARRAY(DataTypes.STRING)
         , ACTIVE         : {
             type         : DataTypes.BOOLEAN
           , allowNull    : false
@@ -37,7 +42,7 @@ module.exports = function(sequelize, DataTypes){
     }, {
         classMethods  : {
             associate : function(models) {
-                JOB.hasMany(models.job_request, {
+                JOB.hasMany(models.job_apply, {
                     onDelete   : 'cascade'
                   , foreignKey : 'JOB_ID'
                 });

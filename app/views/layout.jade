@@ -56,8 +56,7 @@ html(lang='pt-br', ng-app='bitvagas')
           li(ng-if="!isAuthenticated()")
             a(href='/#/signup', title='{{ layout.site_nav.signup }}' translate="layout.site_nav.signup")
           li(ng-if="isAuthenticated()").dropdown
-            .dropdown-active(href='/#/dashboard/overview')
-              {{ currentUser.NAME }}
+            .dropdown-active(href='/#/dashboard/overview') {{ currentUser.NAME }}
             ul(ng-style="style").dropdown__body.dropdown__body--user
               li
                 a(ui-sref='dashboard.overview') Visao Geral

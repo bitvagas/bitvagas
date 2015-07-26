@@ -1,4 +1,4 @@
-angular.module('bitvagas.admin.controllers', [])
+angular.module('bitvagas.dashboard.controllers', [])
 .controller('DashBoardController',DashBoardController);
 
 DashBoardController.$inject = ['$scope', '$state', 'UserService'];

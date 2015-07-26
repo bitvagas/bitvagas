@@ -1,27 +1,32 @@
-angular.module('bitvagas.admin', [ 'bitvagas.admin.controllers' ])
+angular.module('bitvagas.dashboard', [ 'bitvagas.dashboard.controllers' ])
 .config(function($urlRouterProvider, $stateProvider ){
 
     $stateProvider
     .state('dashboard', {
         abstract : true
         , url: '/dashboard'
-        , templateUrl  : '/modules/admin/views/dashboard'
+        , templateUrl  : '/modules/dashboard/views/dashboard'
         , controller   : 'DashBoardController'
         , authenticate : true
     })
     .state('dashboard.overview', {
         url : '/overview'
-        , templateUrl  : '/modules/admin/views/overview'
+        , templateUrl  : '/modules/dashboard/views/overview'
         , authenticate : true
+        , controller   : 'OverviewController'
     })
     .state('dashboard.profile', {
         url : '/profile'
         , views : {
             ''  : {
                 templateUrl : '/modules/users/views/dashboard/profile'
+              , controller  : 'ProfileController'
             }
             , 'change-password@dashboard.profile' : {
-                templateUrl : '/modules/users/views/change-password'
+                templateUrl : '/modules/users/views/dashboard/change-password'
+            }
+            , 'settings@dashboard.profile': {
+                templateUrl : '/modules/users/views/dashboard/settings'
             }
         }
         , authenticate  : true

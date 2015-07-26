@@ -4,7 +4,8 @@ var passport  = require('passport')
 module.exports = function(app){
 
     app.route('/me')
-    .get(user.ensureAuthenticated, user.me);
+    .get(user.ensureAuthenticated, user.me)
+    .post(user.ensureAuthenticated, user.updateMe);
 
     app.route('/signup')
     .post(user.findByEmail, user.signup);

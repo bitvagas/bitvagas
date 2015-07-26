@@ -1,5 +1,5 @@
 {
-  "name": "bitvagas-com",
+  "name": "bitvagas",
   "version": "0.0.1",
   "ignore": [
     "**/.*",
@@ -7,11 +7,12 @@
     "components"
   ],
   "dependencies": {
-    "angular": "~1.4.2",
+    "angular": "1.4.x",
     "angular-ui-router": "~0.2.15",
     "angular-translate": "~2.7.2",
     "angular-translate-loader-static-files": "~2.7.2",
     "angular-translate-storage-local": "~2.7.2",
+    "angular-sanitize": "1.4.0",
     "pg-ng-dropdown": "*",
     "ng-lodash": "~0.2.3",
     "polymer": "~0.9.4",
@@ -20,7 +21,9 @@
     "satellizer": "~0.11.2",
     "ng-input": "~0.0.5",
     "mdi": "~1.1.70",
-    "angular-loading-bar": "~0.8.0"
+    "angular-loading-bar": "~0.8.0",
+    "angular-moment": "~0.10.1",
+    "moment": "~2.10.3"
   },
   "overrides": {
     "angular": {
@@ -34,6 +37,9 @@
     },
     "angular-cookies": {
       "main": "angular-cookies.min.js"
+    },
+    "angular-sanitize": {
+        "main": "angular-sanitize.min.js"
     },
     "angular-translate": {
       "main": "angular-translate.min.js"
@@ -56,11 +62,17 @@
     "ng-input": {
       "main": "dist/ng-input.js"
     },
+    "moment": {
+      "main": "min/moment.min.js"
+    },
+    "angular-moment": {
+      "main": "angular-moment.min.js"
+    },
     "webcomponentsjs": {
       "main": "webcomponents.min.js"
     },
     "angular-loading-bar": {
-        "main": "build/loading-bar.min.js"
+      "main": "build/loading-bar.min.js"
     },
     "mdi": {
       "ignore": true

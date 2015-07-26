@@ -28,14 +28,22 @@ module.exports = function(sequelize, DataTypes){
         , RESETEXPIRES   : DataTypes.DATE
         , LINKEDIN_ID    : DataTypes.STRING
         , LINKEDIN_TOKEN : DataTypes.STRING
+        , NOTIFY_JOBS    : {
+            type         : DataTypes.BOOLEAN
+          , defaultValue : true
+        }
+        , NOTIFY_APPLIES : {
+            type         : DataTypes.BOOLEAN
+          , defaultValue : true
+        }
     }, {
         classMethods  : {
             associate : function(models){
-                USER.hasMany(models.job_request, {
+                USER.hasMany(models.job_apply, {
                     foreignKey    : {
-                        name      : 'JOB_ID'
+                        name      : 'USER_ID'
                       , allowNull : true
-                      }
+                    }
                 });
                 USER.hasMany(models.org, {
                     foreignKey    : {

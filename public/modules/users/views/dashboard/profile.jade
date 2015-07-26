@@ -1,12 +1,29 @@
 h2 Minha Conta
 
-ul
+ul.profile
   li
-    label Nome
-     {{ currentUser.NAME}}
+    img(ng-src="{{ currentUser.PICTURE ? currentUser.PICTURE : 'img/unknown.svg' }}")
+    label.picture
+     | Profile Picture
+     | <br>
+     | Update your picture on linkedIn
   li
-    label Email
-     {{ currentUser.EMAIL}}
+    label.email 
+      i.mdi.mdi-email
+      | Email: {{ currentUser.EMAIL}}
+  li(style="height: 100px")
+    ng-input(theme='fumi' label='Name' icon='icon icon--fumi mdi mdi-account' ng-model='profile.NAME' name='NAME')
 
+div(ui-view="settings")
+
+br
+ul.profile
+  li
+    a.btn.btn--merdium.btn--primary(href="#" ng-click="UpdateProfile()") Update Profile
+    a.btn.linkedin(href="/auth/linkedin")
+      i.mdi.mdi-linkedin-box
+      |  Conectar LinkedIn
+
+br
 
 div(ui-view="change-password")

@@ -6,6 +6,7 @@ var express  = require('express')
   , includes = [
       db.job_type
     , db.job_transaction
+    , db.job_apply
     , db.category
     , db.org
   ];

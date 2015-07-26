@@ -7,8 +7,9 @@ function Interceptor($rootScope, $q){
 
         response: function(response){
 
-            if(response.status === 201 ||
-               response.status === 204)
+            if((response.status === 201 ||
+                response.status === 204) &&
+                !/\/api\/jobs\/\d\/apply/.exec(response.config.url))
                 $rootScope.$broadcast('update-me');
 
             return response;
@@ -17,18 +18,18 @@ function Interceptor($rootScope, $q){
         , responseError: function(response){
 
             if(response.status === 401){
+
+                if(response.data.destroy === true)
+                    $rootScope.logout();
+
                 $rootScope.$broadcast('unauthorized');
-                console.log('401 error');
-                console.log(response);
-                $q.reject(response);
+                return $q.reject(response);
             }
 
             if(response.status === 400 ||
                response.status === 404){
                 //show error
-                console.log('400 error');
-                console.log(response);
-                $q.reject(response);
+                return $q.reject(response);
             }
 
             return response;
