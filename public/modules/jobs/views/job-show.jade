@@ -36,7 +36,7 @@
               | <div class="g-plusone" data-size="medium" data-href="http://bitvagas.com/#{ lang == "en" ? "" : lang + "/" }" data-href="http://bitvagas.com/"></div>
 
           h6(translate="job.description")
-          p.job__description {{ job.DESCRIPTION }}
+          p.job__description(ng-bind-html='job.DESCRIPTION | linky:"_blank"')
 
         footer.job-foot
           div(ng-if='job.APPLY_URL === null')

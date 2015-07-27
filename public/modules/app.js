@@ -8,6 +8,7 @@ angular.module('bitvagas',
     ,'ngCookies'
     ,'ngInput'
     ,'angularMoment'
+    ,'oitozero.ngSweetAlert'
     ,'bitvagas.main'
     ,'bitvagas.jobs'
     ,'bitvagas.org'

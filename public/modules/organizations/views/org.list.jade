@@ -1,17 +1,20 @@
-h4 Your organizations
+.dashboard__title
+  h1.dashboard__title--cell Organizations
+  .dashboard__title--cell
+    a(ui-sref='dashboard.organization.create')
+      i.mdi.mdi-plus-circle
 
-table
-  thead
-    tr
-      th Organization Name
-      th URL
-      th
-      th
-  tbody
-    tr(ng-repeat='org in currentUser.orgs')
-      td {{ org.NAME}}
-      td {{ org.URL }}
-      td
-        a(ui-sref="dashboard.organization.edit({ OrgID : org.id })") Editar
-      td
-        a(href="#" ng-click="delete(org.id)") Excluir
+div(ng-if='currentUser.orgs')
+  ul.orgs
+    li(ng-repeat='org in currentUser.orgs')
+      a.orgs-item(href='#')
+        .orgs-item__cell.orgs-item__cell--img
+          img.thumb(src='/img/template.png')
+        .orgs-item__cell.orgs-item__cell--body
+          h2.orgs-item__title {{ org.NAME }}
+          h3.orgs-item__url {{ org.URL }}
+        .orgs-item__cell.orgs-item__cell--meta
+          span(ui-sref="dashboard.organization.edit({ OrgID : org.id })")
+            i.mdi.mdi-pencil-box
+          span(ng-click="delete(org.id)")
+            i.mdi.mdi-delete

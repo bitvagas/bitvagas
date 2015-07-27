@@ -23,7 +23,10 @@
     "mdi": "~1.1.70",
     "angular-loading-bar": "~0.8.0",
     "angular-moment": "~0.10.1",
-    "moment": "~2.10.3"
+    "moment": "~2.10.3",
+    "sweetalert": "~1.0.1",
+    "angular-sweetalert": "~1.1.0",
+    "modernizr": "~2.8.3"
   },
   "overrides": {
     "angular": {
@@ -39,7 +42,7 @@
       "main": "angular-cookies.min.js"
     },
     "angular-sanitize": {
-        "main": "angular-sanitize.min.js"
+      "main": "angular-sanitize.min.js"
     },
     "angular-translate": {
       "main": "angular-translate.min.js"
@@ -68,6 +71,15 @@
     "angular-moment": {
       "main": "angular-moment.min.js"
     },
+    "sweetalert": {
+      "main": "dist/sweetalert.min.js"
+    },
+    "angular-sweetalert": {
+      "main": "SweetAlert.min.js"
+    },
+    "modernizr": {
+      "main": "modernizr.js"
+    },
     "webcomponentsjs": {
       "main": "webcomponents.min.js"
     },
@@ -86,5 +98,8 @@
     "facebook-button": {
       "ignore": true
     }
+  },
+  "resolutions": {
+    "angular": "1.4.x"
   }
 }

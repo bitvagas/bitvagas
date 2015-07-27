@@ -1,9 +1,5 @@
-.create(style="margin-left: 0;")
-  h2.create__title(translate="post_job.title")
-
-  ul
-    li(ng-repeat='error in errors')
-      label {{ error }}
+.dashboard__title
+  h1.create__title(translate="post_job.title")
 
   .create__body
     form(name="form" ng-submit='form.$valid && create()')

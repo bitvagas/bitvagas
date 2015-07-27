@@ -19,27 +19,27 @@ html(lang='pt-br', ng-app='bitvagas')
 
 block content
 
-    .auth
-      .main
-        a(href='/#/', title='BitVagas')
-          img(src='/img/bitvagas.png', alt='BitVagas')
-        hr.line
-        .auth(ng-controller="AuthController")
-          form.signup-form(novalidate ng-submit='form.$valid && login()' name="form")
-            fieldset.signup-fieldset
-              ul.signup-form
-                li
-                  .signup-form__input
-                    ng-input(theme='fumi' icon='icon icon--fumi mdi mdi-email' label='{{ "signin.email" | translate }}' ng-model='email' name='EMAIL')
-                li
-                  .signup-form__input
-                    ng-input(theme='fumi' type='password' icon='icon icon--fumi mdi mdi-lock' label='{{ "signin.password" | translate }}' ng-model='password' name='PASSWORD')
+  .auth
+    .main
+      a(href='/#/', title='BitVagas')
+        img(src='/img/bitvagas.png', alt='BitVagas')
+      hr.line
+      .auth(ng-controller="AuthController")
+        form.signup-form(novalidate ng-submit='form.$valid && login()' name="form")
+          fieldset.signup-fieldset
+            ul.signup-form
+              li
+                .signup-form__input
+                  ng-input(theme='fumi' icon='icon icon--fumi mdi mdi-email' label='{{ "signin.email" | translate }}' ng-model='email' name='EMAIL')
+              li
+                .signup-form__input
+                  ng-input(theme='fumi' type='password' icon='icon icon--fumi mdi mdi-lock' label='{{ "signin.password" | translate }}' ng-model='password' name='PASSWORD')
 
-            .signup-action
-              input.btn.btn--primary.btn--large(type='submit', value='{{ "signin.button" | translate }}')
-          hr
-          div
-            a.forgot(href='/forgot' translate='signin.forgot')
-            br
-            span(translate='signin.new')
-            a.join(href='/#/signup' translate='signin.join')
+          .signup-action
+            input.btn.btn--primary.btn--large(type='submit', value='{{ "signin.button" | translate }}')
+        hr
+        div
+          a.forgot(href='/forgot' translate='signin.forgot')
+          br
+          span(translate='signin.new')
+          a.join(href='/#/signup' translate='signin.join')

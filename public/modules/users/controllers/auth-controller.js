@@ -13,11 +13,14 @@ function AuthController ($rootScope, $scope, $state, $window, $auth, UserService
           , PASSWORD: $scope.password
         }).then(function(data){
             $scope.authenticated = true;
-            $state.reload();
+            if($window.location.pathname === '/auth/login')
+                $window.location.href = '/#/dashboard/overview';
+            else
+                $state.reload();
         }).catch(function(err){
             $scope.authenticated = false;
-            if($state.current.name === 'signin')
-                $window.location.href = '/auth/login';
+            // if($state.current.name === 'signin')
+                // $window.location.href = '/auth/login';
         });
     };
 

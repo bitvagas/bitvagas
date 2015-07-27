@@ -1,94 +1,94 @@
 block content
-    .main
-        .wrapper
-          .banner
-            .banner__cell.banner__cell--body
-              h2.banner__title
-                strong(translate="about.banner.slogan.strong")
-                span(translate="about.banner.slogan.title")
-              p.banner__p(translate="about.banner.text")
-              ul.banner__btns
-                li
-                  a.btn.btn--large.btn--primary(href='{{ public[lang]._data.index.site_url }post' translate="about.banner.btnPost")
+  .main
+      .wrapper
+        .banner
+          .banner__cell.banner__cell--body
+            h2.banner__title
+              strong(translate="about.banner.slogan.strong")
+              span(translate="about.banner.slogan.title")
+            p.banner__p(translate="about.banner.text")
+            ul.banner__btns
+              li
+                a.btn.btn--large.btn--primary(href='{{ public[lang]._data.index.site_url }post' translate="about.banner.btnPost")
 
-            .banner__cell.banner__cell--img
-              .banner__img
-                img(src='/img/{{ "about.banner_img" | translate }}.png', alt='')
+          .banner__cell.banner__cell--img
+            .banner__img
+              img(src='/img/{{ "about.banner_img" | translate }}.png', alt='')
 
-          .about#about
-            .about__head
-              h2.about__title(translate="about.about.title")
+        .about#about
+          .about__head
+            h2.about__title(translate="about.about.title")
 
-            .about__body(translate="about.about.text")
-            .started__body
-              .started-item
-                img.started-item__img(src="/img/github.png")
-                h3.started-item__title(translate="about.started.opensource.title")
-                p(translate="about.started.opensource.text")
-                a.btn.btn--primary(href="https://github.com/bitvagas/" target='_blank' translate="about.started.opensource.btn")
+          .about__body(translate="about.about.text")
+          .started__body
+            .started-item
+              img.started-item__img(src="/img/github.png")
+              h3.started-item__title(translate="about.started.opensource.title")
+              p(translate="about.started.opensource.text")
+              a.btn.btn--primary(href="https://github.com/bitvagas/" target='_blank' translate="about.started.opensource.btn")
 
-              .started-item
-                img.started-item__img(src="/img/team.png")
-                h3.started-item__title(translate="about.started.team.title")
-                p(translate="about.started.team.text")
-                a.btn.btn--primary(href="#team" translate="about.started.team.btn")
+            .started-item
+              img.started-item__img(src="/img/team.png")
+              h3.started-item__title(translate="about.started.team.title")
+              p(translate="about.started.team.text")
+              a.btn.btn--primary(href="#team" translate="about.started.team.btn")
 
-              .started-item
-                img.started-item__img(src="/img/donate.png")
-                h3.started-item__title(translate="about.started.support.title")
-                p(translate="about.started.support.text")
-                a.btn.btn--primary(href="#support" translate="about.started.support.btn")
+            .started-item
+              img.started-item__img(src="/img/donate.png")
+              h3.started-item__title(translate="about.started.support.title")
+              p(translate="about.started.support.text")
+              a.btn.btn--primary(href="#support" translate="about.started.support.btn")
 
-          .team#team
-            .team__head
-              h2.team__title(translate="about.team.title")
+        .team#team
+          .team__head
+            h2.team__title(translate="about.team.title")
 
-            .team__body
-              .team-item
-                a(href='https://github.com/Anderson-Juhasc' target='_blank').team-item__img
-                  img(src="/img/anderson-juhasc.png")
-                h3.team-item__title Anderson Juhasc
-                h4.team-item__subtitle Front-End/UI Developer
-                p(translate="about.team.anderson.text")
+          .team__body
+            .team-item
+              a(href='https://github.com/Anderson-Juhasc' target='_blank').team-item__img
+                img(src="/img/anderson-juhasc.png")
+              h3.team-item__title Anderson Juhasc
+              h4.team-item__subtitle Front-End/UI Developer
+              p(translate="about.team.anderson.text")
 
-              .team-item
-                a(href='https://github.com/cesardeazevedo/' target='_blank').team-item__img
-                  img(src="/img/cesar-azevedo.png")
-                h3.team-item__title Cesar Azevedo
-                h4.team-item__subtitle Core Developer
-                p(translate="about.team.cesar.text")
+            .team-item
+              a(href='https://github.com/cesardeazevedo/' target='_blank').team-item__img
+                img(src="/img/cesar-azevedo.png")
+              h3.team-item__title Cesar Azevedo
+              h4.team-item__subtitle Core Developer
+              p(translate="about.team.cesar.text")
 
-              .team-item
-                a(href='https://github.com/randsonjs' target='_blank').team-item__img
-                  img(src="/img/randson-oliveira.png")
-                h3.team-item__title Randson Oliveira
-                h4.team-item__subtitle Front-End Developer
-                p(translate="about.team.randson.text")
+            .team-item
+              a(href='https://github.com/randsonjs' target='_blank').team-item__img
+                img(src="/img/randson-oliveira.png")
+              h3.team-item__title Randson Oliveira
+              h4.team-item__subtitle Front-End Developer
+              p(translate="about.team.randson.text")
 
-              .team-item
-                a(href='https://github.com/pinhopro' target='_blank').team-item__img
-                  img(src="/img/rodrigo-souza.png")
-                h3.team-item__title Rodrigo Souza
-                h4.team-item__subtitle(translate="about.team.rodrigo.subtitle")
-                p(translate="about.team.rodrigo.text")
+            .team-item
+              a(href='https://github.com/pinhopro' target='_blank').team-item__img
+                img(src="/img/rodrigo-souza.png")
+              h3.team-item__title Rodrigo Souza
+              h4.team-item__subtitle(translate="about.team.rodrigo.subtitle")
+              p(translate="about.team.rodrigo.text")
 
-          .donate#support
-            .donate__head
-              h2.donate__title(translate="about.support.title")
-            .donate__body
-              p.donate__address BTC: 1MckjA4yZWgwo4kXFnE6ikbfPPuB3yCcx3</a>
-              a.donate__qrcode(href='bitcoin:1MckjA4yZWgwo4kXFnE6ikbfPPuB3yCcx3?label=BitVagas&message=Donation%20for%20Bitvagas')
-                img(src='https://chart.googleapis.com/chart?chs=200x200&cht=qr&chld=L|0&chl=bitcoin:1MckjA4yZWgwo4kXFnE6ikbfPPuB3yCcx3?label=BitVagas&message=Donation%20for%20Bitvagas')
+        .donate#support
+          .donate__head
+            h2.donate__title(translate="about.support.title")
+          .donate__body
+            p.donate__address BTC: 1MckjA4yZWgwo4kXFnE6ikbfPPuB3yCcx3</a>
+            a.donate__qrcode(href='bitcoin:1MckjA4yZWgwo4kXFnE6ikbfPPuB3yCcx3?label=BitVagas&message=Donation%20for%20Bitvagas')
+              img(src='https://chart.googleapis.com/chart?chs=200x200&cht=qr&chld=L|0&chl=bitcoin:1MckjA4yZWgwo4kXFnE6ikbfPPuB3yCcx3?label=BitVagas&message=Donation%20for%20Bitvagas')
 
-          .invite#invite
-            .invite__head
-              h2.invite__title(translate="about.invite.title")
+        .invite#invite
+          .invite__head
+            h2.invite__title(translate="about.invite.title")
 
-            .invite__body
-              p(translate="about.invite.text")
-              form#invite_form.invite-form(action='https://docs.google.com/forms/d/1zYmnXVRPmFieu_JBKJ33R0-3IgGEkeiNWoIB_YpmaUE/formResponse' method='POST' target='_self')
-                input#entry_2101149896.invite-form__input.input(type="email" name="entry.2101149896" value="" placeholder='{{ "about.invite.input.placeholder" | translate }}' dir="auto" aria-label='Email: {{ "about.invite.input.title" | translate }}' aria-required="true" required="" title='{{ "about.invite.input.title" | translate }}')
-                input(type="hidden", name="draftResponse", value="[,,'7057374124153364777']\ ")
-                input(type="hidden", name="pageHistory", value="0")
-                input(type="hidden", name="fbzx", value="7057374124153364777")
-                input#ss-submit.invite-form__btn.btn.btn--primary(type='submit' name='submit' value='{{ "about.invite.btn" | translate }}')
+          .invite__body
+            p(translate="about.invite.text")
+            form#invite_form.invite-form(action='https://docs.google.com/forms/d/1zYmnXVRPmFieu_JBKJ33R0-3IgGEkeiNWoIB_YpmaUE/formResponse' method='POST' target='_self')
+              input#entry_2101149896.invite-form__input.input(type="email" name="entry.2101149896" value="" placeholder='{{ "about.invite.input.placeholder" | translate }}' dir="auto" aria-label='Email: {{ "about.invite.input.title" | translate }}' aria-required="true" required="" title='{{ "about.invite.input.title" | translate }}')
+              input(type="hidden", name="draftResponse", value="[,,'7057374124153364777']\ ")
+              input(type="hidden", name="pageHistory", value="0")
+              input(type="hidden", name="fbzx", value="7057374124153364777")
+              input#ss-submit.invite-form__btn.btn.btn--primary(type='submit' name='submit' value='{{ "about.invite.btn" | translate }}')

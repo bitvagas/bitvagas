@@ -1,10 +1,10 @@
-h1 Overview
+h1 Visão Geral
 
 .dashboard__overview--sections.dashboard__my--jobs
   .dashboard__overview
     h4 Vagas que voce aplicou
 
-    div(ng-if='currentUser.job_appliers.length != 0')
+    div(ng-if='currentUser.job_appliers.length !== 0')
       ul.jobs
         li(ng-repeat='apply in currentUser.job_appliers')
           a.jobs-item
@@ -62,8 +62,12 @@ ul.jobs.dashboard__my--jobs
 
     div(ng-if="job.job_appliers.length !== 0" ng-show='$parent.open == $index')
       .dashboard__overview--applicant(ng-repeat='applicant in job.job_appliers')
-        .right(am-time-ago='applicant.createdAt')
         h4 {{ applicant.NAME }}
+        .right
+          span(ng-if='applicant.user.LOCATION') {{ applicant.user.LOCATION }}
+            i.mdi.mdi-map-marker-radius
+            br
+          .right(am-time-ago='applicant.createdAt')
         a(href="mailto:{{ applicant.EMAIL }}")
           i.mdi.mdi-email
           span {{ applicant.EMAIL }}
@@ -74,12 +78,12 @@ ul.jobs.dashboard__my--jobs
           span(ng-bind-html='applicant.LINKS | linky:"_blank"')
         .applicant--links
           ul
-            li
-              a
+            li(ng-if='applicant.user.LINKEDIN_PROFILE')
+              a(href='{{ applicant.user.LINKEDIN_PROFILE }}' target='_blank')
                 i.mdi.mdi-linkedin-box
                 | LinkedIn
             li
-              a
+              a(href='')
                 i.mdi.mdi-account
                 | Profile
     .dashboard__overview--applicant(ng-if="job.job_appliers.length === 0" ng-show='$parent.open == $index')

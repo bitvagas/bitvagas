@@ -1,26 +1,25 @@
-block content
-  form.signup(name="form" ng-submit="form.$valid && signup(user)")
-    .signup__cell.signup__cell--main
-      header.signup__head
-        h1.signup__title(translate="signup.title")
+form.signup(name="form" ng-submit="form.$valid && signup(user)")
+  .signup__cell.signup__cell--main
+    header.signup__head
+      h1.signup__title(translate="signup.title")
 
-      .signup__body
-        fieldset.signup-fieldset
-          ul.signup-form
-            li
-              .signup-form__input
-                ng-input(type='text' icon='icon icon--fumi mdi mdi-account' theme='fumi' ng-model='NAME' label='{{ "signup.name" | translate }}' name='NAME' title='Usuário Obrigatório' required)
-            li
-              .signup-form__input
-                ng-input(type='email' icon='icon icon--fumi mdi mdi-email-outline' theme='fumi' ng-model='EMAIL' label='{{ "signup.email" | translate }}' name='EMAIL' title='Email Obrigatório' required)
-            li
-              .signup-form__input
-                ng-input(type='password' icon='icon icon--fumi mdi mdi-lock' theme='fumi' pattern='.{8,}' title='Pelo menos 8 caracteres' ng-model='PASSWORD' label='{{ "signup.password" | translate }}' name='PASSWORD' required)
-            li
-              .signup-form__input
-                ng-input(type='password' icon='icon icon--fumi mdi mdi-lock' theme='fumi' pattern='.{8,}' title='Pelo menos 8 caracteres' ng-model='REPASSWORD' label='{{ "signup.repassword" | translate }}' name='REPASSWORD' required)
+    .signup__body
+      fieldset.signup-fieldset
+        ul.signup-form
+          li
+            .signup-form__input
+              ng-input(type='text' icon='icon icon--fumi mdi mdi-account' theme='fumi' ng-model='NAME' label='{{ "signup.name" | translate }}' name='NAME' title='Usuário Obrigatório' required)
+          li
+            .signup-form__input
+              ng-input(type='email' icon='icon icon--fumi mdi mdi-email-outline' theme='fumi' ng-model='EMAIL' label='{{ "signup.email" | translate }}' name='EMAIL' title='Email Obrigatório' required)
+          li
+            .signup-form__input
+              ng-input(type='password' icon='icon icon--fumi mdi mdi-lock' theme='fumi' pattern='.{8,}' title='Pelo menos 8 caracteres' ng-model='PASSWORD' label='{{ "signup.password" | translate }}' name='PASSWORD' required)
+          li
+            .signup-form__input
+              ng-input(type='password' icon='icon icon--fumi mdi mdi-lock' theme='fumi' pattern='.{8,}' title='Pelo menos 8 caracteres' ng-model='REPASSWORD' label='{{ "signup.repassword" | translate }}' name='REPASSWORD' required)
 
-      .signup-action
-        button.signup-action__btn.btn.btn--medium.btn--primary(value='{{ "signup.button" | translate }}' translate="signup.button")
+    .signup-action
+      button.signup-action__btn.btn.btn--medium.btn--primary(value='{{ "signup.button" | translate }}' translate="signup.button")
 
-    .signup__cell.signup__cell--aside
+  .signup__cell.signup__cell--aside

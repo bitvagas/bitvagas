@@ -1,7 +1,8 @@
-h2 Jobs
-
-a(ui-sref='dashboard.jobs.create')
-  i.mdi.mdi-plus-circle
+.dashboard__title
+  h1.dashboard__title--cell Jobs
+  .dashboard__title--cell
+    a(ui-sref='dashboard.jobs.create')
+      i.mdi.mdi-plus-circle
 
 ul.jobs
   li(ng-repeat='job in currentUser.jobs')
@@ -15,7 +16,7 @@ ul.jobs
 
       .jobs-item__cell.jobs-item__cell--meta
         .jobs-item__type
-          .label.label--fulltime {{ job.job_type.NAME }}
+          .label(class='label--{{ job.job_type.NAME }}') {{ job.job_type.NAME }}
         .jobs-item__date(am-time-ago='job.createdAt')
     .accodion(ng-show="$parent.open == $index")
       p Nenhuma pessoa aplicou para esta vaga ainda

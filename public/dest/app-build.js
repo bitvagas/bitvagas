@@ -8,6 +8,7 @@ angular.module('bitvagas',
     ,'ngCookies'
     ,'ngInput'
     ,'angularMoment'
+    ,'oitozero.ngSweetAlert'
     ,'bitvagas.main'
     ,'bitvagas.jobs'
     ,'bitvagas.org'
@@ -371,7 +372,6 @@ function OverviewController($rootScope, $scope, lodash){
                             .flatten()
                             .size()
                             .value();
-        console.log('Counting');
     } else
         $scope.AppliersLength = 0;
 
@@ -682,7 +682,13 @@ function Interceptor($rootScope, $q){
                 if(response.data.destroy === true)
                     $rootScope.logout();
 
-                console.log(response);
+                new NotificationFx({
+                    message : '<div class="ns-thumb"><img src="img/template.png"/></div><div class="ns-content"><span>'+response.data.message+'</span></div>'
+                  , layout : 'other'
+                  , effect : 'thumbslider'
+                  , ttl : 9000
+                  , type : 'notice'
+                });
                 $rootScope.$broadcast('unauthorized');
                 return $q.reject(response);
             }
@@ -702,8 +708,8 @@ function Interceptor($rootScope, $q){
 angular.module('bitvagas.org.controllers',[])
 .controller('OrgController', OrgController);
 
-OrgController.$inject = ['$scope', '$state', 'OrgService', 'ErrorHandling'];
-function OrgController($scope, $state, OrgService, ErrorHandling){
+OrgController.$inject = ['$scope', '$state', 'OrgService', 'SweetAlert'];
+function OrgController($scope, $state, OrgService, SweetAlert){
 
     if($state.params.OrgID !== undefined) {
         OrgService.findById($state.params.OrgID)
@@ -717,7 +723,6 @@ function OrgController($scope, $state, OrgService, ErrorHandling){
             GoBack();
         }, function(err){
             console.log(err);
-            $scope.errors = ErrorHandling.getErrors(err.data);
         });
     };
 
@@ -726,18 +731,39 @@ function OrgController($scope, $state, OrgService, ErrorHandling){
             GoBack();
         }, function(err){
             console.log(err);
-            $scope.errors = ErrorHandling.getErrors(err.data);
         });
     };
 
     $scope.delete = function(id){
-        //TODO: Message confirmation
-        OrgService.delete(id).then(function(data){
-            GoBack();
-        }, function(err){
-            console.log(err);
-            $scope.errors = ErrorHandling.getErrors(err.data);
-        });
+
+        SweetAlert.swal({
+            title: "Delete Organization"
+          , text: "Deseja deletar essa organização"
+          , type: "warning"
+          , showCancelButton: true
+          , confirmButtonColor: "#DD6B55",confirmButtonText: "Sim, deletar!"
+          , cancelButtonText: "No"
+          , closeOnConfirm: false
+          , closeOnCancel: false }
+          , function(isConfirm){
+                if (isConfirm) {
+                    SweetAlert.swal({ title: "Deleted!"
+                                    , text: "Organização deletada."
+                                    , type: "success"
+                                    , confirmButtonColor: "#29B5DF"
+                                    });
+                    OrgService.delete(id).then(function(data){
+                        GoBack();
+                    }, function(err){
+                        console.log(err);
+                    });
+                } else {
+                    SweetAlert.swal({ title: "Cancelled"
+                                    , type: "error"
+                                    , confirmButtonColor: "#29B5DF"
+                                    });
+                }
+            });
     };
 
     function GoBack(){
@@ -788,11 +814,14 @@ function AuthController ($rootScope, $scope, $state, $window, $auth, UserService
           , PASSWORD: $scope.password
         }).then(function(data){
             $scope.authenticated = true;
-            $state.reload();
+            if($window.location.pathname === '/auth/login')
+                $window.location.href = '/#/dashboard/overview';
+            else
+                $state.reload();
         }).catch(function(err){
             $scope.authenticated = false;
-            if($state.current.name === 'signin')
-                $window.location.href = '/auth/login';
+            // if($state.current.name === 'signin')
+                // $window.location.href = '/auth/login';
         });
     };
 

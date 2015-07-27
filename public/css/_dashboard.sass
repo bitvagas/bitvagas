@@ -19,19 +19,49 @@
     width: 70%
 
 .dashboard__cell--aside
-  background: darken(#1283b0, 10%)
+  background: #1283b0
   color: #fff
   padding: 36px
   text-align: center
+
+  i.mdi
+    font-size:170%
+    vertical-align: middle
+    margin-left: 10px
+
+  .profile--info
+    padding-right: 32px
+    font-size: 14px
+    text-align: right
+
   a
     color: #fff
     display: block
     padding: 12px
+    padding-right: 32px
+    text-align: right
+    transition: all 0.2s ease
     &:hover
-      background: #1283b0
+      background: lighten(#1283b0, 10%)
+      padding-right: 36px
   +media-query(desk)
     padding: 36px 0
     width: 30%
+
+  .linkedin
+    width: 240px
+    border: 1px solid
+    border-radius: 4px
+    margin: auto
+    cursor: pointer
+    background-image: linear-gradient(darken(#007BB6, 5%), darken(#00699B,5%))
+    border: 1px solid #0073AE
+    &:hover
+      padding-right: 32px!important
+      background-image: linear-gradient(darken(#007BB6, 2%), darken(#00699B,2%))!important
+
+    i.mdi
+      font-size: 120%
 
 .dashboard__img
   border-radius: 50%
@@ -47,18 +77,20 @@
   padding: 0
   > li
 
-.profile--info
-  font-size: 14px
+.dashboard__title
+  display: table
+  border-bottom: 1px solid #29B5DF
+  padding-bottom: 5px
+  margin-bottom: 30px
+  width: 100%
 
-.linkedin
-  width: 240px
-  border: 1px solid
-  border-radius: 4px
-  margin: auto
-  cursor: pointer
-  background-image: linear-gradient(#007BB6,#00699B)
-  border: 1px solid #0073AE
-  box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, .2)
+
+.dashboard__title--cell
+  display: table-cell
+  width: 100%
+
+
+
 
 .dashboard__overview--sections
   display: table

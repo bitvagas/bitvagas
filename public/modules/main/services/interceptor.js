@@ -22,6 +22,13 @@ function Interceptor($rootScope, $q){
                 if(response.data.destroy === true)
                     $rootScope.logout();
 
+                new NotificationFx({
+                    message : '<div class="ns-thumb"><img src="img/template.png"/></div><div class="ns-content"><span>'+response.data.message+'</span></div>'
+                  , layout : 'other'
+                  , effect : 'thumbslider'
+                  , ttl : 9000
+                  , type : 'notice'
+                });
                 $rootScope.$broadcast('unauthorized');
                 return $q.reject(response);
             }

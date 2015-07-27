@@ -1,8 +1,5 @@
-h4 Edit an organization
-
-ul
-  li(ng-repeat='error in errors')
-    label {{ error }}
+.dashboard__title
+  h1 Edit an organization
 
 form
   ul.create-form
@@ -14,5 +11,5 @@ form
       ng-input(theme='fumi' icon='icon icon--fumi mdi mdi-link' label='Url' type='text' ng-model='org.URL' name='URL')
     hr
 
-  a.btn.btn--medium.btn--primary(ui-sref="dashboard.organization.list") Voltar
+  a.btn.btn--medium(ui-sref="dashboard.organization.list") Voltar
   button.btn.btn--medium.btn--primary(type="submit" ng-click='edit(org)') Alterar Organização
