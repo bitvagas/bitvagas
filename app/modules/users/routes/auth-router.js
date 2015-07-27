@@ -1,7 +1,8 @@
-var passport = require('passport')
-  , user     = require('../controllers/user-controller')
-  , token    = require('../controllers/token-jwt')
-  , strategy = require('../controllers/passport');
+var passport   = require('passport')
+  , user       = require('../controllers/user-controller')
+  , freelancer = require('../controllers/freelancer-controller')
+  , token      = require('../controllers/token-jwt')
+  , strategy   = require('../controllers/passport');
 
 module.exports = function(app){
 
@@ -28,13 +29,6 @@ module.exports = function(app){
         })(request, response, next);
     });
 
-    app.route('/auth/linkedin')
-    .get(passport.authenticate('linkedin', { state : 'state' }), function(request, response){});
-
     app.route('/auth/linkedin/callback')
-    .get(passport.authenticate('linkedin',
-        { successRedirect : '/#/dashboard/profile'
-        , failureRedirect : '/auth'
-        })
-    );
+    .post(user.ensureAuthenticated, freelancer.linkedInCallback);
 };

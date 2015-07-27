@@ -2,7 +2,7 @@ h2 Minha Conta
 
 ul.profile
   li
-    img(ng-src="{{ currentUser.PICTURE ? currentUser.PICTURE : 'img/unknown.svg' }}")
+    img.thumb(ng-src="{{ currentUser.PICTURE ? currentUser.PICTURE : 'img/unknown.svg' }}")
     label.picture
      | Profile Picture
      | <br>
@@ -20,9 +20,10 @@ br
 ul.profile
   li
     a.btn.btn--merdium.btn--primary(href="#" ng-click="UpdateProfile()") Update Profile
-    a.btn.linkedin(href="/auth/linkedin")
+    a.btn.linkedin(ng-click="linkedIn()")
       i.mdi.mdi-linkedin-box
-      |  Conectar LinkedIn
+      span(ng-if='currentUser.LINKEDIN_ID === null')  Conectar LinkedIn
+      span(ng-if='currentUser.LINKEDIN_ID !== null')  Atualizar LinkedIn
 
 br
 

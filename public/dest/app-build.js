@@ -41,6 +41,12 @@ angular.module('bitvagas',
         $authProvider.signupUrl = '/signup';
         $authProvider.signupRedirect = '/signup/verify';
 
+        $authProvider.linkedin({
+            clientId: '78h4jk2ak53yof'
+          , url: '/auth/linkedin/callback'
+          , redirectUri: (window.location.origin || window.location.protocol + '//' + window.location.host)+'/auth/linkedin/callback'
+        });
+
         $httpProvider.interceptors.push('Interceptor');
 
     }).run(function($rootScope, $state, $auth, $window, UserService){
@@ -60,9 +66,13 @@ angular.module('bitvagas',
                 deleteCurrentUser();
         });
 
+        $rootScope.linkedIn = function(){
+            $auth.authenticate('linkedin');
+        };
+
         $window.onload = function() {
             if($rootScope.isAuthenticated())
-                updateUser();
+                $rootScope.updateUser();
         };
 
         $rootScope.$on('unauthorized', function(){
@@ -70,7 +80,7 @@ angular.module('bitvagas',
         });
 
         $rootScope.$on('update-me', function(){
-            updateUser();
+            $rootScope.updateUser();
         });
 
         $rootScope.logout = function(){
@@ -83,13 +93,13 @@ angular.module('bitvagas',
             return $auth.isAuthenticated();
         };
 
-        function updateUser(){
+        $rootScope.updateUser = function(){
             UserService.me().then(function(data){
                 console.log(data);
                 $window.localStorage.currentUser = $window.btoa(JSON.stringify(data.data));
                 $rootScope.currentUser = data.data;
             });
-        }
+        };
 
         function deleteCurrentUser(){
             delete $rootScope.currentUser;
@@ -107,6 +117,19 @@ angular.module('bitvagas.dashboard', [ 'bitvagas.dashboard.controllers' ])
         , templateUrl  : '/modules/dashboard/views/dashboard'
         , controller   : 'DashBoardController'
         , authenticate : true
+        , resolve      : {
+            authenticated: function($rootScope, $q, UserService) {
+                var deferred = $q.defer();
+                if(!$rootScope.currentUser)
+                    UserService.me().then(function(data){
+                        $rootScope.updateUser(data);
+                        deferred.resolve();
+                    });
+                    else deferred.resolve();
+
+                    return deferred.promise;
+            }
+        }
     })
     .state('dashboard.overview', {
         url : '/overview'
@@ -337,20 +360,26 @@ angular.module('bitvagas.dashboard.controllers')
 .controller('OverviewController', OverviewController);
 
 
-OverviewController.$inject = ['$scope', 'lodash'];
-function OverviewController($scope, lodash){
+OverviewController.$inject = ['$rootScope', '$scope', 'lodash'];
+function OverviewController($rootScope, $scope, lodash){
 
-    if($scope.currentUser.jobs)
-        $scope.AppliersLength = lodash
+    if($scope.currentUser &&
+       $scope.currentUser.jobs) {
+       $scope.AppliersLength = lodash
                             .chain($scope.currentUser.jobs)
                             .pluck('job_appliers')
                             .flatten()
                             .size()
                             .value();
+        console.log('Counting');
+    } else
+        $scope.AppliersLength = 0;
 
     $scope.toggle = function(index, id){
-        if($scope.$parent.open == index)
+        if($scope.$parent.open == index) {
+            $scope.$parent.open = undefined;
             return;
+        }
 
         $scope.$parent.open = index;
     };
@@ -492,11 +521,12 @@ function JobDashListController($scope, $sce){
 
     $scope.toggle = function(index, id) {
 
-        if($scope.$parent.open == index)
+        if($scope.$parent.open == index) {
+            $scope.$parent.open = undefined;
             return;
+        }
 
         setUrl(id);
-
         $scope.$parent.open = index;
     };
 }
@@ -652,6 +682,7 @@ function Interceptor($rootScope, $q){
                 if(response.data.destroy === true)
                     $rootScope.logout();
 
+                console.log(response);
                 $rootScope.$broadcast('unauthorized');
                 return $q.reject(response);
             }
@@ -757,7 +788,6 @@ function AuthController ($rootScope, $scope, $state, $window, $auth, UserService
           , PASSWORD: $scope.password
         }).then(function(data){
             $scope.authenticated = true;
-            $rootScope.$broadcast('update-me');
             $state.reload();
         }).catch(function(err){
             $scope.authenticated = false;

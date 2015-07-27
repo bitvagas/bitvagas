@@ -41,6 +41,12 @@ angular.module('bitvagas',
         $authProvider.signupUrl = '/signup';
         $authProvider.signupRedirect = '/signup/verify';
 
+        $authProvider.linkedin({
+            clientId: '78h4jk2ak53yof'
+          , url: '/auth/linkedin/callback'
+          , redirectUri: (window.location.origin || window.location.protocol + '//' + window.location.host)+'/auth/linkedin/callback'
+        });
+
         $httpProvider.interceptors.push('Interceptor');
 
     }).run(function($rootScope, $state, $auth, $window, UserService){
@@ -60,9 +66,13 @@ angular.module('bitvagas',
                 deleteCurrentUser();
         });
 
+        $rootScope.linkedIn = function(){
+            $auth.authenticate('linkedin');
+        };
+
         $window.onload = function() {
             if($rootScope.isAuthenticated())
-                updateUser();
+                $rootScope.updateUser();
         };
 
         $rootScope.$on('unauthorized', function(){
@@ -70,7 +80,7 @@ angular.module('bitvagas',
         });
 
         $rootScope.$on('update-me', function(){
-            updateUser();
+            $rootScope.updateUser();
         });
 
         $rootScope.logout = function(){
@@ -83,13 +93,13 @@ angular.module('bitvagas',
             return $auth.isAuthenticated();
         };
 
-        function updateUser(){
+        $rootScope.updateUser = function(){
             UserService.me().then(function(data){
                 console.log(data);
                 $window.localStorage.currentUser = $window.btoa(JSON.stringify(data.data));
                 $rootScope.currentUser = data.data;
             });
-        }
+        };
 
         function deleteCurrentUser(){
             delete $rootScope.currentUser;

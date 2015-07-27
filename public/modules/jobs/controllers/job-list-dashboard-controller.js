@@ -10,11 +10,12 @@ function JobDashListController($scope, $sce){
 
     $scope.toggle = function(index, id) {
 
-        if($scope.$parent.open == index)
+        if($scope.$parent.open == index) {
+            $scope.$parent.open = undefined;
             return;
+        }
 
         setUrl(id);
-
         $scope.$parent.open = index;
     };
 }

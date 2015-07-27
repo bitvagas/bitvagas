@@ -18,23 +18,24 @@ module.exports = function(sequelize, DataTypes){
               type: DataTypes.STRING
             , allowNull : false
         }
-        , HEADLINE       : DataTypes.STRING
-        , SUMMARY        : DataTypes.STRING
-        , LOCATION       : DataTypes.STRING
-        , POSITION       : DataTypes.STRING
-        , PICTURE        : DataTypes.STRING
-        , TOKEN          : DataTypes.STRING
-        , RESETTOKEN     : DataTypes.STRING
-        , RESETEXPIRES   : DataTypes.DATE
-        , LINKEDIN_ID    : DataTypes.STRING
-        , LINKEDIN_TOKEN : DataTypes.STRING
-        , NOTIFY_JOBS    : {
-            type         : DataTypes.BOOLEAN
-          , defaultValue : true
+        , HEADLINE         : DataTypes.STRING
+        , SUMMARY          : DataTypes.STRING
+        , LOCATION         : DataTypes.STRING
+        , POSITION         : DataTypes.STRING
+        , PICTURE          : DataTypes.STRING
+        , TOKEN            : DataTypes.STRING
+        , RESETTOKEN       : DataTypes.STRING
+        , RESETEXPIRES     : DataTypes.DATE
+        , LINKEDIN_ID      : DataTypes.STRING
+        , LINKEDIN_TOKEN   : DataTypes.STRING
+        , LINKEDIN_PROFILE : DataTypes.STRING
+        , NOTIFY_JOBS      : {
+            type           : DataTypes.BOOLEAN
+          , defaultValue   : true
         }
-        , NOTIFY_APPLIES : {
-            type         : DataTypes.BOOLEAN
-          , defaultValue : true
+        , NOTIFY_APPLIES   : {
+            type           : DataTypes.BOOLEAN
+          , defaultValue   : true
         }
     }, {
         classMethods  : {

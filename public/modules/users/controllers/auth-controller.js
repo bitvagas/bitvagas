@@ -13,7 +13,6 @@ function AuthController ($rootScope, $scope, $state, $window, $auth, UserService
           , PASSWORD: $scope.password
         }).then(function(data){
             $scope.authenticated = true;
-            $rootScope.$broadcast('update-me');
             $state.reload();
         }).catch(function(err){
             $scope.authenticated = false;

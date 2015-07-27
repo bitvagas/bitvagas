@@ -8,6 +8,19 @@ angular.module('bitvagas.dashboard', [ 'bitvagas.dashboard.controllers' ])
         , templateUrl  : '/modules/dashboard/views/dashboard'
         , controller   : 'DashBoardController'
         , authenticate : true
+        , resolve      : {
+            authenticated: function($rootScope, $q, UserService) {
+                var deferred = $q.defer();
+                if(!$rootScope.currentUser)
+                    UserService.me().then(function(data){
+                        $rootScope.updateUser(data);
+                        deferred.resolve();
+                    });
+                    else deferred.resolve();
+
+                    return deferred.promise;
+            }
+        }
     })
     .state('dashboard.overview', {
         url : '/overview'

@@ -10,7 +10,7 @@ ul.breadcrumb
   .dashboard__body
     aside.dashboard__cell.dashboard__cell--aside
       .dashboard-aside
-        img(ng-src="{{ user.PICTURE ? user.PICTURE : 'img/unknown.svg' }}").dashboard__img
+        img(ng-src="{{ currentUser.PICTURE ? currentUser.PICTURE : 'img/unknown.svg' }}").dashboard__img
         h5 {{ currentUser.NAME }}
         .profile--info
           p
@@ -19,8 +19,8 @@ ul.breadcrumb
           p
             i.mdi.mdi-clock
             |   Joined on {{ currentUser.createdAt | date }}
-        p
-          a.linkedin(href="/auth/linkedin")
+        p(ng-if="currentUser.LINKEDIN_ID === null")
+          a.linkedin(ng-click='linkedIn()')
             i.mdi.mdi-linkedin-box
             |  Conectar LinkedIn
 
