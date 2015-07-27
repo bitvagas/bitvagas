@@ -6,7 +6,11 @@ var express  = require('express')
   , token    = require('./token-jwt')
   , db       = require(root + '/app/models')
   , includes = [
-        { model : db.job, include : [db.job_type, db.job_apply] }
+        { model : db.job, include : [
+            { model: db.job_type }
+          , { model: db.job_apply, include: [{ model: db.user, attributes: ['LOCATION', 'PICTURE', 'LINKEDIN_PROFILE'] }] }
+          ]
+        }
       , { model : db.org }
       , { model : db.job_apply, include: [db.job] }
   ];
