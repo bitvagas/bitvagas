@@ -4,10 +4,10 @@ var gulp        = require('gulp')
   , bower       = require('main-bower-files')
   , fixtures    = require('sequelize-fixtures')
   , mocha       = require('gulp-mocha')
-  , browserSync = require('browser-sync');
+  , browserSync = require('browser-sync').create();
 
 gulp.task('browser-sync', ['nodemon'], function(){
-    browserSync.init(null, {
+    browserSync.init(__dirname, {
         proxy: "localhost:3000"
       , port: 9000
       , open: false
