@@ -45,7 +45,6 @@ angular.module('bitvagas',
         $authProvider.linkedin({
             clientId: '78h4jk2ak53yof'
           , url: '/auth/linkedin/callback'
-          , redirectUri: (window.location.origin || window.location.protocol + '//' + window.location.host)+'/auth/linkedin/callback'
         });
 
         $httpProvider.interceptors.push('Interceptor');
