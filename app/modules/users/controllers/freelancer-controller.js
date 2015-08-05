@@ -64,7 +64,7 @@ module.exports = {
 
                 db.user.find({ where : { LINKEDIN_ID : profile.id }}).then(function(user){
 
-                    if(req.user.id !== user.id &&
+                    if(user && req.user.id !== user.id &&
                        req.user.LINKEDIN_ID !== profile.id)
                         return res.status(401).json({ message: 'This account is already connected' });
 
