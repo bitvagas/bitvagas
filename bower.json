@@ -13,7 +13,6 @@
     "angular-translate-loader-static-files": "~2.7.2",
     "angular-translate-storage-local": "~2.7.2",
     "angular-sanitize": "1.4.0",
-    "pg-ng-dropdown": "*",
     "ng-lodash": "~0.2.3",
     "polymer": "~0.9.4",
     "twitter-button": "~0.2.1",

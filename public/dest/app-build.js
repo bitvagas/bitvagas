@@ -161,6 +161,43 @@ angular.module('bitvagas.dashboard', [ 'bitvagas.dashboard.controllers' ])
     });
 });
 
+angular.module('bitvagas.main',
+    ['bitvagas.main.factory'
+    ,'bitvagas.main.controllers'
+    ])
+    .config(function($urlRouterProvider, $stateProvider){
+
+        $urlRouterProvider.otherwise('/');
+        $stateProvider
+        .state('index', {
+            url: '/'
+          , views        : {
+              ''         : {
+                    templateUrl     : 'modules/main/views/index'
+              }
+              , 'job-list@index'    : {
+                    templateUrl     : 'modules/jobs/views/job-list'
+                  , controller      : 'JobListController'
+              }
+              , 'job-sidebar@index' : {
+                    templateUrl     : 'modules/jobs/views/job-sidebar'
+              }
+          }
+        })
+        .state('about', {
+            url: '/about'
+          , templateUrl: 'modules/main/views/about'
+        })
+        .state('terms', {
+            url: '/terms'
+          , templateUrl: 'modules/main/views/terms'
+        })
+        .state('contact', {
+            url: '/contact'
+          , templateUrl: 'modules/main/views/contact'
+        });
+    });
+
 angular.module('bitvagas.jobs',
     [ 'ui.router'
     , 'bitvagas.jobs.controllers'
@@ -243,43 +280,6 @@ angular.module('bitvagas.jobs',
           , params       : { data : {} }
           , controller   : 'JobCreateController'
           , authenticate : true
-        });
-    });
-
-angular.module('bitvagas.main',
-    ['bitvagas.main.factory'
-    ,'bitvagas.main.controllers'
-    ])
-    .config(function($urlRouterProvider, $stateProvider){
-
-        $urlRouterProvider.otherwise('/');
-        $stateProvider
-        .state('index', {
-            url: '/'
-          , views        : {
-              ''         : {
-                    templateUrl     : 'modules/main/views/index'
-              }
-              , 'job-list@index'    : {
-                    templateUrl     : 'modules/jobs/views/job-list'
-                  , controller      : 'JobListController'
-              }
-              , 'job-sidebar@index' : {
-                    templateUrl     : 'modules/jobs/views/job-sidebar'
-              }
-          }
-        })
-        .state('about', {
-            url: '/about'
-          , templateUrl: 'modules/main/views/about'
-        })
-        .state('terms', {
-            url: '/terms'
-          , templateUrl: 'modules/main/views/terms'
-        })
-        .state('contact', {
-            url: '/contact'
-          , templateUrl: 'modules/main/views/contact'
         });
     });
 
@@ -424,6 +424,89 @@ function AuthenticationService($q, $http, $state){
         }
     };
 }
+
+angular.module('bitvagas.main.controllers', [])
+.controller('MainController', MainController);
+
+
+MainController.$inject = ['$scope', '$translate'];
+
+function MainController($scope, $translate){
+    $scope.setLang = function(langKey) {
+        $translate.use(langKey);
+    };
+}
+
+angular.module('bitvagas.main.factory',[])
+.factory('ErrorHandling', function(){
+
+    var handler = {};
+
+    handler.getErrors = function(data){
+        var errorList = [];
+        if(typeof data === 'object')
+            if(data.errors !== undefined)
+                //Get a list of errors
+                for(var errorIndex in data.errors)
+                    errorList.push(data.errors[errorIndex].message);
+            else
+                errorList.push(data.message);
+        else
+            //Single error
+            errorList.push(data);
+
+        return errorList;
+    }
+
+    return handler
+});
+
+angular.module('bitvagas.main.factory')
+.factory('Interceptor', Interceptor);
+
+Interceptor.$inject = ['$rootScope', '$q'];
+function Interceptor($rootScope, $q){
+    return {
+
+        response: function(response){
+
+            if((response.status === 201 ||
+                response.status === 204) &&
+                !/\/api\/jobs\/\d\/apply/.exec(response.config.url))
+                $rootScope.$broadcast('update-me');
+
+            return response;
+        }
+
+        , responseError: function(response){
+
+            if(response.status === 401){
+
+                if(response.data.destroy === true)
+                    $rootScope.logout();
+
+                new NotificationFx({
+                    message : '<div class="ns-thumb"><img src="img/template.png"/></div><div class="ns-content"><span>'+response.data.message+'</span></div>'
+                  , layout : 'other'
+                  , effect : 'thumbslider'
+                  , ttl : 9000
+                  , type : 'notice'
+                });
+                $rootScope.$broadcast('unauthorized');
+                return $q.reject(response);
+            }
+
+            if(response.status === 400 ||
+               response.status === 404){
+                //show error
+                return $q.reject(response);
+            }
+
+            return response;
+        }
+    };
+}
+
 
 angular.module('bitvagas.jobs.controllers',[]);
 
@@ -620,89 +703,6 @@ function JobService($http){
     this.appliers = function(job){
     };
 }
-
-angular.module('bitvagas.main.controllers', [])
-.controller('MainController', MainController);
-
-
-MainController.$inject = ['$scope', '$translate'];
-
-function MainController($scope, $translate){
-    $scope.setLang = function(langKey) {
-        $translate.use(langKey);
-    };
-}
-
-angular.module('bitvagas.main.factory',[])
-.factory('ErrorHandling', function(){
-
-    var handler = {};
-
-    handler.getErrors = function(data){
-        var errorList = [];
-        if(typeof data === 'object')
-            if(data.errors !== undefined)
-                //Get a list of errors
-                for(var errorIndex in data.errors)
-                    errorList.push(data.errors[errorIndex].message);
-            else
-                errorList.push(data.message);
-        else
-            //Single error
-            errorList.push(data);
-
-        return errorList;
-    }
-
-    return handler
-});
-
-angular.module('bitvagas.main.factory')
-.factory('Interceptor', Interceptor);
-
-Interceptor.$inject = ['$rootScope', '$q'];
-function Interceptor($rootScope, $q){
-    return {
-
-        response: function(response){
-
-            if((response.status === 201 ||
-                response.status === 204) &&
-                !/\/api\/jobs\/\d\/apply/.exec(response.config.url))
-                $rootScope.$broadcast('update-me');
-
-            return response;
-        }
-
-        , responseError: function(response){
-
-            if(response.status === 401){
-
-                if(response.data.destroy === true)
-                    $rootScope.logout();
-
-                new NotificationFx({
-                    message : '<div class="ns-thumb"><img src="img/template.png"/></div><div class="ns-content"><span>'+response.data.message+'</span></div>'
-                  , layout : 'other'
-                  , effect : 'thumbslider'
-                  , ttl : 9000
-                  , type : 'notice'
-                });
-                $rootScope.$broadcast('unauthorized');
-                return $q.reject(response);
-            }
-
-            if(response.status === 400 ||
-               response.status === 404){
-                //show error
-                return $q.reject(response);
-            }
-
-            return response;
-        }
-    };
-}
-
 
 angular.module('bitvagas.org.controllers',[])
 .controller('OrgController', OrgController);
