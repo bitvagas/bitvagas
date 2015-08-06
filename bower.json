@@ -23,7 +23,7 @@
     "angular-loading-bar": "~0.8.0",
     "angular-moment": "~0.10.1",
     "moment": "~2.10.3",
-    "sweetalert": "~1.0.1",
+    "sweetalert": "~1.1.0",
     "angular-sweetalert": "~1.1.0",
     "modernizr": "~2.8.3"
   },

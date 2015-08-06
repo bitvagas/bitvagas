@@ -42,12 +42,12 @@
   list-style: none
   margin: 0
   > li
-    margin-bottom: 14px
+    margin-bottom: 24px
+    display: table
     &:last-child
       margin-bottom: 0
   +media-query(desk)
     > li
-      display: table
       margin-bottom: 24px
       width: 100%
       &:last-child
@@ -62,9 +62,13 @@
     width: 25%
 
 .create-form__input
-  +media-query(desk)
-    display: table-cell
-    vertical-align: top
+  display: table-cell
+  vertical-align: top
+
+.create-form__input-icon
+  vertical-align: middle
+  width: 30%
+  display: table-cell
 
 .create-type-job
   +cf

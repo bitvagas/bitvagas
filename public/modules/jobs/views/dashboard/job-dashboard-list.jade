@@ -1,31 +1,31 @@
 .dashboard__title
   h1.dashboard__title--cell Jobs
   .dashboard__title--cell
-    a(ui-sref='dashboard.jobs.create')
+    a.plus(ui-sref='dashboard.jobs.create')
       i.mdi.mdi-plus-circle
 
-ul.jobs
-  li(ng-repeat='job in currentUser.jobs')
-    a.jobs-item(href="#" ng-click="toggle($index, job.id)" ng-model="open" title='')
-      .jobs-item__cell.jobs-item__cell--img
-        img.jobs-item__img(src='/img/company-default.png', alt='')
+div(ng-if='currentUser.jobs.length !== 0')
+  ul.jobs
+    li(ng-repeat='job in currentUser.jobs')
+      a.jobs-item(href="#" ng-click="toggle($index, job.id)" ng-model="open" title='')
+        .jobs-item__cell.jobs-item__cell--img
+          img.jobs-item__img(src='/img/company-default.png', alt='')
 
-      .jobs-item__cell.jobs-item__cell--body
-        h2.jobs-item__title {{ job.TITLE }}
-        h3.jobs-item__company {{ job.LOCATION }}
+        .jobs-item__cell.jobs-item__cell--body
+          h2.jobs-item__title {{ job.TITLE }}
+          h3.jobs-item__company {{ job.LOCATION }}
 
-      .jobs-item__cell.jobs-item__cell--meta
-        .jobs-item__type
-          .label(class='label--{{ job.job_type.NAME }}') {{ job.job_type.NAME }}
-        .jobs-item__date(am-time-ago='job.createdAt')
-    .accodion(ng-show="$parent.open == $index")
-      p Nenhuma pessoa aplicou para esta vaga ainda
-      //- .premium(ng-show="{{ !job.PREMIUM }}")
-        //- h5
-          //- a(href="#") Destacar vaga $ 25,00
-        //- iframe(id="coinbase_inline_iframe_6d111844c2041be4fdbdd1b3df5eaab5" src="{{url}}" style="width: 460px; height: 350px; border: none; box-shadow: 0 1px 3px rgba(0,0,0,0.25);" allowtransparency="true" frameborder="0")
+        .jobs-item__cell.jobs-item__cell--meta
+          .jobs-item__type
+            .label(class='label--{{ job.job_type.NAME }}') {{ job.job_type.NAME }}
+          .jobs-item__date(am-time-ago='job.createdAt')
+      .accodion(ng-show="$parent.open == $index")
+        //- .premium(ng-show="{{ !job.PREMIUM }}")
+          //- h5
+            //- a(href="#") Destacar vaga $ 25,00
+          //- iframe(id="coinbase_inline_iframe_6d111844c2041be4fdbdd1b3df5eaab5" src="{{url}}" style="width: 460px; height: 350px; border: none; box-shadow: 0 1px 3px rgba(0,0,0,0.25);" allowtransparency="true" frameborder="0")
 
-      .premium(ng-show="{{ job.PREMIUM }}")
-        h2 Vaga Premium
-        h5(ng-repeat="t in job.job_transactions")
-          a(href="https://blockchain.info/tx/{{ t.TRANSACTION }}") Transação {{ t.TRANSACTION }}
+        .premium(ng-show="{{ job.PREMIUM }}")
+          h2 Vaga Premium
+          h5(ng-repeat="t in job.job_transactions")
+            a(href="https://blockchain.info/tx/{{ t.TRANSACTION }}") Transação {{ t.TRANSACTION }}

@@ -1,6 +1,18 @@
+
 .dashboard__title
   h1.create__title(translate="post_job.title")
 
+  .job--steps
+    ol
+      li.active
+        .separate
+        span Create Job
+      li
+        .separate
+        span Preview
+      li
+        .separate
+        span Confirm
   .create__body
     form(name="form" ng-submit='form.$valid && create()')
 
@@ -8,7 +20,11 @@
         legend.create-fieldset__legend(translate="post_job.job.title")
         ul.create-form
           li
-            div(data-pg-ng-dropdown name='ORG_ID' data-dynamic-height="true" data-text-property="NAME" data-selected="0" data-options='orgs')
+            .create-form__input
+              div(data-pg-ng-dropdown name='ORG_ID' data-dynamic-height="true" data-text-property="NAME" data-selected="0" data-options='orgs')
+            .create-form__input-icon
+              a.plus.job-plus--org(href='' ng-click='alertNewOrg()')
+                i.mdi.mdi-plus-circle
           li
             .create-form__input
               ng-input(theme='fumi' type='text' icon='icon icon--fumi mdi mdi-tie' label='{{ "post_job.job.name" | translate }}' name='TITLE' ng-model='data.TITLE' ng-required='true')

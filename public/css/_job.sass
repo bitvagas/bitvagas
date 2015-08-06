@@ -177,3 +177,89 @@
     display: inline-block
     width: auto
 
+.job--steps
+  display: table
+  width: 100%
+  margin-bottom: 20px
+  font-size: 18px
+  ol
+    list-style: none
+    margin: 0
+    &:before
+      height: 100%
+      content: ''
+
+    li.active
+      background: #29B5DF
+      color: white
+
+      span
+        &:before
+          border-left: 20px solid #1283B0
+        &:after
+          border-left: 15px solid #29B5DF
+    li
+      float: left
+      width: 30%
+      background: whitesmoke
+      text-align: center
+
+      &:last-child
+        span
+          &:after
+            content: none
+      span
+        display: block
+        padding-top: 12px
+        padding-bottom: 12px
+        position: relative
+        &:before
+          content: " "
+          display: block
+          width: 0
+          height: 0
+          border-top: 25px solid transparent
+          border-bottom: 25px solid transparent
+          border-left: 20px solid #F5F5F5
+          // border-left: 20px solid #1283B0
+          position: absolute
+          top: 50%
+          margin-top: -25px
+          margin-left: 0px
+          left: 100%
+          z-index: 1
+        &:after
+          content: " "
+          display: block
+          width: 0
+          height: 0
+          border-top: 25px solid transparent
+          border-bottom: 25px solid transparent
+          border-left: 20px solid #F5F5F5
+          position: absolute
+          top: 50%
+          margin-top: -25px
+          left: 100%
+          z-index: 2
+
+      // .separate
+        // border-left: 1px solid grey
+
+        // &::before, &::after
+          // top: 0
+          // left: -25%
+          // z-index: -1
+          // width: 150%
+          // height: 75%
+          // background: inherit
+          // -webkit-transform: rotate(-2deg)
+          // transform: rotate(-2deg)
+          // -webkit-transform-origin: 0 0
+          // transform-origin: 0 0
+        // &::before
+          // height: 50%
+          // background: #116094
+          // -webkit-transform: rotate(-3deg)
+          // transform: rotate(-3deg)
+          // -webkit-transform-origin: 3% 0
+          // transform-origin: 3% 0

@@ -161,43 +161,6 @@ angular.module('bitvagas.dashboard', [ 'bitvagas.dashboard.controllers' ])
     });
 });
 
-angular.module('bitvagas.main',
-    ['bitvagas.main.factory'
-    ,'bitvagas.main.controllers'
-    ])
-    .config(function($urlRouterProvider, $stateProvider){
-
-        $urlRouterProvider.otherwise('/');
-        $stateProvider
-        .state('index', {
-            url: '/'
-          , views        : {
-              ''         : {
-                    templateUrl     : 'modules/main/views/index'
-              }
-              , 'job-list@index'    : {
-                    templateUrl     : 'modules/jobs/views/job-list'
-                  , controller      : 'JobListController'
-              }
-              , 'job-sidebar@index' : {
-                    templateUrl     : 'modules/jobs/views/job-sidebar'
-              }
-          }
-        })
-        .state('about', {
-            url: '/about'
-          , templateUrl: 'modules/main/views/about'
-        })
-        .state('terms', {
-            url: '/terms'
-          , templateUrl: 'modules/main/views/terms'
-        })
-        .state('contact', {
-            url: '/contact'
-          , templateUrl: 'modules/main/views/contact'
-        });
-    });
-
 angular.module('bitvagas.jobs',
     [ 'ui.router'
     , 'bitvagas.jobs.controllers'
@@ -280,6 +243,43 @@ angular.module('bitvagas.jobs',
           , params       : { data : {} }
           , controller   : 'JobCreateController'
           , authenticate : true
+        });
+    });
+
+angular.module('bitvagas.main',
+    ['bitvagas.main.factory'
+    ,'bitvagas.main.controllers'
+    ])
+    .config(function($urlRouterProvider, $stateProvider){
+
+        $urlRouterProvider.otherwise('/');
+        $stateProvider
+        .state('index', {
+            url: '/'
+          , views        : {
+              ''         : {
+                    templateUrl     : 'modules/main/views/index'
+              }
+              , 'job-list@index'    : {
+                    templateUrl     : 'modules/jobs/views/job-list'
+                  , controller      : 'JobListController'
+              }
+              , 'job-sidebar@index' : {
+                    templateUrl     : 'modules/jobs/views/job-sidebar'
+              }
+          }
+        })
+        .state('about', {
+            url: '/about'
+          , templateUrl: 'modules/main/views/about'
+        })
+        .state('terms', {
+            url: '/terms'
+          , templateUrl: 'modules/main/views/terms'
+        })
+        .state('contact', {
+            url: '/contact'
+          , templateUrl: 'modules/main/views/contact'
         });
     });
 
@@ -425,98 +425,15 @@ function AuthenticationService($q, $http, $state){
     };
 }
 
-angular.module('bitvagas.main.controllers', [])
-.controller('MainController', MainController);
-
-
-MainController.$inject = ['$scope', '$translate'];
-
-function MainController($scope, $translate){
-    $scope.setLang = function(langKey) {
-        $translate.use(langKey);
-    };
-}
-
-angular.module('bitvagas.main.factory',[])
-.factory('ErrorHandling', function(){
-
-    var handler = {};
-
-    handler.getErrors = function(data){
-        var errorList = [];
-        if(typeof data === 'object')
-            if(data.errors !== undefined)
-                //Get a list of errors
-                for(var errorIndex in data.errors)
-                    errorList.push(data.errors[errorIndex].message);
-            else
-                errorList.push(data.message);
-        else
-            //Single error
-            errorList.push(data);
-
-        return errorList;
-    }
-
-    return handler
-});
-
-angular.module('bitvagas.main.factory')
-.factory('Interceptor', Interceptor);
-
-Interceptor.$inject = ['$rootScope', '$q'];
-function Interceptor($rootScope, $q){
-    return {
-
-        response: function(response){
-
-            if((response.status === 201 ||
-                response.status === 204) &&
-                !/\/api\/jobs\/\d\/apply/.exec(response.config.url))
-                $rootScope.$broadcast('update-me');
-
-            return response;
-        }
-
-        , responseError: function(response){
-
-            if(response.status === 401){
-
-                if(response.data.destroy === true)
-                    $rootScope.logout();
-
-                new NotificationFx({
-                    message : '<div class="ns-thumb"><img src="img/template.png"/></div><div class="ns-content"><span>'+response.data.message+'</span></div>'
-                  , layout : 'other'
-                  , effect : 'thumbslider'
-                  , ttl : 9000
-                  , type : 'notice'
-                });
-                $rootScope.$broadcast('unauthorized');
-                return $q.reject(response);
-            }
-
-            if(response.status === 400 ||
-               response.status === 404){
-                //show error
-                return $q.reject(response);
-            }
-
-            return response;
-        }
-    };
-}
-
-
 angular.module('bitvagas.jobs.controllers',[]);
 
 angular.module('bitvagas.jobs.controllers', ['pg-ng-dropdown'])
 .controller('JobPostController', JobPostController)
 .controller('JobCreateController', JobCreateController);
 
-JobPostController.$inject   = ['$scope', '$state', '$stateParams', 'JobService', 'Categories', 'ErrorHandling', 'lodash'];
-JobCreateController.$inject = ['$scope', '$state', '$stateParams', 'JobService', 'Categories', 'lodash', 'ErrorHandling'];
-function JobPostController($scope, $state, $stateParams, JobService, Categories,  ErrorHandling, _){
+JobPostController.$inject   = ['$scope', '$state', '$stateParams', 'JobService', 'Categories', 'lodash'];
+JobCreateController.$inject = ['$scope', '$state', '$stateParams', '$timeout', 'JobService', 'OrgService', 'Categories', 'lodash', 'SweetAlert'];
+function JobPostController($scope, $state, $stateParams, JobService, Categories, _){
 
     $scope.data = $stateParams.data;
     $scope.errors = $stateParams.errors || [];
@@ -539,13 +456,12 @@ function JobPostController($scope, $state, $stateParams, JobService, Categories,
             //back to crate state and show errors
             $state.go('jobs-create', {
                 data   : $scope.data
-              , errors : ErrorHandling.getErrors(err.data)
             });
         });
     };
 }
 
-function JobCreateController($scope, $state, $stateParams, JobService, Categories, _, ErrorHandling){
+function JobCreateController($scope, $state, $stateParams, $timeout, JobService, OrgService, Categories, _, SweetAlert){
 
     $scope.data = $stateParams.data;
     $scope.errors = $stateParams.errors || [];
@@ -558,9 +474,23 @@ function JobCreateController($scope, $state, $stateParams, JobService, Categorie
     if($scope.orgs[0])
         $scope.orgs[0].selected = true;
 
+    if($scope.orgs.length === 0){
+        //Open a popup to create an organization
+        $scope.alertNewOrg();
+    }
+
     $scope.create = function(){
         $scope.data.CATEGORY_ID = _.selected($scope.categories, 'id');
         $scope.data.ORG_ID = _.selected($scope.orgs, 'id');
+        $scope.data.ORG_NAME = _.result(_.find($scope.orgs, { id: $scope.data.ORG_ID }), 'NAME');
+
+        var typeId = $scope.data.TYPE_ID;
+        $scope.data.TYPE_NAME = typeId == 1 ? 'FULL-TIME' :
+                                typeId == 2 ? 'PART-TIME' :
+                                typeId == 3 ? 'FREELANCE' :
+                                typeId == 4 ? 'TEMPORARY' : 'FREELANCE';
+
+
         $state.transitionTo('dashboard.jobs.confirm', { data : $scope.data });
     };
 
@@ -570,11 +500,44 @@ function JobCreateController($scope, $state, $stateParams, JobService, Categorie
         .then(function(data){
             $state.go('dashboard.jobs.list');
         }, function(err){
-            //back to crate state and show errors
             $state.go('dashboard.jobs.create', {
-                data   : $scope.data
-              , errors : ErrorHandling.getErrors(err.data)
+                data : $scope.data
             });
+        });
+    };
+
+    $scope.unconfirm = function(data){
+        $state.go('dashboard.jobs.create', {
+            data : $scope.data
+        });
+    };
+
+    $scope.alertNewOrg = function(){
+
+        SweetAlert.swal({
+              title: "Organização"
+            , text: "Crie uma organização "
+            , type: "input"
+            , inputPlaceholder: 'Nome da Organização'
+            , html: true
+            , showCancelButton: true
+            , closeOnConfirm: false
+            , confirmButtonColor: "#28B5DF"
+            , confirmButtonText: "Cadastrar"
+            , showLoaderOnConfirm: true
+        }, function(inputValue){
+            if(inputValue){
+                OrgService.create({ NAME: inputValue }).then(function(data){
+                    SweetAlert.swal({
+                        title: "Success"
+                        , text: "Organização Criada."
+                        , type: "success"
+                        , confirmButtonColor: "#29B5DF"
+                    }, function(){
+                        $state.reload();
+                    });
+                });
+            }
         });
     };
 }
@@ -704,6 +667,89 @@ function JobService($http){
     };
 }
 
+angular.module('bitvagas.main.controllers', [])
+.controller('MainController', MainController);
+
+
+MainController.$inject = ['$scope', '$translate'];
+
+function MainController($scope, $translate){
+    $scope.setLang = function(langKey) {
+        $translate.use(langKey);
+    };
+}
+
+angular.module('bitvagas.main.factory',[])
+.factory('ErrorHandling', function(){
+
+    var handler = {};
+
+    handler.getErrors = function(data){
+        var errorList = [];
+        if(typeof data === 'object')
+            if(data.errors !== undefined)
+                //Get a list of errors
+                for(var errorIndex in data.errors)
+                    errorList.push(data.errors[errorIndex].message);
+            else
+                errorList.push(data.message);
+        else
+            //Single error
+            errorList.push(data);
+
+        return errorList;
+    }
+
+    return handler
+});
+
+angular.module('bitvagas.main.factory')
+.factory('Interceptor', Interceptor);
+
+Interceptor.$inject = ['$rootScope', '$q'];
+function Interceptor($rootScope, $q){
+    return {
+
+        response: function(response){
+
+            if((response.status === 201 ||
+                response.status === 204) &&
+                !/\/api\/jobs\/\d\/apply/.exec(response.config.url))
+                $rootScope.$broadcast('update-me');
+
+            return response;
+        }
+
+        , responseError: function(response){
+
+            if(response.status === 401){
+
+                if(response.data.destroy === true)
+                    $rootScope.logout();
+
+                new NotificationFx({
+                    message : '<div class="ns-thumb"><img src="img/template.png"/></div><div class="ns-content"><span>'+response.data.message+'</span></div>'
+                  , layout : 'other'
+                  , effect : 'thumbslider'
+                  , ttl : 9000
+                  , type : 'notice'
+                });
+                $rootScope.$broadcast('unauthorized');
+                return $q.reject(response);
+            }
+
+            if(response.status === 400 ||
+               response.status === 404){
+                //show error
+                return $q.reject(response);
+            }
+
+            return response;
+        }
+    };
+}
+
+
 angular.module('bitvagas.org.controllers',[])
 .controller('OrgController', OrgController);
 
@@ -743,24 +789,28 @@ function OrgController($scope, $state, OrgService, SweetAlert){
           , confirmButtonColor: "#DD6B55",confirmButtonText: "Sim, deletar!"
           , cancelButtonText: "No"
           , closeOnConfirm: false
-          , closeOnCancel: false }
+          , closeOnCancel: false
+          , showLoaderOnConfirm: true
+          }
           , function(isConfirm){
                 if (isConfirm) {
-                    SweetAlert.swal({ title: "Deleted!"
-                                    , text: "Organização deletada."
-                                    , type: "success"
-                                    , confirmButtonColor: "#29B5DF"
-                                    });
                     OrgService.delete(id).then(function(data){
-                        GoBack();
+                        SweetAlert.swal({ title: "Deleted!"
+                            , text: "Organização deletada."
+                            , type: "success"
+                            , confirmButtonColor: "#29B5DF"
+                        }, function(){
+                            GoBack();
+                        });
                     }, function(err){
                         console.log(err);
                     });
                 } else {
-                    SweetAlert.swal({ title: "Cancelled"
-                                    , type: "error"
-                                    , confirmButtonColor: "#29B5DF"
-                                    });
+                    SweetAlert.swal({
+                          title: "Cancelled"
+                        , type: "error"
+                        , confirmButtonColor: "#29B5DF"
+                    });
                 }
             });
     };

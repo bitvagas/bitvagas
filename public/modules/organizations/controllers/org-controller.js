@@ -37,24 +37,28 @@ function OrgController($scope, $state, OrgService, SweetAlert){
           , confirmButtonColor: "#DD6B55",confirmButtonText: "Sim, deletar!"
           , cancelButtonText: "No"
           , closeOnConfirm: false
-          , closeOnCancel: false }
+          , closeOnCancel: false
+          , showLoaderOnConfirm: true
+          }
           , function(isConfirm){
                 if (isConfirm) {
-                    SweetAlert.swal({ title: "Deleted!"
-                                    , text: "Organização deletada."
-                                    , type: "success"
-                                    , confirmButtonColor: "#29B5DF"
-                                    });
                     OrgService.delete(id).then(function(data){
-                        GoBack();
+                        SweetAlert.swal({ title: "Deleted!"
+                            , text: "Organização deletada."
+                            , type: "success"
+                            , confirmButtonColor: "#29B5DF"
+                        }, function(){
+                            GoBack();
+                        });
                     }, function(err){
                         console.log(err);
                     });
                 } else {
-                    SweetAlert.swal({ title: "Cancelled"
-                                    , type: "error"
-                                    , confirmButtonColor: "#29B5DF"
-                                    });
+                    SweetAlert.swal({
+                          title: "Cancelled"
+                        , type: "error"
+                        , confirmButtonColor: "#29B5DF"
+                    });
                 }
             });
     };

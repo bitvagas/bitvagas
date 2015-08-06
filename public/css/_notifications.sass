@@ -3,14 +3,16 @@
 .ns-box
   position: fixed
   background: rgba(42, 45, 50, 0.85)
-  padding: 22px
-  padding-top: 30px
   line-height: 1.4
   z-index: 99999
   pointer-events: none
   color: rgba(250, 251, 255, 0.95)
   font-size: 120%
   width: 550px
+  margin-top: 100px
+  margin-left: 20px
+  border-radius: 4px
+  overflow: hidden
   &.ns-show
     pointer-events: auto
   a
@@ -32,8 +34,8 @@
   width: 20px
   height: 20px
   position: absolute
-  right: 4px
-  top: 4px
+  right: 10px
+  top: 10px
   overflow: hidden
   text-indent: 100%
   cursor: pointer
@@ -424,9 +426,6 @@
 
 .ns-effect-thumbslider
   background: transparent
-  .ns-close
-    top: 1.8em
-    right: 1.8em
   &.ns-show .ns-close, &.ns-hide .ns-close, &.ns-show .ns-content p, &.ns-hide .ns-content p
     -webkit-animation-name: animFade
     animation-name: animFade
@@ -456,13 +455,18 @@
     position: absolute
     z-index: 100
     overflow: hidden
+    img
+      max-width: 80px
+      padding: 4px
+      border-right: 1px solid #eee
   .ns-content
     background: #fff
     color: #727275
     font-weight: bold
-    padding: 0 40px 0 80px
-    height: 64px
+    padding: 0 40px 0 95px
+    height: 80px
     line-height: 60px
+    border: 1px solid rgba(0, 174, 239, 0.2)
   &.ns-show .ns-content, &.ns-hide .ns-content
     -webkit-animation-name: animSlide
     animation-name: animSlide

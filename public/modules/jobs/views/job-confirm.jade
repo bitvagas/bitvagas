@@ -1,18 +1,49 @@
-.main
-  .wrapper
-    .job
-      .job__cell.job__cell--main
-        header.job-head
-          h1.job-head__title {{ data.TITLE }}
-          h2.job-head-local {{ data.LOCATION }}
-          .job-head__date {{ data.createdAt | date }}
-          .job-head__type {{ data.jobType.NAME }}
-          h3.job-head-local {{ data.org.NAME }}
-          ul.job-head-nav
-            li
-              a(href="{{ job.org.URL }}") {{ data.org.URL }} 
-        .job-body
-          h6 Descrição do trabalho:
-          p {{ data.DESCRIPTION }}
-          p
-            button.btn.btn--medium.btn--primary(ng-click='confirm(data)') Confirmar Vaga
+.job
+  .job--steps
+    ol
+      li
+        .separate
+        span Create Job
+      li.active
+        .separate
+        span Preview
+      li
+        .separate
+        span Confirm
+  header.job__head
+    .job-media
+      a(href='{{ job.org.URL }}' target='_blank').job-media__img
+        img(src='/img/template.png')
+      .job-media__body
+        h1.job__title {{ data.TITLE }} <span class="job__company">{{ "job.in" | translate }} {{ data.ORG_NAME }}</span>
+    ul.job-info
+      li
+        |  <div class="label label--{{ data.TYPE_NAME }}">{{ data.TYPE_NAME }}</div>
+      li
+        img(src='/img/local.svg').job__icon
+        .job__local {{ data.LOCATION }}
+
+    h6(translate="job.description")
+    p.job__description(ng-bind-html='data.DESCRIPTION | linky:"_blank"')
+
+    footer.job-foot
+      button.btn.btn--medium(ng-click='unconfirm(data)') Voltar
+      button.btn.btn--medium.btn--primary(ng-click='confirm(data)') Confirmar Vaga
+
+//- .wrapper
+  //- .job
+    //- .job__cell.job__cell--main
+      //- header.job-head
+        //- h1.job-head__title {{ data.TITLE }}
+        //- h2.job-head-local {{ data.LOCATION }}
+        //- .job-head__date {{ data.createdAt | date }}
+        //- .job-head__type {{ data.jobType.NAME }}
+        //- h3.job-head-local {{ data.org.NAME }}
+        //- ul.job-head-nav
+          //- li
+            //- a(href="{{ job.org.URL }}") {{ data.org.URL }} 
+      //- .job-body
+        //- h6 Descrição do trabalho:
+        //- p {{ data.DESCRIPTION }}
+        //- p
+          //- button.btn.btn--medium.btn--primary(ng-click='confirm(data)') Confirmar Vaga
