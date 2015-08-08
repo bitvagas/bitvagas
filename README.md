@@ -7,8 +7,13 @@
 <a href="https://gemnasium.com/bitvagas/bitvagas">
 <img src="https://gemnasium.com/bitvagas/bitvagas.svg"></img>
 </a>
+<a href="https://travis-ci.org/bitvagas/bitvagas">
+<img src="https://travis-ci.org/bitvagas/bitvagas.svg"></img>
+</a>
 </p>
 </p>
+
+
 
 ##Tools
 
