@@ -20,10 +20,11 @@
         legend.create-fieldset__legend(translate="post_job.job.title")
         ul.create-form
           li
-            .create-form__input
+            .create-form__input(ng-if='orgs.length !== 0')
               div(data-pg-ng-dropdown name='ORG_ID' data-dynamic-height="true" data-text-property="NAME" data-selected="0" data-options='orgs')
             .create-form__input-icon
               a.plus.job-plus--org(href='' ng-click='alertNewOrg()')
+                h5(ng-if='orgs.length === 0' style="display: inline; padding-right: 10px; vertical-align: text-bottom") Criar Organização
                 i.mdi.mdi-plus-circle
           li
             .create-form__input

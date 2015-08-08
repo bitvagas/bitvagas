@@ -93,8 +93,6 @@
             document.body.removeChild(e);
 
         // append to body or the element specified in options.wrapper
-        console.log(this.options);
-        console.log(document.body);
         this.options.wrapper = document.body;
         this.options.wrapper.insertBefore(this.ntf, this.options.wrapper.firstChild);
 

@@ -45,10 +45,6 @@ function JobCreateController($scope, $state, $stateParams, $timeout, JobService,
     if($scope.orgs[0])
         $scope.orgs[0].selected = true;
 
-    if($scope.orgs.length === 0){
-        //Open a popup to create an organization
-        $scope.alertNewOrg();
-    }
 
     $scope.create = function(){
         $scope.data.CATEGORY_ID = _.selected($scope.categories, 'id');
@@ -108,7 +104,19 @@ function JobCreateController($scope, $state, $stateParams, $timeout, JobService,
                         $state.reload();
                     });
                 });
+            } else {
+                SweetAlert.swal({
+                      title: "Concelled"
+                    , text: "Nome da organização é obrigatorio"
+                    , type: "error"
+                    , confirmButtonColor: "#C1C1C1"
+                });
             }
         });
     };
+
+    if($scope.orgs.length === 0){
+        //Open a popup to create an organization
+        $scope.alertNewOrg();
+    }
 }

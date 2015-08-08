@@ -57,7 +57,7 @@ function OrgController($scope, $state, OrgService, SweetAlert){
                     SweetAlert.swal({
                           title: "Cancelled"
                         , type: "error"
-                        , confirmButtonColor: "#29B5DF"
+                        , confirmButtonColor: "#C1C1C1"
                     });
                 }
             });
