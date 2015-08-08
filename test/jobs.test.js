@@ -6,7 +6,8 @@ var request  = require('supertest')
   , prefix   = '/api/'
   , org      = {}
   , job      = {}
-  , user     = {};
+  , user     = {}
+  , post     = {};
 
 describe('Jobs modules api', function(){
 
@@ -27,9 +28,18 @@ describe('Jobs modules api', function(){
           , PASSWORD: 'testpassword'
           , REPASSWORD: 'testpassword'
         };
-    });
 
-    beforeEach(function(done){
+        post = {
+            EMAIL: 'testpost@gmail.com'
+          , ORG_NAME: 'OrgPost'
+          , URL: 'http://orgpost.org'
+          , TITLE: 'Job Test'
+          , TYPE_ID: '1'
+          , DESCRIPTION: 'Description Test'
+          , CATEGORY_ID: '1'
+          , LOCATION: 'NY'
+        };
+
         db.user.sync({ force: true })
         .then(function(){
             return db.job.sync({ force: true });
@@ -40,7 +50,6 @@ describe('Jobs modules api', function(){
                 .post('/signup')
                 .send(user)
                 .expect(201)
-                .expect('Content-Type', 'application/json; charset=utf-8')
                 .end(function(err, response){
                     if(err)
                         done(new Error(err));
@@ -84,8 +93,7 @@ describe('Jobs modules api', function(){
         request(app)
         .post(prefix+'organizations')
         .send(org)
-        .expect(401)
-        .end(done);
+        .expect(401, done);
     });
 
     it('create an organization and a job with authorization header', function(done){
@@ -111,6 +119,25 @@ describe('Jobs modules api', function(){
 
                 done();
             });
+        });
+    });
+
+    it('post a job', function(done){
+        request(app)
+        .post('/api/jobs/post')
+        .send(post)
+        .expect(201)
+        .end(done);
+    });
+
+    it('post a job and apply by an user', function(done){
+        request(app)
+        .post('/api/jobs/post')
+        .send(post)
+        .expect(201)
+        .end(function(err, response){
+
+            done();
         });
     });
 });
