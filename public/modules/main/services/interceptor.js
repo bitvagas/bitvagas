@@ -1,4 +1,4 @@
-angular.module('bitvagas.main.factory')
+angular.module('bitvagas.main.factory', [])
 .factory('Interceptor', Interceptor);
 
 Interceptor.$inject = ['$rootScope', '$q'];
@@ -17,13 +17,17 @@ function Interceptor($rootScope, $q){
 
         , responseError: function(response){
 
+            var errorMessage = response.data.message ?
+                               response.data.message :
+                               response.data;
+
             if(response.status === 401){
 
                 if(response.data.destroy === true)
                     $rootScope.logout();
 
                 new NotificationFx({
-                    message : '<div class="ns-thumb"><img src="img/template.png"/></div><div class="ns-content"><span>'+response.data.message+'</span></div>'
+                    message : '<div class="ns-thumb"><img src="img/template.png"/></div><div class="ns-content"><span>'+errorMessage+'</span></div>'
                   , layout : 'other'
                   , effect : 'thumbslider'
                   , ttl : 9000
@@ -33,8 +37,18 @@ function Interceptor($rootScope, $q){
                 return $q.reject(response);
             }
 
-            if(response.status === 400 ||
-               response.status === 404){
+            if(response.status === 400){
+                console.log(response);
+                new NotificationFx({
+                    message : '<div class="ns-thumb"><img src="img/template.png"/></div><div class="ns-content"><span>'+errorMessage+'</span></div>'
+                  , layout : 'other'
+                  , effect : 'thumbslider'
+                  , ttl : 9000
+                  , type : 'notice'
+                });
+                return $q.reject(response);
+            }
+            if(response.status === 404){
                 //show error
                 return $q.reject(response);
             }
