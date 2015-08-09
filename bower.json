@@ -26,7 +26,8 @@
     "sweetalert": "~1.1.0",
     "angular-sweetalert": "~1.1.0",
     "modernizr": "~2.8.3",
-    "angular-tooltips": "~0.1.19"
+    "angular-tooltips": "~0.1.19",
+    "ng-tags-input": "~3.0.0"
   },
   "overrides": {
     "angular": {
@@ -89,8 +90,11 @@
     "angular-tooltips": {
       "main": "dist/angular-tooltips.min.js"
     },
+    "ng-tags-input": {
+        "main": "ng-tags-input.min.js"
+    },
     "imagesloaded": {
-        "ignore": true
+      "ignore": true
     },
     "mdi": {
       "ignore": true

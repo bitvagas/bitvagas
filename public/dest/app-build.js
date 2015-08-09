@@ -4,6 +4,7 @@ angular.module('bitvagas',
     ,'angular-loading-bar'
     ,'720kb.tooltips'
     ,'wu.masonry'
+    ,'ngTagsInput'
     ,'satellizer'
     ,'ngSanitize'
     ,'ngLodash'
@@ -109,60 +110,6 @@ angular.module('bitvagas',
         }
     });
 
-angular.module('bitvagas.dashboard', [ 'bitvagas.dashboard.controllers' ])
-.config(function($urlRouterProvider, $stateProvider ){
-
-    $stateProvider
-    .state('dashboard', {
-        abstract : true
-        , url: '/dashboard'
-        , templateUrl  : '/modules/dashboard/views/dashboard'
-        , controller   : 'DashBoardController'
-        , authenticate : true
-        , resolve      : {
-            authenticated: function($rootScope, $q, UserService) {
-                var deferred = $q.defer();
-                if(!$rootScope.currentUser)
-                    UserService.me().then(function(data){
-                        $rootScope.updateUser(data);
-                        deferred.resolve();
-                    });
-                    else deferred.resolve();
-
-                    return deferred.promise;
-            }
-        }
-    })
-    .state('dashboard.overview', {
-        url : '/overview'
-        , templateUrl  : '/modules/dashboard/views/overview'
-        , authenticate : true
-        , controller   : 'OverviewController'
-    })
-    .state('dashboard.profile', {
-        url : '/profile'
-        , views : {
-            ''  : {
-                templateUrl : '/modules/users/views/dashboard/profile'
-              , controller  : 'ProfileController'
-            }
-            , 'change-password@dashboard.profile' : {
-                templateUrl : '/modules/users/views/dashboard/change-password'
-            }
-            , 'settings@dashboard.profile': {
-                templateUrl : '/modules/users/views/dashboard/settings'
-            }
-        }
-        , authenticate  : true
-    })
-    .state('dashboard.cv', {
-        url : '/cv'
-        , templateUrl  : '/modules/users/views/dashboard/my-cv'
-        , controller   : 'CVController'
-        , authenticate : true
-    });
-});
-
 angular.module('bitvagas.jobs',
     [ 'ui.router'
     , 'bitvagas.jobs.controllers'
@@ -248,6 +195,72 @@ angular.module('bitvagas.jobs',
         });
     });
 
+angular.module('bitvagas.users', [
+      'bitvagas.users.controllers'
+    , 'bitvagas.users.services'
+    ])
+    .config(function($urlRouterProvider, $stateProvider){
+
+        $stateProvider
+        .state('signup', {
+            url: '/signup'
+          , templateUrl : 'modules/users/views/signup'
+          , controller  : 'AuthController'
+        })
+        .state('signin', {
+            url: '/signin'
+          , templateUrl : 'modules/users/views/signin'
+          , controller  : 'AuthController'
+        })
+        .state('verify', {
+            url: '/signup/verify'
+          , templateUrl : 'modules/users/views/verify-message'
+        })
+        .state('freelancers', {
+            url: '/freelancers'
+          , templateUrl : 'modules/users/views/freelancers'
+          , controller  : 'FreelancerController'
+        })
+        .state('freelancers-cv', {
+            url: '/freelancers/:id'
+          , templateUrl : 'modules/users/views/cv'
+          , controller  : 'CVController'
+        });
+    });
+
+angular.module('bitvagas.org',
+    [ 'bitvagas.org.controllers'
+    , 'bitvagas.org.services'
+    ])
+    .config(function($urlRouterProvider, $stateProvider){
+
+        $stateProvider
+        .state('dashboard.organization', {
+            url: '/organization'
+          , abstract : true
+          , templateUrl  : '/modules/organizations/views/organizations'
+          , authenticate : true
+        })
+        .state('dashboard.organization.list', {
+            url : '/'
+          , templateUrl  : '/modules/organizations/views/org.list'
+          , authenticate : true
+          , controller   : 'OrgController'
+        })
+        .state('dashboard.organization.create', {
+            url : '/create'
+          , templateUrl  : '/modules/organizations/views/org.create'
+          , authenticate : true
+          , controller   : 'OrgController'
+        })
+        .state('dashboard.organization.edit', {
+            url : '/edit/:OrgID'
+          , templateUrl  : '/modules/organizations/views/org.edit'
+          , authenticate : true
+          , controller   : 'OrgController'
+        });
+    });
+
 angular.module('bitvagas.main',
     ['bitvagas.main.factory'
     ,'bitvagas.main.controllers'
@@ -285,149 +298,59 @@ angular.module('bitvagas.main',
         });
     });
 
-angular.module('bitvagas.org',
-    [ 'bitvagas.org.controllers'
-    , 'bitvagas.org.services'
-    ])
-    .config(function($urlRouterProvider, $stateProvider){
+angular.module('bitvagas.dashboard', [ 'bitvagas.dashboard.controllers' ])
+.config(function($urlRouterProvider, $stateProvider ){
 
-        $stateProvider
-        .state('dashboard.organization', {
-            url: '/organization'
-          , abstract : true
-          , templateUrl  : '/modules/organizations/views/organizations'
-          , authenticate : true
-        })
-        .state('dashboard.organization.list', {
-            url : '/'
-          , templateUrl  : '/modules/organizations/views/org.list'
-          , authenticate : true
-          , controller   : 'OrgController'
-        })
-        .state('dashboard.organization.create', {
-            url : '/create'
-          , templateUrl  : '/modules/organizations/views/org.create'
-          , authenticate : true
-          , controller   : 'OrgController'
-        })
-        .state('dashboard.organization.edit', {
-            url : '/edit/:OrgID'
-          , templateUrl  : '/modules/organizations/views/org.edit'
-          , authenticate : true
-          , controller   : 'OrgController'
-        });
-    });
+    $stateProvider
+    .state('dashboard', {
+        abstract : true
+        , url: '/dashboard'
+        , templateUrl  : '/modules/dashboard/views/dashboard'
+        , controller   : 'DashBoardController'
+        , authenticate : true
+        , resolve      : {
+            authenticated: function($rootScope, $q, UserService) {
+                var deferred = $q.defer();
+                if(!$rootScope.currentUser)
+                    UserService.me().then(function(data){
+                        $rootScope.updateUser(data);
+                        deferred.resolve();
+                    });
+                    else deferred.resolve();
 
-angular.module('bitvagas.users', [
-      'bitvagas.users.controllers'
-    , 'bitvagas.users.services'
-    ])
-    .config(function($urlRouterProvider, $stateProvider){
-
-        $stateProvider
-        .state('signup', {
-            url: '/signup'
-          , templateUrl : 'modules/users/views/signup'
-          , controller  : 'AuthController'
-        })
-        .state('signin', {
-            url: '/signin'
-          , templateUrl : 'modules/users/views/signin'
-          , controller  : 'AuthController'
-        })
-        .state('verify', {
-            url: '/signup/verify'
-          , templateUrl : 'modules/users/views/verify-message'
-        })
-        .state('freelancers', {
-            url: '/freelancers'
-          , templateUrl : 'modules/users/views/freelancers'
-          , controller  : 'FreelancerController'
-        })
-        .state('freelancers-cv', {
-            url: '/freelancers/:id'
-          , templateUrl : 'modules/users/views/cv'
-          , controller  : 'CVController'
-        });
-    });
-
-angular.module('bitvagas.dashboard.controllers', [])
-.controller('DashBoardController',DashBoardController);
-
-DashBoardController.$inject = ['$scope', '$state', 'UserService'];
-function DashBoardController($scope, $state, UserService){
-}
-
-angular.module('bitvagas.dashboard.controllers')
-.controller('OverviewController', OverviewController);
-
-
-OverviewController.$inject = ['$rootScope', '$scope', 'lodash'];
-function OverviewController($rootScope, $scope, lodash){
-
-    if($scope.currentUser &&
-       $scope.currentUser.jobs) {
-       $scope.AppliersLength = lodash
-                            .chain($scope.currentUser.jobs)
-                            .pluck('job_appliers')
-                            .flatten()
-                            .size()
-                            .value();
-    } else
-        $scope.AppliersLength = 0;
-
-    $scope.toggle = function(index, id){
-        if($scope.$parent.open == index) {
-            $scope.$parent.open = undefined;
-            return;
+                    return deferred.promise;
+            }
         }
-
-        $scope.$parent.open = index;
-    };
-}
-
-angular.module('bitvagas.dashboard.controllers')
-.controller('ProfileController', ProfileController);
-
-ProfileController.$inject = ['$rootScope', '$scope', '$state', 'UserService'];
-function ProfileController($rootScope, $scope, $state, UserService){
-
-    $scope.profile = {};
-    $scope.profile.NAME = $scope.currentUser.NAME;
-    $scope.profile.LOCATION = $scope.currentUser.LOCATION;
-    $scope.profile.NOTIFY_JOBS = $scope.currentUser.NOTIFY_JOBS;
-    $scope.profile.NOTIFY_APPLIES = $scope.currentUser.NOTIFY_APPLIES;
-
-    $scope.UpdateProfile = function(){
-        UserService.updateMe($scope.profile).then(function(data){
-            $rootScope.$broadcast('update-me');
-            $scope.profile.NAME = data.data.NAME;
-            $scope.profile.LOCATION = data.data.LOCATION;
-        });
-    };
-}
-
-angular.module('bitvagas.admin.services', [])
-.factory('AuthenticationService', AuthenticationService);
-
-AuthenticationService.$inject = ['$q', '$http', '$state'];
-function AuthenticationService($q, $http, $state){
-    return {
-        isAuthenticated : function() {
-            var deferred = $q.defer();
-            $http.get('/isAuthenticated').then(function(user){
-                if(user !== 0)
-                    deferred.resolve(user);
-                else
-                    deferred.reject();
-
-            },function(err){
-                deferred.reject(err);
-            });
-            return deferred.promise;
+    })
+    .state('dashboard.overview', {
+        url : '/overview'
+        , templateUrl  : '/modules/dashboard/views/overview'
+        , authenticate : true
+        , controller   : 'OverviewController'
+    })
+    .state('dashboard.profile', {
+        url : '/profile'
+        , views : {
+            ''  : {
+                templateUrl : '/modules/users/views/dashboard/profile'
+              , controller  : 'ProfileController'
+            }
+            , 'change-password@dashboard.profile' : {
+                templateUrl : '/modules/users/views/dashboard/change-password'
+            }
+            , 'settings@dashboard.profile': {
+                templateUrl : '/modules/users/views/dashboard/settings'
+            }
         }
-    };
-}
+        , authenticate  : true
+    })
+    .state('dashboard.cv', {
+        url : '/cv'
+        , templateUrl  : '/modules/users/views/dashboard/my-cv'
+        , controller   : 'CVController'
+        , authenticate : true
+    });
+});
 
 angular.module('bitvagas.jobs.controllers',[]);
 
@@ -447,6 +370,7 @@ function JobPostController($scope, $state, $stateParams, JobService, Categories,
 
     $scope.create = function(){
         $scope.data.CATEGORY_ID = _.selected($scope.categories, 'id');
+        $scope.data.TAGS = _.map($scope.tags, 'text');
         if($scope.form.$valid)
             $state.go('jobs-confirm', { data : $scope.data });
     };
@@ -458,9 +382,15 @@ function JobPostController($scope, $state, $stateParams, JobService, Categories,
             $state.go('jobs-show', { 'id': data.data.id});
         }, function(err){
             //back to crate state and show errors
-            $state.go('jobs-create', {
+            $state.go('jobs-post', {
                 data   : $scope.data
             });
+        });
+    };
+
+    $scope.unconfirm = function(data){
+        $state.go('jobs-post', {
+            data : $scope.data
         });
     };
 }
@@ -483,6 +413,7 @@ function JobCreateController($scope, $state, $stateParams, $timeout, JobService,
         $scope.data.CATEGORY_ID = _.selected($scope.categories, 'id');
         $scope.data.ORG_ID = _.selected($scope.orgs, 'id');
         $scope.data.ORG_NAME = _.result(_.find($scope.orgs, { id: $scope.data.ORG_ID }), 'NAME');
+        $scope.data.TAGS = _.map($scope.tags, 'text');
 
         var typeId = $scope.data.TYPE_ID;
         $scope.data.TYPE_NAME = typeId == 1 ? 'FULL-TIME' :
@@ -495,7 +426,6 @@ function JobCreateController($scope, $state, $stateParams, $timeout, JobService,
     };
 
     $scope.confirm = function(data){
-
         JobService.create(data)
         .then(function(data){
             $state.go('dashboard.jobs.list');
@@ -679,187 +609,6 @@ function JobService($http){
     };
 }
 
-angular.module('bitvagas.main.controllers', [])
-.controller('MainController', MainController);
-
-
-MainController.$inject = ['$scope', '$translate'];
-
-function MainController($scope, $translate){
-    $scope.setLang = function(langKey) {
-        $translate.use(langKey);
-    };
-}
-
-angular.module('bitvagas.main.factory',[])
-.factory('ErrorHandling', function(){
-
-    var handler = {};
-
-    handler.getErrors = function(data){
-        var errorList = [];
-        if(typeof data === 'object')
-            if(data.errors !== undefined)
-                //Get a list of errors
-                for(var errorIndex in data.errors)
-                    errorList.push(data.errors[errorIndex].message);
-            else
-                errorList.push(data.message);
-        else
-            //Single error
-            errorList.push(data);
-
-        return errorList;
-    }
-
-    return handler
-});
-
-angular.module('bitvagas.main.factory')
-.factory('Interceptor', Interceptor);
-
-Interceptor.$inject = ['$rootScope', '$q'];
-function Interceptor($rootScope, $q){
-    return {
-
-        response: function(response){
-
-            if((response.status === 201 ||
-                response.status === 204) &&
-                !/\/api\/jobs\/\d\/apply/.exec(response.config.url))
-                $rootScope.$broadcast('update-me');
-
-            return response;
-        }
-
-        , responseError: function(response){
-
-            if(response.status === 401){
-
-                if(response.data.destroy === true)
-                    $rootScope.logout();
-
-                new NotificationFx({
-                    message : '<div class="ns-thumb"><img src="img/template.png"/></div><div class="ns-content"><span>'+response.data.message+'</span></div>'
-                  , layout : 'other'
-                  , effect : 'thumbslider'
-                  , ttl : 9000
-                  , type : 'notice'
-                });
-                $rootScope.$broadcast('unauthorized');
-                return $q.reject(response);
-            }
-
-            if(response.status === 400 ||
-               response.status === 404){
-                //show error
-                return $q.reject(response);
-            }
-
-            return response;
-        }
-    };
-}
-
-
-angular.module('bitvagas.org.controllers',[])
-.controller('OrgController', OrgController);
-
-OrgController.$inject = ['$scope', '$state', 'OrgService', 'SweetAlert'];
-function OrgController($scope, $state, OrgService, SweetAlert){
-
-    if($state.params.OrgID !== undefined) {
-        OrgService.findById($state.params.OrgID)
-        .then(function(data){
-            $scope.org = data.data;
-        });
-    }
-
-    $scope.create = function(org){
-        OrgService.create(org).then(function(data){
-            GoBack();
-        }, function(err){
-            console.log(err);
-        });
-    };
-
-    $scope.edit = function(org){
-        OrgService.edit(org).then(function(data){
-            GoBack();
-        }, function(err){
-            console.log(err);
-        });
-    };
-
-    $scope.delete = function(id){
-
-        SweetAlert.swal({
-            title: "Delete Organization"
-          , text: "Deseja deletar essa organização"
-          , type: "warning"
-          , showCancelButton: true
-          , confirmButtonColor: "#DD6B55",confirmButtonText: "Sim, deletar!"
-          , cancelButtonText: "No"
-          , closeOnConfirm: false
-          , closeOnCancel: false
-          , showLoaderOnConfirm: true
-          }
-          , function(isConfirm){
-                if (isConfirm) {
-                    OrgService.delete(id).then(function(data){
-                        SweetAlert.swal({ title: "Deleted!"
-                            , text: "Organização deletada."
-                            , type: "success"
-                            , confirmButtonColor: "#29B5DF"
-                        }, function(){
-                            GoBack();
-                        });
-                    }, function(err){
-                        console.log(err);
-                    });
-                } else {
-                    SweetAlert.swal({
-                          title: "Cancelled"
-                        , type: "error"
-                        , confirmButtonColor: "#C1C1C1"
-                    });
-                }
-            });
-    };
-
-    function GoBack(){
-        $state.transitionTo('dashboard.organization.list');
-    }
-}
-
-angular.module('bitvagas.org.services', [])
-.service('OrgService', OrgService);
-
-OrgService.$inject = ['$http'];
-function OrgService($http){
-    var baseUrl = 'api/organizations/';
-
-    this.findAll = function(){
-        return $http.get(baseUrl);
-    };
-
-    this.findById = function(id){
-        return $http.get(baseUrl+id);
-    };
-
-    this.create = function(org){
-        return $http.post(baseUrl, org);
-    };
-
-    this.edit = function(org){
-        return $http.put(baseUrl + org.id, org);
-    };
-
-    this.delete = function(id){
-        return $http.delete(baseUrl + id);
-    };
-};
-
 angular.module('bitvagas.users.controllers', [])
 .controller('AuthController', AuthController);
 
@@ -1007,5 +756,264 @@ function UserService($http) {
 
     this.reset = function(data){
         return $http.post('/reset', data);
+    };
+}
+
+angular.module('bitvagas.org.controllers',[])
+.controller('OrgController', OrgController);
+
+OrgController.$inject = ['$scope', '$state', 'OrgService', 'SweetAlert'];
+function OrgController($scope, $state, OrgService, SweetAlert){
+
+    if($state.params.OrgID !== undefined) {
+        OrgService.findById($state.params.OrgID)
+        .then(function(data){
+            $scope.org = data.data;
+        });
+    }
+
+    $scope.create = function(org){
+        OrgService.create(org).then(function(data){
+            GoBack();
+        }, function(err){
+            console.log(err);
+        });
+    };
+
+    $scope.edit = function(org){
+        OrgService.edit(org).then(function(data){
+            GoBack();
+        }, function(err){
+            console.log(err);
+        });
+    };
+
+    $scope.delete = function(id){
+
+        SweetAlert.swal({
+            title: "Delete Organization"
+          , text: "Deseja deletar essa organização"
+          , type: "warning"
+          , showCancelButton: true
+          , confirmButtonColor: "#DD6B55",confirmButtonText: "Sim, deletar!"
+          , cancelButtonText: "No"
+          , closeOnConfirm: false
+          , closeOnCancel: false
+          , showLoaderOnConfirm: true
+          }
+          , function(isConfirm){
+                if (isConfirm) {
+                    OrgService.delete(id).then(function(data){
+                        SweetAlert.swal({ title: "Deleted!"
+                            , text: "Organização deletada."
+                            , type: "success"
+                            , confirmButtonColor: "#29B5DF"
+                        }, function(){
+                            GoBack();
+                        });
+                    }, function(err){
+                        console.log(err);
+                    });
+                } else {
+                    SweetAlert.swal({
+                          title: "Cancelled"
+                        , type: "error"
+                        , confirmButtonColor: "#C1C1C1"
+                    });
+                }
+            });
+    };
+
+    function GoBack(){
+        $state.transitionTo('dashboard.organization.list');
+    }
+}
+
+angular.module('bitvagas.org.services', [])
+.service('OrgService', OrgService);
+
+OrgService.$inject = ['$http'];
+function OrgService($http){
+    var baseUrl = 'api/organizations/';
+
+    this.findAll = function(){
+        return $http.get(baseUrl);
+    };
+
+    this.findById = function(id){
+        return $http.get(baseUrl+id);
+    };
+
+    this.create = function(org){
+        return $http.post(baseUrl, org);
+    };
+
+    this.edit = function(org){
+        return $http.put(baseUrl + org.id, org);
+    };
+
+    this.delete = function(id){
+        return $http.delete(baseUrl + id);
+    };
+};
+
+angular.module('bitvagas.main.controllers', [])
+.controller('MainController', MainController);
+
+
+MainController.$inject = ['$scope', '$translate'];
+
+function MainController($scope, $translate){
+    $scope.setLang = function(langKey) {
+        $translate.use(langKey);
+    };
+}
+
+angular.module('bitvagas.main.factory',[])
+.factory('ErrorHandling', function(){
+
+    var handler = {};
+
+    handler.getErrors = function(data){
+        var errorList = [];
+        if(typeof data === 'object')
+            if(data.errors !== undefined)
+                //Get a list of errors
+                for(var errorIndex in data.errors)
+                    errorList.push(data.errors[errorIndex].message);
+            else
+                errorList.push(data.message);
+        else
+            //Single error
+            errorList.push(data);
+
+        return errorList;
+    }
+
+    return handler
+});
+
+angular.module('bitvagas.main.factory')
+.factory('Interceptor', Interceptor);
+
+Interceptor.$inject = ['$rootScope', '$q'];
+function Interceptor($rootScope, $q){
+    return {
+
+        response: function(response){
+
+            if((response.status === 201 ||
+                response.status === 204) &&
+                !/\/api\/jobs\/\d\/apply/.exec(response.config.url))
+                $rootScope.$broadcast('update-me');
+
+            return response;
+        }
+
+        , responseError: function(response){
+
+            if(response.status === 401){
+
+                if(response.data.destroy === true)
+                    $rootScope.logout();
+
+                new NotificationFx({
+                    message : '<div class="ns-thumb"><img src="img/template.png"/></div><div class="ns-content"><span>'+response.data.message+'</span></div>'
+                  , layout : 'other'
+                  , effect : 'thumbslider'
+                  , ttl : 9000
+                  , type : 'notice'
+                });
+                $rootScope.$broadcast('unauthorized');
+                return $q.reject(response);
+            }
+
+            if(response.status === 400 ||
+               response.status === 404){
+                //show error
+                return $q.reject(response);
+            }
+
+            return response;
+        }
+    };
+}
+
+
+angular.module('bitvagas.dashboard.controllers', [])
+.controller('DashBoardController',DashBoardController);
+
+DashBoardController.$inject = ['$scope', '$state', 'UserService'];
+function DashBoardController($scope, $state, UserService){
+}
+
+angular.module('bitvagas.dashboard.controllers')
+.controller('OverviewController', OverviewController);
+
+
+OverviewController.$inject = ['$rootScope', '$scope', 'lodash'];
+function OverviewController($rootScope, $scope, lodash){
+
+    if($scope.currentUser &&
+       $scope.currentUser.jobs) {
+       $scope.AppliersLength = lodash
+                            .chain($scope.currentUser.jobs)
+                            .pluck('job_appliers')
+                            .flatten()
+                            .size()
+                            .value();
+    } else
+        $scope.AppliersLength = 0;
+
+    $scope.toggle = function(index, id){
+        if($scope.$parent.open == index) {
+            $scope.$parent.open = undefined;
+            return;
+        }
+
+        $scope.$parent.open = index;
+    };
+}
+
+angular.module('bitvagas.dashboard.controllers')
+.controller('ProfileController', ProfileController);
+
+ProfileController.$inject = ['$rootScope', '$scope', '$state', 'UserService'];
+function ProfileController($rootScope, $scope, $state, UserService){
+
+    $scope.profile = {};
+    $scope.profile.NAME = $scope.currentUser.NAME;
+    $scope.profile.LOCATION = $scope.currentUser.LOCATION;
+    $scope.profile.NOTIFY_JOBS = $scope.currentUser.NOTIFY_JOBS;
+    $scope.profile.NOTIFY_APPLIES = $scope.currentUser.NOTIFY_APPLIES;
+
+    $scope.UpdateProfile = function(){
+        UserService.updateMe($scope.profile).then(function(data){
+            $rootScope.$broadcast('update-me');
+            $scope.profile.NAME = data.data.NAME;
+            $scope.profile.LOCATION = data.data.LOCATION;
+        });
+    };
+}
+
+angular.module('bitvagas.admin.services', [])
+.factory('AuthenticationService', AuthenticationService);
+
+AuthenticationService.$inject = ['$q', '$http', '$state'];
+function AuthenticationService($q, $http, $state){
+    return {
+        isAuthenticated : function() {
+            var deferred = $q.defer();
+            $http.get('/isAuthenticated').then(function(user){
+                if(user !== 0)
+                    deferred.resolve(user);
+                else
+                    deferred.reject();
+
+            },function(err){
+                deferred.reject(err);
+            });
+            return deferred.promise;
+        }
     };
 }

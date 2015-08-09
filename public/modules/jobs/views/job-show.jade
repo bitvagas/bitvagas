@@ -38,6 +38,13 @@
           h6(translate="job.description")
           p.job__description(ng-bind-html='job.DESCRIPTION | linky:"_blank"')
 
+          ul.job--tags
+            li(ng-repeat='(index, tag) in job.TAGS')
+              i.mdi.mdi-tag
+              span {{ tag }}
+
+          hr
+
         footer.job-foot
           div(ng-if='job.APPLY_URL === null')
             div(ng-if='!alreadyApplied')

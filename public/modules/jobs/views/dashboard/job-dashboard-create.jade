@@ -56,6 +56,9 @@ br
             ng-input(theme='fumi' type='text' icon='icon icon--fumi mdi mdi-map-marker-radius' label='{{ "post_job.job.local" | translate }}' name='location' ng-model='data.LOCATION' ng-required='true')
         li
           .create-form__input
+            tags-input(ng-model="tags" name="TAGS" placeholder="Add a tag to your job")
+        li
+          .create-form__input
             .create-how-apply
               .create-how-apply__input
                 label.create-how-apply-label

@@ -14,6 +14,7 @@ function JobPostController($scope, $state, $stateParams, JobService, Categories,
 
     $scope.create = function(){
         $scope.data.CATEGORY_ID = _.selected($scope.categories, 'id');
+        $scope.data.TAGS = _.map($scope.tags, 'text');
         if($scope.form.$valid)
             $state.go('jobs-confirm', { data : $scope.data });
     };
@@ -25,9 +26,15 @@ function JobPostController($scope, $state, $stateParams, JobService, Categories,
             $state.go('jobs-show', { 'id': data.data.id});
         }, function(err){
             //back to crate state and show errors
-            $state.go('jobs-create', {
+            $state.go('jobs-post', {
                 data   : $scope.data
             });
+        });
+    };
+
+    $scope.unconfirm = function(data){
+        $state.go('jobs-post', {
+            data : $scope.data
         });
     };
 }
@@ -50,6 +57,7 @@ function JobCreateController($scope, $state, $stateParams, $timeout, JobService,
         $scope.data.CATEGORY_ID = _.selected($scope.categories, 'id');
         $scope.data.ORG_ID = _.selected($scope.orgs, 'id');
         $scope.data.ORG_NAME = _.result(_.find($scope.orgs, { id: $scope.data.ORG_ID }), 'NAME');
+        $scope.data.TAGS = _.map($scope.tags, 'text');
 
         var typeId = $scope.data.TYPE_ID;
         $scope.data.TYPE_NAME = typeId == 1 ? 'FULL-TIME' :
@@ -62,7 +70,6 @@ function JobCreateController($scope, $state, $stateParams, $timeout, JobService,
     };
 
     $scope.confirm = function(data){
-
         JobService.create(data)
         .then(function(data){
             $state.go('dashboard.jobs.list');
