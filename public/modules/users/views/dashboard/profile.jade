@@ -1,6 +1,7 @@
 .dashboard__title
   h1 Minha Conta
 
+br
 ul.profile
   li
     img.thumb(ng-src="{{ currentUser.PICTURE ? currentUser.PICTURE : 'img/unknown.svg' }}")
@@ -14,6 +15,8 @@ ul.profile
       | Email: {{ currentUser.EMAIL}}
   li(style="height: 100px")
     ng-input(theme='fumi' label='Name' icon='icon icon--fumi mdi mdi-account' ng-model='profile.NAME' name='NAME')
+  li(style="height: 100px")
+    ng-input(theme='fumi' label='Location' icon='icon icon--fumi mdi mdi-map-marker-radius' ng-model='profile.LOCATION' name='LOCATION' style="width: 500px")
 
 div(ui-view="settings")
 

@@ -33,6 +33,7 @@ module.exports = {
             where   : { id : request.user.id }
           , include : includes
           }).then(function(user){
+            user.PASSWORD = undefined;
             response.status(200).json(user);
         });
   }
@@ -46,10 +47,12 @@ module.exports = {
       }).then(function(user){
 
           user.NAME = request.body.NAME;
+          user.LOCATION = request.body.LOCATION;
           user.NOTIFY_JOBS = request.body.NOTIFY_JOBS;
           user.NOTIFY_APPLIES = request.body.NOTIFY_APPLIES;
 
           user.save().then(function(user){
+              user.PASSWORD = undefined;
               response.status(201).json(user);
           }).catch(function(err){
               response.status(400).json({ error: err });
