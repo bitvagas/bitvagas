@@ -2,6 +2,8 @@ angular.module('bitvagas',
     ['ui.router'
     ,'pascalprecht.translate'
     ,'angular-loading-bar'
+    ,'720kb.tooltips'
+    ,'wu.masonry'
     ,'satellizer'
     ,'ngSanitize'
     ,'ngLodash'
@@ -155,7 +157,7 @@ angular.module('bitvagas.dashboard', [ 'bitvagas.dashboard.controllers' ])
     })
     .state('dashboard.cv', {
         url : '/cv'
-        , templateUrl  : '/modules/users/views/cv'
+        , templateUrl  : '/modules/users/views/dashboard/my-cv'
         , controller   : 'CVController'
         , authenticate : true
     });
@@ -392,6 +394,7 @@ function ProfileController($rootScope, $scope, $state, UserService){
 
     $scope.profile = {};
     $scope.profile.NAME = $scope.currentUser.NAME;
+    $scope.profile.LOCATION = $scope.currentUser.LOCATION;
     $scope.profile.NOTIFY_JOBS = $scope.currentUser.NOTIFY_JOBS;
     $scope.profile.NOTIFY_APPLIES = $scope.currentUser.NOTIFY_APPLIES;
 
@@ -399,6 +402,7 @@ function ProfileController($rootScope, $scope, $state, UserService){
         UserService.updateMe($scope.profile).then(function(data){
             $rootScope.$broadcast('update-me');
             $scope.profile.NAME = data.data.NAME;
+            $scope.profile.LOCATION = data.data.LOCATION;
         });
     };
 }

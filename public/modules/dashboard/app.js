@@ -46,7 +46,7 @@ angular.module('bitvagas.dashboard', [ 'bitvagas.dashboard.controllers' ])
     })
     .state('dashboard.cv', {
         url : '/cv'
-        , templateUrl  : '/modules/users/views/cv'
+        , templateUrl  : '/modules/users/views/dashboard/my-cv'
         , controller   : 'CVController'
         , authenticate : true
     });

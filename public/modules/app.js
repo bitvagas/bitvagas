@@ -2,6 +2,8 @@ angular.module('bitvagas',
     ['ui.router'
     ,'pascalprecht.translate'
     ,'angular-loading-bar'
+    ,'720kb.tooltips'
+    ,'wu.masonry'
     ,'satellizer'
     ,'ngSanitize'
     ,'ngLodash'

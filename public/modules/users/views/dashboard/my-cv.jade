@@ -1,5 +1,5 @@
 .cv(ng-if="currentUser.LINKEDIN_ID !== null")
-  .cv__cell.cv__cell--main
+  .cv__dashboard.cv__cell.cv__cell--main
     .cv__header
       .cv__header--cell.cv__header--title
         h2.title__name {{ user.NAME }}
@@ -8,7 +8,6 @@
         img.cv(src="img/CV.png")
 
     hr
-
 
     .cv__item
       .cv__item--cell
@@ -32,17 +31,10 @@
             i.mdi.mdi-email
             | {{ user.cv.emailAddress }}
 
-  aside.cv__cell.cv__aside
-    img.cv__img.dashboard__img(ng-src="{{ user.PICTURE ? user.PICTURE : 'img/unknown.svg' }}")
+.cv.cv__linkedin(ng-if="currentUser.LINKEDIN_ID === null")
+  img.zoom(src="img/bv-connectcv.png")
+  .connect
+    a.btn.linkedin(ng-click="linkedIn()")
+      i.mdi.mdi-linkedin-box
+      span(ng-if='currentUser.LINKEDIN_ID === null')  Conectar LinkedIn
 
-    ul.aside__list
-      li
-        label
-          i.mdi.mdi-email
-          {{ user.cv.emailAddress }}
-      li
-        label
-          i.mdi.mdi-map-marker-radius
-          {{ user.cv.location.name }}
-
-    hr

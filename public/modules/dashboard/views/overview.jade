@@ -6,7 +6,7 @@ h1 Visão Geral
 
     div(ng-if='currentUser.job_appliers.length !== 0')
       ul.jobs
-        li(ng-repeat='apply in currentUser.job_appliers')
+        li(ng-repeat='apply in currentUser.job_appliers | limitTo: 5')
           a.jobs-item
             .jobs-item__cell.jobs-item__cell--img
               img.thumb(src='img/template.png')
@@ -24,7 +24,7 @@ h1 Visão Geral
 
     .dashboard__overview--list-scroll(ng-if='currentUser.job.length != 0')
       ul.jobs
-        li(ng-repeat="job in currentUser.jobs")
+        li(ng-repeat="job in currentUser.jobs | limitTo: 5")
           a.jobs-item(href="#")
             .jobs-item__cell.jobs-item__cell--img
               img.thumb(src='/img/template.png')

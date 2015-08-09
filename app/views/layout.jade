@@ -10,7 +10,7 @@ html(lang='pt-br', ng-app='bitvagas')
     link(rel='stylesheet' href='/css/bitvagas.css')
     link(rel='stylesheet' href='/components/mdi/css/materialdesignicons.min.css' media='all')
     link(rel='stylesheet' href='/components/ng-input/dist/css/ng-input.css')
-
+    link(rel='stylesheet' href='/components/angular-tooltips/dist/angular-tooltips.min.css')
 
     include script
 
@@ -59,7 +59,7 @@ html(lang='pt-br', ng-app='bitvagas')
           li(ng-if="isAuthenticated()").dropdown
             .dropdown-active(href='/#/dashboard/overview') {{ currentUser.NAME }}
             ul(ng-style="style").dropdown__body.dropdown__body--user
-              li
+              li.border-top
                 a(ui-sref='dashboard.overview') Visao Geral
               li
                 a(ui-sref='dashboard.profile') Minha Conta
@@ -67,7 +67,7 @@ html(lang='pt-br', ng-app='bitvagas')
                 a(ui-sref='dashboard.cv({id : user.id})') Meu Curriculo
               li
                 a(ui-sref='dashboard.jobs.list') Minhas Vagas
-              li
+              li.border-bottom
                 a(ui-sref='dashboard.organization.list') Minhas Organizações
               li
                 a(ng-click='logout()' href="#" title='{{ layout.site_nav.logout}}' translate="layout.site_nav.logout")
