@@ -25,7 +25,8 @@
     "moment": "~2.10.3",
     "sweetalert": "~1.1.0",
     "angular-sweetalert": "~1.1.0",
-    "modernizr": "~2.8.3"
+    "modernizr": "~2.8.3",
+    "angular-tooltips": "~0.1.19"
   },
   "overrides": {
     "angular": {
@@ -84,6 +85,12 @@
     },
     "angular-loading-bar": {
       "main": "build/loading-bar.min.js"
+    },
+    "angular-tooltips": {
+      "main": "dist/angular-tooltips.min.js"
+    },
+    "imagesloaded": {
+        "ignore": true
     },
     "mdi": {
       "ignore": true

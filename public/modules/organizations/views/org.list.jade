@@ -14,7 +14,7 @@ div(ng-if='currentUser.orgs.length !== 0')
           h2.orgs-item__title {{ org.NAME }}
           h3.orgs-item__url {{ org.URL }}
         .orgs-item__cell.orgs-item__cell--meta
-          span(ui-sref="dashboard.organization.edit({ OrgID : org.id })")
+          span(ui-sref="dashboard.organization.edit({ OrgID : org.id })" tooltips tooltip-title="Edit" tooltip-side="top")
             i.mdi.mdi-pencil-box
-          span(ng-click="delete(org.id)")
+          span(ng-click="delete(org.id)" tooltips tooltip-title="Delete" tooltip-side="top")
             i.mdi.mdi-delete

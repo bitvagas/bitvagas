@@ -2,78 +2,79 @@
 .dashboard__title
   h1.create__title(translate="post_job.title")
 
-  .job--steps
-    ol
-      li.active
-        .separate
-        span Create Job
-      li
-        .separate
-        span Preview
-      li
-        .separate
-        span Confirm
-  .create__body
-    form(name="form" ng-submit='form.$valid && create()')
+br
+.job--steps
+  ol
+    li.active
+      .separate
+      span Create Job
+    li
+      .separate
+      span Preview
+    li
+      .separate
+      span Confirm
+.create__body
+  form(name="form" ng-submit='form.$valid && create()')
 
-      fieldset.create-fieldset
-        legend.create-fieldset__legend(translate="post_job.job.title")
-        ul.create-form
-          li
-            .create-form__input(ng-if='orgs.length !== 0')
-              div(data-pg-ng-dropdown name='ORG_ID' data-dynamic-height="true" data-text-property="NAME" data-selected="0" data-options='orgs')
-            .create-form__input-icon
-              a.plus.job-plus--org(href='' ng-click='alertNewOrg()')
-                h5(ng-if='orgs.length === 0' style="display: inline; padding-right: 10px; vertical-align: text-bottom") Criar Organização
-                i.mdi.mdi-plus-circle
-          li
-            .create-form__input
-              ng-input(theme='fumi' type='text' icon='icon icon--fumi mdi mdi-tie' label='{{ "post_job.job.name" | translate }}' name='TITLE' ng-model='data.TITLE' ng-required='true')
-          li
-            .create-form__input
-              ul.create-type-job
-                li
-                  input.create-type-job__input(type='radio' name='job_typeID' value='1' id='rdl-fulltime' ng-model='data.TYPE_ID' ng-required='true')
-                  label.create-type-job__label.label.label--fulltime(for='rdl-fulltime' translate="post_job.job.type.full")
-                li
-                  input.create-type-job__input(type='radio' name='job_typeID' value='2' id='rdl-parttime' ng-model='data.TYPE_ID' ng-required='true')
-                  label.create-type-job__label.label.label--parttime(for='rdl-parttime' translate="post_job.job.type.part")
-                li
-                  input.create-type-job__input(type='radio' name='job_typeID' value='3' id='rdl-freelancer' ng-model='data.TYPE_ID' ng-required='true')
-                  label.create-type-job__label.label.label--freelance(for='rdl-freelancer' translate="post_job.job.type.freelancer")
-                li
-                  input.create-type-job__input(type='radio' name='job_typeID' value='4' id='rdl-temporary' ng-model='data.TYPE_ID' ng-required='true')
-                  label.create-type-job__label.label.label--temporary(for='rdl-temporary' translate="post_job.job.type.temp")
-          li
-            .create-form__input
-              textarea.textarea.textarea--full(placeholder='{{ "post_job.job.description" | translate }}' name='DESCRIPTION' ng-model='data.DESCRIPTION' rows='6' cols='50' ng-required='true')
-          li
-            .create-form__input
-              div(data-pg-ng-dropdown name='categoryId' data-dynamic-height="true" data-text-property="NAME" data-selected="1" data-options='categories')
-          li
-            .create-form__input
-              ng-input(theme='fumi' type='text' icon='icon icon--fumi mdi mdi-map-marker-radius' label='{{ "post_job.job.local" | translate }}' name='location' ng-model='data.LOCATION' ng-required='true')
-          li
-            .create-form__input
-              .create-how-apply
-                .create-how-apply__input
-                  label.create-how-apply-label
-                    input.create-how-apply-label__radio(type='checkbox' name='applyUrl' ng-model='applyUrl' value='url')
-                    .create-how-apply-label__body(translate="post_job.job.how_apply.value")
-                ng-input(theme='fumi' type='text' icon='icon icon--fumi mdi mdi-link' label='URL' ng-model='data.APPLY_URL' name='APPLY_URL' ng-show='applyUrl')
-          //- li
-            //- label.create-form__label Destacar essa vaga:
-            //- .create-form__input
-              //- label.create-terms
-                //- p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                //- input.create-terms__input(type='checkbox' id='feature')
-                //- .create-terms__text
-                //- |  Sim, destacar por $25,00.
-          li
-            .create-form__input
-                label(for='terms')
-                  input(type='checkbox' ng-model='terms' id='terms')
-                  |  <a ui-sref="terms" target="_blank" translate="post_job.job.terms"></a>
+    fieldset.create-fieldset
+      legend.create-fieldset__legend(translate="post_job.job.title")
+      ul.create-form
+        li
+          .create-form__input(ng-if='orgs.length !== 0')
+            div(data-pg-ng-dropdown name='ORG_ID' data-dynamic-height="true" data-text-property="NAME" data-selected="0" data-options='orgs')
+          .create-form__input-icon
+            a.plus.job-plus--org(href='' ng-click='alertNewOrg()')
+              h5(ng-if='orgs.length === 0' style="display: inline; padding-right: 10px; vertical-align: text-bottom") Criar Organização
+              i.mdi.mdi-plus-circle
+        li
+          .create-form__input
+            ng-input(theme='fumi' type='text' icon='icon icon--fumi mdi mdi-tie' label='{{ "post_job.job.name" | translate }}' name='TITLE' ng-model='data.TITLE' ng-required='true')
+        li
+          .create-form__input
+            ul.create-type-job
+              li
+                input.create-type-job__input(type='radio' name='job_typeID' value='1' id='rdl-fulltime' ng-model='data.TYPE_ID' ng-required='true')
+                label.create-type-job__label.label.label--fulltime(for='rdl-fulltime' translate="post_job.job.type.full")
+              li
+                input.create-type-job__input(type='radio' name='job_typeID' value='2' id='rdl-parttime' ng-model='data.TYPE_ID' ng-required='true')
+                label.create-type-job__label.label.label--parttime(for='rdl-parttime' translate="post_job.job.type.part")
+              li
+                input.create-type-job__input(type='radio' name='job_typeID' value='3' id='rdl-freelancer' ng-model='data.TYPE_ID' ng-required='true')
+                label.create-type-job__label.label.label--freelance(for='rdl-freelancer' translate="post_job.job.type.freelancer")
+              li
+                input.create-type-job__input(type='radio' name='job_typeID' value='4' id='rdl-temporary' ng-model='data.TYPE_ID' ng-required='true')
+                label.create-type-job__label.label.label--temporary(for='rdl-temporary' translate="post_job.job.type.temp")
+        li
+          .create-form__input
+            textarea.textarea.textarea--full(placeholder='{{ "post_job.job.description" | translate }}' name='DESCRIPTION' ng-model='data.DESCRIPTION' rows='6' cols='50' ng-required='true')
+        li
+          .create-form__input
+            div(data-pg-ng-dropdown name='categoryId' data-dynamic-height="true" data-text-property="NAME" data-selected="1" data-options='categories')
+        li
+          .create-form__input
+            ng-input(theme='fumi' type='text' icon='icon icon--fumi mdi mdi-map-marker-radius' label='{{ "post_job.job.local" | translate }}' name='location' ng-model='data.LOCATION' ng-required='true')
+        li
+          .create-form__input
+            .create-how-apply
+              .create-how-apply__input
+                label.create-how-apply-label
+                  input.create-how-apply-label__radio(type='checkbox' name='applyUrl' ng-model='applyUrl' value='url')
+                  .create-how-apply-label__body(translate="post_job.job.how_apply.value")
+              ng-input(theme='fumi' type='text' icon='icon icon--fumi mdi mdi-link' label='URL' ng-model='data.APPLY_URL' name='APPLY_URL' ng-show='applyUrl')
+        //- li
+          //- label.create-form__label Destacar essa vaga:
+          //- .create-form__input
+            //- label.create-terms
+              //- p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+              //- input.create-terms__input(type='checkbox' id='feature')
+              //- .create-terms__text
+              //- |  Sim, destacar por $25,00.
+        li
+          .create-form__input
+              label(for='terms')
+                input(type='checkbox' ng-model='terms' id='terms')
+                |  <a ui-sref="terms" target="_blank" translate="post_job.job.terms"></a>
 
-      .create-action
-        button.create-action__btn.btn.btn--medium.btn--primary(ng-disabled='!terms' type='submit' translate="post_job.job.continue")
+    .create-action
+      button.btn.btn--large.btn--primary(ng-disabled='!terms' type='submit' translate="post_job.job.continue")
