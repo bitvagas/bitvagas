@@ -11,6 +11,7 @@ angular.module('bitvagas.main',
           , views        : {
               ''         : {
                     templateUrl     : 'modules/main/views/index'
+                  , controller      : 'JobListController'
               }
               , 'job-list@index'    : {
                     templateUrl     : 'modules/jobs/views/job-list'

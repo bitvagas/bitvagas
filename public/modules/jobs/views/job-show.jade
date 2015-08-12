@@ -18,6 +18,10 @@
               img(src='/img/calendar.svg').job__icon
               .job__date
                 span(am-time-ago="job.createdAt")
+            li
+              i.mdi.mdi-tie
+              span {{ job.category.NAME }}
+
             li.right
               .job__appliers
                 strong
@@ -83,6 +87,5 @@
                   .job-form__field
                     textarea.job-form__input.textarea.textarea--full(name='DESCRIPTION' rows='5' cols='45' ng-model='apply.DESCRIPTION' placeholder="{{ 'job.apply.description' | translate }}")
 
-            .job-action
-              input.job-action__btn.btn.btn--primary.btn--medium(type="submit" name="submit" value="{{ 'job.apply.button' | translate }}")
+            input.job-action__btn.btn.btn--primary.btn--medium(type="submit" name="submit" value="{{ 'job.apply.button' | translate }}")
 

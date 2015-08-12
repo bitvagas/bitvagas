@@ -179,7 +179,7 @@ angular.module('bitvagas.jobs',
           , controller  : 'JobListController'
         })
         .state('jobs-list', {
-            url: '/jobs/list'
+            url: '/jobs/list/:filter'
           , templateUrl : '/modules/jobs/views/job-list'
           , controller  : 'JobListController'
         })
@@ -262,6 +262,7 @@ angular.module('bitvagas.main',
           , views        : {
               ''         : {
                     templateUrl     : 'modules/main/views/index'
+                  , controller      : 'JobListController'
               }
               , 'job-list@index'    : {
                     templateUrl     : 'modules/jobs/views/job-list'
@@ -565,13 +566,30 @@ function JobCreateController($scope, $state, $stateParams, $timeout, JobService,
 angular.module('bitvagas.jobs.controllers')
 .controller('JobListController', JobListController);
 
-JobListController.$inject = ['$scope', 'JobService'];
+JobListController.$inject = ['$scope', '$state', '$stateParams', 'JobService'];
 
-function JobListController($scope, JobService) {
+function JobListController($scope, $state, $stateParams, JobService) {
+
+    $scope.filter = $stateParams.filter;
+
+    $scope.filterTypes = {
+        'FULL-TIME': true,
+        'PARTTIME': true,
+        'FREELANCE': true,
+        'TEMPORARY': true
+    };
 
     JobService.findAll().then(function(data){
         $scope.jobs = data.data;
     });
+
+    $scope.filterJobs = function(){
+        $state.go('jobs-list', { filter : $scope.filter }, { notify: false });
+    };
+
+    $scope.filterType = function(type){
+        return $scope.filterTypes[type.job_type.NAME];
+    };
 }
 
 angular.module('bitvagas.jobs.controllers')

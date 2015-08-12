@@ -5,6 +5,47 @@ h1.slogan
 
 .home
   .home-main
-    section(ui-view='job-list')
+
+    .search
+      input.search__input(name='', type='text', placeholder='{{ "explore.search.placeholder" | translate }}')
+      a.search__btn.btn(ng-click='filter()' translate='explore.search.button')
+
+    .typejob
+      ul.typejob__list
+        li
+          label(for='check--full').typejob-label
+            .typejob-label__checkbox
+            input(type='checkbox' checked id="check--full").typejob-label__input
+            .typejob-label__text.label.label--fulltime(translate="explore.search.type.full")
+        li
+          label(for='check--part').typejob-label
+            input(type='checkbox' checked id="check--part").typejob-label__input
+            .typejob-label__text.label.label--parttime(translate="explore.search.type.part")
+        li
+          label(for='check--freelancer').typejob-label
+            input(type='checkbox' checked id="check--freelancer").typejob-label__input
+            .typejob-label__text.label.label--freelance(translate="explore.search.type.freelancer")
+        li
+          label(for='check--temp').typejob-label
+            input(type='checkbox' checked id="check--temp").typejob-label__input
+            .typejob-label__text.label.label--temporary(translate="explore.search.type.temp")
+    ul.jobs
+      li(ng-repeat='job in jobs | limitTo: 5')
+        a.jobs-item(ui-sref='jobs-show({id : job.id})', title='')
+          .jobs-item__cell.jobs-item__cell--img
+            img.jobs-item__img(src='/img/company-default.png', alt='')
+
+          .jobs-item__cell.jobs-item__cell--body
+            h2.jobs-item__title {{ job.TITLE }}
+            h3.jobs-item__company {{ job.LOCATION }}
+
+          .jobs-item__cell.jobs-item__cell--meta
+            .jobs-item__type
+              .label(class="label--{{job.job_type.NAME}}") {{ job.job_type.NAME }}
+            .jobs-item__date(am-time-ago='job.createdAt')
+
+      a(ui-sref='jobs-list').jobs--all
+        i.mdi.mdi-plus-circle
+        | Todas as Vagas
 
   section(ui-view='job-sidebar')

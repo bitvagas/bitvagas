@@ -13,7 +13,7 @@ angular.module('bitvagas.jobs',
           , controller  : 'JobListController'
         })
         .state('jobs-list', {
-            url: '/jobs/list'
+            url: '/jobs/list/:filter'
           , templateUrl : '/modules/jobs/views/job-list'
           , controller  : 'JobListController'
         })

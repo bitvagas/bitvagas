@@ -1,30 +1,31 @@
+h1 Todas as Vagas
+hr
 .search
-  input.search__input(name='', type='text', placeholder='{{ "explore.search.placeholder" | translate }}')
-  a.search__btn.btn(href='' translate='explore.search.button')
+  input.search__input(name='' ng-change='filterJobs()' ng-model='filter' type='text', placeholder='{{ "explore.search.placeholder" | translate }}')
+  a.search__btn.btn(href='' ng-click='filterJobs()' translate='explore.search.button')
 
 .typejob
   ul.typejob__list
     li
       label(for='check--full').typejob-label
-        .typejob-label__checkbox
-        input(type='checkbox' checked id="check--full").typejob-label__input
+        input(type='checkbox' ng-model='filterTypes["FULL-TIME"]' checked id="check--full").typejob-label__input
         .typejob-label__text.label.label--fulltime(translate="explore.search.type.full")
     li
       label(for='check--part').typejob-label
-        input(type='checkbox' checked id="check--part").typejob-label__input
+        input(type='checkbox' ng-model='filterTypes["PARTTIME"]' checked id="check--part").typejob-label__input
         .typejob-label__text.label.label--parttime(translate="explore.search.type.part")
     li
       label(for='check--freelancer').typejob-label
-        input(type='checkbox' checked id="check--freelancer").typejob-label__input
+        input(type='checkbox' ng-model='filterTypes["FREELANCE"]' checked id="check--freelancer").typejob-label__input
         .typejob-label__text.label.label--freelance(translate="explore.search.type.freelancer")
     li
       label(for='check--temp').typejob-label
-        input(type='checkbox' checked id="check--temp").typejob-label__input
+        input(type='checkbox' ng-model='filterTypes["TEMPORARY"]' checked id="check--temp").typejob-label__input
         .typejob-label__text.label.label--temporary(translate="explore.search.type.temp")
 
 h2.jobs-title(translate="explore.last")
 ul.jobs
-  li(ng-repeat='job in jobs')
+  li(ng-repeat='job in jobs | filter: filter | filter: filterType')
     a.jobs-item(ui-sref='jobs-show({id : job.id})', title='')
       .jobs-item__cell.jobs-item__cell--img
         img.jobs-item__img(src='/img/company-default.png', alt='')
@@ -38,12 +39,12 @@ ul.jobs
           .label(class="label--{{job.job_type.NAME}}") {{ job.job_type.NAME }}
         .jobs-item__date(am-time-ago='job.createdAt')
 
-ul.pagination
-  li.current
-    a(href='') 1
-  li
-    a(href='') 2
-  li
-    a(href='') 3
-  li
-    a(href='') Next &raquo;
+//- ul.pagination
+  //- li.current
+    //- a(href='') 1
+  //- li
+    //- a(href='') 2
+  //- li
+    //- a(href='') 3
+  //- li
+    //- a(href='') Next &raquo;
