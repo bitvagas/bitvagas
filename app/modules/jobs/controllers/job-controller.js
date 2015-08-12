@@ -14,7 +14,7 @@ var express  = require('express')
 module.exports = {
 
     findAll: function(request, response){
-        db.job.findAll({ include : includes }).then(function(jobs){
+        db.job.findAll({ include : includes, order: '"createdAt" DESC' }).then(function(jobs){
             response.status(200).json(jobs);
         });
     }
