@@ -29,10 +29,8 @@ module.exports = {
         if(!request.user)
             return response.status(401).send('User has not found');
 
-        db.user.findOne({
-            where   : { id : request.user.id }
-          , include : includes
-          }).then(function(user){
+        db.user.findById(request.user.id , { include : includes })
+        .then(function(user){
             user.PASSWORD = undefined;
             response.status(200).json(user);
         });
@@ -184,11 +182,8 @@ module.exports = {
           response.status(404).json({ error: 'Missing email'});
 
       db.user.find({
-          where   : { EMAIL : request.body.EMAIL }
-        , include : [
-            { model : db.job, include : [db.job_type] }
-          , { model : db.org }
-        ]}).then(function(user){
+          where: { EMAIL : request.body.EMAIL }
+        }).then(function(user){
           request.user = user || undefined;
           next();
       }).catch(function(err){
