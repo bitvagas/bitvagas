@@ -24,7 +24,7 @@
         .job__local {{ data.LOCATION }}
 
     h6(translate="job.description")
-    p.job__description(ng-bind-html='data.DESCRIPTION | linky:"_blank"')
+    p.job__description(ng-bind-html='data.DESCRIPTION')
 
     footer.job-foot
       button.btn.btn--medium(ng-click='unconfirm(data)') Voltar

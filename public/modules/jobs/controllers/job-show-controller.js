@@ -1,16 +1,16 @@
 angular.module('bitvagas.jobs.controllers')
 .controller('JobShowController', JobShowController);
 
-JobShowController.$inject = ['$scope', '$state', '$auth', 'JobService', 'lodash'];
-function JobShowController($scope, $state, $auth, JobService, lodash){
+JobShowController.$inject = ['$scope', '$state', '$auth', 'JobService', 'lodash', 'marked'];
+function JobShowController($scope, $state, $auth, JobService, lodash, marked){
 
     $scope.apply = {};
 
     var id = $state.params.id;
 
     JobService.findById(id).then(function(data){
-        console.log(data);
         $scope.job = data.data;
+        $scope.job.DESCRIPTION = marked(data.data.DESCRIPTION);
         AlreadyApplied();
     }).catch(function(err){
         $state.transitionTo('index');

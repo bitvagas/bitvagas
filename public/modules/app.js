@@ -12,6 +12,7 @@ angular.module('bitvagas',
     ,'ngInput'
     ,'angularMoment'
     ,'oitozero.ngSweetAlert'
+    ,'hc.marked'
     ,'bitvagas.main'
     ,'bitvagas.jobs'
     ,'bitvagas.org'

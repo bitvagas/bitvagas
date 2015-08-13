@@ -39,8 +39,7 @@
               //- |  <iframe src="https://plusone.google.com/_/+1/fastbutton?bsv&amp;size=medium&amp;hl=en-US&amp;url=http://bitvagas.com/&amp;parent=http://bitvagas.com/" allowtransparency="true" frameborder="0" scrolling="no" width="70" height="20"></iframe>
               | <div class="g-plusone" data-size="medium" data-href="http://bitvagas.com/#{ lang == "en" ? "" : lang + "/" }" data-href="http://bitvagas.com/"></div>
 
-          h6(translate="job.description")
-          p.job__description(ng-bind-html='job.DESCRIPTION | linky:"_blank"')
+          p.job__description(ng-bind-html='job.DESCRIPTION')
 
           ul.job--tags
             li(ng-repeat='(index, tag) in job.TAGS')

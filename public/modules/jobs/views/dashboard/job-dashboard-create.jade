@@ -47,7 +47,7 @@ br
                 label.create-type-job__label.label.label--temporary(for='rdl-temporary' translate="post_job.job.type.temp")
         li
           .create-form__input
-            textarea.textarea.textarea--full(placeholder='{{ "post_job.job.description" | translate }}' name='DESCRIPTION' ng-model='data.DESCRIPTION' rows='6' cols='50' ng-required='true')
+            textarea.textarea.textarea--full(id='markdown__editor' name='DESCRIPTION' rows='6' cols='50')
         li
           .create-form__input
             div(data-pg-ng-dropdown name='categoryId' data-dynamic-height="true" data-text-property="NAME" data-selected="1" data-options='categories')

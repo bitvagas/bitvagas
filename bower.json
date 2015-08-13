@@ -27,7 +27,9 @@
     "angular-sweetalert": "~1.1.0",
     "modernizr": "~2.8.3",
     "angular-tooltips": "~0.1.19",
-    "ng-tags-input": "~3.0.0"
+    "ng-tags-input": "~3.0.0",
+    "angular-marked": "~0.0.21",
+    "marked": "~0.3.5"
   },
   "overrides": {
     "angular": {
@@ -78,6 +80,12 @@
     "angular-sweetalert": {
       "main": "SweetAlert.min.js"
     },
+    "marked": {
+        "main": "marked.min.js"
+    },
+    "angular-marked": {
+        "main": "angular-marked.min.js"
+    },
     "modernizr": {
       "main": "modernizr.js"
     },
@@ -91,7 +99,7 @@
       "main": "dist/angular-tooltips.min.js"
     },
     "ng-tags-input": {
-        "main": "ng-tags-input.min.js"
+      "main": "ng-tags-input.min.js"
     },
     "imagesloaded": {
       "ignore": true

@@ -2,19 +2,37 @@ angular.module('bitvagas.jobs.controllers', ['pg-ng-dropdown'])
 .controller('JobPostController', JobPostController)
 .controller('JobCreateController', JobCreateController);
 
-JobPostController.$inject   = ['$scope', '$state', '$stateParams', 'JobService', 'Categories', 'lodash'];
-JobCreateController.$inject = ['$scope', '$state', '$stateParams', '$timeout', 'JobService', 'OrgService', 'Categories', 'lodash', 'SweetAlert'];
-function JobPostController($scope, $state, $stateParams, JobService, Categories, _){
+JobPostController.$inject   = ['$scope', '$state', '$stateParams', 'JobService', 'Categories', 'lodash', 'marked'];
+JobCreateController.$inject = ['$scope', '$state', '$stateParams', '$timeout', 'JobService', 'OrgService', 'Categories', 'lodash', 'SweetAlert', 'marked'];
+function JobPostController($scope, $state, $stateParams, JobService, Categories, _, marked){
+
+    var markdown;
 
     $scope.data = $stateParams.data;
     $scope.errors = $stateParams.errors || [];
 
     $scope.categories = Categories.data;
-    $scope.categories[0].selected = true;
+    $scope.categories[1].selected = true;
+
+    // Render markedown on confirm page
+    if($state.current.name === 'jobs-confirm')
+        $scope.data.DESCRIPTION = marked($scope.data.DESCRIPTION);
+
+    if(_.isElement(document.getElementById("markdown__editor"))) {
+        markdown = new SimpleMDE({
+            element: document.getElementById("markdown__editor")
+          , spellChecker: false
+        });
+        //Back editor value
+        markdown.value($scope.data.marked);
+        markdown.render();
+    }
 
     $scope.create = function(){
         $scope.data.CATEGORY_ID = _.selected($scope.categories, 'id');
         $scope.data.TAGS = _.map($scope.tags, 'text');
+        $scope.data.DESCRIPTION = markdown.value();
+        $scope.data.marked = markdown.value();
         if($scope.form.$valid)
             $state.go('jobs-confirm', { data : $scope.data });
     };
@@ -39,7 +57,9 @@ function JobPostController($scope, $state, $stateParams, JobService, Categories,
     };
 }
 
-function JobCreateController($scope, $state, $stateParams, $timeout, JobService, OrgService, Categories, _, SweetAlert){
+function JobCreateController($scope, $state, $stateParams, $timeout, JobService, OrgService, Categories, _, SweetAlert, marked){
+
+    var markdown;
 
     $scope.data = $stateParams.data;
     $scope.errors = $stateParams.errors || [];
@@ -47,24 +67,39 @@ function JobCreateController($scope, $state, $stateParams, $timeout, JobService,
     $scope.categories = Categories.data;
     $scope.orgs = $scope.currentUser.orgs;
 
-    $scope.categories[0].selected = true;
+    $scope.categories[1].selected = true;
 
     if($scope.orgs[0])
         $scope.orgs[0].selected = true;
 
+    // Render markedown on confirm page
+    if($state.current.name === 'dashboard.jobs.confirm')
+        $scope.data.DESCRIPTION = marked($scope.data.DESCRIPTION);
+
+    if(_.isElement(document.getElementById("markdown__editor"))) {
+        markdown = new SimpleMDE({
+            element: document.getElementById("markdown__editor")
+          , spellChecker: false
+        });
+
+        //Back editor value
+        markdown.value($scope.data.marked);
+        markdown.render();
+    }
 
     $scope.create = function(){
         $scope.data.CATEGORY_ID = _.selected($scope.categories, 'id');
         $scope.data.ORG_ID = _.selected($scope.orgs, 'id');
         $scope.data.ORG_NAME = _.result(_.find($scope.orgs, { id: $scope.data.ORG_ID }), 'NAME');
         $scope.data.TAGS = _.map($scope.tags, 'text');
+        $scope.data.DESCRIPTION = markdown.value();
+        $scope.data.marked = markdown.value();
 
         var typeId = $scope.data.TYPE_ID;
         $scope.data.TYPE_NAME = typeId == 1 ? 'FULL-TIME' :
                                 typeId == 2 ? 'PART-TIME' :
                                 typeId == 3 ? 'FREELANCE' :
                                 typeId == 4 ? 'TEMPORARY' : 'FREELANCE';
-
 
         $state.transitionTo('dashboard.jobs.confirm', { data : $scope.data });
     };
