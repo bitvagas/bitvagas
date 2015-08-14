@@ -9,7 +9,8 @@ function Interceptor($rootScope, $q){
 
             if((response.status === 201 ||
                 response.status === 204) &&
-                !/\/api\/jobs\/\d\/apply/.exec(response.config.url))
+                !/\/api\/jobs\/\d\/apply/.exec(response.config.url) &&
+                !/\/api\/jobs\/post/.exec(response.config.url))
                 $rootScope.$broadcast('update-me');
 
             return response;
