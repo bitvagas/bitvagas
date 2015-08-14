@@ -35,45 +35,13 @@
 
 `$ bower install`
 
-####Database
+#### Configure your database
 
-We use [postgres](http://www.postgresql.org/download/), you can setup your database  for each environment by `psql` command.
+`# create database bitvagas_dev;`
 
-`$ psql -h localhost -U postgres -p 5433`
+#### Run fixtures:
 
-inside postgres
-
-`# create database bitvagas_dev;` for development
-
-`# create database bitvagas_test;` for tests
-
-`# create database bitvagas;` for production
-
-`# \l` to list your databases created
-
-`# \c bitvagas_dev` to change your current database.
-
-after run application sequelize will create our tables.
-
-####Export your database variables
-
-We use [sequelize](http://sequelizejs.com/) to map our database, you need export your variables to set up.
-
-`$ export user=username` => default : postgres
-
-`$ export password=password`
-
-if you running postgres on a diferent port ([see this issue](https://github.com/bitvagas/bitvagas/issues/1))
-
-`$ export port=5433` => default : 5432
-
-####NodeMailer variables
-
-export your email variables to setup nodemailer, we using Gmail Smtp for now, but probably will be changed later.
-
-`$ export email=youremail@gmail.com`
-
-`$ export mailPass=youremailPassword`
+`$ gulp fixtures`
 
 ####Run with:
 
