@@ -77,8 +77,8 @@ module.exports = {
                             , LINKEDIN_PROFILE : profile.publicProfileUrl
                             , LINKEDIN_ID      : profile.id
                             , LINKEDIN_TOKEN   : body.access_token
-                        }).then(function(user){
-                            res.status(201).json({ token: token.createJWT(user) });
+                        }).then(function(){
+                            res.status(201).json({ token: token.createJWT(req.user) });
                         }).catch(function(err){
                             res.statsu(400).json({ message: err });
                         });
