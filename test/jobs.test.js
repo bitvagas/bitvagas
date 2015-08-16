@@ -11,7 +11,7 @@ var request  = require('supertest')
 
 describe('Jobs modules api', function(){
 
-    before(function(){
+    before(function(done){
         org  = { NAME: 'org-test', URL: 'http://test.org' };
 
         job  = { TITLE       : 'Job-Test'
@@ -40,41 +40,42 @@ describe('Jobs modules api', function(){
           , LOCATION: 'NY'
         };
 
-        db.user.sync({ force: true })
-        .then(function(){
-            return db.job.sync({ force: true });
-        }).then(function(){
-            fixtures.loadFile(__dirname+"/../config/data/**.yml", require('../app/models'))
-            .then(function(){
+        return db.sequelize.sync({logging: false, force: true}).then(function(){
+            fixtures.loadFile(__dirname+"/../config/data/**.yml", require('../app/models')).then(function(){
+                done();
+            });
+        });
+    });
+
+    it('Create a user, verify and get token', function(done){
+
+        request(app)
+        .post('/signup')
+        .send(user)
+        .expect(200)
+        .end(function(err, response){
+            if(err)
+                return done(new Error(err));
+
+            request(app)
+            .post('/verify')
+            .send({ token: response.body.data.TOKEN })
+            .expect(201)
+            .expect('Content-Type', 'application/json; charset=utf-8')
+            .end(function(err, response){
+                if(err)
+                    done(new Error(err));
+
                 request(app)
-                .post('/signup')
+                .post('/auth/login')
                 .send(user)
-                .expect(201)
+                .expect(200)
                 .end(function(err, response){
                     if(err)
                         done(new Error(err));
 
-                    request(app)
-                    .post('/verify')
-                    .send({ token: response.body.data.TOKEN })
-                    .expect(201)
-                    .expect('Content-Type', 'application/json; charset=utf-8')
-                    .end(function(err, response){
-                        if(err)
-                            done(new Error(err));
-
-                        request(app)
-                        .post('/auth/login')
-                        .send(user)
-                        .expect(200)
-                        .end(function(err, response){
-                            if(err)
-                                done(new Error(err));
-
-                            token = response.body.token;
-                            done();
-                        });
-                    });
+                    token = response.body.token;
+                    done();
                 });
             });
         });
@@ -106,14 +107,14 @@ describe('Jobs modules api', function(){
             if(err)
                 return done(new Error(err));
 
-            job.ORG_ID = response.body.id;
+            job.ORG_ID = JSON.parse(JSON.stringify(response.body.id));
 
             request(app)
             .post(prefix+'jobs')
             .set('Authorization', 'token ' + token)
             .send(job)
             .expect(201)
-            .end(function(err, response){
+            .end(function(err){
                 if(err)
                     return done(new Error(err));
 
@@ -128,16 +129,5 @@ describe('Jobs modules api', function(){
         .send(post)
         .expect(201)
         .end(done);
-    });
-
-    it('post a job and apply by an user', function(done){
-        request(app)
-        .post('/api/jobs/post')
-        .send(post)
-        .expect(201)
-        .end(function(err, response){
-
-            done();
-        });
     });
 });

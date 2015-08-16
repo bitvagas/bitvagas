@@ -4,6 +4,7 @@ var request  = require('supertest')
   , db       = require('../app/models')
   , fixtures = require('sequelize-fixtures')
   , prefix   = '/api/'
+  , token    = {}
   , user     = {};
 
 describe('Users modules', function(){
@@ -15,8 +16,9 @@ describe('Users modules', function(){
           , PASSWORD: 'testpassword'
           , REPASSWORD: 'testpassword'
         };
-        db.user.sync({ force: true }).then(function(){
-            fixtures.loadFile(__dirname+"/../config/data/*.yml", require('../app/models')).then(function(){
+
+        return db.sequelize.sync({logging: false, force: true}).then(function(){
+            fixtures.loadFile(__dirname+"/../config/data/**.yml", require('../app/models')).then(function(){
                 done();
             });
         });
@@ -33,19 +35,18 @@ describe('Users modules', function(){
         request(app)
         .post('/signup')
         .send(user)
-        .expect(201)
         .expect('Content-Type', 'application/json; charset=utf-8')
         .end(function(err, response){
             if(err)
                 done(new Error(err));
 
-            response.status.should.be.exactly(201);
+            response.status.should.be.exactly(200);
 
             user.id = response.body.data.id;
             user.TOKEN = response.body.data.TOKEN;
-            var token = {
-                token: user.TOKEN
-            };
+            token = { token: user.TOKEN };
+
+            done();
         });
     });
 
