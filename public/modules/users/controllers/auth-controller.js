@@ -1,8 +1,8 @@
 angular.module('bitvagas.users.controllers', [])
 .controller('AuthController', AuthController);
 
-AuthController.$inject = ['$rootScope', '$scope', '$state', '$window', '$auth', 'UserService'];
-function AuthController ($rootScope, $scope, $state, $window, $auth, UserService) {
+AuthController.$inject = ['$rootScope', '$scope', '$state', '$window', '$auth', 'UserService', 'SweetAlert'];
+function AuthController ($rootScope, $scope, $state, $window, $auth, UserService, SweetAlert) {
 
     if($auth.isAuthenticated())
         $state.transitionTo('dashboard.overview');
@@ -66,6 +66,19 @@ function AuthController ($rootScope, $scope, $state, $window, $auth, UserService
             }, 500);
         }).catch(function(err){
             console.log(err);
+        });
+    };
+
+    $scope.error = function(){
+        var msg = "";
+        if($scope.form.$error.minlength)
+            msg = 'Passwords must be at least 8 characters.';
+
+        SweetAlert.swal({
+            title: "Errors"
+          , type: "error"
+          , text: msg
+          , confirmButtonColor: "#C1C1C1"
         });
     };
 }
