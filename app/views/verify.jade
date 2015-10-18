@@ -3,6 +3,45 @@ extends layout
 block content
   .main(ng-controller='AuthController')
     .wrapper
-      h1 Verify your account
-      form(name='form' ng-submit='verify("#{token}")')
-        input.btn.btn--medium.btn--primary(type='submit' value='Verify now!')
+      .verify
+        h1 Verify your account
+        //- hr
+
+        //- .wallet__table
+          //- .wallet__cell.wallet__img
+            //- img(src='img/wallet.svg')
+          //- .wallet__cell
+            //- h1.wallet__title(translate='dashboard.overview.wallet.title')
+            //- p.wallet__name Setup Your Wallet
+          //- .wallet__cell
+            //- .switch
+              //- input.cmn-toggle.cmn-toggle-round(id="wallet--enable" type="checkbox" ng-model='data.walletEnable')
+              //- label(for="wallet--enable")
+        form(name='form' ng-init='data.token="#{token}"' ng-submit='verify(data)')
+          //- .wallet__form(ng-class='{ wallet__disabled: !data.walletEnable }')
+            //- .wallet__instructions
+              //- .wallet--cell
+                //- h1.pass
+                  //- img(src='img/bitgo.png')
+                //- h5 BitGo
+                //- p.description Our wallet are from BitGo, the most secure bitcoin wallet
+              //- .wallet--cell
+                //- h1.pass
+                  //- i.mdi.mdi-shield
+                //- h5 Secure
+                //- p.description Our wallet are from BitGo, the most secure bitcoin wallet
+              //- .wallet--cell
+                //- h1.pass
+                  //- i.mdi.mdi-account-switch
+                //- h5 Escrow
+                //- p.description Our wallet are from BitGo, the most secure bitcoin wallet
+
+            //- .create__body
+                //- ul.create-form
+                  //- li
+                    //- .create-form__input
+                      //- ng-input(theme='fumi' type='password' ng-model='data.passphrase' label='Wallet Password' icon='icon icon--fumi mdi mdi-lock')
+                //- br
+          .create-action
+            input.btn.btn--medium.btn--primary(type='submit' value='Verify now!')
+        br

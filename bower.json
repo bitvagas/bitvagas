@@ -29,7 +29,11 @@
     "angular-tooltips": "~0.1.19",
     "ng-tags-input": "~3.0.0",
     "angular-marked": "~0.0.21",
-    "marked": "~0.3.5"
+    "marked": "~0.3.5",
+    "angular-animate": "1.4.2",
+    "qrcode": "~1.0.2",
+    "angular-qr": "~0.2.0",
+    "angucomplete-alt": "~1.1.0"
   },
   "overrides": {
     "angular": {
@@ -46,6 +50,9 @@
     },
     "angular-sanitize": {
       "main": "angular-sanitize.min.js"
+    },
+    "angular-animate": {
+      "main": "angular-animate.min.js"
     },
     "angular-translate": {
       "main": "angular-translate.min.js"
@@ -81,10 +88,10 @@
       "main": "SweetAlert.min.js"
     },
     "marked": {
-        "main": "marked.min.js"
+      "main": "marked.min.js"
     },
     "angular-marked": {
-        "main": "angular-marked.min.js"
+      "main": "angular-marked.min.js"
     },
     "modernizr": {
       "main": "modernizr.js"
@@ -100,6 +107,15 @@
     },
     "ng-tags-input": {
       "main": "ng-tags-input.min.js"
+    },
+    "qrcode": {
+      "main": "lib/qrcode.min.js"
+    },
+    "angular-qr": {
+      "main": "angular-qr.min.js"
+    },
+    "angucomplete-alt": {
+        "main": "dist/angucomplete-alt.min.js"
     },
     "imagesloaded": {
       "ignore": true

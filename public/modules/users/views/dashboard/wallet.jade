@@ -1,0 +1,43 @@
+.wallet
+  .wallet__table
+    .wallet__cell.wallet__img
+      img(src='img/wallet.svg')
+    .wallet__cell
+      h1.wallet__title(translate='dashboard.overview.wallet.title')
+      h3.wallet__name BitVagas: Cesar Augusto
+    .wallet__cell.right
+      a(ui-sref='{{current}}' ng-click='updateWallet()')
+        i.mdi.mdi-reload
+      span
+        | {{ currentUser.BALANCE | number: 4 }} <strong>BTC</strong>
+      br
+      small.wallet--usd {{ 0 | currency }} USD
+  div(ng-if='currentUser.USER_STATUS === 3')
+    div(ng-if='currentUser.WALLET_ID !== null')
+      hr
+      .wallet__table.wallet__operations
+        .wallet__cell
+          a(ui-sref='{{current}}' ng-click='receive()')
+            h3.receive__title
+              span Receive
+              i.mdi.mdi-arrow-down-bold-circle-outline
+            img.img__receive(src='img/hand-receive.png')
+        .wallet__cell
+          a(ui-sref='escrow')
+            h3 Escrow
+      hr
+      .wallet__transactions
+        h1 Transactions
+    div(ng-if='currentUser.WALLET_ID === null' style='margin-left: 70px')
+      a.btn.btn--secondary(ui-sref='{{current}}' ng-click='createWallet()')
+        i.mdi
+          svg(xmlns='http://www.w3.org/2000/svg', width='24', height='22', viewbox='0 0 26 26')
+            path(fill='#fff' d='M23,6C23,6,5.641,6,2.648,6C1.77,6,0.99,5.824,0.99,5L23,4V2c0-1.656-1.344-2-3-2L2.021,3 C0.419,3.356,0,4.035,0,5v18c0,1.656,1.344,3,3,3h20c1.656,0,3-1.344,3-3V9C26,7.344,24.656,6,23,6z M22,18c-1.104,0-2-0.896-2-2 s0.896-2,2-2s2,0.896,2,2S23.104,18,22,18z')
+        span Create Wallet
+      br
+      br
+    //- .wallet__bitgo
+      //- img(src='img/bitgo.png')
+  div(ng-if='currentUser.USER_STATUS === 2')
+    h2.verify__title(translate='dashboard.wallet.not-verify')
+    h3.verify__email {{ currentUser.EMAIL }}
