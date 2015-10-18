@@ -11,7 +11,7 @@ var secrets  = require(root + '/config/secrets')
 module.exports = {
 
     list: function(request, response){
-        db.user.findAll({ where: { LINKEDIN_ID: { $ne: null }}}).then(function(users){
+        db.user.findAll().then(function(users){
             lodash.forEach(users, function(user){
                 user.PASSWORD = undefined;
             });
@@ -41,7 +41,7 @@ module.exports = {
     , linkedInCallback: function(req, res){
 
         if(!req.user)
-            return res.status(401).json({ message: 'You need be logged to connect your linkedIn' });
+            return res.status(401).send('errorMessage.linkedin.logout');
 
         var accessTokenUrl = 'https://www.linkedin.com/uas/oauth2/accessToken';
         var peopleApiUrl = 'https://api.linkedin.com/v1/people/~:(id,first-name,last-name,email-address,picture-urls::(original),headline,summary,location,public-profile-url)';
@@ -66,7 +66,7 @@ module.exports = {
 
                     if(user && req.user.id !== user.id &&
                        req.user.LINKEDIN_ID !== profile.id)
-                        return res.status(401).json({ message: 'This account is already connected' });
+                        return res.status(401).send('errorMessage.linkedin.already.connected');
 
                     users.findById(req.user.id).then(function(user){
                         user.update({
@@ -93,7 +93,7 @@ module.exports = {
      */
     , getFreelancerById: function(request, response, next, id){
         db.user.find({ where : { id : id }}).then(function(user){
-            if(!user) response.status(404).json({ error : 'Freelancer not found' });
+            if(!user) response.status(400).send('errorMessage.freelancer.not.found');
 
             request.freelancer = user;
             next();

@@ -37,6 +37,13 @@ module.exports = function(sequelize, DataTypes){
             type           : DataTypes.BOOLEAN
           , defaultValue   : true
         }
+        , WALLET_ID        : {
+            type           : DataTypes.STRING
+          , unique         : true
+        }
+        , BALANCE          : {
+            type           : DataTypes.DECIMAL(16,8)
+        }
     }, {
         classMethods  : {
             associate : function(models){

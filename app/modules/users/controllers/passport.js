@@ -18,10 +18,8 @@ passport.use('signin', new LocalStrategy(
             var user  = request.user;
             bcrypt.compare(password, user.PASSWORD, function(err, res) {
                 if(err || !res)
-                    return done(null, false, { message: 'Email or Password Invalid' });
+                    return done(null, false, { message: 'errorMessage.email.password.invalid' });
                 else {
-                    if(user.USER_STATUS != 3)
-                        return done(null, false, { message : 'Verify your account, check your email' });
 
                     user.PASSWORD = undefined;
                     user.LINKEDIN_TOKEN = undefined;
@@ -29,6 +27,6 @@ passport.use('signin', new LocalStrategy(
                 }
             });
         } else
-            return done(null, false, { message: 'Email or Password Invalid'});
+            return done(null, false, { message: 'errorMessage.email.password.invalid'});
     }
 ));

@@ -14,7 +14,10 @@ var express  = require('express')
 module.exports = {
 
     findAll: function(request, response){
-        db.job.findAll({ include : includes, order: '"createdAt" DESC' }).then(function(jobs){
+        db.job.findAll({ include : includes
+                       , where: { ACTIVE: true }
+                       , order: '"createdAt" DESC'
+        }).then(function(jobs){
             response.status(200).json(jobs);
         });
     }
@@ -49,12 +52,11 @@ module.exports = {
                 request.body.NAME = request.body.ORG_NAME;
                 return db.org.create(request.body,{ transaction : t});
             }).then(function(org){
-                //create an organization
                 //create a job
                 request.body.ORG_ID = org.id;
+                request.body.LOCATION = request.body.JOB_LOCATION;
                 return db.job.create(request.body, { transaction : t});
             }).catch(function(err){
-                response.status(400).json(err);
                 //throw an error to rollback
                 throw new Error(err);
             });
@@ -66,6 +68,20 @@ module.exports = {
         }).catch(function(err){
             //Trasaction rollbacked
             response.status(400).json(err);
+        });
+    }
+
+    , active: function(request, response){
+        if(!request.job)
+            return response.status(401).send('errorMessage.job.not.found');
+
+        var job = request.job;
+
+        job.ACTIVE = request.body.ACTIVE;
+        job.save().then(function(job){
+            response.status(201).json(job);
+        }).catch(function(err){
+            response.status(401).json(err);
         });
     }
 
@@ -105,7 +121,7 @@ module.exports = {
           , include : includes
         }).then(function(job){
             if(!job)
-                response.status(404).json({ error : "Job not found" });
+                response.status(400).json({ message : "errorMessage.job.not.found" });
 
             request.job = job;
             next();

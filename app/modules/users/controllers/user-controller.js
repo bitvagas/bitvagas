@@ -27,7 +27,7 @@ module.exports = {
   , me: function(request, response){
 
         if(!request.user)
-            return response.status(401).send('User has not found');
+            return response.status(401).send('errorMessage.user.not.found');
 
         db.user.findById(request.user.id , { include : includes })
         .then(function(user){
@@ -38,7 +38,7 @@ module.exports = {
 
   , updateMe: function(request, response){
       if(!request.user)
-          return response.status(401).send('User has not found');
+          return response.status(401).send('errorMessage.user.not.found');
 
       db.user.findOne({
           where : { id : request.user.id }
@@ -61,10 +61,10 @@ module.exports = {
   , signup: function(request, response, next){
 
         if(request.body.PASSWORD != request.body.REPASSWORD)
-             response.status(400).send('These passwords don\'t match.');
+             response.status(400).send('errorMessage.password.dont.match');
 
         if(request.user)
-            response.status(400).send('User already exists');
+            response.status(400).send('errorMessage.email.already.registered');
         else {
 
             var salt = bcrypt.genSaltSync(4);
@@ -95,7 +95,7 @@ module.exports = {
   , invite: function(request, response, t){
 
       if(request.user)
-          response.status(400).send('User already exists');
+          response.status(400).send('errorMessage.email.already.registered');
       else {
           request.body.USER_STATUS = 1; //User invited
           request.body.PASSWORD = '';
@@ -107,15 +107,20 @@ module.exports = {
   /*
    * Verify an user account after receive an email to confirmation
    */
-  , verifyAccount: function(request, response){
+  , verifyAccount: function(request, response, next){
 
       var hashedEmail = request.body.token;
+
       db.user.find({ where : { TOKEN : hashedEmail }})
       .then(function(user){
           return user.update({ USER_STATUS : 3, TOKEN : null });
       })
       .then(function(user){
-          response.status(201).json({ message: 'verified', USER_STATUS: user.USER_STATUS });
+          // if(request.body.walletEnable) {
+              // request.user = user;
+              // next();
+          // } else
+              response.status(201).json({ message: 'verified' });
       })
       .catch(function(err){
           response.status(400).json(err);
@@ -137,7 +142,7 @@ module.exports = {
               }).then(function(user){
                   //Send link to email to reset password
                   mailer.sendForgotPassword(user);
-                  response.status(200).json({ message: 'A link has been send to your email' });
+                  response.status(200).send('errorMessage.forgot.link');
               }).catch(function(err){
                   response.status(400).json({ message : err });
               });
@@ -156,7 +161,7 @@ module.exports = {
           if(user.RESETEXPIRES > Date.now()){
 
               if(request.body.PASSWORD !== request.body.REPASSWORD)
-                  return response.status(400).json({ message : 'These passwords don\'t match.' });
+                  return response.status(400).send('errorMessage.password.dont.match');
 
               var salt = bcrypt.genSaltSync(4);
               var hash = bcrypt.hashSync(request.body.PASSWORD, salt);
@@ -169,7 +174,7 @@ module.exports = {
               response.status(200).send('Password Changed');
           } else {
               //Token Expired
-              response.status(400).json({ message: 'Token Expired', email: user.EMAIL });
+              response.status(400).json({ message: 'errorMessage.token.expired', email: user.EMAIL });
           }
       });
   }
@@ -179,7 +184,7 @@ module.exports = {
      */
   , findByEmail: function(request, response, next){
       if(!request.body.EMAIL)
-          response.status(404).json({ error: 'Missing email'});
+          response.status(404).send('errorMessage.missing.email');
 
       db.user.find({
           where: { EMAIL : request.body.EMAIL }
@@ -196,7 +201,7 @@ module.exports = {
    */
   , ensureAuthenticated: function(request, response, next){
       if(!request.headers.authorization)
-          return response.status(401).json({ message: 'Missing Authorization header' });
+          return response.status(401).send('errorMessage.missing.authorization');
 
       var headerToken = request.headers.authorization.split(' ')[1];
 
@@ -210,13 +215,32 @@ module.exports = {
       }
 
       if(token.verify(payload.exp))
-          return response.status(401).send({ message: 'Token has expired' });
-
-      if(payload.sub.USER_STATUS !== 3 &&
-         payload.sub.USER_STATUS !== 4)
-          return response.status(401).send({ message: 'Verify your account, check your email' });
+          return response.status(401).send('errorMessage.token.expired');
 
       request.user = payload.sub;
+      next();
+  }
+
+  /*
+   * Get user information
+   */
+  , getUser: function(request, response, next){
+
+        if(!request.user)
+            return response.status(400).send('errorMessage.user.not.found');
+
+        db.user.findOne({ id: request.user.id }).then(function(user){
+            request.user = user;
+            next();
+        });
+  }
+
+  , checkIsVerified: function(request, response, next){
+
+      if(request.user.USER_STATUS !== 3 &&
+         request.user.sub.USER_STATUS !== 4)
+          return response.status(401).send('errorMessage.verify.account');
+
       next();
   }
 
@@ -234,10 +258,6 @@ module.exports = {
           } catch(err){
               next();
           }
-
-          if(payload.sub.USER_STATUS !== 3 &&
-             payload.sub.USER_STATUS !== 4)
-             next();
 
           request.user = payload.sub;
           next();

@@ -5,7 +5,7 @@ var express = require('express')
 module.exports = {
 
     findAll: function(request, response){
-        db.org.findAll().then(function(orgs){
+        db.org.findAll({ include: [ db.job ] }).then(function(orgs){
             response.status(200).json(orgs);
         });
     }
@@ -24,7 +24,7 @@ module.exports = {
 
     , create: function(request, response){
         if(!request.user)
-            return response.status(401).send('User has not found');
+            return response.status(400).send('errorMessage.user.not.found');
 
         request.body.USER_ID = request.user.id;
 
@@ -49,8 +49,12 @@ module.exports = {
         var org = request.org;
         org.destroy().then(function(){
             return response.status(204).send('deleted');
-        }).catch(function(error){
-            return response.status(400).json(error);
+        }).catch(function(err){
+            console.log(err);
+            if(err.parent.table === 'jobs')
+                return response.status(400).send("delete.jobs");
+
+            return response.status(400).json(err);
         });
     }
 
@@ -59,7 +63,7 @@ module.exports = {
      */
     , findById: function(request, response, next, OrgID){
         db.org.find({ where : { id : OrgID }}).then(function(org){
-            if(!org) response.status(404).json({ error : 'Org not Found' });
+            if(!org) response.status(400).send('errorMessage.org.not.found');
             request.org = org;
             next();
         }).catch(function(err){

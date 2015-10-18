@@ -1,4 +1,5 @@
-var passport  = require('passport')
+var passport = require('passport')
+  , bitcoin  = require('../controllers/bitcoin-controller')
   , user     = require('../controllers/user-controller');
 
 module.exports = function(app){
@@ -23,7 +24,13 @@ module.exports = function(app){
 
         response.render('verify', { token : request.query.token });
     })
-    .post(user.verifyAccount);
+    .post(user.verifyAccount
+        // , bitcoin.createWallet
+        // , bitcoin.getWallet
+        // , bitcoin.walletShare
+        // , bitcoin.getAddress
+        // , bitcoin.updateWallet
+    );
 
     app.route('/forgot')
     .get(function(request, response){

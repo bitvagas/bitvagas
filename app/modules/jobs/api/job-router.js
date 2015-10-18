@@ -15,6 +15,9 @@ module.exports = function(app){
     router.route('/jobs/post')
     .post(user.findByEmail, jobs.post);
 
+    router.route('/jobs/:id/active')
+    .post(jobs.findById, jobs.active);
+
     router.route('/jobs/premium/callback')
     .post(user.ensureAuthenticated, jobs.premium);
 
