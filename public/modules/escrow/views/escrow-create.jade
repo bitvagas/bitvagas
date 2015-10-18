@@ -1,0 +1,79 @@
+.create
+  .create__cell.create__cell--main
+    header.create__head
+      h1.create__title Escrow
+
+  .job--steps
+    ol
+      li.active
+        .separate
+        span Details
+      li
+        .separate
+        span Approval
+      li
+        .separate
+        span Payment
+      li
+        .separate
+        span Complete
+
+  hr
+  .create__body
+    form(name="form" ng-submit='form.$valid && create()')
+      .escrow__body
+        //Seller
+        .escrow__cell
+          div(ng-if='!initBuyer')
+            img.escrow__img(ng-src="{{ currentUser.PICTURE ? currentUser.PICTURE : 'img/unknown.svg' }}")
+            br
+            span {{ currentUser.NAME }}
+          div(ng-if='initBuyer')
+            img.escrow__img(ng-src="{{ partner.image ? partner.image : 'img/unknown.svg' }}")
+            br
+            span {{ partner.title }}
+          h1
+            a(ng-click='initBuyer=false') Seller
+        //Switch
+        .escrow__cell.escrow__center
+          h1.escrow__switch(ng-click='initBuyer=!initBuyer')
+            i.mdi.mdi-account-switch
+        // Buyer
+        .escrow__cell.escrow__right
+          div(ng-if='initBuyer')
+            img.escrow__img(ng-src="{{ currentUser.PICTURE ? currentUser.PICTURE : 'img/unknown.svg' }}")
+            br
+            span {{ currentUser.NAME }}
+          div(ng-if='!initBuyer')
+            img.escrow__img(ng-src="{{ partner.image ? partner.image : 'img/unknown.svg' }}")
+            br
+            span {{ partner.title }}
+          h1
+            a(ng-click='initBuyer=true') Buyer
+
+      hr
+      fieldset.create-fieldset
+        legend.create-fieldset__legend Search the Buyer or Seller
+        ul.create-form
+          li
+            span.input.input--fumi.input--autocomplete
+              angucomplete-alt(id="ex1" placeholder="Search a Partner"
+                  pause="100" local-data="users"
+                  search-fields="NAME"
+                  title-field="NAME"
+                  minlength="1"
+                  image-field="PICTURE"
+                  selected-object='onChangeUser'
+                  input-class="input__field input__field--fumi angucomplete-input")
+
+              label.input__label.input__label--fumi.input__label--fumi-color-1(data-content='Organization', for='input_0')
+                i.icon.icon--fumi.mdi.mdi-account
+      fieldset.create-fieldset
+        legend.create-fieldset__legend Escrow
+        ul.create-form
+          li
+            ng-input(theme='fumi' icon='icon icon--fumi mdi mdi-currency-btc' label='Amount in BTC' type='number' ng-model='escrow.VALUE_BTC')
+
+      br
+      hr
+      button.btn.btn--primary.btn--large(type='submit') Start Escrow

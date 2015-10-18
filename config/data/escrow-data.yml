@@ -1,0 +1,31 @@
+fixtures:
+    - model: escrow_status
+      data:
+        NAME: Pending
+    - model: escrow_status
+      data:
+        NAME: Waiting Payment
+    - model: escrow_status
+      data:
+        NAME: Waiting Product
+    - model: escrow_status
+      data:
+        NAME: Waiting Buyer Sign
+    - model: escrow_status
+      data:
+        NAME: Waiting Seller Sign
+    - model: escrow_status
+      data:
+        NAME: Complete
+    - model: escrow_status
+      data:
+        NAME: Disputed
+    - model: escrow_status
+      data:
+        NAME: Disputed Waiting Owner
+    - model: escrow_status
+      data:
+        NAME: Disputed Waiting Owner
+
+
+
