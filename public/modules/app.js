@@ -1,5 +1,6 @@
 angular.module('bitvagas',
     ['ui.router'
+    ,'ngAnimate'
     ,'pascalprecht.translate'
     ,'angular-loading-bar'
     ,'720kb.tooltips'
@@ -13,11 +14,14 @@ angular.module('bitvagas',
     ,'angularMoment'
     ,'oitozero.ngSweetAlert'
     ,'hc.marked'
+    ,'ja.qr'
+    ,'angucomplete-alt'
     ,'bitvagas.main'
     ,'bitvagas.jobs'
     ,'bitvagas.org'
     ,'bitvagas.users'
     ,'bitvagas.dashboard'
+    ,'bitvagas.escrow'
     ]).config(function($translateProvider){
         //Angular translation configuration
         $translateProvider.useStaticFilesLoader({
@@ -38,7 +42,7 @@ angular.module('bitvagas',
 
     }).config(function($authProvider, $httpProvider){
 
-        $authProvider.loginOnSignup = false;
+        $authProvider.loginOnSignup = true;
 
         $authProvider.loginUrl = '/auth/login';
         $authProvider.loginRedirect = '/dashboard/overview';

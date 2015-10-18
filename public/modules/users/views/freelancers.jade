@@ -3,11 +3,12 @@ h1 FreeLancers
 #freelancers
   ul(masonry)
     li.freelancer__item.masonry-brick(ng-repeat="freelancer in freelancers")
-      a(ui-sref="freelancers-cv({ id : freelancer.id })")
-        .freelancer
-          .freelancer__cell
-            img.cv__img.dashboard__img(ng-src="{{ freelancer.PICTURE }}")
-          .freelancer__cell
-            .freelancer__description
-              h3 {{ freelancer.NAME }}
-              p.headline {{ freelancer.HEADLINE }}
+      div(ng-if='freelancer.LINKEDIN_ID')
+        a(ui-sref="freelancers-cv({ id : freelancer.id })")
+          .freelancer
+            .freelancer__cell
+              img.cv__img.dashboard__img(ng-src="{{ freelancer.PICTURE }}")
+            .freelancer__cell
+              .freelancer__description
+                h3 {{ freelancer.NAME }}
+                p.headline {{ freelancer.HEADLINE }}

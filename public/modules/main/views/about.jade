@@ -79,16 +79,3 @@ block content
             p.donate__address BTC: 1MckjA4yZWgwo4kXFnE6ikbfPPuB3yCcx3</a>
             a.donate__qrcode(href='bitcoin:1MckjA4yZWgwo4kXFnE6ikbfPPuB3yCcx3?label=BitVagas&message=Donation%20for%20Bitvagas')
               img(src='https://chart.googleapis.com/chart?chs=200x200&cht=qr&chld=L|0&chl=bitcoin:1MckjA4yZWgwo4kXFnE6ikbfPPuB3yCcx3?label=BitVagas&message=Donation%20for%20Bitvagas')
-
-        .invite#invite
-          .invite__head
-            h2.invite__title(translate="about.invite.title")
-
-          .invite__body
-            p(translate="about.invite.text")
-            form#invite_form.invite-form(action='https://docs.google.com/forms/d/1zYmnXVRPmFieu_JBKJ33R0-3IgGEkeiNWoIB_YpmaUE/formResponse' method='POST' target='_self')
-              input#entry_2101149896.invite-form__input.input(type="email" name="entry.2101149896" value="" placeholder='{{ "about.invite.input.placeholder" | translate }}' dir="auto" aria-label='Email: {{ "about.invite.input.title" | translate }}' aria-required="true" required="" title='{{ "about.invite.input.title" | translate }}')
-              input(type="hidden", name="draftResponse", value="[,,'7057374124153364777']\ ")
-              input(type="hidden", name="pageHistory", value="0")
-              input(type="hidden", name="fbzx", value="7057374124153364777")
-              input#ss-submit.invite-form__btn.btn.btn--primary(type='submit' name='submit' value='{{ "about.invite.btn" | translate }}')

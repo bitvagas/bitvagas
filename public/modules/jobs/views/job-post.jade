@@ -3,10 +3,17 @@
     header.create__head
       h1.create__title(translate="post_job.title")
 
-    ul
-      li(ng-repeat='error in errors')
-        label {{ error }}
-
+    .job--steps
+      ol
+        li.active
+          .separate
+          span(translate='dashboard.jobs.create')
+        li
+          .separate
+          span(translate='dashboard.jobs.preview')
+        li
+          .separate
+          span(translate='dashboard.jobs.confirm')
     .create__body
       form(name="form")
         fieldset.create-fieldset
@@ -50,10 +57,10 @@
                 textarea.textarea.textarea--full(id='markdown__editor' placeholder='{{ "post_job.job.description" | translate }}' name='DESCRIPTION' ng-model='data.DESCRIPTION' rows='10' cols='50')
             li
               .create-form__input
-                div(data-pg-ng-dropdown name='categoryId' data-dynamic-height="true" data-selected="1" data-text-property="NAME" data-options='categories')
+                div(data-pg-ng-dropdown name='categoryId' data-selected="1" data-text-property="NAME" data-options='categories')
             li
               .create-form__input
-                ng-input(theme='fumi' type='text' icon='icon icon--fumi mdi mdi-map-marker-radius' label='{{ "post_job.job.local" | translate }} ' name='location' ng-model='data.LOCATION' ng-required='true')
+                ng-input(theme='fumi' type='text' icon='icon icon--fumi mdi mdi-map-marker-radius' label='{{ "post_job.job.local" | translate }}' name='location' ng-model='data.JOB_LOCATION' ng-required='true')
             li
               .create-form__input
                 tags-input(ng-model="tags" name="TAGS" placeholder="Add a tag to your job")
@@ -64,7 +71,9 @@
                   label.create-how-apply-label
                     input.create-how-apply-label__radio(type='checkbox' name='applyUrl' ng-model='applyUrl' value='url')
                     .create-how-apply-label__body(translate="post_job.job.how_apply.value")
-                ng-input(theme='fumi' type='text' icon='icon icon--fumi mdi mdi-link' label='URL' ng-model='data.APPLY_URL' name='APPLY_URL' ng-show='applyUrl ')
+                div(ng-if='applyUrl === true')
+                  br
+                  ng-input(theme='fumi' type='text' icon='icon icon--fumi mdi mdi-link' label='URL' ng-model='data.APPLY_URL' name='APPLY_URL')
             //- li
               //- label.create-form__label(translate="post_job.job.premium.title")
             //- li

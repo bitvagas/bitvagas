@@ -1,7 +1,87 @@
-h1 Visão Geral
+h1(translate='dashboard.overview.title')
+hr
 
-.dashboard__overview--sections.dashboard__my--jobs
-  .dashboard__overview
+.dashboard__overview--sections.dashboard__my--jobs.tabs.tabs-style-bar
+  //- nav
+    //- ul
+      //- li(ng-class='{"tab-current":isSet(1)}')
+        //- a(href='#/dashboard/overview#' ng-click="setTab(1)")
+          //- svg(style='width:34px;height:24px'  viewbox='0 0 24 24')
+            //- path(d='M12.04,2.5L9.53,5H14.53L12.04,2.5M4,7V20H20V7H4M12,0L17,5V5H20A2,2 0 0,1 22,7V20A2,2 0 0,1 20,22H4A2,2 0 0,1 2,20V7A2,2 0 0,1 4,5H7V5L12,0M7,18V14H12V18H7M14,17V10H18V17H14M6,12V9H11V12H6Z')
+          //- span(translate='dashboard.overview.title')
+      //- li(ng-class='{"tab-current":isSet(2)}')
+        //- a(href='#/dashboard/overview#' ng-click='setTab(2)')
+          //- i.mdi.mdi-tie
+          //- span(translate='dashboard.overview.applicant.title') Applicants
+      //- li(ng-class='{"tab-current":isSet(3)}')
+        //- a(href='#/dashboard/overview#' ng-click='setTab(3)')
+          //- i.mdi.mdi-tie
+          //- span Jobs
+
+  //- section.tab--content(ng-show="isSet(1)")
+  h2
+    span {{ "dashboard.overview.applicant.title" | translate }}
+    div.badge {{ AppliersLength }}
+
+  ul.jobs
+    li(ng-repeat='job in currentUser.jobs' style='border-bottom: none')
+      div(ng-if='job.job_appliers.length !== 0')
+        .jobs-item
+          .jobs-item__cell.jobs-item__cell--img
+            img.thumb(src='/img/template.png')
+          .jobs-item__cell.jobs-item__cell--body
+            h2.jobs-item__title {{ job.TITLE }}
+            h3.jobs-item__company
+              i.mdi.mdi-map-marker-radius
+              span {{ job.LOCATION }}
+          .jobs-item__cell.jobs-item__cell--meta
+            .jobs-item__type
+              .label(class="label--{{job.job_type.NAME}}")
+                span {{ job.job_type.NAME }}
+            .jobs-item__date(am-time-ago="job.createdAt")
+            .jobs-item__link(ui-sref="jobs-show({ id: job.id })") 
+              i.mdi.mdi-link-variant
+              span Link
+
+        ul.dashboard__my--jobs.dashboard__applicant--list
+          li(ng-repeat='applicant in job.job_appliers' style='border-bottom: none; border-top:1px solid #ddd')
+            a.jobs-item(href='#/dashboard/overview#{{applicant.id}}' ng-click='toggle($index, applicant.id)')
+              .jobs-item__cell.jobs-item__cell--img
+                img.thumb(ng-src='{{ applicant.user.PICTURE }}' ng-if='applicant.user.PICTURE')
+              .jobs-item__cell.jobs-item__cell--body
+                h2.jobs-item__title {{ applicant.NAME }}
+                p(ng-if='applicant.user.LOCATION') {{ applicant.user.LOCATION }}
+              .jobs-item__cell.job-item__cell--meta(style='vertical-align: middle')
+                div(am-time-ago='applicant.createdAt')
+                //- a(href='{{ applicant.user.LINKEDIN_PROFILE }}' target='_blank')
+                  //- i.mdi.mdi-linkedin-box
+                  //- | LinkedIn
+            div.dashboard__applicant--body(ng-show='$parent.open == $index')
+              .applicant--content
+                h5 Descrição:
+                label.applicant--description {{ applicant.DESCRIPTION }}
+                div(ng-if="applicant.LINKS !== null")
+                  h5 Links:
+                  span(ng-bind-html='applicant.LINKS | linky:"_blank"')
+            .applicant--links
+              ul
+                li
+                  a(href="mailto:{{ applicant.EMAIL }}")
+                    i.mdi.mdi-email
+                    span {{ applicant.EMAIL }}
+                li(ng-if='applicant.user.LINKEDIN_PROFILE')
+                  a(href='{{ applicant.user.LINKEDIN_PROFILE }}' target='_blank')
+                    i.mdi.mdi-linkedin-box
+                    | LinkedIn
+                //- li
+                  //- a(href='')
+                    //- i.mdi.mdi-account
+                    //- | Profile
+        .dashboard__overview--applicant(ng-if="job.job_appliers.length === 0" ng-show='$parent.open == $index')
+          h5(translate='dashboard.overview.applicant.notyet') No Appliers yet
+
+    br
+    br
     h4 Vagas que voce aplicou
 
     div(ng-if='currentUser.job_appliers.length !== 0')
@@ -13,80 +93,37 @@ h1 Visão Geral
             .jobs-item__cell.jobs-item__cell--body
               h2.jobs-item__title {{ apply.job.TITLE }}
               h3.jobs-item__company(am-time-ago='apply.createdAt')
+            .jobs-item__cell.jobs-item__cell--meta
+              .jobs-item__date(am-time-ago="apply.job.createdAt")
+              .jobs-item__link(ui-sref="jobs-show({ id: apply.job.id })") 
+                i.mdi.mdi-link-variant
+                span Link
 
     div(ng-if='currentUser.job_appliers.length == 0')
       | You doesn't applied to any job yet
       br
       a(ui-sref='jobs-list') APPLY NOW
+  //- div(ui-view='wallet')
 
-  .dashboard__overview.dashboard__my--jobs
-    h4 Minhas Vagas
+  //Organizations
+  h2(translate='dashboard.overview.orgs.title')
+  hr
+  div(ng-if='currentUser.orgs.length !== 0')
+    ul.dashboard__overview--orgs
+      li(ng-repeat='org in currentUser.orgs')
+        a.orgs-item(href='#')
+          .orgs-item__cell.orgs-item__cell--img
+            img.thumb(src='/img/template.png')
+          .orgs-item__cell.orgs-item__cell--body
+            h2.orgs-item__title {{ org.NAME }}
+            h3.orgs-item__url {{ org.URL }}
+          .orgs-item__cell.orgs-item__cell--meta
 
-    .dashboard__overview--list-scroll(ng-if='currentUser.job.length != 0')
-      ul.jobs
-        li(ng-repeat="job in currentUser.jobs | limitTo: 3")
-          a.jobs-item(href="#")
-            .jobs-item__cell.jobs-item__cell--img
-              img.thumb(src='/img/template.png')
-            .jobs-item__cell.jobs-item__cell--body
-              h2.jobs-item__title {{ job.TITLE }}
-              h3.jobs-item__company
-                i.mdi.mdi-map-marker-radius
-                span {{ job.LOCATION }}
+    hr
+  a(ui-sref='dashboard.organization.create')
+    h3
+      i.mdi.mdi-plus-circle
+      span(translate='dashboard.overview.orgs.create')
 
 
-    div(ng-if='currentUser.job.length == 0')
-
-br
-br
-h3 Applicadores
-  div.badge {{ AppliersLength }}
-
-ul.jobs.dashboard__my--jobs
-  li(ng-repeat='job in currentUser.jobs')
-    a.jobs-item(href="#/dashboard/overview#{{job.id}}" ng-click="toggle($index, job.id)")
-      .jobs-item__cell.jobs-item__cell--img
-        img.thumb(src='/img/template.png')
-      .jobs-item__cell.jobs-item__cell--body
-        h2.jobs-item__title {{ job.TITLE }}
-        h3.jobs-item__company
-          i.mdi.mdi-map-marker-radius
-          span {{ job.LOCATION }}
-      .jobs-item__cell.jobs-item__cell--meta
-        .jobs-item__type
-          .label(class="label--{{job.job_type.NAME}}")
-            span {{ job.job_type.NAME }}
-        .jobs-item__date(am-time-ago="job.createdAt")
-        .jobs-item__link(ui-sref="jobs-show({ id: job.id })") 
-          i.mdi.mdi-link-variant
-          span Link
-
-    div(ng-if="job.job_appliers.length !== 0" ng-show='$parent.open == $index')
-      .dashboard__overview--applicant(ng-repeat='applicant in job.job_appliers')
-        h4 {{ applicant.NAME }}
-        .right
-          span(ng-if='applicant.user.LOCATION') {{ applicant.user.LOCATION }}
-            i.mdi.mdi-map-marker-radius
-            br
-          .right(am-time-ago='applicant.createdAt')
-        a(href="mailto:{{ applicant.EMAIL }}")
-          i.mdi.mdi-email
-          span {{ applicant.EMAIL }}
-        h5 Descrição:
-        label.applicant--description {{ applicant.DESCRIPTION }}
-        div(ng-if="applicant.LINKS !== null")
-          h5 Links
-          span(ng-bind-html='applicant.LINKS | linky:"_blank"')
-        .applicant--links
-          ul
-            li(ng-if='applicant.user.LINKEDIN_PROFILE')
-              a(href='{{ applicant.user.LINKEDIN_PROFILE }}' target='_blank')
-                i.mdi.mdi-linkedin-box
-                | LinkedIn
-            li
-              a(href='')
-                i.mdi.mdi-account
-                | Profile
-    .dashboard__overview--applicant(ng-if="job.job_appliers.length === 0" ng-show='$parent.open == $index')
-      h5 No Appliers yet
-
+  //- section.tab--content(ng-show="isSet(2)")

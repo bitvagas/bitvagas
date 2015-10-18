@@ -1,8 +1,8 @@
 angular.module('bitvagas.main.factory', [])
 .factory('Interceptor', Interceptor);
 
-Interceptor.$inject = ['$rootScope', '$q'];
-function Interceptor($rootScope, $q){
+Interceptor.$inject = ['$rootScope', '$q', '$injector', 'lodash'];
+function Interceptor($rootScope, $q, $injector, _){
     return {
 
         response: function(response){
@@ -18,9 +18,14 @@ function Interceptor($rootScope, $q){
 
         , responseError: function(response){
 
+            var $translate =  $injector.get('$translate');
+
             var errorMessage = response.data.message ?
                                response.data.message :
                                response.data;
+
+            if(_.startsWith(errorMessage, 'errorMessage'))
+               errorMessage  = $translate.instant(errorMessage);
 
             if(response.status === 401){
 

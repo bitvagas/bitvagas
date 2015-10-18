@@ -12,11 +12,15 @@ function JobPostController($scope, $state, $stateParams, JobService, Categories,
     $scope.errors = $stateParams.errors || [];
 
     $scope.categories = Categories.data;
-    $scope.categories[1].selected = true;
+    $scope.categories[2].selected = true;
 
     // Render markedown on confirm page
-    if($state.current.name === 'jobs-confirm')
+    if($state.current.name === 'jobs-confirm') {
+        if(_.isEmpty($scope.data))
+            $state.transitionTo('jobs-post');
+
         $scope.data.DESCRIPTION = marked($scope.data.DESCRIPTION);
+    }
 
     if(_.isElement(document.getElementById("markdown__editor"))) {
         markdown = new SimpleMDE({
@@ -33,8 +37,14 @@ function JobPostController($scope, $state, $stateParams, JobService, Categories,
         $scope.data.TAGS = _.map($scope.tags, 'text');
         $scope.data.DESCRIPTION = markdown.value();
         $scope.data.marked = markdown.value();
-        if($scope.form.$valid)
-            $state.go('jobs-confirm', { data : $scope.data });
+
+        var typeId = $scope.data.TYPE_ID;
+        $scope.data.TYPE_NAME = typeId == 1 ? 'FULL-TIME' :
+                                typeId == 2 ? 'PART-TIME' :
+                                typeId == 3 ? 'FREELANCE' :
+                                typeId == 4 ? 'TEMPORARY' : 'FREELANCE';
+
+        $state.go('jobs-confirm', { data : $scope.data });
     };
 
     $scope.confirm = function(data){
@@ -107,7 +117,7 @@ function JobCreateController($scope, $state, $stateParams, $timeout, JobService,
     $scope.confirm = function(data){
         JobService.create(data)
         .then(function(data){
-            $state.go('dashboard.jobs.list');
+            $state.go('jobs-show', { 'id': data.data.id});
         }, function(err){
             $state.go('dashboard.jobs.create', {
                 data : $scope.data
@@ -135,6 +145,7 @@ function JobCreateController($scope, $state, $stateParams, $timeout, JobService,
             , confirmButtonText: "Cadastrar"
             , showLoaderOnConfirm: true
         }, function(inputValue){
+            if(inputValue === false) return false;
             if(inputValue){
                 OrgService.create({ NAME: inputValue }).then(function(data){
                     SweetAlert.swal({

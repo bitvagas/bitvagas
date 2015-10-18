@@ -18,8 +18,8 @@ function UserService($http) {
         return $http.post('/invite', user);
     };
 
-    this.verify = function(token){
-        return $http.post('/verify', { token: token });
+    this.verify = function(data){
+        return $http.post('/verify', data);
     };
 
     this.forgot = function(email){

@@ -13,36 +13,44 @@
             span  {{ currentUser.LOCATION }}
             i.mdi.mdi-map-marker-radius
           p
-            |   Joined on {{ currentUser.createdAt | date }}
+            |   {{ "dashboard.join" | translate }} {{ currentUser.createdAt | date }}
             i.mdi.mdi-clock
         p(ng-if="currentUser.LINKEDIN_ID === null")
           a.linkedin(ng-click='linkedIn()')
             i.mdi.mdi-linkedin-box
-            |  Conectar LinkedIn
+            |  {{ "dashboard.profile.connectLinkedIn" | translate }}
         hr
         ul.dashboard-nav
           li
             a(ui-sref='dashboard.overview')
-              span Visao Geral
+              span(translate="dashboard.menu.overview")
               i.mdi
                 | <svg style="width:24px;height:24px" viewBox="0 0 24 24">
                 |   <path fill="#fff" d="M12.04,2.5L9.53,5H14.53L12.04,2.5M4,7V20H20V7H4M12,0L17,5V5H20A2,2 0 0,1 22,7V20A2,2 0 0,1 20,22H4A2,2 0 0,1 2,20V7A2,2 0 0,1 4,5H7V5L12,0M7,18V14H12V18H7M14,17V10H18V17H14M6,12V9H11V12H6Z" />
                 | </svg>
           li
             a(ui-sref='dashboard.profile')
-              span Minha Conta
+              span(translate="dashboard.menu.myaccount")
               i.mdi.mdi-account
+          li.soon
+            //- a(ui-sref='dashboard.wallet')
+            a(style='cursor: pointer')
+              span(translate="dashboard.menu.mywallet")
+              i.mdi
+                svg(xmlns='http://www.w3.org/2000/svg', width='26', height='26', viewbox='0 0 26 26')
+                  path(fill='#fff' d='M23,6C23,6,5.641,6,2.648,6C1.77,6,0.99,5.824,0.99,5L23,4V2c0-1.656-1.344-2-3-2L2.021,3 C0.419,3.356,0,4.035,0,5v18c0,1.656,1.344,3,3,3h20c1.656,0,3-1.344,3-3V9C26,7.344,24.656,6,23,6z M22,18c-1.104,0-2-0.896-2-2 s0.896-2,2-2s2,0.896,2,2S23.104,18,22,18z')
+
           li
             a(ui-sref='dashboard.cv({id : user.id})')
-              span Meu Curriculo
+              span(translate="dashboard.menu.mycv")
               i.mdi.mdi-linkedin-box
           li
             a(ui-sref='dashboard.jobs.list')
-              span Minhas Vagas
+              span(translate="dashboard.menu.myjobs")
               i.mdi.mdi-tie
           li
             a(ui-sref='dashboard.organization.list')
-              span Minhas Organizações
+              span(translate="dashboard.menu.myorgs")
               i.mdi.mdi-earth
 
     section(ui-view='').dashboard__cell.dashboard__cell--main

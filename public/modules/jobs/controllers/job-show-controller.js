@@ -9,6 +9,7 @@ function JobShowController($scope, $state, $auth, JobService, lodash, marked){
     var id = $state.params.id;
 
     JobService.findById(id).then(function(data){
+        console.log(data.data);
         $scope.job = data.data;
         $scope.job.DESCRIPTION = marked(data.data.DESCRIPTION);
         AlreadyApplied();

@@ -24,9 +24,17 @@ angular.module('bitvagas.dashboard', [ 'bitvagas.dashboard.controllers' ])
     })
     .state('dashboard.overview', {
         url : '/overview'
-        , templateUrl  : '/modules/dashboard/views/overview'
         , authenticate : true
-        , controller   : 'OverviewController'
+        , views: {
+            '': {
+                templateUrl : '/modules/dashboard/views/overview'
+              , controller  : 'OverviewController'
+            }
+            , 'wallet@dashboard.overview': {
+                templateUrl : '/modules/users/views/dashboard/wallet'
+              , controller  : 'WalletController'
+            }
+        }
     })
     .state('dashboard.profile', {
         url : '/profile'
@@ -44,6 +52,11 @@ angular.module('bitvagas.dashboard', [ 'bitvagas.dashboard.controllers' ])
         }
         , authenticate  : true
     })
+    // .state('dashboard.wallet', {
+        // url: '/wallet'
+      // , templateUrl: '/modules/users/views/dashboard/wallet'
+      // , controller  : 'WalletController'
+    // })
     .state('dashboard.cv', {
         url : '/cv'
         , templateUrl  : '/modules/users/views/dashboard/my-cv'

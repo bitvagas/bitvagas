@@ -4,6 +4,9 @@ angular.module('bitvagas.users.controllers', [])
 AuthController.$inject = ['$rootScope', '$scope', '$state', '$window', '$auth', 'UserService', 'SweetAlert'];
 function AuthController ($rootScope, $scope, $state, $window, $auth, UserService, SweetAlert) {
 
+    $scope.data = {};
+    $scope.data.walletEnable = true;
+
     if($auth.isAuthenticated())
         $state.transitionTo('dashboard.overview');
 
@@ -35,8 +38,10 @@ function AuthController ($rootScope, $scope, $state, $window, $auth, UserService
         });
     };
 
-    $scope.verify = function(token){
-        UserService.verify(token).then(function(data){
+    $scope.verify = function(verify){
+        console.log('Verifying');
+        console.log(verify);
+        UserService.verify(verify).then(function(data){
             //locations href crashes on chrome
             setTimeout(function(){
                 $window.location.href = '/#/signin';

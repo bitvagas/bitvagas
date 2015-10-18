@@ -1,19 +1,6 @@
-
 aside.home-aside
   .home-post
     div(ng-if="!isAuthenticated()")
       a.home-post__btn.btn.btn--primary.btn--large(ui-sref='jobs-post' title='Postar Vaga Grátis' translate="explore.side_bar.btn")
     div(ng-if="isAuthenticated()")
       a.home-post__btn.btn.btn--primary.btn--large(ui-sref='dashboard.jobs.create' title='Postar Vaga Grátis' translate="explore.side_bar.btn")
-
-  .category
-    h4.category__title(translate="explore.side_bar.category")
-    ul.category__list
-      li
-        a(href='') Todas as Vagas (50)
-      li
-        a(href='') Design (29)
-      li
-        a(href='') Desenvolvimento (21)
-
-  //- h4 Apoiar com Doações

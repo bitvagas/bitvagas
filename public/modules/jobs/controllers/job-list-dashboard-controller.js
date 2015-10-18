@@ -1,12 +1,8 @@
 angular.module('bitvagas.jobs.controllers')
 .controller('JobDashListController', JobDashListController);
 
-JobDashListController.$inject = ['$scope', '$sce'];
-function JobDashListController($scope, $sce){
-
-    var setUrl = function(id){
-        $scope.url = $sce.trustAsResourceUrl("https://sandbox.coinbase.com/checkouts/6d111844c2041be4fdbdd1b3df5eaab5/inline"+(id ? "?c="+id : ""));
-    };
+JobDashListController.$inject = ['$scope', 'JobService'];
+function JobDashListController($scope, JobService){
 
     $scope.toggle = function(index, id) {
 
@@ -15,8 +11,13 @@ function JobDashListController($scope, $sce){
             return;
         }
 
-        setUrl(id);
         $scope.$parent.open = index;
     };
+
+    $scope.active = function(job){
+        JobService.active(job).then(function(job){
+            console.log(job);
+        });
+    }
 }
 

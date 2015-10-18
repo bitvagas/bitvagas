@@ -71,7 +71,7 @@ angular.module('bitvagas.jobs',
         })
         .state('dashboard.jobs.confirm', {
             url          : '/create'
-          , templateUrl  : '/modules/jobs/views/job-confirm'
+          , templateUrl  : '/modules/jobs/views/dashboard/job-confirm'
           , resolve      : {
               Categories : function(CategoryService){
                   return CategoryService.findAll();

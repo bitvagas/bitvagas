@@ -1,5 +1,6 @@
 angular.module('bitvagas',
     ['ui.router'
+    ,'ngAnimate'
     ,'pascalprecht.translate'
     ,'angular-loading-bar'
     ,'720kb.tooltips'
@@ -13,11 +14,14 @@ angular.module('bitvagas',
     ,'angularMoment'
     ,'oitozero.ngSweetAlert'
     ,'hc.marked'
+    ,'ja.qr'
+    ,'angucomplete-alt'
     ,'bitvagas.main'
     ,'bitvagas.jobs'
     ,'bitvagas.org'
     ,'bitvagas.users'
     ,'bitvagas.dashboard'
+    ,'bitvagas.escrow'
     ]).config(function($translateProvider){
         //Angular translation configuration
         $translateProvider.useStaticFilesLoader({
@@ -38,7 +42,7 @@ angular.module('bitvagas',
 
     }).config(function($authProvider, $httpProvider){
 
-        $authProvider.loginOnSignup = false;
+        $authProvider.loginOnSignup = true;
 
         $authProvider.loginUrl = '/auth/login';
         $authProvider.loginRedirect = '/dashboard/overview';
@@ -137,9 +141,17 @@ angular.module('bitvagas.dashboard', [ 'bitvagas.dashboard.controllers' ])
     })
     .state('dashboard.overview', {
         url : '/overview'
-        , templateUrl  : '/modules/dashboard/views/overview'
         , authenticate : true
-        , controller   : 'OverviewController'
+        , views: {
+            '': {
+                templateUrl : '/modules/dashboard/views/overview'
+              , controller  : 'OverviewController'
+            }
+            , 'wallet@dashboard.overview': {
+                templateUrl : '/modules/users/views/dashboard/wallet'
+              , controller  : 'WalletController'
+            }
+        }
     })
     .state('dashboard.profile', {
         url : '/profile'
@@ -157,11 +169,34 @@ angular.module('bitvagas.dashboard', [ 'bitvagas.dashboard.controllers' ])
         }
         , authenticate  : true
     })
+    // .state('dashboard.wallet', {
+        // url: '/wallet'
+      // , templateUrl: '/modules/users/views/dashboard/wallet'
+      // , controller  : 'WalletController'
+    // })
     .state('dashboard.cv', {
         url : '/cv'
         , templateUrl  : '/modules/users/views/dashboard/my-cv'
         , controller   : 'CVController'
         , authenticate : true
+    });
+});
+
+angular.module('bitvagas.escrow', [
+    'bitvagas.escrow.controllers'
+   ,'bitvagas.escrow.services'
+])
+.config(function($urlRouterProvider, $stateProvider){
+
+    $stateProvider
+    .state('escrow', {
+        url: '/escrow'
+      , templateUrl : '/modules/escrow/views/escrow-create'
+      , controller  : 'EscrowController'
+    })
+    .state('dispute', {
+        url: '/escrow/:id/dispute'
+      , templateUrl : '/modules/escrow/views/dispute'
     });
 });
 
@@ -238,7 +273,7 @@ angular.module('bitvagas.jobs',
         })
         .state('dashboard.jobs.confirm', {
             url          : '/create'
-          , templateUrl  : '/modules/jobs/views/job-confirm'
+          , templateUrl  : '/modules/jobs/views/dashboard/job-confirm'
           , resolve      : {
               Categories : function(CategoryService){
                   return CategoryService.findAll();
@@ -364,18 +399,27 @@ function DashBoardController($scope, $state, UserService){
 angular.module('bitvagas.dashboard.controllers')
 .controller('OverviewController', OverviewController);
 
-
 OverviewController.$inject = ['$rootScope', '$scope', 'lodash'];
 function OverviewController($rootScope, $scope, lodash){
+
+    $scope.tab = 1;
+
+    $scope.setTab = function(tabId){
+        $scope.tab = tabId;
+    };
+
+    $scope.isSet = function(tabId){
+        return $scope.tab === tabId;
+    };
 
     if($scope.currentUser &&
        $scope.currentUser.jobs) {
        $scope.AppliersLength = lodash
-                            .chain($scope.currentUser.jobs)
-                            .pluck('job_appliers')
-                            .flatten()
-                            .size()
-                            .value();
+                              .chain($scope.currentUser.jobs)
+                              .pluck('job_appliers')
+                              .flatten()
+                              .size()
+                              .value();
     } else
         $scope.AppliersLength = 0;
 
@@ -410,6 +454,77 @@ function ProfileController($rootScope, $scope, $state, UserService){
     };
 }
 
+angular.module('bitvagas.dashboard.controllers')
+.controller('WalletController', WalletController);
+
+
+WalletController.$inject = ['$rootScope', '$scope', '$state', '$compile', '$timeout', 'WalletService', 'SweetAlert'];
+function WalletController($rootScope, $scope, $state, $compile, $timeout, WalletService, SweetAlert){
+
+    var qrcode  = angular.element("<qr text='address' type-number='10' size='200' image='false'></qr>");
+
+    $scope.current = $state.current.name;
+
+    $scope.updateWallet = function(){
+        WalletService.updateWallet().then(function(data){
+            console.log(data);
+        });
+    };
+
+    $scope.receive = function(){
+        SweetAlert.swal({
+            title: "Receive"
+          , text: "<hr/><div id='qr'></div><span id='address'></span>"
+          , html: true
+          , imageUrl: 'img/wallet.svg'
+          , animation: "slide-from-top"
+          , showCancelButton: true
+          , showConfirmButton: false
+        }, function(){
+        });
+
+        $timeout(function(){
+            angular.element(document.querySelector('#loading')).addClass('animated zoomOut');
+
+            $scope.address = $rootScope.currentUser.WALLET_ID;
+
+            //Append qr manually to sweet alert
+            angular.element(document.querySelector('#qr')).append($compile(qrcode)($scope));
+            //Display addres to sweet alert
+            angular.element(document.querySelector('#address')).text($scope.address);
+        },100);
+    };
+
+    $scope.createWallet = function(){
+        SweetAlert.swal({
+            title: "Wallet Password"
+          , text: "This password will be asked to sign transactions"
+          , imageUrl: 'img/wallet.svg'
+          , animation: "slide-from-top"
+          , type: 'input'
+          , inputPlaceholder: 'Wallet Password (min. 8 characters)'
+          , inputType: 'password'
+          , showCancelButton: true
+          , showConfirmButton: true
+          , closeOnConfirm: false
+          , showLoaderOnConfirm: true,
+        }, function(value){
+            if(value === false) return false;
+            if(value === "" || value.length < 8) {
+                swal.showInputError("Passphrase Invalid, at least 8 characters");
+                return false;
+            }
+
+            WalletService.createWallet(value).then(function(data){
+                SweetAlert.swal({
+                    title: 'Wallet Created'
+                  , text: 'Address: '+data.data.WALLET_ID
+                });
+            });
+        });
+    };
+}
+
 angular.module('bitvagas.admin.services', [])
 .factory('AuthenticationService', AuthenticationService);
 
@@ -432,6 +547,42 @@ function AuthenticationService($q, $http, $state){
     };
 }
 
+angular.module('bitvagas.escrow.controllers', [])
+.controller('EscrowController', EscrowController);
+
+EscrowController.$inject = ['$scope', '$state', 'FreelancerService', 'EscrowService'];
+function EscrowController($scope, $state, FreelancerService, EscrowService){
+
+    $scope.initBuyer = true;
+
+    FreelancerService.findAll().then(function(users){
+        console.log(users);
+        $scope.users = users.data;
+    });
+
+    $scope.onChangeUser = function(selected){
+        $scope.partner = selected;
+        console.log(selected);
+    };
+
+    $scope.create = function(escrow){
+        EscrowService.create(escrow).then(function(data){
+            console.log(data);
+        });
+    };
+}
+
+angular.module('bitvagas.escrow.services', [])
+.service('EscrowService', EscrowService);
+
+EscrowService.$inject = ['$http'];
+function EscrowService($http){
+
+    this.create = function(data){
+        return $http.post('/api/escrow', data);
+    };
+}
+
 angular.module('bitvagas.jobs.controllers',[]);
 
 angular.module('bitvagas.jobs.controllers', ['pg-ng-dropdown'])
@@ -448,11 +599,15 @@ function JobPostController($scope, $state, $stateParams, JobService, Categories,
     $scope.errors = $stateParams.errors || [];
 
     $scope.categories = Categories.data;
-    $scope.categories[1].selected = true;
+    $scope.categories[2].selected = true;
 
     // Render markedown on confirm page
-    if($state.current.name === 'jobs-confirm')
+    if($state.current.name === 'jobs-confirm') {
+        if(_.isEmpty($scope.data))
+            $state.transitionTo('jobs-post');
+
         $scope.data.DESCRIPTION = marked($scope.data.DESCRIPTION);
+    }
 
     if(_.isElement(document.getElementById("markdown__editor"))) {
         markdown = new SimpleMDE({
@@ -469,8 +624,14 @@ function JobPostController($scope, $state, $stateParams, JobService, Categories,
         $scope.data.TAGS = _.map($scope.tags, 'text');
         $scope.data.DESCRIPTION = markdown.value();
         $scope.data.marked = markdown.value();
-        if($scope.form.$valid)
-            $state.go('jobs-confirm', { data : $scope.data });
+
+        var typeId = $scope.data.TYPE_ID;
+        $scope.data.TYPE_NAME = typeId == 1 ? 'FULL-TIME' :
+                                typeId == 2 ? 'PART-TIME' :
+                                typeId == 3 ? 'FREELANCE' :
+                                typeId == 4 ? 'TEMPORARY' : 'FREELANCE';
+
+        $state.go('jobs-confirm', { data : $scope.data });
     };
 
     $scope.confirm = function(data){
@@ -543,7 +704,7 @@ function JobCreateController($scope, $state, $stateParams, $timeout, JobService,
     $scope.confirm = function(data){
         JobService.create(data)
         .then(function(data){
-            $state.go('dashboard.jobs.list');
+            $state.go('jobs-show', { 'id': data.data.id});
         }, function(err){
             $state.go('dashboard.jobs.create', {
                 data : $scope.data
@@ -571,6 +732,7 @@ function JobCreateController($scope, $state, $stateParams, $timeout, JobService,
             , confirmButtonText: "Cadastrar"
             , showLoaderOnConfirm: true
         }, function(inputValue){
+            if(inputValue === false) return false;
             if(inputValue){
                 OrgService.create({ NAME: inputValue }).then(function(data){
                     SweetAlert.swal({
@@ -631,12 +793,8 @@ function JobListController($scope, $state, $stateParams, JobService) {
 angular.module('bitvagas.jobs.controllers')
 .controller('JobDashListController', JobDashListController);
 
-JobDashListController.$inject = ['$scope', '$sce'];
-function JobDashListController($scope, $sce){
-
-    var setUrl = function(id){
-        $scope.url = $sce.trustAsResourceUrl("https://sandbox.coinbase.com/checkouts/6d111844c2041be4fdbdd1b3df5eaab5/inline"+(id ? "?c="+id : ""));
-    };
+JobDashListController.$inject = ['$scope', 'JobService'];
+function JobDashListController($scope, JobService){
 
     $scope.toggle = function(index, id) {
 
@@ -645,9 +803,14 @@ function JobDashListController($scope, $sce){
             return;
         }
 
-        setUrl(id);
         $scope.$parent.open = index;
     };
+
+    $scope.active = function(job){
+        JobService.active(job).then(function(job){
+            console.log(job);
+        });
+    }
 }
 
 
@@ -662,6 +825,7 @@ function JobShowController($scope, $state, $auth, JobService, lodash, marked){
     var id = $state.params.id;
 
     JobService.findById(id).then(function(data){
+        console.log(data.data);
         $scope.job = data.data;
         $scope.job.DESCRIPTION = marked(data.data.DESCRIPTION);
         AlreadyApplied();
@@ -732,6 +896,10 @@ function JobService($http){
         return $http.get(baseUrl+id);
     };
 
+    this.active = function(job){
+        return $http.post(baseUrl + job.id + '/active', job);
+    };
+
     //Apply job
     this.apply = function(job, apply){
         return $http.post(baseUrl + job.id + '/apply', apply);
@@ -756,8 +924,8 @@ function MainController($scope, $translate){
 angular.module('bitvagas.main.factory', [])
 .factory('Interceptor', Interceptor);
 
-Interceptor.$inject = ['$rootScope', '$q'];
-function Interceptor($rootScope, $q){
+Interceptor.$inject = ['$rootScope', '$q', '$injector', 'lodash'];
+function Interceptor($rootScope, $q, $injector, _){
     return {
 
         response: function(response){
@@ -773,9 +941,14 @@ function Interceptor($rootScope, $q){
 
         , responseError: function(response){
 
+            var $translate =  $injector.get('$translate');
+
             var errorMessage = response.data.message ?
                                response.data.message :
                                response.data;
+
+            if(_.startsWith(errorMessage, 'errorMessage'))
+               errorMessage  = $translate.instant(errorMessage);
 
             if(response.status === 401){
 
@@ -919,6 +1092,9 @@ angular.module('bitvagas.users.controllers', [])
 AuthController.$inject = ['$rootScope', '$scope', '$state', '$window', '$auth', 'UserService', 'SweetAlert'];
 function AuthController ($rootScope, $scope, $state, $window, $auth, UserService, SweetAlert) {
 
+    $scope.data = {};
+    $scope.data.walletEnable = true;
+
     if($auth.isAuthenticated())
         $state.transitionTo('dashboard.overview');
 
@@ -950,8 +1126,10 @@ function AuthController ($rootScope, $scope, $state, $window, $auth, UserService
         });
     };
 
-    $scope.verify = function(token){
-        UserService.verify(token).then(function(data){
+    $scope.verify = function(verify){
+        console.log('Verifying');
+        console.log(verify);
+        UserService.verify(verify).then(function(data){
             //locations href crashes on chrome
             setTimeout(function(){
                 $window.location.href = '/#/signin';
@@ -1063,8 +1241,8 @@ function UserService($http) {
         return $http.post('/invite', user);
     };
 
-    this.verify = function(token){
-        return $http.post('/verify', { token: token });
+    this.verify = function(data){
+        return $http.post('/verify', data);
     };
 
     this.forgot = function(email){
@@ -1073,5 +1251,19 @@ function UserService($http) {
 
     this.reset = function(data){
         return $http.post('/reset', data);
+    };
+}
+
+angular.module('bitvagas.users.services')
+.service('WalletService', WalletService);
+
+WalletService.$inject = ['$http'];
+function WalletService($http){
+    this.createWallet = function(passphrase){
+        return $http.post('/api/createwallet', { passphrase: passphrase });
+    };
+
+    this.updateWallet = function(){
+        return $http.post('/api/updatewallet');
     };
 }

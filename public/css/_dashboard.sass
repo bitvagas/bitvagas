@@ -4,6 +4,7 @@
 .dashboard__body
   +cf
   margin-bottom: 24px
+  width: 100%
   +media-query(desk)
     display: table
 
@@ -100,54 +101,64 @@
   .jobs-item__cell--body
     width: 70%
 
+  .dashboard__overview--orgs
+    list-style: none
+    display: table
+    li
+      float: left
+
 .dashboard__overview
   padding-right: 10px
   +media-query(desk)
-    display: table-cell
-    width: 50%
+    display: block
     padding-left: 5px
     padding-right: 5px
 
 
-.dashboard__overview--list-scroll
-  max-height: 220px
+.dashboard__applicant--list
+  list-style: none
+  margin-left: 50px
+  border-left: 1px solid #ddd
 
+.dashboard__applicant--body.ng-hide
+  max-height: 0px
+  transition: all .7s ease
 
-.dashboard__overview--applicant
-  border-top: 1px solid #eee
-  border-bottom: 1px solid #EEE
-  margin-top: 20px
-  margin-left: -5px
-  margin-bottom: -1px
+.dashboard__applicant--body
+  background-color: #f7f7f7
+  margin-left: 75px
+  margin-bottom: 10px
   padding-left: 25px
-  padding-top: 10px
-  padding-bottom: 5px
   border-left: 2px solid #29B5DF
   border-top-left-radius: 5px
   border-bottom-left-radius: 5px
+  max-height: 1000px
+  overflow: hidden
+  transition: all .7s ease
+  position: relative
 
-  .right
-    float: right
+  .applicant--content
+    border-top: 1px solid #eee
+    border-bottom: 1px solid #EEE
+    padding-top: 10px
+    padding-bottom: 10px
 
-  .applicant--links
-    background: url(../img/head-bg.png) repeat;
-    border-bottom: 2px solid #29B5DF
-    border-radius: 5px
-    padding: 10px
-    padding-left: 25px
-    margin-top: 15px
-    margin-bottom: 10px
-
-    ul
-      margin: 0
-      width: 100%
-      font-size: 18px
-      li
-        width: 25%
-        display: inline-block
+.applicant--links
+  background: url(../img/head-bg.png) repeat;
+  border-bottom: 1px solid #ddd
+  padding: 10px
+  padding-left: 25px
 
   ul
+    margin: 0
+    width: 100%
+    font-size: 18px
     list-style: none
+    li
+      margin-right: 30px
+      width: auto
+      display: inline-block
+
 
 .badge
   background-color: #29B5DF

@@ -1,13 +1,13 @@
 .dashboard__title
-  h1.dashboard__title--cell Jobs
+  h1.dashboard__title--cell(translate='dashboard.jobs.title')
   .dashboard__title--cell
     a.plus(ui-sref='dashboard.jobs.create')
       i.mdi.mdi-plus-circle
 
 div(ng-if='currentUser.jobs.length !== 0')
-  ul.jobs
-    li(ng-repeat='job in currentUser.jobs')
-      a.jobs-item(href="#" ng-click="toggle($index, job.id)" ng-model="open" title='')
+  ul.jobs.dashboard__my--jobs
+    li(ng-repeat='job in currentUser.jobs' ng-class='{ job__disabled: !job.ACTIVE }')
+      a.jobs-item(href="#/dashboard/jobs/#{{job.id}}" ng-click="toggle($index, job.id)")
         .jobs-item__cell.jobs-item__cell--img
           img.jobs-item__img(src='/img/company-default.png', alt='')
 
@@ -19,7 +19,19 @@ div(ng-if='currentUser.jobs.length !== 0')
           .jobs-item__type
             .label(class='label--{{ job.job_type.NAME }}') {{ job.job_type.NAME }}
           .jobs-item__date(am-time-ago='job.createdAt')
+          .jobs-item__link(ui-sref="jobs-show({ id: job.id })")
+            i.mdi.mdi-link-variant
+            span Link
       .accodion(ng-show="$parent.open == $index")
+        .jobs-item
+          .jobs-item__cell
+            h3 Applicants
+              .badge {{ job.job_appliers.length }}
+          .jobs-item__cell
+            .switch(tooltips tooltip-title='Turn Job {{ job.ACTIVE ? "Off" : "On" }}' style='float: right')
+              input.cmn-toggle.cmn-toggle-round(id="cmn-toggle-{{job.id}}" type="checkbox" ng-model='job.ACTIVE' ng-change='active(job)')
+              label(for="cmn-toggle-{{job.id}}") Active
+
         //- .premium(ng-show="{{ !job.PREMIUM }}")
           //- h5
             //- a(href="#") Destacar vaga $ 25,00
@@ -29,3 +41,37 @@ div(ng-if='currentUser.jobs.length !== 0')
           h2 Vaga Premium
           h5(ng-repeat="t in job.job_transactions")
             a(href="https://blockchain.info/tx/{{ t.TRANSACTION }}") Transação {{ t.TRANSACTION }}
+
+div(ng-if='currentUser.jobs.length === 0' style='text-align:center;padding-top:60px')
+  br
+  img.zoom(src="img/bv-connectcv.png")
+  .connect
+    a(ui-sref='dashboard.jobs.create')
+      h3
+        span(translate='dashboard.jobs.create')
+    ul.items--descriptions
+      li
+        h3
+          i.mdi.mdi-fast-forward
+        strong(translate='dashboard.jobs.description.easy')
+      li
+        h3
+          i.mdi.mdi-markdown
+        strong(translate='dashboard.jobs.description.markdown')
+      li
+        h3
+          i.mdi.mdi-email-open
+        strong(translate='dashboard.jobs.description.email')
+      li
+        h3
+          i.mdi.mdi-linkedin-box
+        strong(translate='dashboard.jobs.description.linkedin')
+      li
+        h3
+          i.mdi.mdi-share
+        strong(translate='dashboard.jobs.description.share')
+      li
+        h3
+          i.mdi.mdi-currency-btc
+        strong(translate='dashboard.jobs.description.bitcoin')
+

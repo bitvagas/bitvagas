@@ -1,13 +1,13 @@
-h2 Notificações
+h2(translate='dashboard.profile.notification.title')
 
 ul.settings-list
   li
-    label.settings-title(for='cmn-toggle-1') Job Suggestions
+    label.settings-title(for='cmn-toggle-1' translate='dashboard.profile.notification.job')
     .switch
       input.cmn-toggle.cmn-toggle-round(id="cmn-toggle-1" type="checkbox" ng-model='profile.NOTIFY_JOBS')
       label(for="cmn-toggle-1")
   li
-    label.settings-title(for='cmn-toggle-2') Someone apply to your job
+    label.settings-title(for='cmn-toggle-2' translate='dashboard.profile.notification.apply')
     .switch
       input.cmn-toggle.cmn-toggle-round(id="cmn-toggle-2" type="checkbox" ng-model='profile.NOTIFY_APPLIES')
       label(for="cmn-toggle-2")

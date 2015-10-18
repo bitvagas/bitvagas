@@ -18,6 +18,10 @@ function JobService($http){
         return $http.get(baseUrl+id);
     };
 
+    this.active = function(job){
+        return $http.post(baseUrl + job.id + '/active', job);
+    };
+
     //Apply job
     this.apply = function(job, apply){
         return $http.post(baseUrl + job.id + '/apply', apply);

@@ -1,5 +1,5 @@
 .dashboard__title
-  h1.dashboard__title--cell Organizations
+  h1.dashboard__title--cell(translate='dashboard.org.title')
   .dashboard__title--cell
     a.plus(ui-sref='dashboard.organization.create')
       i.mdi.mdi-plus-circle
@@ -16,5 +16,6 @@ div(ng-if='currentUser.orgs.length !== 0')
         .orgs-item__cell.orgs-item__cell--meta
           span(ui-sref="dashboard.organization.edit({ OrgID : org.id })" tooltips tooltip-title="Edit" tooltip-side="top")
             i.mdi.mdi-pencil-box
-          span(ng-click="delete(org.id)" tooltips tooltip-title="Delete" tooltip-side="top")
+          span(ng-if='' ng-click="delete(org.id)" tooltips tooltip-title="Delete" tooltip-side="top")
             i.mdi.mdi-delete
+div(ng-if='currentUser.orgs.length === 0')

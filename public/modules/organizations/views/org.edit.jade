@@ -1,15 +1,14 @@
 .dashboard__title
-  h1 Edit an organization
+  h1(translate='dashboard.org.update')
 
+br
 form
   ul.create-form
     li
-      .create-form__input
-      ng-input(theme='fumi' icon='icon icon--fumi mdi mdi-bank' label='Organization' type='text' ng-model='org.NAME' name='NAME')
+      ng-input(theme='fumi' icon='icon icon--fumi mdi mdi-bank' label='{{ "dashboard.org.title" | translate }}' type='text' ng-model='org.NAME' name='NAME')
     li
-      .create-form__input
       ng-input(theme='fumi' icon='icon icon--fumi mdi mdi-link' label='Url' type='url' ng-model='org.URL' name='URL')
     hr
 
-  a.btn.btn--medium(ui-sref="dashboard.organization.list") Voltar
-  button.btn.btn--medium.btn--primary(type="submit" ng-click='edit(org)') Alterar Organização
+  //- a.btn.btn--medium(ui-sref="dashboard.organization.list") Voltar
+  button.btn.btn--medium.btn--primary(type="submit" ng-click='edit(org)' translate='dashboard.org.update') Alterar Organização

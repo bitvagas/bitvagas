@@ -6,29 +6,38 @@ ul.profile
   li
     img.thumb(ng-src="{{ currentUser.PICTURE ? currentUser.PICTURE : 'img/unknown.svg' }}")
     label.picture
-     | Profile Picture
-     | <br>
-     | Update your picture on linkedIn
+      strong {{ currentUser.NAME }}
+      br
+      small(translate='dashboard.profile.picture')
   li
-    label.email 
+    label.email
       i.mdi.mdi-email
       | Email: {{ currentUser.EMAIL}}
+  li
+    label.verified(tooltips tooltip-title='Email verified' tooltip-side='right')
+      div(ng-if='currentUser.USER_STATUS === 2')
+        i.mdi.mdi-close
+        span(translate='dashboard.profile.verify')
+      div(ng-if='currentUser.USER_STATUS === 3')
+        i.mdi.mdi-check
+        span(translate='dashboard.profile.verified')
+
   li(style="height: 100px")
-    ng-input(theme='fumi' label='Name' icon='icon icon--fumi mdi mdi-account' ng-model='profile.NAME' name='NAME')
+    ng-input(theme='fumi' label='{{ "dashboard.profile.name" | translate }}' icon='icon icon--fumi mdi mdi-account' ng-model='profile.NAME' name='NAME')
   li(style="height: 100px")
-    ng-input(theme='fumi' label='Location' icon='icon icon--fumi mdi mdi-map-marker-radius' ng-model='profile.LOCATION' name='LOCATION' style="width: 500px")
+    ng-input(theme='fumi' label='{{ "dashboard.profile.location" | translate }}' icon='icon icon--fumi mdi mdi-map-marker-radius' ng-model='profile.LOCATION' name='LOCATION' style="width: 500px")
 
 div(ui-view="settings")
 
 br
 ul.profile
   li
-    a.btn.btn--merdium.btn--primary(href="#" ng-click="UpdateProfile()") Update Profile
+    a.btn.btn--primary(href="#" ng-click="UpdateProfile()" translate='dashboard.profile.updateProfile')
     a.btn.linkedin(ng-click="linkedIn()")
       i.mdi.mdi-linkedin-box
-      span(ng-if='currentUser.LINKEDIN_ID === null')  Conectar LinkedIn
-      span(ng-if='currentUser.LINKEDIN_ID !== null')  Atualizar LinkedIn
+      span(ng-if='currentUser.LINKEDIN_ID === null' translate='dashboard.profile.connectLinkedIn')
+      span(ng-if='currentUser.LINKEDIN_ID !== null' translate='dashboard.profile.updateLinkedIn')
 
 br
 
-div(ui-view="change-password")
+//- div(ui-view="change-password")

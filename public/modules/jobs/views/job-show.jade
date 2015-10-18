@@ -20,7 +20,7 @@
                 span(am-time-ago="job.createdAt")
             li
               i.mdi.mdi-tie
-              span {{ job.category.NAME }}
+              span(translate='categories.{{ job.category.NAME }}')
 
             li.right
               .job__appliers
