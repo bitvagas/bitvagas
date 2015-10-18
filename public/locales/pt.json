@@ -26,6 +26,23 @@
             "jobs": "Vagas"
         }
     },
+    "errorMessage": {
+        "deleting.org": "Sua organização é proprietaria de uma vaga, delete sua vaga primeiro",
+        "email.password.invalid": "Email ou Senha incorreto",
+        "email.already.registered": "Email já registrado",
+        "email.missing": "Preencha seu Email",
+        "verify.account": "Verifique sua conta no seu email",
+        "password.dont.match": "Essas senhas não coincidem",
+        "job.not.found": "Vaga não encontrada",
+        "user.not.found": "Usuario não encontrado",
+        "org.not.found": "Organização não encontrada",
+        "freelancer.not.found": "Freelancer não encontrado",
+        "linkedin.logout": "Voce precisa logar no sistema para conectar seu linkedIn",
+        "linkedin.already.connected": "Esta conta já foi conectada",
+        "forgot.link": "Um link foi enviado para seu email",
+        "token.expired": "Token Expirou",
+        "missing.authorization": "Voce não está autenticado"
+    },
     "home": {
         "banner": {
             "slogan": {
@@ -128,6 +145,83 @@
             "btn": "Enviar"
         }
     },
+    "dashboard": {
+        "join": "Entrou em",
+        "menu": {
+            "overview": "Visão Geral",
+            "myaccount": "Minha Conta",
+            "mywallet": "Minha Carteira (em breve)",
+            "mycv": "Meu Curriculo",
+            "myjobs": "Minhas Vagas",
+            "myorgs": "Minhas Organizações"
+        },
+        "overview": {
+            "title": "Visão Geral",
+            "wallet": {
+                "title": "caretira",
+                "founds": {
+                    "title": "Fundos"
+                },
+                "transactions": {
+                    "name": "Transações"
+                }
+            },
+            "orgs": {
+                "title": "Organizações",
+                "create": "Nova Organização"
+            },
+            "applicant": {
+                "title": "Applicadores",
+                "notyet": "No Appliers yet",
+                "appliers": {
+                    "description": "Descrição: ",
+                    "links": "Links: "
+                },
+                "myapply": {
+                    "title": "Vagas que voce aplicou"
+                }
+            }
+        },
+        "wallet": {
+            "title": "Carteira",
+            "not-verify": "Verifique Sua Conta"
+        },
+        "profile": {
+            "picture": "Atualize sua foto no linkedIn",
+            "verify": "Verifique sua conta no seu email",
+            "verified": "Verificado",
+            "name": "Nome",
+            "location": "Localização",
+            "notification": {
+                "title": "Notificações",
+                "job": "Sugestões de Vagas",
+                "apply": "Alguém aplicou para sua vaga"
+            },
+            "updateProfile": "Atualizar Profile",
+            "connectLinkedIn": " Conectar LinkedIn",
+            "updateLinkedIn": " Atualizar LinkedIn"
+        },
+        "jobs": {
+            "title": "Vagas",
+            "create": "Postar Vaga",
+            "preview": "Visualizar",
+            "confirm": "Confirmar",
+            "description": {
+                "easy": "Postar uma vaga é muito fácil",
+                "markdown": "Descreva sua vaga no formato markdown",
+                "email": "Receba aplicadores pelo seu email",
+                "linkedin": "Receba os curriculos através do linkedIn",
+                "share": "Compartilhe sua vaga nas redes sociais",
+                "bitcoin": "Pague em bitcoins"
+            }
+        },
+        "org": {
+            "title": "Organização",
+            "create": "Criar Organização",
+            "update": "Atualizar Organização"
+        }
+
+    },
     "privacy": {
         "source": "privacy",
         "lang": "pt-br",
@@ -139,8 +233,14 @@
         "p1": "Seus dados pré cadastrais não serão utilizados ou reproduzidos de qualquer maneira por nossa equipe, sendo estes utilizados apenas para contato via email, a respeito do BitVagas, tais como abertura do pré-lançamento, newsletter, pesquisa e etc.",
         "p2": "Essas políticas podem e serão atualizadas conforme o desenvolvimento do BitVagas, para atender as necessidades legais da plataforma. Quando essas mudanças ocorrerem, você será avisado via email sobre as mudanças."
     },
+    "categories": {
+        "Development": "Desenvolvimento",
+        "Design": "Design",
+        "Marketing": "Marketing",
+        "Other": "Outro"
+    },
     "signin": {
-        "title": "Sign In",
+        "title": "Login",
         "email": "Email",
         "password": "Senha",
         "forgot": "Esqueceu sua senha?",
@@ -157,8 +257,8 @@
         "button": "Inscrever-se"
     },
     "explore": {
-        "description": "Explore the Bitcoin universe and help stimulate the decentralized economy. Hire using digital coins.",
-        "title": "Explorar",
+        "title": "Todas as Vagas",
+        "description": "Explore o universo Bitcoin e ajude a estimular a economia descentralizada. Contrate utilizando moedas digitais.",
         "search": {
             "placeholder": "Buscar Vaga, Empresas, Locais...",
             "button": "Buscar",

@@ -27,6 +27,23 @@
             "jobs": "Jobs"
         }
     },
+    "errorMessage": {
+        "deleting.org": "Your organization is currently an owner in a job, delete it first",
+        "email.password.invalid": "Email or Password invalid",
+        "email.already.registered": "Email already registrated",
+        "email.missing": "Missing Email",
+        "verify.account": "Verify your account, check your email",
+        "password.dont.match": "These passwords don't match",
+        "job.not.found": "Job has not found",
+        "user.not.found": "User has not found",
+        "org.not.found": "Organization has not found",
+        "freelancer.not.found": "Freelancer has not found",
+        "linkedin.logout": "You need be logged to connect your linkedIn",
+        "linkedin.already.connected": "This account is already connected",
+        "forgot.link": "A link has been send to your email",
+        "token.expired": "Token has Expired",
+        "missing.authorization": "Missing Authorization"
+    },
     "home": {
         "banner": {
             "slogan": {
@@ -132,6 +149,83 @@
             "btn": "Send"
         }
     },
+    "dashboard": {
+        "join": "Join on",
+        "menu": {
+            "overview": "Overview",
+            "myaccount": "My Account",
+            "mywallet": "My Wallet (Soon)",
+            "mycv": "My Curriculum",
+            "myjobs": "My Jobs",
+            "myorgs": "My Organizations"
+        },
+        "overview": {
+            "title": "Overview",
+            "wallet": {
+                "title": "Wallet",
+                "founds": {
+                    "title": "Founds"
+                },
+                "transactions": {
+                    "name": "Trasactions"
+                }
+            },
+            "orgs": {
+                "title": "Organizations",
+                "create": "Create Organization"
+            },
+            "applicant": {
+                "title": "Applicants",
+                "notyet": "Nenhuma pessoa applicou ainda",
+                "appliers": {
+                    "title": "Appliers",
+                    "description": "Description: ",
+                    "links": "Links: "
+                },
+                "myapply": {
+                    "title": "Jobs that you applied"
+                }
+            }
+        },
+        "wallet": {
+            "title": "Wallet",
+            "not-verify": "Verify Your Account"
+        },
+        "profile": {
+            "picture": "Update your picture on linkedIn",
+            "verify": "Verified Your Account, Check your email",
+            "verified": "Verified",
+            "name": "Name",
+            "location": "Location",
+            "notification": {
+                "title": "Notifications",
+                "job": "Job Suggestions",
+                "apply": "Someone apply to your job"
+            },
+            "updateProfile": "Update Profile",
+            "connectLinkedIn": "Connect LinkedIn",
+            "updateLinkedIn": "Update LinkedIn"
+        },
+        "jobs": {
+            "title": "Jobs",
+            "create": "Post a Job",
+            "preview": "Preview",
+            "confirm": "Confirm",
+            "description": {
+                "easy": "Post a job is so easy",
+                "markdown": "Describe your job in a markdown format",
+                "email": "Receive appliers in your email",
+                "linkedin": "Receive all CVs through linkedIn",
+                "share": "Share your job everywhere",
+                "bitcoin": "Pay in bitcoins"
+            }
+        },
+        "org": {
+            "title": "Organization",
+            "create": "Create an Organization",
+            "update": "Update Organization"
+        }
+    },
     "privacy": {
         "source": "privacy",
         "lang": "en",
@@ -141,6 +235,12 @@
         "title": "Privacy Policy",
         "p1": "Their pre registration information will not be used or reproduced in any way by our team, these being used only to contact via email, about BitVagas, such as opening of pre-release, newsletter, research, etc.",
         "p2": "These policies can and will be updated as the development of BitVagas to meet the platform's legal needs. When these changes occur, you will be notified via email of the changes."
+    },
+    "categories": {
+        "Development": "Development",
+        "Design": "Design",
+        "Marketing": "Marketing",
+        "Other": "Other"
     },
     "signin": {
         "title": "Sign In",
@@ -160,11 +260,11 @@
         "button": "Sign up for Bitvagas"
     },
     "explore": {
+        "title": "All Jobs",
         "description": "Explore the Bitcoin universe and help stimulate the decentralized economy. Hire using digital coins.",
-        "title": "Explorar",
         "search": {
             "placeholder": "Find Job, Companies, Places...",
-            "btn": "Find",
+            "button": "Search",
             "type": {
                 "title": "Type of Job",
                 "full": "Full-time",
@@ -217,6 +317,9 @@
             },
             "terms": "I Agree to the BitVagas terms",
             "continue": "Next"
+        },
+        "confirm": {
+            "title": "Confirm Job"
         }
     },
     "job": {
