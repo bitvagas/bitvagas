@@ -7,6 +7,7 @@ var request  = require('supertest')
   , org      = {}
   , job      = {}
   , user     = {}
+  , token    = {}
   , post     = {};
 
 describe('Jobs modules api', function(){

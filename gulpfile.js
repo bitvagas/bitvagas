@@ -15,8 +15,9 @@ gulp.task('browser-sync', ['nodemon'], function(){
 });
 
 gulp.task('nodemon', function(){
-    nodemon({
+    return nodemon({
         script: 'app.js'
+      , ignore: ['public/**']
       , env : { 'NODE_ENV': 'development'}
     })
     .on('restart', function(){
@@ -34,7 +35,7 @@ gulp.task('bower', function(){
     .pipe(gulp.dest('public/dest'));
 });
 
-gulp.task('script', ['bower'], function(){
+gulp.task('script', function(){
     return gulp.src('public/modules/**/*.js')
     .pipe(concat('app-build.js'))
     .pipe(gulp.dest('public/dest'));
@@ -48,7 +49,7 @@ gulp.task('fixtures', function(){
 gulp.task('test', function(){
     process.env.NODE_ENV = 'test';
     return gulp.src('test/*.test.js', { read: false })
-    .pipe(mocha())
+    .pipe(mocha({ timeout: 25000 }))
     .once('error', function(){
         process.exit(1);
     }).once('end', function(){
@@ -68,7 +69,7 @@ gulp.task('watch', function(){
     });
     //Watch js files
     gulp.watch('public/modules/**/*.js', ['script'], function(){
-        browserSync.reload('app-build.js', { stream: true });
+        browserSync.reload();
     });
 });
 

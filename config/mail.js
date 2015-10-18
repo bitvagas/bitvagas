@@ -58,6 +58,35 @@ module.exports = {
         this.sendMail(user.EMAIL, subject, template, context);
     }
 
+    , sendApplierNotification: function(recipient, job, applier, apply){
+        var subject  = 'BitVagas | ' + applier.NAME + ' has applied to your job';
+
+        var template = 'applier';
+        var context  = {
+            applier: applier
+          , apply: apply
+          , job: job
+          , url: config.url
+        };
+
+        this.sendMail(recipient, subject, template, context);
+    }
+
+    , sendEscrowVerification : function(user){
+        var subject = 'You are invited to an escrow';
+
+        var template = 'escrow';
+        var context = {
+            name  : user.NAME
+          , email : user.EMAIL
+          , token : user.TOKEN
+          , url   : config.url
+          , recipient: user.recipient
+        };
+
+        this.sendMail(user.EMAIL, subject, template, context);
+    }
+
     , sendMail : function(to, subject, template, context){
 
         if(env === 'test')
