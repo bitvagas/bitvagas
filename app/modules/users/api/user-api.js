@@ -5,7 +5,7 @@ var express    = require('express')
 module.exports = function(app){
 
     router.route('/freelancer')
-    .get(freelancer.list);
+    .get(freelancer.freelancers);
 
     router.route('/freelancer/:id')
     .get(freelancer.read);

@@ -6,16 +6,21 @@ var secrets  = require(root + '/config/secrets')
   , request  = require('request')
   , linkedin = require('node-linkedin')(secrets.linkedIn.clientID
                                       , secrets.linkedIn.clientSecret
-                                      , secrets.linkedIn.callbackURL);
+                                      , secrets.linkedIn.callbackURL)
+  , fields   = ['NAME', 'EMAIL', 'HEADLINE', 'SUMMARY', 'LOCATION'
+               ,'POSITION', 'PICTURE', 'LINKEDIN_ID', 'LINKEDIN_PROFILE'];
 
 module.exports = {
 
     list: function(request, response){
-        db.user.findAll().then(function(users){
-            lodash.forEach(users, function(user){
-                user.PASSWORD = undefined;
-            });
+        db.user.findAll({ attributes: fields }).then(function(users){
             response.status(200).json(users);
+        });
+    }
+
+    , freelancers: function(request, response){
+        db.user.findAll({ attributes: fields, where: { LINKEDIN_ID: { $ne: null }}}).then(function(freelancers){
+            response.status(200).json(freelancers);
         });
     }
 
