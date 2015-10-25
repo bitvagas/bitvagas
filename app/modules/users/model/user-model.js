@@ -18,8 +18,8 @@ module.exports = function(sequelize, DataTypes){
               type: DataTypes.STRING
             , allowNull : false
         }
-        , HEADLINE         : DataTypes.STRING
-        , SUMMARY          : DataTypes.STRING
+        , HEADLINE         : DataTypes.TEXT
+        , SUMMARY          : DataTypes.TEXT
         , LOCATION         : DataTypes.STRING
         , POSITION         : DataTypes.STRING
         , PICTURE          : DataTypes.STRING

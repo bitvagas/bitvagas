@@ -70,7 +70,8 @@ module.exports = {
 
                     users.findById(req.user.id).then(function(user){
                         user.update({
-                              HEADLINE         : profile.headline
+                              NAME             : profile.firstName + " " + profile.lastName
+                            , HEADLINE         : profile.headline
                             , SUMMARY          : profile.summary
                             , LOCATION         : profile.location.name
                             , PICTURE          : profile.pictureUrls.values[0] || null
@@ -80,7 +81,8 @@ module.exports = {
                         }).then(function(){
                             res.status(201).json({ token: token.createJWT(req.user) });
                         }).catch(function(err){
-                            res.statsu(400).json({ message: err });
+                            console.log(err);
+                            res.status(400).json({ message: err });
                         });
                     });
                 });
