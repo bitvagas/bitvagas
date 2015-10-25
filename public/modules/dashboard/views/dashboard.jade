@@ -4,7 +4,7 @@
     aside.dashboard__cell.dashboard__cell--aside
       .dashboard-aside
         img(ng-src="{{ currentUser.PICTURE ? currentUser.PICTURE : 'img/unknown.svg' }}").dashboard__img
-        h5 {{ currentUser.NAME }}
+        h5.name {{ currentUser.NAME }}
         .profile--info
           p
             |  {{ currentUser.EMAIL }}

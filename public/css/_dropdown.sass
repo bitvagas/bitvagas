@@ -4,6 +4,7 @@
   background: #fff
   padding: 0 6px 4px
   position: relative
+  max-width: 159px
   +media-query(desk)
     background: transparent
     padding: 0
@@ -19,6 +20,9 @@
   border-bottom: 1px solid rgba(#000, .08)
   font-weight: 700
   padding: 12px 6px 6px
+  overflow: hidden
+  text-overflow: ellipsis
+  white-space: nowrap
   +media-query(desk)
     border-width: 1px 1px 0
     border-style: solid
