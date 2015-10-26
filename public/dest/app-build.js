@@ -200,44 +200,6 @@ angular.module('bitvagas.escrow', [
     });
 });
 
-angular.module('bitvagas.main',
-    ['bitvagas.main.factory'
-    ,'bitvagas.main.controllers'
-    ])
-    .config(function($urlRouterProvider, $stateProvider){
-
-        $urlRouterProvider.otherwise('/');
-        $stateProvider
-        .state('index', {
-            url: '/'
-          , views        : {
-              ''         : {
-                    templateUrl     : 'modules/main/views/index'
-                  , controller      : 'JobListController'
-              }
-              , 'job-list@index'    : {
-                    templateUrl     : 'modules/jobs/views/job-list'
-                  , controller      : 'JobListController'
-              }
-              , 'job-sidebar@index' : {
-                    templateUrl     : 'modules/jobs/views/job-sidebar'
-              }
-          }
-        })
-        .state('about', {
-            url: '/about'
-          , templateUrl: 'modules/main/views/about'
-        })
-        .state('terms', {
-            url: '/terms'
-          , templateUrl: 'modules/main/views/terms'
-        })
-        .state('contact', {
-            url: '/contact'
-          , templateUrl: 'modules/main/views/contact'
-        });
-    });
-
 angular.module('bitvagas.jobs',
     [ 'ui.router'
     , 'bitvagas.jobs.controllers'
@@ -320,6 +282,44 @@ angular.module('bitvagas.jobs',
           , params       : { data : {} }
           , controller   : 'JobCreateController'
           , authenticate : true
+        });
+    });
+
+angular.module('bitvagas.main',
+    ['bitvagas.main.factory'
+    ,'bitvagas.main.controllers'
+    ])
+    .config(function($urlRouterProvider, $stateProvider){
+
+        $urlRouterProvider.otherwise('/');
+        $stateProvider
+        .state('index', {
+            url: '/'
+          , views        : {
+              ''         : {
+                    templateUrl     : 'modules/main/views/index'
+                  , controller      : 'JobListController'
+              }
+              , 'job-list@index'    : {
+                    templateUrl     : 'modules/jobs/views/job-list'
+                  , controller      : 'JobListController'
+              }
+              , 'job-sidebar@index' : {
+                    templateUrl     : 'modules/jobs/views/job-sidebar'
+              }
+          }
+        })
+        .state('about', {
+            url: '/about'
+          , templateUrl: 'modules/main/views/about'
+        })
+        .state('terms', {
+            url: '/terms'
+          , templateUrl: 'modules/main/views/terms'
+        })
+        .state('contact', {
+            url: '/contact'
+          , templateUrl: 'modules/main/views/contact'
         });
     });
 
@@ -530,28 +530,6 @@ function WalletController($rootScope, $scope, $state, $compile, $timeout, Wallet
     };
 }
 
-angular.module('bitvagas.admin.services', [])
-.factory('AuthenticationService', AuthenticationService);
-
-AuthenticationService.$inject = ['$q', '$http', '$state'];
-function AuthenticationService($q, $http, $state){
-    return {
-        isAuthenticated : function() {
-            var deferred = $q.defer();
-            $http.get('/isAuthenticated').then(function(user){
-                if(user !== 0)
-                    deferred.resolve(user);
-                else
-                    deferred.reject();
-
-            },function(err){
-                deferred.reject(err);
-            });
-            return deferred.promise;
-        }
-    };
-}
-
 angular.module('bitvagas.escrow.services', [])
 .service('EscrowService', EscrowService);
 
@@ -562,85 +540,6 @@ function EscrowService($http){
         return $http.post('/api/escrow', data);
     };
 }
-
-angular.module('bitvagas.main.controllers', [])
-.controller('MainController', MainController);
-
-
-MainController.$inject = ['$scope', '$translate'];
-
-function MainController($scope, $translate){
-    $scope.setLang = function(langKey) {
-        $translate.use(langKey);
-    };
-}
-
-angular.module('bitvagas.main.factory', [])
-.factory('Interceptor', Interceptor);
-
-Interceptor.$inject = ['$rootScope', '$q', '$injector', 'lodash'];
-function Interceptor($rootScope, $q, $injector, _){
-    return {
-
-        response: function(response){
-
-            if((response.status === 201 ||
-                response.status === 204) &&
-                !/\/api\/jobs\/\d\/apply/.exec(response.config.url) &&
-                !/\/api\/jobs\/post/.exec(response.config.url))
-                $rootScope.$broadcast('update-me');
-
-            return response;
-        }
-
-        , responseError: function(response){
-
-            var $translate =  $injector.get('$translate');
-
-            var errorMessage = response.data.message ?
-                               response.data.message :
-                               response.data;
-
-            if(_.startsWith(errorMessage, 'errorMessage'))
-               errorMessage  = $translate.instant(errorMessage);
-
-            if(response.status === 401){
-
-                if(response.data.destroy === true)
-                    $rootScope.logout();
-
-                new NotificationFx({
-                    message : '<div class="ns-thumb"><img src="img/template.png"/></div><div class="ns-content"><span>'+errorMessage+'</span></div>'
-                  , layout : 'other'
-                  , effect : 'thumbslider'
-                  , ttl : 9000
-                  , type : 'notice'
-                });
-                $rootScope.$broadcast('unauthorized');
-                return $q.reject(response);
-            }
-
-            if(response.status === 400){
-                console.log(response);
-                new NotificationFx({
-                    message : '<div class="ns-thumb"><img src="img/template.png"/></div><div class="ns-content"><span>'+errorMessage+'</span></div>'
-                  , layout : 'other'
-                  , effect : 'thumbslider'
-                  , ttl : 9000
-                  , type : 'notice'
-                });
-                return $q.reject(response);
-            }
-            if(response.status === 404){
-                //show error
-                return $q.reject(response);
-            }
-
-            return response;
-        }
-    };
-}
-
 
 angular.module('bitvagas.jobs.controllers',[]);
 
@@ -968,6 +867,85 @@ function JobService($http){
     };
 }
 
+angular.module('bitvagas.main.controllers', [])
+.controller('MainController', MainController);
+
+
+MainController.$inject = ['$scope', '$translate'];
+
+function MainController($scope, $translate){
+    $scope.setLang = function(langKey) {
+        $translate.use(langKey);
+    };
+}
+
+angular.module('bitvagas.main.factory', [])
+.factory('Interceptor', Interceptor);
+
+Interceptor.$inject = ['$rootScope', '$q', '$injector', 'lodash'];
+function Interceptor($rootScope, $q, $injector, _){
+    return {
+
+        response: function(response){
+
+            if((response.status === 201 ||
+                response.status === 204) &&
+                !/\/api\/jobs\/\d\/apply/.exec(response.config.url) &&
+                !/\/api\/jobs\/post/.exec(response.config.url))
+                $rootScope.$broadcast('update-me');
+
+            return response;
+        }
+
+        , responseError: function(response){
+
+            var $translate =  $injector.get('$translate');
+
+            var errorMessage = response.data.message ?
+                               response.data.message :
+                               response.data;
+
+            if(_.startsWith(errorMessage, 'errorMessage'))
+               errorMessage  = $translate.instant(errorMessage);
+
+            if(response.status === 401){
+
+                if(response.data.destroy === true)
+                    $rootScope.logout();
+
+                new NotificationFx({
+                    message : '<div class="ns-thumb"><img src="img/template.png"/></div><div class="ns-content"><span>'+errorMessage+'</span></div>'
+                  , layout : 'other'
+                  , effect : 'thumbslider'
+                  , ttl : 9000
+                  , type : 'notice'
+                });
+                $rootScope.$broadcast('unauthorized');
+                return $q.reject(response);
+            }
+
+            if(response.status === 400){
+                console.log(response);
+                new NotificationFx({
+                    message : '<div class="ns-thumb"><img src="img/template.png"/></div><div class="ns-content"><span>'+errorMessage+'</span></div>'
+                  , layout : 'other'
+                  , effect : 'thumbslider'
+                  , ttl : 9000
+                  , type : 'notice'
+                });
+                return $q.reject(response);
+            }
+            if(response.status === 404){
+                //show error
+                return $q.reject(response);
+            }
+
+            return response;
+        }
+    };
+}
+
+
 angular.module('bitvagas.org.controllers',[])
 .controller('OrgController', OrgController);
 
@@ -1176,33 +1154,8 @@ function CVController($scope, $state, $stateParams, FreelancerService){
     });
 }
 
-function FreelancerController ($scope, freelancers) {
+function FreelancerController($scope, freelancers) {
     $scope.freelancers = freelancers.data;
-}
-
-angular.module('bitvagas.escrow.controllers', [])
-.controller('EscrowController', EscrowController);
-
-EscrowController.$inject = ['$scope', '$state', 'FreelancerService', 'EscrowService'];
-function EscrowController($scope, $state, FreelancerService, EscrowService){
-
-    $scope.initBuyer = true;
-
-    FreelancerService.findAll().then(function(users){
-        console.log(users);
-        $scope.users = users.data;
-    });
-
-    $scope.onChangeUser = function(selected){
-        $scope.partner = selected;
-        console.log(selected);
-    };
-
-    $scope.create = function(escrow){
-        EscrowService.create(escrow).then(function(data){
-            console.log(data);
-        });
-    };
 }
 
 angular.module('bitvagas.users.services', [])
@@ -1268,5 +1221,52 @@ function WalletService($http){
 
     this.updateWallet = function(){
         return $http.post('/api/updatewallet');
+    };
+}
+
+angular.module('bitvagas.escrow.controllers', [])
+.controller('EscrowController', EscrowController);
+
+EscrowController.$inject = ['$scope', '$state', 'FreelancerService', 'EscrowService'];
+function EscrowController($scope, $state, FreelancerService, EscrowService){
+
+    $scope.initBuyer = true;
+
+    FreelancerService.findAll().then(function(users){
+        console.log(users);
+        $scope.users = users.data;
+    });
+
+    $scope.onChangeUser = function(selected){
+        $scope.partner = selected;
+        console.log(selected);
+    };
+
+    $scope.create = function(escrow){
+        EscrowService.create(escrow).then(function(data){
+            console.log(data);
+        });
+    };
+}
+
+angular.module('bitvagas.admin.services', [])
+.factory('AuthenticationService', AuthenticationService);
+
+AuthenticationService.$inject = ['$q', '$http', '$state'];
+function AuthenticationService($q, $http, $state){
+    return {
+        isAuthenticated : function() {
+            var deferred = $q.defer();
+            $http.get('/isAuthenticated').then(function(user){
+                if(user !== 0)
+                    deferred.resolve(user);
+                else
+                    deferred.reject();
+
+            },function(err){
+                deferred.reject(err);
+            });
+            return deferred.promise;
+        }
     };
 }

@@ -18,6 +18,6 @@ function CVController($scope, $state, $stateParams, FreelancerService){
     });
 }
 
-function FreelancerController ($scope, freelancers) {
+function FreelancerController($scope, freelancers) {
     $scope.freelancers = freelancers.data;
 }

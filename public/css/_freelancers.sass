@@ -1,12 +1,20 @@
 #freelancers
   background-color: #FFF
-  padding-top: 20px
+  padding: 10px
+
+  .freelancers--header
+    padding-bottom: 10px
+    padding-top: 10px
+    padding-left: 20px
+    padding-right: 20px
+    padding-bottom: 0px
 
   .freelancer__item
     margin: 1em
 
   .masonry-brick
     display: none
+    margin: 0.2em
 
   .masonry-brick.loaded
     display: block
@@ -16,24 +24,34 @@
 
   .freelancer
     display: table
+    width: 230px
+    background-color: #eee
+    text-align: center
+    padding-top: 10px
+    border: 1px solid
 
-  .freelancer__cell
-    display: table-cell
-    vertical-align: middle
+  .freelancer__name
+    font-weight: 600
+    overflow: hidden
+    max-width: 275px
+    text-overflow: ellipsis
+    white-space: nowrap
 
-    .freelancer__description
-      padding-left: 70px
-      padding-top: 20px
-      padding-bottom: 20px
-      padding-right: 50px
-      background-color: #eee
-      margin-left: -50px
+  .freelancer__description
+    background-color: #1283B0
+    color: white
+    padding: 10px
+    text-align: left
+    margin-top: 15px
+    max-width: 230px
+    *
+      max-width: 220px
+      overflow: hidden
+      text-overflow: ellipsis
+      white-space: nowrap
 
-      .headline
-        max-width: 300px
-        text-overflow: ellipsis
-        overflow: hidden
-        white-space: nowrap
+    .headline
+      font-size: 14px
 
-      h3, p
-        margin: 0
+    h3, p
+      margin: 0

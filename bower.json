@@ -33,7 +33,8 @@
     "angular-animate": "1.4.2",
     "qrcode": "~1.0.2",
     "angular-qr": "~0.2.0",
-    "angucomplete-alt": "~1.1.0"
+    "angucomplete-alt": "~1.1.0",
+    "angular-masonry": "~0.13.0"
   },
   "overrides": {
     "angular": {
@@ -115,7 +116,7 @@
       "main": "angular-qr.min.js"
     },
     "angucomplete-alt": {
-        "main": "dist/angucomplete-alt.min.js"
+      "main": "dist/angucomplete-alt.min.js"
     },
     "imagesloaded": {
       "ignore": true
