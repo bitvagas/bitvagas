@@ -240,16 +240,16 @@
         "Other": "Outro"
     },
     "signin": {
-        "title": "Login",
+        "title": "Entrar",
         "email": "Email",
         "password": "Senha",
         "forgot": "Esqueceu sua senha?",
         "new": "Ainda não é usuario?",
-        "join": "Inscreva-se Agora",
+        "join": " Inscreva-se Agora",
         "button": "Entrar"
     },
     "signup": {
-        "title": "Entrar",
+        "title": "Registrar",
         "name": "Nome",
         "email": "Email",
         "password": "Senha",

@@ -7,8 +7,16 @@ angular.module('bitvagas.users', [
         $stateProvider
         .state('signup', {
             url: '/signup'
-          , templateUrl : 'modules/users/views/signup'
-          , controller  : 'AuthController'
+          , views       : {
+              ''        : {
+                  templateUrl : 'modules/users/views/signup'
+                , controller  : 'AuthController'
+              }
+              , 'signin@signup' : {
+                  templateUrl : 'modules/users/views/signin'
+                , controller  : 'AuthController'
+              }
+          }
         })
         .state('signin', {
             url: '/signin'

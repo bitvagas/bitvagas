@@ -365,8 +365,16 @@ angular.module('bitvagas.users', [
         $stateProvider
         .state('signup', {
             url: '/signup'
-          , templateUrl : 'modules/users/views/signup'
-          , controller  : 'AuthController'
+          , views       : {
+              ''        : {
+                  templateUrl : 'modules/users/views/signup'
+                , controller  : 'AuthController'
+              }
+              , 'signin@signup' : {
+                  templateUrl : 'modules/users/views/signin'
+                , controller  : 'AuthController'
+              }
+          }
         })
         .state('signin', {
             url: '/signin'
@@ -526,6 +534,53 @@ function WalletController($rootScope, $scope, $state, $compile, $timeout, Wallet
                   , text: 'Address: '+data.data.WALLET_ID
                 });
             });
+        });
+    };
+}
+
+angular.module('bitvagas.admin.services', [])
+.factory('AuthenticationService', AuthenticationService);
+
+AuthenticationService.$inject = ['$q', '$http', '$state'];
+function AuthenticationService($q, $http, $state){
+    return {
+        isAuthenticated : function() {
+            var deferred = $q.defer();
+            $http.get('/isAuthenticated').then(function(user){
+                if(user !== 0)
+                    deferred.resolve(user);
+                else
+                    deferred.reject();
+
+            },function(err){
+                deferred.reject(err);
+            });
+            return deferred.promise;
+        }
+    };
+}
+
+angular.module('bitvagas.escrow.controllers', [])
+.controller('EscrowController', EscrowController);
+
+EscrowController.$inject = ['$scope', '$state', 'FreelancerService', 'EscrowService'];
+function EscrowController($scope, $state, FreelancerService, EscrowService){
+
+    $scope.initBuyer = true;
+
+    FreelancerService.findAll().then(function(users){
+        console.log(users);
+        $scope.users = users.data;
+    });
+
+    $scope.onChangeUser = function(selected){
+        $scope.partner = selected;
+        console.log(selected);
+    };
+
+    $scope.create = function(escrow){
+        EscrowService.create(escrow).then(function(data){
+            console.log(data);
         });
     };
 }
@@ -1221,52 +1276,5 @@ function WalletService($http){
 
     this.updateWallet = function(){
         return $http.post('/api/updatewallet');
-    };
-}
-
-angular.module('bitvagas.escrow.controllers', [])
-.controller('EscrowController', EscrowController);
-
-EscrowController.$inject = ['$scope', '$state', 'FreelancerService', 'EscrowService'];
-function EscrowController($scope, $state, FreelancerService, EscrowService){
-
-    $scope.initBuyer = true;
-
-    FreelancerService.findAll().then(function(users){
-        console.log(users);
-        $scope.users = users.data;
-    });
-
-    $scope.onChangeUser = function(selected){
-        $scope.partner = selected;
-        console.log(selected);
-    };
-
-    $scope.create = function(escrow){
-        EscrowService.create(escrow).then(function(data){
-            console.log(data);
-        });
-    };
-}
-
-angular.module('bitvagas.admin.services', [])
-.factory('AuthenticationService', AuthenticationService);
-
-AuthenticationService.$inject = ['$q', '$http', '$state'];
-function AuthenticationService($q, $http, $state){
-    return {
-        isAuthenticated : function() {
-            var deferred = $q.defer();
-            $http.get('/isAuthenticated').then(function(user){
-                if(user !== 0)
-                    deferred.resolve(user);
-                else
-                    deferred.reject();
-
-            },function(err){
-                deferred.reject(err);
-            });
-            return deferred.promise;
-        }
     };
 }
