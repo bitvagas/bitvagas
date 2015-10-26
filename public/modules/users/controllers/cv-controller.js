@@ -2,7 +2,7 @@ angular.module('bitvagas.users.controllers')
 .controller('FreelancerController', FreelancerController)
 .controller('CVController', CVController);
 
-FreelancerController.$inject = ['$scope', 'FreelancerService'];
+FreelancerController.$inject = ['$scope', 'freelancers'];
 CVController.$inject = ['$scope', '$state', '$stateParams', 'FreelancerService'];
 function CVController($scope, $state, $stateParams, FreelancerService){
 
@@ -18,8 +18,6 @@ function CVController($scope, $state, $stateParams, FreelancerService){
     });
 }
 
-function FreelancerController ($scope, FreelancerService) {
-    FreelancerService.findAll().then(function(data){
-        $scope.freelancers = data.data;
-    });
+function FreelancerController ($scope, freelancers) {
+    $scope.freelancers = freelancers.data;
 }

@@ -21,7 +21,12 @@ angular.module('bitvagas.users', [
         })
         .state('freelancers', {
             url: '/freelancers'
-          , templateUrl : 'modules/users/views/freelancers'
+          , templateUrl   : 'modules/users/views/freelancers'
+          , resolve       : {
+              freelancers : function(FreelancerService) {
+                  return FreelancerService.findAll();
+              }
+          }
           , controller  : 'FreelancerController'
         })
         .state('freelancers-cv', {
