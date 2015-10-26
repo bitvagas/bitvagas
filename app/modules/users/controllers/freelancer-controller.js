@@ -7,7 +7,7 @@ var secrets  = require(root + '/config/secrets')
   , linkedin = require('node-linkedin')(secrets.linkedIn.clientID
                                       , secrets.linkedIn.clientSecret
                                       , secrets.linkedIn.callbackURL)
-  , fields   = ['NAME', 'EMAIL', 'HEADLINE', 'SUMMARY', 'LOCATION'
+  , fields   = ['id', 'NAME', 'EMAIL', 'HEADLINE', 'SUMMARY', 'LOCATION'
                ,'POSITION', 'PICTURE', 'LINKEDIN_ID', 'LINKEDIN_PROFILE'];
 
 module.exports = {
