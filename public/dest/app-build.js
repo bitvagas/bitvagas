@@ -402,6 +402,28 @@ angular.module('bitvagas.users', [
         });
     });
 
+angular.module('bitvagas.admin.services', [])
+.factory('AuthenticationService', AuthenticationService);
+
+AuthenticationService.$inject = ['$q', '$http', '$state'];
+function AuthenticationService($q, $http, $state){
+    return {
+        isAuthenticated : function() {
+            var deferred = $q.defer();
+            $http.get('/isAuthenticated').then(function(user){
+                if(user !== 0)
+                    deferred.resolve(user);
+                else
+                    deferred.reject();
+
+            },function(err){
+                deferred.reject(err);
+            });
+            return deferred.promise;
+        }
+    };
+}
+
 angular.module('bitvagas.dashboard.controllers', [])
 .controller('DashBoardController',DashBoardController);
 
@@ -538,28 +560,6 @@ function WalletController($rootScope, $scope, $state, $compile, $timeout, Wallet
     };
 }
 
-angular.module('bitvagas.admin.services', [])
-.factory('AuthenticationService', AuthenticationService);
-
-AuthenticationService.$inject = ['$q', '$http', '$state'];
-function AuthenticationService($q, $http, $state){
-    return {
-        isAuthenticated : function() {
-            var deferred = $q.defer();
-            $http.get('/isAuthenticated').then(function(user){
-                if(user !== 0)
-                    deferred.resolve(user);
-                else
-                    deferred.reject();
-
-            },function(err){
-                deferred.reject(err);
-            });
-            return deferred.promise;
-        }
-    };
-}
-
 angular.module('bitvagas.escrow.controllers', [])
 .controller('EscrowController', EscrowController);
 
@@ -593,50 +593,6 @@ function EscrowService($http){
 
     this.create = function(data){
         return $http.post('/api/escrow', data);
-    };
-}
-
-angular.module('bitvagas.jobs.category.services', [])
-.service('CategoryService', CategoryService);
-
-CategoryService.$inject = ['$http'];
-function CategoryService($http){
-    var baseUrl = 'api/categories';
-    this.findAll = function(){
-        return $http.get(baseUrl);
-    };
-}
-
-angular.module('bitvagas.jobs.services', [])
-.service('JobService', JobService);
-
-JobService.$inject = ['$http'];
-function JobService($http){
-    var baseUrl = '/api/jobs/';
-
-    this.create = function(job){
-        return $http.post(baseUrl, job);
-    };
-    this.post = function(job){
-        return $http.post(baseUrl + 'post', job);
-    };
-    this.findAll = function(){
-        return $http.get(baseUrl);
-    };
-    this.findById = function(id){
-        return $http.get(baseUrl+id);
-    };
-
-    this.active = function(job){
-        return $http.post(baseUrl + job.id + '/active', job);
-    };
-
-    //Apply job
-    this.apply = function(job, apply){
-        return $http.post(baseUrl + job.id + '/apply', apply);
-    };
-
-    this.appliers = function(job){
     };
 }
 
@@ -920,6 +876,50 @@ function JobShowController($scope, $state, $auth, JobService, lodash, marked){
         if($scope.currentUser)
             $scope.alreadyApplied = lodash.result(lodash.find($scope.currentUser.job_appliers, { JOB_ID: $scope.job.id }), 'EMAIL') !== undefined;
     }
+}
+
+angular.module('bitvagas.jobs.category.services', [])
+.service('CategoryService', CategoryService);
+
+CategoryService.$inject = ['$http'];
+function CategoryService($http){
+    var baseUrl = 'api/categories';
+    this.findAll = function(){
+        return $http.get(baseUrl);
+    };
+}
+
+angular.module('bitvagas.jobs.services', [])
+.service('JobService', JobService);
+
+JobService.$inject = ['$http'];
+function JobService($http){
+    var baseUrl = '/api/jobs/';
+
+    this.create = function(job){
+        return $http.post(baseUrl, job);
+    };
+    this.post = function(job){
+        return $http.post(baseUrl + 'post', job);
+    };
+    this.findAll = function(){
+        return $http.get(baseUrl);
+    };
+    this.findById = function(id){
+        return $http.get(baseUrl+id);
+    };
+
+    this.active = function(job){
+        return $http.post(baseUrl + job.id + '/active', job);
+    };
+
+    //Apply job
+    this.apply = function(job, apply){
+        return $http.post(baseUrl + job.id + '/apply', apply);
+    };
+
+    this.appliers = function(job){
+    };
 }
 
 angular.module('bitvagas.main.controllers', [])
