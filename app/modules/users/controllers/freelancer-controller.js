@@ -26,7 +26,6 @@ module.exports = {
 
     , read: function(request, response){
         var freelancer = request.freelancer;
-        freelancer.PASSWORD = undefined;
         response.status(200).json(freelancer);
     }
 
@@ -99,7 +98,7 @@ module.exports = {
      * Middleware for freelancer (user) id
      */
     , getFreelancerById: function(request, response, next, id){
-        db.user.find({ where : { id : id }}).then(function(user){
+        db.user.find({ attributes: fields, where : { id : id }}).then(function(user){
             if(!user) response.status(400).send('errorMessage.freelancer.not.found');
 
             request.freelancer = user;

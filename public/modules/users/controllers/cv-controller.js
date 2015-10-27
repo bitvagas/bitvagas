@@ -9,12 +9,12 @@ function CVController($scope, $state, $stateParams, FreelancerService){
     var id = $stateParams.id || $scope.currentUser.id;
     FreelancerService.findById(id).then(function(user){
         $scope.user = user.data;
-        var linkedIn = user.data.LINKEDIN_TOKEN;
-        if(linkedIn) {
-            FreelancerService.getCV({ token : linkedIn}).then(function(data){
-                $scope.user.cv = data.data;
-            });
-        }
+        // var linkedIn = user.data.LINKEDIN_ID;
+        // if(linkedIn) {
+            // FreelancerService.getCV({ token : linkedIn}).then(function(data){
+                // $scope.user.cv = data.data;
+            // });
+        // }
     });
 }
 

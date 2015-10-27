@@ -30,7 +30,7 @@
         li
           a(href="mailto:{{ user.cv.emailAddress }}")
             i.mdi.mdi-email
-            | {{ user.cv.emailAddress }}
+            | {{ user.EMAIL }}
 
   aside.cv__cell.cv__aside
     img.cv__img.dashboard__img(ng-src="{{ user.PICTURE ? user.PICTURE : 'img/unknown.svg' }}")
@@ -39,10 +39,10 @@
       li
         label
           i.mdi.mdi-email
-          {{ user.cv.emailAddress }}
+          {{ user.EMAIL }}
       li
         label
           i.mdi.mdi-map-marker-radius
-          {{ user.cv.location.name }}
+          {{ user.LOCATION }}
 
     hr
