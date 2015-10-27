@@ -8,6 +8,7 @@ var express        = require('express')
   , harp           = require('harp')
   , passport       = require('passport')
   , session        = require('express-session')
+  , cors           = require('cors')
   , glob           = require('glob');
 
 module.exports = function(app, config) {
@@ -21,11 +22,13 @@ module.exports = function(app, config) {
     app.use(bodyParser.urlencoded({
         extended: true
     }));
+    app.use(cors({ origin: false }));
     app.use(cookieParser());
     app.use(compress());
     app.use(express.static(config.root + '/public'));
     app.use(methodOverride());
     app.use(passport.initialize());
+    app.disable('x-powered-by');
 
     //Initialize HarpJS
     app.use(harp.mount(config.root + "/public"));
