@@ -24,11 +24,11 @@
     .cv__links
       ul
         li
-          a(href="{{ user.cv.publicProfileUrl }}" target="_blank")
+          a(href="{{ user.LINKEDIN_PROFILE }}" target="_blank")
             i.mdi.mdi-linkedin-box
             | LinkedIn
         li
-          a(href="mailto:{{ user.cv.emailAddress }}")
+          a(href="mailto:{{ user.EMAIL }}")
             i.mdi.mdi-email
             | {{ user.EMAIL }}
 
