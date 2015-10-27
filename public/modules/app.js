@@ -69,7 +69,7 @@ angular.module('bitvagas',
 
             if($window.localStorage.getItem('currentUser')      !== null &&
                $window.localStorage.getItem('satellizer_token') !== null)
-               $rootScope.currentUser = JSON.parse($window.atob(decodeURIComponent($window.localStorage.currentUser)));
+               $rootScope.currentUser = JSON.parse(decodeURIComponent($window.atob($window.localStorage.currentUser)));
             else
                 deleteCurrentUser();
         });
