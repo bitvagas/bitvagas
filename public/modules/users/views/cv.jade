@@ -10,7 +10,7 @@
     hr
 
 
-    .cv__item
+    .cv__item(ng-if='user.SUMMARY')
       .cv__item--cell
         p.description {{ user.SUMMARY }}
       .cv__item--cell.cv__item--small
