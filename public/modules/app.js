@@ -69,7 +69,7 @@ angular.module('bitvagas',
 
             if($window.localStorage.getItem('currentUser')      !== null &&
                $window.localStorage.getItem('satellizer_token') !== null)
-               $rootScope.currentUser = JSON.parse($window.atob($window.localStorage.currentUser));
+               $rootScope.currentUser = JSON.parse($window.atob(decodeURIComponent($window.localStorage.currentUser)));
             else
                 deleteCurrentUser();
         });
@@ -104,7 +104,7 @@ angular.module('bitvagas',
         $rootScope.updateUser = function(){
             UserService.me().then(function(data){
                 console.log(data);
-                $window.localStorage.currentUser = $window.btoa(JSON.stringify(data.data));
+                $window.localStorage.currentUser = $window.btoa(encodeURIComponent(JSON.stringify(data.data)));
                 $rootScope.currentUser = data.data;
             });
         };
