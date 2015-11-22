@@ -4,7 +4,6 @@ angular.module('bitvagas',
     ,'pascalprecht.translate'
     ,'angular-loading-bar'
     ,'720kb.tooltips'
-    ,'wu.masonry'
     ,'ngTagsInput'
     ,'satellizer'
     ,'ngSanitize'
@@ -402,28 +401,6 @@ angular.module('bitvagas.users', [
         });
     });
 
-angular.module('bitvagas.admin.services', [])
-.factory('AuthenticationService', AuthenticationService);
-
-AuthenticationService.$inject = ['$q', '$http', '$state'];
-function AuthenticationService($q, $http, $state){
-    return {
-        isAuthenticated : function() {
-            var deferred = $q.defer();
-            $http.get('/isAuthenticated').then(function(user){
-                if(user !== 0)
-                    deferred.resolve(user);
-                else
-                    deferred.reject();
-
-            },function(err){
-                deferred.reject(err);
-            });
-            return deferred.promise;
-        }
-    };
-}
-
 angular.module('bitvagas.dashboard.controllers', [])
 .controller('DashBoardController',DashBoardController);
 
@@ -557,6 +534,28 @@ function WalletController($rootScope, $scope, $state, $compile, $timeout, Wallet
                 });
             });
         });
+    };
+}
+
+angular.module('bitvagas.admin.services', [])
+.factory('AuthenticationService', AuthenticationService);
+
+AuthenticationService.$inject = ['$q', '$http', '$state'];
+function AuthenticationService($q, $http, $state){
+    return {
+        isAuthenticated : function() {
+            var deferred = $q.defer();
+            $http.get('/isAuthenticated').then(function(user){
+                if(user !== 0)
+                    deferred.resolve(user);
+                else
+                    deferred.reject();
+
+            },function(err){
+                deferred.reject(err);
+            });
+            return deferred.promise;
+        }
     };
 }
 

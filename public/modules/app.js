@@ -4,7 +4,6 @@ angular.module('bitvagas',
     ,'pascalprecht.translate'
     ,'angular-loading-bar'
     ,'720kb.tooltips'
-    ,'wu.masonry'
     ,'ngTagsInput'
     ,'satellizer'
     ,'ngSanitize'
