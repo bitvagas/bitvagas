@@ -1,8 +1,49 @@
+#freelancer--background
+  background-image: url('/img/freelancer-background.png')
+  background-size: cover
+  position: absolute
+  top: 460px
+  left: 0
+  width: 100%
+  height: 460px
+  z-index: 0
+  +media-query(desk)
+    top: 0
+
+#freelancer--connect
+  text-align: center
+  position: relative
+  margin: auto
+  margin-top: -20px
+  margin-bottom: 10px
+  padding: 10px
+  height: auto
+
+  .connect
+    color: white
+
+    .coin
+      width: 100px
+      margin-top: -20px
+      margin-bottom: -25px
+
+    .connect--btn
+      cursor: pointer
+      margin-top: 20px
+
+    .connect--description
+      margin-bottom: 0px
+      text-shadow: 0px 0px 2px rgba(51, 51, 51, 0.55)
+
 #freelancers
+  position: relative
   background-color: #FFF
   padding: 10px
+  z-index: 2
 
   .freelancers--header
+    text-transform: uppercase
+    text-align: center
     padding-bottom: 10px
     padding-top: 10px
     padding-left: 20px
@@ -10,7 +51,8 @@
     padding-bottom: 0px
 
   .freelancer__item
-    margin: 1em
+    display: inline-block
+    margin: 3px
 
   .masonry-brick
     display: none

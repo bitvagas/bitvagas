@@ -1,6 +1,7 @@
 {
     "lang": "EN",
-    "tweet": "Platform of jobs for #Bitcoin users. @bitvagas #bitvagas #startup",
+    "tweet": "Platform of jobs for #Bitcoin users. @bitvagas #bitvagas",
+    "description": "BitVagas — Platform of jobs for Bitcoin users",
     "layout": {
         "head":{
             "title": "BitVagas — Platform of jobs for Bitcoin users"
@@ -258,6 +259,11 @@
         "password": "Password",
         "repassword": "Repeat Password",
         "button": "Sign up for Bitvagas"
+    },
+    "freelancers": {
+        "become": "Become a freelancer",
+        "connect": "Connect your LinkedIn",
+        "button": "Connect"
     },
     "explore": {
         "title": "All Jobs",

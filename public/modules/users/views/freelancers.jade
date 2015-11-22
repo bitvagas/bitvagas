@@ -1,13 +1,28 @@
+
+#freelancer--background
+#freelancer--connect
+  span.connect
+    h1.connect--description
+      img.coin(src='/img/coin.png')
+      br
+      |  {{ "freelancers.become" | translate }}
+      br
+      |  {{ "freelancers.connect" | translate }}
+
+    span(ng-if='isAuthenticated()')
+      a.connect-btn.btn.btn--primary(ng-click='linkedIn()' translate='freelancers.button')
+    span(ng-if='!isAuthenticated()')
+      a.connect-btn.btn.btn--primary(ui-sref='signup' translate='freelancers.button')
+
 #freelancers
   .freelancers--header
     h1 Freelancers
     hr
 
-  div(masonry reload-on-resize)
-    .freelancer__item.masonry-brick(masonry-brick ng-repeat="freelancer in freelancers")
-      a(ui-sref="freelancers-cv({ id : freelancer.id })")
-        .freelancer
-          img.cv__img.dashboard__img(ng-src="{{ freelancer.PICTURE }}")
-          .freelancer__description
-            p.freelancer__name {{ freelancer.NAME }}
-            p.headline {{ freelancer.HEADLINE }}
+  .freelancer__item(ng-repeat="freelancer in freelancers")
+    a(ui-sref="freelancers-cv({ id : freelancer.id })")
+      .freelancer
+        img.cv__img.dashboard__img(ng-src="{{ freelancer.PICTURE }}")
+        .freelancer__description
+          p.freelancer__name {{ freelancer.NAME }}
+          p.headline {{ freelancer.HEADLINE }}
