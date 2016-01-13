@@ -16,10 +16,10 @@ var config = {
     , app: {
         name   : 'bitvagas'
     }
-    , mailer   : {
-        email  : process.env.email
-      , username : process.env.email
-      , pass     : process.env.mailPass
+    , mailer     : {
+        email    : "noreply@bitvagas.com"
+      , username : process.env.SENDGRID_USERNAME
+      , pass     : process.env.SENDGRID_PASSWORD
     }
     , url      : url
     , host     : host
