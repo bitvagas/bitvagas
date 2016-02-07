@@ -33,7 +33,7 @@
             | {{ user.EMAIL }}
 
   aside.cv__cell.cv__aside
-    img.cv__img.dashboard__img(ng-src="{{ user.PICTURE ? user.PICTURE : 'img/unknown.svg' }}")
+    img.cv__img.dashboard__img(ng-src="{{ user.PICTURE ? user.PICTURE : 'img/unknown.svg' }}" fallback)
 
     ul.aside__list
       li

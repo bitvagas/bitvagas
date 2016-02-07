@@ -22,7 +22,7 @@
   .freelancer__item(ng-repeat="freelancer in freelancers")
     a(ui-sref="freelancers-cv({ id : freelancer.id })")
       .freelancer
-        img.cv__img.dashboard__img(ng-src="{{ freelancer.PICTURE }}")
+        img.cv__img.dashboard__img(ng-src="{{ freelancer.PICTURE }}" fallback)
         .freelancer__description
           p.freelancer__name {{ freelancer.NAME }}
           p.headline {{ freelancer.HEADLINE }}

@@ -1,6 +1,7 @@
 angular.module('bitvagas.main',
     ['bitvagas.main.factory'
     ,'bitvagas.main.controllers'
+    ,'bitvagas.main.directives'
     ])
     .config(function($urlRouterProvider, $stateProvider){
 

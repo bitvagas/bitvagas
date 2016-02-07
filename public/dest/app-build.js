@@ -287,6 +287,7 @@ angular.module('bitvagas.jobs',
 angular.module('bitvagas.main',
     ['bitvagas.main.factory'
     ,'bitvagas.main.controllers'
+    ,'bitvagas.main.directives'
     ])
     .config(function($urlRouterProvider, $stateProvider){
 
@@ -400,28 +401,6 @@ angular.module('bitvagas.users', [
           , controller  : 'CVController'
         });
     });
-
-angular.module('bitvagas.admin.services', [])
-.factory('AuthenticationService', AuthenticationService);
-
-AuthenticationService.$inject = ['$q', '$http', '$state'];
-function AuthenticationService($q, $http, $state){
-    return {
-        isAuthenticated : function() {
-            var deferred = $q.defer();
-            $http.get('/isAuthenticated').then(function(user){
-                if(user !== 0)
-                    deferred.resolve(user);
-                else
-                    deferred.reject();
-
-            },function(err){
-                deferred.reject(err);
-            });
-            return deferred.promise;
-        }
-    };
-}
 
 angular.module('bitvagas.dashboard.controllers', [])
 .controller('DashBoardController',DashBoardController);
@@ -556,6 +535,28 @@ function WalletController($rootScope, $scope, $state, $compile, $timeout, Wallet
                 });
             });
         });
+    };
+}
+
+angular.module('bitvagas.admin.services', [])
+.factory('AuthenticationService', AuthenticationService);
+
+AuthenticationService.$inject = ['$q', '$http', '$state'];
+function AuthenticationService($q, $http, $state){
+    return {
+        isAuthenticated : function() {
+            var deferred = $q.defer();
+            $http.get('/isAuthenticated').then(function(user){
+                if(user !== 0)
+                    deferred.resolve(user);
+                else
+                    deferred.reject();
+
+            },function(err){
+                deferred.reject(err);
+            });
+            return deferred.promise;
+        }
     };
 }
 
@@ -931,6 +932,22 @@ function MainController($scope, $translate){
     $scope.setLang = function(langKey) {
         $translate.use(langKey);
     };
+}
+
+angular.module('bitvagas.main.directives', [])
+.directive('fallback', fallback);
+
+function fallback(){
+  return {
+    restrict: 'A',
+    link: link
+  }
+
+  function link(scope, element){
+    element.on('error', function(){
+      element.attr('src', 'img/unknown.svg');
+    });
+  }
 }
 
 angular.module('bitvagas.main.factory', [])

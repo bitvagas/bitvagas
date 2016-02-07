@@ -3,7 +3,7 @@
   .dashboard__body
     aside.dashboard__cell.dashboard__cell--aside
       .dashboard-aside
-        img(ng-src="{{ currentUser.PICTURE ? currentUser.PICTURE : 'img/unknown.svg' }}").dashboard__img
+        img(ng-src="{{ currentUser.PICTURE ? currentUser.PICTURE : 'img/unknown.svg' }}" fallback).dashboard__img
         h5.name {{ currentUser.NAME }}
         .profile--info
           p
