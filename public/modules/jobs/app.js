@@ -43,6 +43,11 @@ angular.module('bitvagas.jobs',
             url: '/jobs/:id'
           , templateUrl: '/modules/jobs/views/job-show'
           , controller : 'JobShowController'
+          , resolve    : {
+            Job        : function(JobService, $stateParams){
+              return JobService.findById($stateParams.id);
+            }
+          }
         })
         //Dashboard views
         .state('dashboard.jobs', {
