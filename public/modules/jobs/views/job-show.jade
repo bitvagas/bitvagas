@@ -10,7 +10,7 @@
               h1.job__title {{ job.TITLE }} <span class="job__company">{{ "job.in" | translate }} {{ job.org.NAME }}</span>
           ul.job-info
             li
-              |  <div class="label label--fulltime">Full-Time{{ job.jobType.NAME }}</div>
+              .label(class="label--{{job.job_type.NAME}}") {{ job.job_type.NAME }}
             li
               img(src='/img/local.svg').job__icon
               .job__local {{ job.LOCATION }}
