@@ -10,20 +10,20 @@ $dropdownEasing: cubic-bezier(0.230, 1.000, 0.320, 1.000)
   position: relative
   height: $initialHeight
   width: 400px
-  border:none
+  border: none
   background-color: $backgroundColor
   border: 1px solid $borderColor
   border-radius: 4px
-  cursor:pointer
+  cursor: pointer
   overflow: hidden
   transition: height 425ms $dropdownEasing
-  float:left
+  float: left
 
   .arrow-wrapper
 
     position: absolute
-    top:0
-    right:0
+    top: 0
+    right: 0
     width: $initialHeight
     height: $initialHeight
 
@@ -32,12 +32,12 @@ $dropdownEasing: cubic-bezier(0.230, 1.000, 0.320, 1.000)
       $_size: 10px
 
       position: absolute
-      top:0
-      left:0
+      top: 0
+      left: 0
       width: 0
       height: 0
-      top:50%
-      left:50%
+      top: 50%
+      left: 50%
       transform: translate(-50%, -50%)
       border-left: 4px solid transparent
       border-right: 4px solid transparent
@@ -59,8 +59,8 @@ $dropdownEasing: cubic-bezier(0.230, 1.000, 0.320, 1.000)
   .dropdown-content
 
     $_padding: 0px
-    position:relative
-    display:block
+    position: relative
+    display: block
     overflow: hidden!important
     margin: 0
     padding: $_padding 0px $_padding 0
@@ -72,14 +72,14 @@ $dropdownEasing: cubic-bezier(0.230, 1.000, 0.320, 1.000)
     display: block
     height: 30px
     width: 100%
-    list-style:none
+    list-style: none
     padding: 0 $sidePadding
     line-height: 29.5px
     transition: all 100ms ease
 
     &:hover
-      background-color:#29B5DF
-      color:white
+      background-color: #29B5DF
+      color: white
 
     &.selected *
       opacity: 0.4
@@ -91,7 +91,7 @@ $dropdownEasing: cubic-bezier(0.230, 1.000, 0.320, 1.000)
 
       position: relative
       float: left
-      display:inline-block
+      display: inline-block
 
     span
       height: 100%
@@ -102,7 +102,7 @@ $dropdownEasing: cubic-bezier(0.230, 1.000, 0.320, 1.000)
       height: 30px
       width: 17px
       margin: 0 7px 0 0
-      top:50%
+      top: 50%
       transform: translateY(-50%)
       background-size: 17px 17px
       background-position: 50% 48%
