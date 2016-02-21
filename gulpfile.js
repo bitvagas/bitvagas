@@ -4,6 +4,7 @@ var gulp        = require('gulp')
   , bower       = require('main-bower-files')
   , fixtures    = require('sequelize-fixtures')
   , mocha       = require('gulp-mocha')
+  , uglify      = require('gulp-uglify')
   , browserSync = require('browser-sync').create();
 
 gulp.task('browser-sync', ['nodemon'], function(){
@@ -38,6 +39,7 @@ gulp.task('bower', function(){
 gulp.task('script', function(){
     return gulp.src('public/modules/**/*.js')
     .pipe(concat('app-build.js'))
+    .pipe(uglify())
     .pipe(gulp.dest('public/dest'));
 });
 

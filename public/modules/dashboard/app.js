@@ -1,5 +1,6 @@
 angular.module('bitvagas.dashboard', [ 'bitvagas.dashboard.controllers' ])
-.config(function($urlRouterProvider, $stateProvider ){
+.config(["$urlRouterProvider", "$stateProvider", function($urlRouterProvider, $stateProvider ){
+
 
     $stateProvider
     .state('dashboard', {
@@ -9,7 +10,7 @@ angular.module('bitvagas.dashboard', [ 'bitvagas.dashboard.controllers' ])
         , controller   : 'DashBoardController'
         , authenticate : true
         , resolve      : {
-            authenticated: function($rootScope, $q, UserService) {
+            authenticated: ["$rootScope", "$q", "UserService", function($rootScope, $q, UserService) {
                 var deferred = $q.defer();
                 if(!$rootScope.currentUser)
                     UserService.me().then(function(data){
@@ -19,7 +20,7 @@ angular.module('bitvagas.dashboard', [ 'bitvagas.dashboard.controllers' ])
                     else deferred.resolve();
 
                     return deferred.promise;
-            }
+            }]
         }
     })
     .state('dashboard.overview', {
@@ -63,4 +64,4 @@ angular.module('bitvagas.dashboard', [ 'bitvagas.dashboard.controllers' ])
         , controller   : 'CVController'
         , authenticate : true
     });
-});
+}]);

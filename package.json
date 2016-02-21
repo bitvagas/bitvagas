@@ -55,6 +55,7 @@
     "superagent-proxy": "^1.0.0"
   },
   "devDependencies": {
+    "gulp-uglify": "^1.5.2",
     "should": "^4.4.1",
     "supertest": "^1.0.1"
   },

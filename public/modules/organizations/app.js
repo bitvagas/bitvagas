@@ -2,7 +2,8 @@ angular.module('bitvagas.org',
     [ 'bitvagas.org.controllers'
     , 'bitvagas.org.services'
     ])
-    .config(function($urlRouterProvider, $stateProvider){
+    .config(["$urlRouterProvider", "$stateProvider", function($urlRouterProvider, $stateProvider){
+
 
         $stateProvider
         .state('dashboard.organization', {
@@ -29,4 +30,4 @@ angular.module('bitvagas.org',
           , authenticate : true
           , controller   : 'OrgController'
         });
-    });
+    }]);

@@ -2,7 +2,7 @@ angular.module('bitvagas.escrow', [
     'bitvagas.escrow.controllers'
    ,'bitvagas.escrow.services'
 ])
-.config(function($urlRouterProvider, $stateProvider){
+.config(["$urlRouterProvider", "$stateProvider", function($urlRouterProvider, $stateProvider){
 
     $stateProvider
     .state('escrow', {
@@ -14,4 +14,4 @@ angular.module('bitvagas.escrow', [
         url: '/escrow/:id/dispute'
       , templateUrl : '/modules/escrow/views/dispute'
     });
-});
+}]);

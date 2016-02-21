@@ -20,8 +20,8 @@ angular.module('bitvagas',
     ,'bitvagas.org'
     ,'bitvagas.users'
     ,'bitvagas.dashboard'
-    ,'bitvagas.escrow'
-    ]).config(function($translateProvider){
+    ]).config(["$translateProvider", function($translateProvider){
+
         //Angular translation configuration
         $translateProvider.useStaticFilesLoader({
             prefix: 'locales/',
@@ -35,14 +35,15 @@ angular.module('bitvagas',
         $translateProvider.useMessageFormatInterpolation();
 
         $translateProvider.useSanitizeValueStrategy('escaped');
-    }).config(function(lodash){
+    }]).config(["lodash", function(lodash){
+
 
         //find selected : true property
         lodash.mixin({ 'selected' : function(array, property){
             return lodash.result(lodash.find(array, { selected : true }), property);
         }});
 
-    }).config(function($authProvider, $httpProvider){
+    }]).config(["$authProvider", "$httpProvider", function($authProvider, $httpProvider){
 
         $authProvider.loginOnSignup = true;
 
@@ -59,7 +60,7 @@ angular.module('bitvagas',
 
         $httpProvider.interceptors.push('Interceptor');
 
-    }).run(function($rootScope, $state, $auth, $window, $translate, UserService){
+    }]).run(["$rootScope", "$state", "$auth", "$window", "$translate", "UserService", function($rootScope, $state, $auth, $window, $translate, UserService){
 
         $rootScope.$on("$stateChangeStart", function(e, toState, toParams, fromState, fromParams){
 
@@ -118,4 +119,4 @@ angular.module('bitvagas',
             delete $rootScope.currentUser;
             $window.localStorage.removeItem('currentUser');
         }
-    });
+    }]);

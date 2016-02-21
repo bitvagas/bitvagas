@@ -2,7 +2,8 @@ angular.module('bitvagas.users', [
       'bitvagas.users.controllers'
     , 'bitvagas.users.services'
     ])
-    .config(function($urlRouterProvider, $stateProvider){
+    .config(["$urlRouterProvider", "$stateProvider", function($urlRouterProvider, $stateProvider){
+
 
         $stateProvider
         .state('signup', {
@@ -31,9 +32,9 @@ angular.module('bitvagas.users', [
             url: '/freelancers'
           , templateUrl   : 'modules/users/views/freelancers'
           , resolve       : {
-              freelancers : function(FreelancerService) {
+              freelancers : ["FreelancerService", function(FreelancerService) {
                   return FreelancerService.findAll();
-              }
+              }]
           }
           , controller  : 'FreelancerController'
         })
@@ -42,4 +43,4 @@ angular.module('bitvagas.users', [
           , templateUrl : 'modules/users/views/cv'
           , controller  : 'CVController'
         });
-    });
+    }]);

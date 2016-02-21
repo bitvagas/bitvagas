@@ -4,7 +4,7 @@ angular.module('bitvagas.jobs',
     , 'bitvagas.jobs.services'
     , 'bitvagas.jobs.category.services'
     ])
-    .config(function($urlRouterProvider, $stateProvider, $urlMatcherFactoryProvider){
+    .config(["$urlRouterProvider", "$stateProvider", "$urlMatcherFactoryProvider", function($urlRouterProvider, $stateProvider, $urlMatcherFactoryProvider){
 
         $urlMatcherFactoryProvider.type('titleMatcher', {
           encode: function(str) {
@@ -32,9 +32,9 @@ angular.module('bitvagas.jobs',
             url: '/jobs/post'
           , templateUrl  : '/modules/jobs/views/job-post'
           , resolve      : {
-              Categories : function(CategoryService){
+              Categories : ["CategoryService", function(CategoryService){
                   return CategoryService.findAll();
-              }
+              }]
           }
           , params       : { data : {}, errors : [] }
           , controller   : 'JobPostController'
@@ -43,9 +43,9 @@ angular.module('bitvagas.jobs',
             url: '/jobs/create/confirm'
           , templateUrl  : '/modules/jobs/views/job-confirm'
           , resolve      : {
-              Categories : function(CategoryService){
+              Categories : ["CategoryService", function(CategoryService){
                   return CategoryService.findAll();
-              }
+              }]
           }
           , params       : { data : {}}
           , controller   : 'JobPostController'
@@ -57,7 +57,7 @@ angular.module('bitvagas.jobs',
           , params     : { id: undefined }
           , caseInsensitiveMatch: true
           , resolve    : {
-            Job        : function($q, $state, $stateParams, JobService){
+            Job        : ["$q", "$state", "$stateParams", "JobService", function($q, $state, $stateParams, JobService){
               var deferred = $q.defer();
 
               if ($stateParams.id) {
@@ -80,7 +80,7 @@ angular.module('bitvagas.jobs',
               }
 
               return deferred.promise;
-            }
+            }]
           }
         })
         .state('jobs-show-id', {
@@ -88,7 +88,7 @@ angular.module('bitvagas.jobs',
           , templateUrl: '/modules/jobs/views/job-show'
           , controller : 'JobShowController'
           , resolve    : {
-            Job        : function($q, $state, $stateParams, JobService){
+            Job        : ["$q", "$state", "$stateParams", "JobService", function($q, $state, $stateParams, JobService){
               var deferred = $q.defer();
 
               JobService.findById($stateParams.id)
@@ -101,7 +101,7 @@ angular.module('bitvagas.jobs',
               });
 
               return deferred.promise;
-            }
+            }]
           }
         })
         //Dashboard views
@@ -121,9 +121,9 @@ angular.module('bitvagas.jobs',
             url          : '/create'
           , templateUrl  : '/modules/jobs/views/dashboard/job-dashboard-create'
           , resolve      : {
-                Categories : function(CategoryService){
+                Categories : ["CategoryService", function(CategoryService){
                   return CategoryService.findAll();
-              }
+              }]
           }
           , params       : { data : {}, errors : [] }
           , controller   : 'JobCreateController'
@@ -133,12 +133,12 @@ angular.module('bitvagas.jobs',
             url          : '/create'
           , templateUrl  : '/modules/jobs/views/dashboard/job-confirm'
           , resolve      : {
-              Categories : function(CategoryService){
+              Categories : ["CategoryService", function(CategoryService){
                   return CategoryService.findAll();
-              }
+              }]
           }
           , params       : { data : {} }
           , controller   : 'JobCreateController'
           , authenticate : true
         });
-    });
+    }]);

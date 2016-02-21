@@ -3,7 +3,7 @@ angular.module('bitvagas.main',
     ,'bitvagas.main.controllers'
     ,'bitvagas.main.directives'
     ])
-    .config(function($urlRouterProvider, $stateProvider, $locationProvider){
+    .config(["$urlRouterProvider", "$stateProvider", "$locationProvider", function($urlRouterProvider, $stateProvider, $locationProvider){
 
         $urlRouterProvider.otherwise('/');
         $locationProvider.html5Mode(true);
@@ -37,4 +37,4 @@ angular.module('bitvagas.main',
             url: '/contact'
           , templateUrl: 'modules/main/views/contact'
         });
-    });
+    }]);
