@@ -27,9 +27,12 @@ angular.module('bitvagas',
             prefix: 'locales/',
             suffix: '.json'
         })
-        .preferredLanguage('en')
-        .fallbackLanguage(['pt', 'en'])
+        .addInterpolation('$translateMessageFormatInterpolation')
+        .preferredLanguage('pt-BR')
+        .fallbackLanguage(['pt-BR', 'en-US'])
         .useLocalStorage();
+
+        $translateProvider.useMessageFormatInterpolation();
 
         $translateProvider.useSanitizeValueStrategy('escaped');
     }).config(function(lodash){
@@ -56,9 +59,13 @@ angular.module('bitvagas',
 
         $httpProvider.interceptors.push('Interceptor');
 
-    }).run(function($rootScope, $state, $auth, $window, UserService){
+    }).run(function($rootScope, $state, $auth, $window, $translate, UserService){
 
         $rootScope.$on("$stateChangeStart", function(e, toState, toParams, fromState, fromParams){
+
+            // Set title back
+            $window.document.title = $translate.instant('layout.head.title');
+
             if(toState.authenticate) {
                 if($auth.isAuthenticated() === false){
                     e.preventDefault();
@@ -83,6 +90,7 @@ angular.module('bitvagas',
         };
 
         $rootScope.$on('unauthorized', function(){
+            console.log('Trasition');
             $state.transitionTo('signin');
         });
 
@@ -205,7 +213,18 @@ angular.module('bitvagas.jobs',
     , 'bitvagas.jobs.services'
     , 'bitvagas.jobs.category.services'
     ])
-    .config(function($urlRouterProvider, $stateProvider){
+    .config(function($urlRouterProvider, $stateProvider, $urlMatcherFactoryProvider){
+
+        $urlMatcherFactoryProvider.type('titleMatcher', {
+          encode: function(str) {
+            return str && str.replace(/ /g, "-").toLowerCase();
+          },
+          decode: function(str) {
+            return str && str.replace(/-/g, " ");
+          },
+          is: angular.isString,
+          pattern: /[^/]+/
+        });
 
         $stateProvider
         .state('jobs', {
@@ -241,9 +260,58 @@ angular.module('bitvagas.jobs',
           , controller   : 'JobPostController'
         })
         .state('jobs-show', {
-            url: '/jobs/:id'
+            url: '/{title:titleMatcher}/'
           , templateUrl: '/modules/jobs/views/job-show'
           , controller : 'JobShowController'
+          , params     : { id: undefined }
+          , caseInsensitiveMatch: true
+          , resolve    : {
+            Job        : function($q, $state, $stateParams, JobService){
+              var deferred = $q.defer();
+
+              if ($stateParams.id) {
+                JobService.findById($stateParams.id)
+                .then(function(job){
+                    return deferred.resolve(job);
+                }).catch(function(err){
+                    deferred.reject(err);
+                    $state.transitionTo('jobs-list');
+                });
+              } else {
+                JobService.findByTitle($stateParams.title)
+                .then(function(job){
+                    return deferred.resolve(job);
+                }).catch(function(err){
+                    deferred.reject(err);
+                    $state.transitionTo('jobs-list');
+                    return;
+                });
+              }
+
+              return deferred.promise;
+            }
+          }
+        })
+        .state('jobs-show-id', {
+            url: '/job/:id'
+          , templateUrl: '/modules/jobs/views/job-show'
+          , controller : 'JobShowController'
+          , resolve    : {
+            Job        : function($q, $state, $stateParams, JobService){
+              var deferred = $q.defer();
+
+              JobService.findById($stateParams.id)
+              .then(function(job){
+                return deferred.resolve(job);
+              })
+              .catch(function(err){
+                deferred.reject(err);
+                $state.transitionTo('jobs-list');
+              });
+
+              return deferred.promise;
+            }
+          }
         })
         //Dashboard views
         .state('dashboard.jobs', {
@@ -289,9 +357,11 @@ angular.module('bitvagas.main',
     ,'bitvagas.main.controllers'
     ,'bitvagas.main.directives'
     ])
-    .config(function($urlRouterProvider, $stateProvider){
+    .config(function($urlRouterProvider, $stateProvider, $locationProvider){
 
         $urlRouterProvider.otherwise('/');
+        $locationProvider.html5Mode(true);
+
         $stateProvider
         .state('index', {
             url: '/'
@@ -651,7 +721,7 @@ function JobPostController($scope, $state, $stateParams, JobService, Categories,
 
         JobService.post(data)
         .then(function(data){
-            $state.go('jobs-show', { 'id': data.data.id});
+            $state.go('jobs-show', { id: data.data.id, title: data.data.TITLE });
         }, function(err){
             //back to crate state and show errors
             $state.go('jobs-post', {
@@ -717,7 +787,7 @@ function JobCreateController($scope, $state, $stateParams, $timeout, JobService,
     $scope.confirm = function(data){
         JobService.create(data)
         .then(function(data){
-            $state.go('jobs-show', { 'id': data.data.id});
+            $state.go('jobs-show', { id: data.data.id, title: data.data.TITLE });
         }, function(err){
             $state.go('dashboard.jobs.create', {
                 data : $scope.data
@@ -785,7 +855,7 @@ function JobListController($scope, $state, $stateParams, JobService) {
 
     $scope.filterTypes = {
         'FULL-TIME': true,
-        'PARTTIME': true,
+        'PART-TIME': true,
         'FREELANCE': true,
         'TEMPORARY': true
     };
@@ -830,21 +900,17 @@ function JobDashListController($scope, JobService){
 angular.module('bitvagas.jobs.controllers')
 .controller('JobShowController', JobShowController);
 
-JobShowController.$inject = ['$scope', '$state', '$auth', 'JobService', 'lodash', 'marked'];
-function JobShowController($scope, $state, $auth, JobService, lodash, marked){
+JobShowController.$inject = ['$scope', '$state',  '$auth', '$window', 'JobService', 'Job', 'lodash', 'marked'];
+function JobShowController($scope, $state, $auth, $window, JobService, Job, lodash, marked){
 
     $scope.apply = {};
 
-    var id = $state.params.id;
+    var job = Job.data;
+    $scope.job = job;
+    $scope.job.DESCRIPTION = marked(job.DESCRIPTION);
+    AlreadyApplied();
 
-    JobService.findById(id).then(function(data){
-        console.log(data.data);
-        $scope.job = data.data;
-        $scope.job.DESCRIPTION = marked(data.data.DESCRIPTION);
-        AlreadyApplied();
-    }).catch(function(err){
-        $state.transitionTo('index');
-    });
+    $window.document.title = job.TITLE + " - " + job.org.NAME;
 
     $scope.toggle = function(){
         $scope.toggled = true;
@@ -863,8 +929,7 @@ function JobShowController($scope, $state, $auth, JobService, lodash, marked){
 
     $scope.applyJob = function(){
         JobService.apply($scope.job, $scope.apply).then(function(){
-            JobService.findById(id).then(function(data){
-                console.log(data);
+            JobService.findById($scope.job.id).then(function(data){
                 $scope.job = data.data;
                 $scope.toggled = false;
                 $scope.alreadyApplied = true;
@@ -875,6 +940,23 @@ function JobShowController($scope, $state, $auth, JobService, lodash, marked){
     function AlreadyApplied() {
         if($scope.currentUser)
             $scope.alreadyApplied = lodash.result(lodash.find($scope.currentUser.job_appliers, { JOB_ID: $scope.job.id }), 'EMAIL') !== undefined;
+    }
+
+    try {
+      if($window.twttr)
+        $window.twttr.widgets.load();
+
+      if($window.FB) {
+        $window.FB.init({
+          appId      : '162990964082513',
+          status     : true,
+          xfbml      : true,
+          version    : 'v2.5'
+        });
+        $window.FB.XFBML.parse();
+      }
+    } catch(err){
+      console.log(err);
     }
 }
 
@@ -908,7 +990,9 @@ function JobService($http){
     this.findById = function(id){
         return $http.get(baseUrl+id);
     };
-
+    this.findByTitle = function(title){
+        return $http.get(baseUrl + 'title/' + title);
+    };
     this.active = function(job){
         return $http.post(baseUrl + job.id + '/active', job);
     };
@@ -931,6 +1015,9 @@ MainController.$inject = ['$scope', '$translate'];
 function MainController($scope, $translate){
     $scope.setLang = function(langKey) {
         $translate.use(langKey);
+    };
+    $scope.currentLang = function(){
+      return $translate.use();
     };
 }
 
