@@ -44,7 +44,6 @@ function Interceptor($rootScope, $q, $injector, _){
             }
 
             if(response.status === 400){
-                console.log(response);
                 new NotificationFx({
                     message : '<div class="ns-thumb"><img src="img/template.png"/></div><div class="ns-content"><span>'+errorMessage+'</span></div>'
                   , layout : 'other'

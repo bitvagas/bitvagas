@@ -11,7 +11,6 @@ function WalletController($rootScope, $scope, $state, $compile, $timeout, Wallet
 
     $scope.updateWallet = function(){
         WalletService.updateWallet().then(function(data){
-            console.log(data);
         });
     };
 

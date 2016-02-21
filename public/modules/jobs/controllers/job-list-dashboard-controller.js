@@ -16,7 +16,6 @@ function JobDashListController($scope, JobService){
 
     $scope.active = function(job){
         JobService.active(job).then(function(job){
-            console.log(job);
         });
     }
 }

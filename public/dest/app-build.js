@@ -90,7 +90,6 @@ angular.module('bitvagas',
         };
 
         $rootScope.$on('unauthorized', function(){
-            console.log('Trasition');
             $state.transitionTo('signin');
         });
 
@@ -110,7 +109,6 @@ angular.module('bitvagas',
 
         $rootScope.updateUser = function(){
             UserService.me().then(function(data){
-                console.log(data);
                 $window.localStorage.currentUser = $window.btoa(encodeURIComponent(JSON.stringify(data.data)));
                 $rootScope.currentUser = data.data;
             });
@@ -550,7 +548,6 @@ function WalletController($rootScope, $scope, $state, $compile, $timeout, Wallet
 
     $scope.updateWallet = function(){
         WalletService.updateWallet().then(function(data){
-            console.log(data);
         });
     };
 
@@ -891,7 +888,6 @@ function JobDashListController($scope, JobService){
 
     $scope.active = function(job){
         JobService.active(job).then(function(job){
-            console.log(job);
         });
     }
 }
@@ -1083,7 +1079,6 @@ function Interceptor($rootScope, $q, $injector, _){
             }
 
             if(response.status === 400){
-                console.log(response);
                 new NotificationFx({
                     message : '<div class="ns-thumb"><img src="img/template.png"/></div><div class="ns-content"><span>'+errorMessage+'</span></div>'
                   , layout : 'other'
@@ -1243,8 +1238,6 @@ function AuthController ($rootScope, $scope, $state, $window, $auth, UserService
     };
 
     $scope.verify = function(verify){
-        console.log('Verifying');
-        console.log(verify);
         UserService.verify(verify).then(function(data){
             //locations href crashes on chrome
             setTimeout(function(){
@@ -1257,7 +1250,6 @@ function AuthController ($rootScope, $scope, $state, $window, $auth, UserService
 
     $scope.forgot = function(){
         UserService.forgot($scope.data).then(function(data){
-            console.log(data);
             setTimeout(function(){
                 $window.location.href = '/#/signup/verify';
             }, 500);
@@ -1269,7 +1261,6 @@ function AuthController ($rootScope, $scope, $state, $window, $auth, UserService
     $scope.reset = function(token){
         $scope.data.token = token;
         UserService.reset($scope.data).then(function(data){
-            console.log(data);
             setTimeout(function(){
                 $window.location.href = '/#/signin';
             }, 500);

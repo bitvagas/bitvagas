@@ -90,7 +90,6 @@ angular.module('bitvagas',
         };
 
         $rootScope.$on('unauthorized', function(){
-            console.log('Trasition');
             $state.transitionTo('signin');
         });
 
@@ -110,7 +109,6 @@ angular.module('bitvagas',
 
         $rootScope.updateUser = function(){
             UserService.me().then(function(data){
-                console.log(data);
                 $window.localStorage.currentUser = $window.btoa(encodeURIComponent(JSON.stringify(data.data)));
                 $rootScope.currentUser = data.data;
             });

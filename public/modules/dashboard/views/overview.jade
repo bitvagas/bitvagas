@@ -95,7 +95,7 @@ hr
               h3.jobs-item__company(am-time-ago='apply.createdAt')
             .jobs-item__cell.jobs-item__cell--meta
               .jobs-item__date(am-time-ago="apply.job.createdAt")
-              .jobs-item__link(ui-sref="jobs-show({ id: apply.job.id })") 
+              .jobs-item__link(ui-sref="jobs-show({ id: apply.job.id, title: apply.job.TITLE })") 
                 i.mdi.mdi-link-variant
                 span Link
 
