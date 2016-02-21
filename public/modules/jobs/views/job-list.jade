@@ -12,7 +12,7 @@ hr
         .typejob-label__text.label.label--fulltime(translate="explore.search.type.full")
     li
       label(for='check--part').typejob-label
-        input(type='checkbox' ng-model='filterTypes["PARTTIME"]' checked id="check--part").typejob-label__input
+        input(type='checkbox' ng-model='filterTypes["PART-TIME"]' checked id="check--part").typejob-label__input
         .typejob-label__text.label.label--parttime(translate="explore.search.type.part")
     li
       label(for='check--freelancer').typejob-label
@@ -26,7 +26,7 @@ hr
 h2.jobs-title(translate="explore.last")
 ul.jobs
   li(ng-repeat='job in jobs | filter: filter | filter: filterType')
-    a.jobs-item(ui-sref='jobs-show({id : job.id})', title='')
+    a.jobs-item(ui-sref='jobs-show({id : job.id, title: job.TITLE })', title='')
       .jobs-item__cell.jobs-item__cell--img
         img.jobs-item__img(src='/img/company-default.png', alt='')
 

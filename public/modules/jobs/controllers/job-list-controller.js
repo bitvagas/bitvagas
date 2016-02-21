@@ -9,7 +9,7 @@ function JobListController($scope, $state, $stateParams, JobService) {
 
     $scope.filterTypes = {
         'FULL-TIME': true,
-        'PARTTIME': true,
+        'PART-TIME': true,
         'FREELANCE': true,
         'TEMPORARY': true
     };
