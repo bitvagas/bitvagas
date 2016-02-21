@@ -44,22 +44,7 @@ module.exports = function(app, config) {
         app.use('/api', require(route)(app));
     });
 
-    app.use(function (req, res, next) {
-        var err = new Error('Not Found');
-        err.status = 404;
-        next(err);
-    });
-
-    // error handlers
-    if(app.get('env') === 'development'){
-        app.use(function (err, req, res, next) {
-            res.status(err.status || 500);
-            res.json({ message: err.message });
-        });
-    }
-
-    app.use(function (err, req, res, next) {
-        res.status(err.status || 500);
-        res.redirect('/');
+    app.all('/*', function(request, response, next) {
+        response.render("index", { user : request.user });
     });
 };
