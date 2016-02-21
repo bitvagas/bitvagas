@@ -7,8 +7,8 @@ h1.slogan
   .home-main
 
     .search
-      input.search__input(name='', type='text', placeholder='{{ "explore.search.placeholder" | translate }}')
-      a.search__btn.btn(ng-click='filter()' translate='explore.search.button')
+      input.search__input(name='', type='text', ng-model='filter' placeholder='{{ "explore.search.placeholder" | translate }}')
+      a.search__btn.btn(translate='explore.search.button' ui-sref="jobs-list({ filter: filter })")
 
     .typejob
       ul.typejob__list
@@ -31,7 +31,7 @@ h1.slogan
             .typejob-label__text.label.label--temporary(translate="explore.search.type.temp")
     ul.jobs
       li(ng-repeat='job in jobs | limitTo: 5')
-        a.jobs-item(ui-sref='jobs-show({id : job.id})', title='')
+        a.jobs-item(ui-sref='jobs-show({id : job.id, title: job.TITLE })', title='')
           .jobs-item__cell.jobs-item__cell--img
             img.jobs-item__img(src='/img/company-default.png', alt='')
 

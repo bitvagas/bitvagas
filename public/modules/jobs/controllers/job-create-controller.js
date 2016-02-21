@@ -51,7 +51,7 @@ function JobPostController($scope, $state, $stateParams, JobService, Categories,
 
         JobService.post(data)
         .then(function(data){
-            $state.go('jobs-show', { 'id': data.data.id});
+            $state.go('jobs-show', { id: data.data.id, title: data.data.TITLE });
         }, function(err){
             //back to crate state and show errors
             $state.go('jobs-post', {
@@ -117,7 +117,7 @@ function JobCreateController($scope, $state, $stateParams, $timeout, JobService,
     $scope.confirm = function(data){
         JobService.create(data)
         .then(function(data){
-            $state.go('jobs-show', { 'id': data.data.id});
+            $state.go('jobs-show', { id: data.data.id, title: data.data.TITLE });
         }, function(err){
             $state.go('dashboard.jobs.create', {
                 data : $scope.data

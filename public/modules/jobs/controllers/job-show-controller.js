@@ -13,12 +13,6 @@ function JobShowController($scope, $state, $auth, $window, JobService, Job, loda
 
     $window.document.title = job.TITLE + " - " + job.org.NAME;
 
-    if($window.twttr)
-      $window.twttr.widgets.load();
-
-    if($window.FB)
-      $window.FB.XFBML.parse();
-
     $scope.toggle = function(){
         $scope.toggled = true;
 
@@ -47,5 +41,22 @@ function JobShowController($scope, $state, $auth, $window, JobService, Job, loda
     function AlreadyApplied() {
         if($scope.currentUser)
             $scope.alreadyApplied = lodash.result(lodash.find($scope.currentUser.job_appliers, { JOB_ID: $scope.job.id }), 'EMAIL') !== undefined;
+    }
+
+    try {
+      if($window.twttr)
+        $window.twttr.widgets.load();
+
+      if($window.FB) {
+        $window.FB.init({
+          appId      : '162990964082513',
+          status     : true,
+          xfbml      : true,
+          version    : 'v2.5'
+        });
+        $window.FB.XFBML.parse();
+      }
+    } catch(err){
+      console.log(err);
     }
 }

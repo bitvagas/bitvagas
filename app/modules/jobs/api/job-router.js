@@ -9,6 +9,9 @@ module.exports = function(app){
     .get(jobs.findAll)
     .post(user.ensureAuthenticated, jobs.create);
 
+    router.route('/jobs/title/:title')
+    .get(jobs.read);
+
     router.route('/jobs/:id')
     .get(jobs.read);
 
@@ -22,6 +25,7 @@ module.exports = function(app){
     .post(user.ensureAuthenticated, jobs.premium);
 
     router.param('id', jobs.findById);
+    router.param('title', jobs.findByTitle);
 
     return router;
 };

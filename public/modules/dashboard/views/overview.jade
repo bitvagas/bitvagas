@@ -39,7 +39,7 @@ hr
               .label(class="label--{{job.job_type.NAME}}")
                 span {{ job.job_type.NAME }}
             .jobs-item__date(am-time-ago="job.createdAt")
-            .jobs-item__link(ui-sref="jobs-show({ id: job.id })") 
+            a.jobs-item__link(ui-sref="jobs-show({ id: job.id, title: job.TITLE })") 
               i.mdi.mdi-link-variant
               span Link
 

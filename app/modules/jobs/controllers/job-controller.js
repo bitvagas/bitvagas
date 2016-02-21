@@ -1,12 +1,12 @@
-var express  = require('express')
-  , bitcore  = require('bitcore')
-  , org      = require('./org-controller')
-  , user     = require('../../users/controllers/user-controller')
-  , db       = require(root + '/app/models')
-  , includes = [
+var express   = require('express')
+  , bitcore   = require('bitcore')
+  , Sequelize = require('sequelize')
+  , org       = require('./org-controller')
+  , user      = require('../../users/controllers/user-controller')
+  , db        = require(root + '/app/models')
+  , includes  = [
       db.job_type
-    , db.job_transaction
-    , db.job_apply
+    , { model: db.job_apply, attributes: ['createdAt'] }
     , db.category
     , db.org
   ];
@@ -116,8 +116,27 @@ module.exports = {
      * Middleware job for id parameter
      */
     , findById : function(request, response, next, id){
-        db.job.find({
+        db.job.findOne({
             where   : { id : id }
+          , include : includes
+        }).then(function(job){
+            if(!job)
+                response.status(400).json({ message : "errorMessage.job.not.found" });
+
+            request.job = job;
+            next();
+        }).catch(function(err){
+            next(err);
+        });
+    }
+
+    /*
+     * Middleware job for title querys tring
+     */
+    , findByTitle : function(request, response, next, title){
+        db.job.findOne({
+          where: Sequelize.where(Sequelize.fn('lower', Sequelize.col('TITLE')),
+                                 Sequelize.fn('lower', title))
           , include : includes
         }).then(function(job){
             if(!job)

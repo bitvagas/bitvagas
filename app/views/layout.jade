@@ -21,6 +21,8 @@ html(lang='pt-BR', ng-app='bitvagas')
     include script
 
   body
+    #fb-root
+
     header.head
       .wrapper.cf
         a.logo(href='/#/', title='BitVagas')
@@ -137,14 +139,3 @@ html(lang='pt-BR', ng-app='bitvagas')
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
       ga('create', 'UA-66600303-1', 'auto');
       ga('send', 'pageview');
-
-
-    #fb-root
-    script.
-      (function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.5&appId=162990964082513";
-      fjs.parentNode.insertBefore(js, fjs);
-      }(document, 'script', 'facebook-jssdk'));

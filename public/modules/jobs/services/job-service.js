@@ -17,7 +17,9 @@ function JobService($http){
     this.findById = function(id){
         return $http.get(baseUrl+id);
     };
-
+    this.findByTitle = function(title){
+        return $http.get(baseUrl + 'title/' + title);
+    };
     this.active = function(job){
         return $http.post(baseUrl + job.id + '/active', job);
     };
