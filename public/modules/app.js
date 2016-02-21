@@ -27,8 +27,8 @@ angular.module('bitvagas',
             prefix: 'locales/',
             suffix: '.json'
         })
-        .preferredLanguage('en')
-        .fallbackLanguage(['pt', 'en'])
+        .preferredLanguage('pt-BR')
+        .fallbackLanguage(['pt-BR', 'en-US'])
         .useLocalStorage();
 
         $translateProvider.useSanitizeValueStrategy('escaped');
@@ -56,9 +56,13 @@ angular.module('bitvagas',
 
         $httpProvider.interceptors.push('Interceptor');
 
-    }).run(function($rootScope, $state, $auth, $window, UserService){
+    }).run(function($rootScope, $state, $auth, $window, $translate, UserService){
 
         $rootScope.$on("$stateChangeStart", function(e, toState, toParams, fromState, fromParams){
+
+            // Set title back
+            $window.document.title = $translate.instant('layout.head.title');
+
             if(toState.authenticate) {
                 if($auth.isAuthenticated() === false){
                     e.preventDefault();

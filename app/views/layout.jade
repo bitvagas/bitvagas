@@ -1,7 +1,9 @@
 doctype html
-html(lang='pt-br', ng-app='bitvagas')
+html(lang='pt-BR', ng-app='bitvagas')
   head
     title(translate="layout.head.title")
+
+    base(href="/")
 
     include meta
     link(rel='shortcut icon', href='/img/favicon.ico')
@@ -9,22 +11,14 @@ html(lang='pt-br', ng-app='bitvagas')
     link(rel="image_src" href="https://bitvagas.com/img/bitvagas-cover.jpg")
 
     link(href='https://fonts.googleapis.com/css?family=Droid+Sans:400,700', rel='stylesheet', type='text/css')
-    link(rel='stylesheet' href='/dest/bitvagas.css')
+    link(rel='stylesheet' href='/css/bitvagas.css')
     link(rel='stylesheet' href='/components/mdi/css/materialdesignicons.min.css' media='all')
     link(rel='stylesheet' href='/components/ng-input/dist/css/ng-input.css')
     link(rel='stylesheet' href='/components/angular-tooltips/dist/angular-tooltips.min.css')
+    link(rel='stylesheet' href='/components/flag-icon-css/css/flag-icon.min.css')
     link(rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css")
 
     include script
-
-    //Twitter button
-    link(rel='import' href='/components/twitter-button/dist/twitter-button.html')
-    //Facebook button
-    link(rel='import' href='/components/facebook-button/dist/facebook-button.html')
-    //G+ button. fix: confict with polymer versions
-    //- link(rel='import' href='/components/gplus-elements/dist/gplus-one.html')
-    //Github button fix: confict with polymer versions
-    //- link(rel='import' href='/components/github-button/dist/github-button.html')
 
   body
     header.head
@@ -47,14 +41,15 @@ html(lang='pt-br', ng-app='bitvagas')
         ul.head-nav.head-nav--right
           li.dropdown(ng-controller="MainController")
             .dropdown-active
-              .dropdown-active__icon
-                img(src="/img/icon-lang.svg")
-              .dropdown-active__text(translate="lang")
-            ul.dropdown__body(ng-style="style")
+              .dropdown-active__text
+                span.flag-icon(class="flag-icon-{{ currentLang() == 'pt-BR' ? 'br' : 'us'}}")
+            ul.dropdown__body.dropdown__body--lang(ng-style="style")
               li
-                a(href="#" ng-click="setLang('en')") EN
+                a(href="#" ng-click="setLang('en-US')")
+                  span.flag-icon.flag-icon-us
               li
-                a(href="#" ng-click="setLang('pt')") PT
+                a(href="#" ng-click="setLang('pt-BR')")
+                  span.flag-icon.flag-icon-br
           li(ng-if="!isAuthenticated()")
             a(href='/#/signin', title='{{ layout.site_nav.signin | translate }}' translate="layout.site_nav.signin")
           li(ng-if="!isAuthenticated()")
@@ -127,17 +122,14 @@ html(lang='pt-br', ng-app='bitvagas')
               twitter-button(user='bitvagas' href='https://bitvagas.com' text="{{ 'tweet' | translate }}" type="share")
           li
             a(href='')
-              facebook-button(href="https://bitvagas.com" type="like")
+             .fb-like(data-href="https://bitvagas.com" data-layout="button_count" data-action="like" data-show-faces="true" data-share="false")
+          li(style="width:80px")
+            a(href='')
+              .g-plusone
           li
             a(href='')
-              //TODO: replace with webcomponents
-              | <div class="g-plusone" data-size="medium" data-href="https://bitvagas.com/#{ lang == "en" ? "" : lang + "/" }" data-href="https://bitvagas.com/"></div>
-          li
-            a(href='')
-              //TODO: replace with webcomponents
-              | <iframe src="https://ghbtns.com/github-btn.html?user=bitvagas&amp;repo=bitvagas&amp;type=watch&amp;count=true&amp;size=small" allowtransparency="true" frameborder="0" scrolling="0" width="85" height="20"></iframe>
+              a.github-button(href="https://github.com/bitvagas/bitvagas" data-count-href="/bitvagas/bitvagas/stargazers" data-count-api="/repos/bitvagas/bitvagas#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star ntkme/github-buttons on GitHub") Star
 
-    script(src="https://apis.google.com/js/platform.js" async defer)
     script.
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -145,3 +137,14 @@ html(lang='pt-br', ng-app='bitvagas')
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
       ga('create', 'UA-66600303-1', 'auto');
       ga('send', 'pageview');
+
+
+    #fb-root
+    script.
+      (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.5&appId=162990964082513";
+      fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));

@@ -8,4 +8,7 @@ function MainController($scope, $translate){
     $scope.setLang = function(langKey) {
         $translate.use(langKey);
     };
+    $scope.currentLang = function(){
+      return $translate.use();
+    };
 }
