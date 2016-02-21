@@ -1,8 +1,8 @@
 angular.module('bitvagas.jobs.controllers')
 .controller('JobShowController', JobShowController);
 
-JobShowController.$inject = ['$scope', '$state',  '$auth', 'JobService', 'Job', 'lodash', 'marked'];
-function JobShowController($scope, $state, $auth, JobService, Job, lodash, marked){
+JobShowController.$inject = ['$scope', '$state',  '$auth', '$window', 'JobService', 'Job', 'lodash', 'marked'];
+function JobShowController($scope, $state, $auth, $window, JobService, Job, lodash, marked){
 
     $scope.apply = {};
 
@@ -10,6 +10,14 @@ function JobShowController($scope, $state, $auth, JobService, Job, lodash, marke
     $scope.job = job;
     $scope.job.DESCRIPTION = marked(job.DESCRIPTION);
     AlreadyApplied();
+
+    $window.document.title = job.TITLE + " - " + job.org.NAME;
+
+    if($window.twttr)
+      $window.twttr.widgets.load();
+
+    if($window.FB)
+      $window.FB.XFBML.parse();
 
     $scope.toggle = function(){
         $scope.toggled = true;
