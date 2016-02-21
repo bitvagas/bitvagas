@@ -7,7 +7,7 @@
             a(href='{{ job.org.URL }}' target='_blank').job-media__img
               img(src='/img/template.png')
             .job-media__body
-              h1.job__title {{ job.TITLE }} <span class="job__company">{{ "job.in" | translate }} {{ job.org.NAME }}</span>
+              h1.job__title {{ job.TITLE }} <span class="job__company">- {{ job.org.NAME }}</span>
           ul.job-info
             li
               .label(class="label--{{job.job_type.NAME}}") {{ job.job_type.NAME }}
@@ -31,13 +31,9 @@
         .job__body
           ul.job-social
             li
-              //- twitter-button(user='bitvagass' class="twitter-share-button twitter-count-horizontal" href='http://bitvagas.com' text="Vaga" type="share")
-              |  <iframe src="https://platform.twitter.com/widgets/tweet_button.1359159993.html#_=1360010161235&amp;count=horizontal&amp;id=twitter-widget-0&amp;lang=pt-BR&amp;size=m&amp;url=https://bitvagas.com/&amp;text=BitVagas - " class="twitter-share-button twitter-count-horizontal" data-twttr-rendered="true" allowtransparency="true" frameborder="0" scrolling="no" width="82" height="20"></iframe>
+              a(href="https://twitter.com/share" class="twitter-share-button" data-via="BitVagas" data-hashtags="bitcoin,freelancer") Tweet
             li
-                facebook-button(href="https://bitvagas.com" type="like")
-            li(style='width: 74px;')
-              //- |  <iframe src="https://plusone.google.com/_/+1/fastbutton?bsv&amp;size=medium&amp;hl=en-US&amp;url=https://bitvagas.com/&amp;parent=https://bitvagas.com/" allowtransparency="true" frameborder="0" scrolling="no" width="70" height="20"></iframe>
-              | <div class="g-plusone" data-size="medium" data-href="https://bitvagas.com/#{ lang == "en" ? "" : lang + "/" }" data-href="https://bitvagas.com/"></div>
+              .fb-share-button(data-layout="button_count")
 
           p.job__description(ng-bind-html='job.DESCRIPTION')
 
