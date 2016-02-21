@@ -1,6 +1,6 @@
 <p align="center">
 
-<img src="http://bitvagas.com/img/bitvagas.svg" />
+<img src="https://bitvagas.com/img/bitvagas.png" />
 <h4 align="center">Platform of Jobs for Bitcoin Users</h4>
 <h1></h1>
 <p align="center">
