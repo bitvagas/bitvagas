@@ -27,9 +27,12 @@ angular.module('bitvagas',
             prefix: 'locales/',
             suffix: '.json'
         })
+        .addInterpolation('$translateMessageFormatInterpolation')
         .preferredLanguage('pt-BR')
         .fallbackLanguage(['pt-BR', 'en-US'])
         .useLocalStorage();
+
+        $translateProvider.useMessageFormatInterpolation();
 
         $translateProvider.useSanitizeValueStrategy('escaped');
     }).config(function(lodash){
@@ -87,6 +90,7 @@ angular.module('bitvagas',
         };
 
         $rootScope.$on('unauthorized', function(){
+            console.log('Trasition');
             $state.transitionTo('signin');
         });
 

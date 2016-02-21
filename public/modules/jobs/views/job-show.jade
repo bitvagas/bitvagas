@@ -25,8 +25,7 @@
             li.right
               .job__appliers
                 strong
-                  {{ job.job_appliers.length }}
-                ng-pluralize(count="job.job_appliers.length" when="{'0': ' Applicant', '1': ' Applicant', 'other': ' Applicants'}")
+                span(translate="job.applicant" translate-values="{appliers: job.job_appliers.length}" translate-interpolation="messageformat")
 
         .job__body
           ul.job-social
@@ -47,11 +46,11 @@
         footer.job-foot
           div(ng-if='job.APPLY_URL === null')
             div(ng-if='!alreadyApplied')
-              button#btn-apply.btn.btn--medium.btn--primary(ng-click="toggle()" ng-show="!toggled") Candidatar-se à vaga
+              button#btn-apply.btn.btn--medium.btn--primary(ng-click="toggle()" ng-show="!toggled" translate="job.button")
             div(ng-if='alreadyApplied')
               p You have already applied to this job
           div(ng-if='job.APPLY_URL !== null')
-            a.btn.btn--medium.btn--primary(href='{{ job.APPLY_URL }}' target='_blank') Candidatar-se à vaga
+            a.btn.btn--medium.btn--primary(href='{{ job.APPLY_URL }}' target='_blank' translate="job.button")
 
           form.job-form(ng-show="toggled" name='form' ng-submit='form.$valid && applyJob()')
             .job-form__head

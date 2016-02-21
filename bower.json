@@ -8,10 +8,10 @@
   ],
   "dependencies": {
     "angular": "1.4.x",
-    "angular-ui-router": "~0.2.15",
-    "angular-translate": "~2.7.2",
-    "angular-translate-loader-static-files": "~2.7.2",
-    "angular-translate-storage-local": "~2.7.2",
+    "angular-ui-router": "~0.2.18",
+    "angular-translate": "~2.9.1",
+    "angular-translate-loader-static-files": "~2.9.1",
+    "angular-translate-storage-local": "~2.9.1",
     "angular-sanitize": "1.4.0",
     "ng-lodash": "~0.2.3",
     "polymer": "~0.9.4",
@@ -34,7 +34,9 @@
     "qrcode": "~1.0.2",
     "angular-qr": "~0.2.0",
     "angucomplete-alt": "~1.1.0",
-    "flag-icon-css": "~1.2.0"
+    "flag-icon-css": "~1.2.0",
+    "angular-translate-interpolation-messageformat": "~2.9.1",
+    "messageformat": "0.3.1"
   },
   "overrides": {
     "angular": {
@@ -135,6 +137,7 @@
     }
   },
   "resolutions": {
-    "angular": "1.4.x"
+    "angular": "1.4.x",
+    "messageformat": "0.3.1"
   }
 }
