@@ -2,8 +2,8 @@
   .cv__dashboard.cv__cell.cv__cell--main
     .cv__header
       .cv__header--cell.cv__header--title
-        h2.title__name {{ user.NAME }}
-        h5.headline {{ user.HEADLINE }}
+        h2.title__name {{ currentUser.NAME }}
+        h5.headline {{ currentUser.HEADLINE }}
       .cv__header--cell.cv__header--img
         img.cv(src="img/CV.png")
 
@@ -11,7 +11,7 @@
 
     .cv__item
       .cv__item--cell
-        p.description {{ user.SUMMARY }}
+        p.description {{ currentUser.SUMMARY }}
       .cv__item--cell.cv__item--small
         h1
           i.mdi.mdi-account-circle
@@ -23,13 +23,13 @@
     .cv__links
       ul
         li
-          a(href="{{ user.LINKEDIN_PROFILE }}" target="_blank")
+          a(href="{{ currentUser.LINKEDIN_PROFILE }}" target="_blank")
             i.mdi.mdi-linkedin-box
             | LinkedIn
         li
-          a(href="mailto:{{ user.EMAIL }}")
+          a(href="mailto:{{ currentUser.EMAIL }}")
             i.mdi.mdi-email
-            | {{ user.EMAIL }}
+            | {{ currentUser.EMAIL }}
 
 .cv.cv__linkedin(ng-if="currentUser.LINKEDIN_ID === null")
   img.zoom(src="img/bv-connectcv.png")
