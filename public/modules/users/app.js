@@ -40,7 +40,21 @@ angular.module('bitvagas.users', [
         })
         .state('freelancers-cv', {
             url: '/freelancers/:id'
-          , templateUrl : 'modules/users/views/cv'
-          , controller  : 'CVController'
+          , templateUrl  : 'modules/users/views/cv'
+          , controller   : 'CVController'
+          , resolve      : {
+              freelancer : ["$q", '$state', "$stateParams", "FreelancerService", function($q, $state, $stateParams, FreelancerService) {
+                var deferred = $q.defer();
+                FreelancerService.findById($stateParams.id)
+                .then(function(freelancer) {
+                    return deferred.resolve(freelancer);
+                }).catch(function(err){
+                    deferred.reject(err);
+                    $state.transitionTo('freelancers');
+                });
+
+                return deferred.promise;
+              }]
+          }
         });
     }]);

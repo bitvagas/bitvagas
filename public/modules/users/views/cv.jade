@@ -1,4 +1,4 @@
-.cv(ng-if="currentUser.LINKEDIN_ID !== null")
+.cv
   .cv__cell.cv__cell--main
     .cv__header
       .cv__header--cell.cv__header--title
@@ -39,10 +39,10 @@
       li
         label
           i.mdi.mdi-email
-          {{ user.EMAIL }}
+          span {{ user.EMAIL }}
       li
         label
           i.mdi.mdi-map-marker-radius
-          {{ user.LOCATION }}
+          span {{ user.LOCATION }}
 
     hr
