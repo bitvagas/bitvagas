@@ -32,9 +32,5 @@ angular.module('bitvagas.main',
         .state('terms', {
             url: '/terms'
           , templateUrl: 'modules/main/views/terms'
-        })
-        .state('contact', {
-            url: '/contact'
-          , templateUrl: 'modules/main/views/contact'
         });
     }]);
