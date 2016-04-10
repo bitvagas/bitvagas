@@ -29,6 +29,7 @@ module.exports = function(app, config) {
     app.use(methodOverride());
     app.use(passport.initialize());
     app.disable('x-powered-by');
+    app.use(require('prerender-node').set('prerenderToken', process.env.PRERENDER));
 
     //Initialize HarpJS
     app.use(harp.mount(config.root + "/public"));
