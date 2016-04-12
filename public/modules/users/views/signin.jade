@@ -14,10 +14,10 @@
             .signup-form__input
               ng-input(type='password' icon='icon icon--fumi mdi mdi-lock' theme='fumi' label='{{ "signin.password" | translate }}' name='PASSWORD' ng-model='password' ng-required='true')
           li
-            a.forgot(ng-href='/forgot?email={{email}}' translate="signin.forgot")
+            a.forgot(ui-sref='forgot()' translate="signin.forgot")
             br
             span(translate='signin.new')
-            a.join(href='/#/signup' translate='signin.join')
+            a.join(href='/signup' translate='signin.join')
 
       hr
       input.signup-action__btn.btn.btn--medium.btn--primary(type='submit' value='{{ "signin.button" | translate }}')

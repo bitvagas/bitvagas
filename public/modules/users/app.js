@@ -28,6 +28,11 @@ angular.module('bitvagas.users', [
             url: '/signup/verify'
           , templateUrl : 'modules/users/views/verify-message'
         })
+        .state('forgot', {
+            url: '/forgot'
+          , templateUrl : 'modules/users/views/forgot'
+          , controller  : 'AuthController'
+        })
         .state('freelancers', {
             url: '/freelancers'
           , templateUrl   : 'modules/users/views/freelancers'

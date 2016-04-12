@@ -1,5 +1,5 @@
 .signup
-  .signup__cell.signup__cell--main
+  .signup__cell--main
     header.signup__head
       h1.signup__title(translate="signup.title")
 
@@ -20,8 +20,5 @@
               .signup-form__input
                 ng-input(type='password' icon='icon icon--fumi mdi mdi-lock' theme='fumi' ng-minlength='8' ng-model='REPASSWORD' label='{{ "signup.repassword" | translate }}' name='REPASSWORD' ng-required='true')
 
+      hr
       button.signup-action__btn.btn.btn--medium.btn--primary(value='{{ "signup.button" | translate }}' translate="signup.button")
-
-  .signup__cell.signup__cell--aside.signin__cell
-    .signup__divider
-      div(ui-view='signin@signup')

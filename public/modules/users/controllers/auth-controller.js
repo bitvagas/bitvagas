@@ -17,7 +17,7 @@ function AuthController ($rootScope, $scope, $state, $window, $auth, UserService
         }).then(function(data){
             $scope.authenticated = true;
             if($window.location.pathname === '/auth/login')
-                $window.location.href = '/#/dashboard/overview';
+                $window.location.href = '/dashboard/overview';
             else
                 $state.reload();
         }).catch(function(err){
@@ -40,9 +40,8 @@ function AuthController ($rootScope, $scope, $state, $window, $auth, UserService
 
     $scope.verify = function(verify){
         UserService.verify(verify).then(function(data){
-            //locations href crashes on chrome
             setTimeout(function(){
-                $window.location.href = '/#/signin';
+                $state.transitionTo('signin');
             }, 500);
         }).catch(function(err){
             console.log(err);
@@ -52,7 +51,7 @@ function AuthController ($rootScope, $scope, $state, $window, $auth, UserService
     $scope.forgot = function(){
         UserService.forgot($scope.data).then(function(data){
             setTimeout(function(){
-                $window.location.href = '/#/signup/verify';
+                $state.transitionTo('verify');
             }, 500);
         }).catch(function(err){
             console.log(err);
@@ -63,7 +62,7 @@ function AuthController ($rootScope, $scope, $state, $window, $auth, UserService
         $scope.data.token = token;
         UserService.reset($scope.data).then(function(data){
             setTimeout(function(){
-                $window.location.href = '/#/signin';
+                $window.location.href = '/signin';
             }, 500);
         }).catch(function(err){
             console.log(err);

@@ -1,0 +1,11 @@
+.signin.signin__cell
+
+  header.signup__head
+    h1.signup__title Forgot your password?
+
+  form(name='form' ng-submit='form.$valid && forgot()')
+    ul.signup-form
+      li
+        ng-input(theme='fumi' icon='icon icon--fumi mdi mdi-email' type='text' label='Email' name='EMAIL' ng-model='data.EMAIL' ng-required='true')
+      li
+        button.btn.btn--medium.btn--primary(value='Email me recovery link') Email me recovery link

@@ -33,9 +33,6 @@ module.exports = function(app){
     );
 
     app.route('/forgot')
-    .get(function(request, response){
-        response.render('forgot', { email : request.query.email || '' });
-    })
     .post(user.findByEmail, user.forgotPassword);
 
     app.route('/reset')

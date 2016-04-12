@@ -25,20 +25,20 @@ html(lang='pt-BR', ng-app='bitvagas')
 
     header.head
       .wrapper.cf
-        a.logo(href='/#/', title='BitVagas')
+        a.logo(href='/', title='BitVagas')
           img(src='/img/bitvagas.png', alt='BitVagas')
 
         ul.head-nav
           li
-            a(href='/#/about', title='{{ layout.site_nav.about }}' translate="layout.site_nav.about")
+            a(href='/about', title='{{ layout.site_nav.about }}' translate="layout.site_nav.about")
           li
-            a(href='/#/jobs-list', title='{{ "layout.site_nav.all_jobs" | translate }}' translate="layout.site_nav.all_jobs")
+            a(href='/jobs-list', title='{{ "layout.site_nav.all_jobs" | translate }}' translate="layout.site_nav.all_jobs")
           li(ng-if='!isAuthenticated()')
-            a(href='/#/jobs/post', title='{{ "layout.site_nav.post" | translate }}' translate="layout.site_nav.post")
+            a(href='/jobs/post', title='{{ "layout.site_nav.post" | translate }}' translate="layout.site_nav.post")
           li(ng-if='isAuthenticated()')
-            a(href='/#/dashboard/jobs/create', title='{{ "layout.site_nav.post" | translate }}' translate="layout.site_nav.post")
+            a(href='/dashboard/jobs/create', title='{{ "layout.site_nav.post" | translate }}' translate="layout.site_nav.post")
           li
-            a(href='/#/freelancers', title='{{ "layout.site_nav.freelancers" | translate }}' translate="layout.site_nav.freelancers")
+            a(href='/freelancers', title='{{ "layout.site_nav.freelancers" | translate }}' translate="layout.site_nav.freelancers")
 
         ul.head-nav.head-nav--right
           li.dropdown(ng-controller="MainController")
@@ -53,11 +53,11 @@ html(lang='pt-BR', ng-app='bitvagas')
                 a(href="#" ng-click="setLang('pt-BR')")
                   span.flag-icon.flag-icon-br
           li(ng-if="!isAuthenticated()")
-            a(href='/#/signin', title='{{ layout.site_nav.signin | translate }}' translate="layout.site_nav.signin")
+            a(href='/signin', title='{{ layout.site_nav.signin | translate }}' translate="layout.site_nav.signin")
           li(ng-if="!isAuthenticated()")
-            a(href='/#/signup', title='{{ layout.site_nav.signup }}' translate="layout.site_nav.signup")
+            a(href='/signup', title='{{ layout.site_nav.signup }}' translate="layout.site_nav.signup")
           li(ng-if="isAuthenticated()").dropdown
-            .dropdown-active(href='/#/dashboard/overview') {{ currentUser.NAME || "You" }}
+            .dropdown-active(href='/dashboard/overview') {{ currentUser.NAME || "You" }}
             ul(ng-style="style").dropdown__body.dropdown__body--user
               li.border-top
                 a(ui-sref='dashboard.overview' translate='dashboard.menu.overview')
@@ -76,23 +76,23 @@ html(lang='pt-BR', ng-app='bitvagas')
 
     footer.foot
       .wrapper.cf
-        a.logo-foot(href='/#/', title='BitVagas')
+        a.logo-foot(href='/', title='BitVagas')
           img.logo-foot__img(src='/img/bitvagas-white.png', alt='BitVagas')
 
         ul.foot-nav
           li
             h5 BitVagas
           li
-            a(href="/#/about" translate="layout.site_nav.about" )
+            a(href="/about" translate="layout.site_nav.about" )
           li
-            a(href="/#/about#team" translate="layout.site_nav.team" )
+            a(href="/about#team" translate="layout.site_nav.team" )
 
 
         ul.foot-nav
           li
             h5(translate="layout.foot.develop")
           li
-            a(href="/#/about#support" translate="layout.site_nav.support" )
+            a(href="/about#support" translate="layout.site_nav.support" )
           li
             a(href="https://github.com/bitvagas/bitvagas" target="_BLANK") Github
           li
@@ -102,15 +102,15 @@ html(lang='pt-BR', ng-app='bitvagas')
           li
             h5(translate="layout.foot.jobs")
           li
-            a(href='/#/' title='{{ "layout.site_nav.all_jobs"' translate="layout.site_nav.all_jobs")
+            a(href='/' title='{{ "layout.site_nav.all_jobs"' translate="layout.site_nav.all_jobs")
           li(ng-if='!isAuthenticated()')
-            a(href='/#/jobs/post', title='{{ "layout.site_nav.post" | translate }}' translate="layout.site_nav.post")
+            a(href='/jobs/post', title='{{ "layout.site_nav.post" | translate }}' translate="layout.site_nav.post")
           li(ng-if='isAuthenticated()')
-            a(href='/#/dashboard/jobs/create', title='{{ "layout.site_nav.post" | translate }}' translate="layout.site_nav.post")
+            a(href='/dashboard/jobs/create', title='{{ "layout.site_nav.post" | translate }}' translate="layout.site_nav.post")
           li
-            a(href='/#/signup' title='{{ "layout.site_nav.cv" | translate }}' translate="layout.site_nav.cv")
+            a(href='/signup' title='{{ "layout.site_nav.cv" | translate }}' translate="layout.site_nav.cv")
           li
-            a(href='/#/freelancers' title='{{ "layout.site_nav.freelancers" | translate }}' translate="layout.site_nav.freelancers")
+            a(href='/freelancers' title='{{ "layout.site_nav.freelancers" | translate }}' translate="layout.site_nav.freelancers")
           li
 
         hr
