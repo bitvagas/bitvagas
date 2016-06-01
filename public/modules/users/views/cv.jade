@@ -1,3 +1,10 @@
+update-title(title="{{ user.NAME }} | bitvagas")
+update-meta(itemprop="description" content="{{ user.HEADLINE }} | bitvagas")
+update-meta(itemprop="og:title" content="{{ user.HEADLINE }} | bitvagas")
+update-meta(itemprop="og:description" content="{{ user.SUMMARY }} | bitvagas")
+update-meta(itemprop="og:url" content="https://bitvagas.com/freelancers{{ user.id }}")
+update-meta(itemprop="twitter:title" content="{{ user.headline }} | bitvagas")
+update-meta(itemprop="twitter:description" content="{{ user.SUMMARY }} | bitvagas")
 .cv
   .cv__cell.cv__cell--main
     .cv__header

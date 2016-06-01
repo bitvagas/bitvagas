@@ -1,17 +1,17 @@
 angular.module('bitvagas.jobs.controllers')
 .controller('JobShowController', JobShowController);
 
-JobShowController.$inject = ['$scope', '$state',  '$auth', '$window', 'JobService', 'Job', 'lodash', 'marked'];
-function JobShowController($scope, $state, $auth, $window, JobService, Job, lodash, marked){
+JobShowController.$inject = ['$scope', '$stateParams', '$state',  '$auth', '$window', 'JobService', 'Job', 'lodash', 'marked'];
+function JobShowController($scope, $stateParams, $state, $auth, $window, JobService, Job, lodash, marked){
 
     $scope.apply = {};
 
     var job = Job.data;
     $scope.job = job;
     $scope.job.DESCRIPTION = marked(job.DESCRIPTION);
+    $scope.url = $stateParams.title.replace(/ /g, "-").toLowerCase();
+    $scope.tags = $scope.job.TAGS.join(', ');
     AlreadyApplied();
-
-    $window.document.title = job.TITLE + " - " + job.org.NAME;
 
     $scope.toggle = function(){
         $scope.toggled = true;

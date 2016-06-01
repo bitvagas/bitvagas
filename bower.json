@@ -36,7 +36,8 @@
     "angucomplete-alt": "~1.1.0",
     "flag-icon-css": "~1.2.0",
     "angular-translate-interpolation-messageformat": "~2.9.1",
-    "messageformat": "0.3.1"
+    "messageformat": "0.3.1",
+    "angular-update-meta": "~1.9.0"
   },
   "overrides": {
     "angular": {
@@ -119,6 +120,9 @@
     },
     "angucomplete-alt": {
       "main": "dist/angucomplete-alt.min.js"
+    },
+    "angular-update-meta": {
+      "main": "dist/update-meta.min.js"
     },
     "flag-icon-css": {
       "ignore": true

@@ -1,3 +1,11 @@
+update-title(title="{{ job.TITLE }} | BitVagas")
+update-meta(itemprop="description" content="{{ job.TITLE }} - {{ job.org.NAME }} | BitVagas")
+update-meta(itemprop="keywords" content="BitVagas, Bitcoin, Freelancer, Vagas Bitcoin, Freelancers Bitcoin, Bitcoin Jobs, Jobs, platform jobs, {{ tags }}")
+update-meta(itemprop="og:title" content="{{ job.TITLE }} - {{ job.org.NAME }} | BitVagas")
+update-meta(itemprop="og:description" content="{{ job.TITLE }} - {{ job.org.NAME }} | BitVagas")
+update-meta(itemprop="og:url" content="https://bitvagas.com/{{ url }}")
+update-meta(itemprop="twitter:title" content="{{ job.TITLE }} - {{ job.org.NAME }} | BitVagas")
+update-meta(itemprop="twitter:description" content="{{ job.TITLE }} - {{ job.org.NAME }} | BitVagas")
 .main
   .wrapper
     .job
@@ -32,7 +40,7 @@
             li
               a(href="https://twitter.com/share" class="twitter-share-button" data-via="BitVagas" data-hashtags="bitcoin,freelancer") Tweet
             li
-              .fb-share-button(data-layout="button_count")
+              .fb-share-button(data-layout="button_count" data-mobile-iframe="true")
 
           p.job__description(ng-bind-html='job.DESCRIPTION')
 
