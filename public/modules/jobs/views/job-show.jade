@@ -30,11 +30,6 @@ update-meta(itemprop="twitter:description" content="{{ job.TITLE }} - {{ job.org
               i.mdi.mdi-tie
               span(translate='categories.{{ job.category.NAME }}')
 
-            li.right
-              .job__appliers
-                strong
-                span(translate="job.applicant" translate-values="{appliers: job.job_appliers.length}" translate-interpolation="messageformat")
-
         .job__body
           ul.job-social
             li
@@ -51,20 +46,24 @@ update-meta(itemprop="twitter:description" content="{{ job.TITLE }} - {{ job.org
 
           hr
 
-        footer.job-foot
-          div(ng-if='job.APPLY_URL === null')
-            div(ng-if='!alreadyApplied')
-              button#btn-apply.btn.btn--medium.btn--primary(ng-click="toggle()" ng-show="!toggled" translate="job.button")
-            div(ng-if='alreadyApplied')
-              p You have already applied to this job
-          div(ng-if='job.APPLY_URL !== null')
-            a.btn.btn--medium.btn--primary(href='{{ job.APPLY_URL }}' target='_blank' translate="job.button")
+        footer.job-foot.job-form
+          .job__apply
+            div(ng-if='job.APPLY_URL === null')
+              div(ng-if='!alreadyApplied')
+                button#btn-apply.btn.btn--medium.btn--primary(ng-click="toggle()" ng-show="!toggled" translate="job.button")
+              .job-form__head(ng-show='toggled')
+                span.job-apply__title
+                  | {{ "job.apply.title" | translate }} <strong class="job-form__bold"> {{ job.TITLE }} </strong> - <span class="job-form__bold">{{ job.org.NAME }}</span>
+              div(ng-if='alreadyApplied')
+                h6(translate='job.apply.already_applied') You have already applied to this job
+            div(ng-if='job.APPLY_URL !== null')
+              a.btn.btn--medium.btn--primary(href='{{ job.APPLY_URL }}' target='_blank' translate="job.button" rel="noopener noreferrer")
+            .job__appliers
+              h2(ng-bind='job.job_appliers.length')
+              span(translate="job.applicant" translate-values="{appliers: 4}" translate-interpolation="messageformat")
 
-          form.job-form(ng-show="toggled" name='form' ng-submit='form.$valid && applyJob()')
-            .job-form__head
-              h6.job-apply__title
-                | {{ "job.apply.title" | translate }} <span class="job-form__bold"> {{ job.TITLE }} </span> {{ "job.in" | translate }} <span class="job-form__bold">{{ job.org.NAME }}</span>
-              hr
+          form(ng-show="toggled" name='form' ng-submit='form.$valid && applyJob()')
+            hr
             .job-form__body
               ul.job-form__list
                 li

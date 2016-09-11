@@ -5,8 +5,13 @@
 
 .job__cell--main
   margin: 0 auto
+  background: rgb(255, 255, 255);
+  padding: 24px;
+  border-radius: 4px;
+  border-left: 2px solid rgb(41, 181, 223);
+  box-shadow: 0px 3px 20px rgba(128, 128, 128, 0.2);
   +media-query(desk)
-    width: 70%
+    width: 75%
 
 .job__disabled
   opacity: 0.3
@@ -115,6 +120,21 @@
     > li
       margin-bottom: 0
 
+.job__apply
+  display: table
+  width: 100%
+  div
+    &:first-child
+      display: table-cell
+      vertical-align: middle
+      width: 70%;
+
+  h2, h6
+    margin-bottom: 0px
+
+  .job__appliers
+    text-align: center
+
 .job-apply__title
   font-weight: 400
 
@@ -129,8 +149,12 @@
   border-radius: 4px
   background: whitesmoke
   border: 1px solid #e5e5e5
-  margin-top: 24px
   padding: 24px
+  padding-bottom: 16px
+  padding-top: 16px
+  border-top: 2px solid #29B5DF
+  form
+    margin-top: 24px
 
 .job-form__list
   list-style: none

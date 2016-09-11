@@ -332,8 +332,9 @@
         "in": "in",
         "description": "Job Description",
         "button": "Apply for this Job",
-        "applicant": "{appliers, plural, =0{Nobody has applied} one{One person has applied} other{# people applied}}",
+        "applicant": "{appliers, plural, =0{Applicants} one{Applicant} other{Applicants}}",
         "apply": {
+            "already_applied": "You have already applied to this job",
             "title": "Apply for",
             "name": "Name",
             "last_name": "Last Name",

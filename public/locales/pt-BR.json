@@ -330,8 +330,9 @@
         "in": "na",
         "description": "Descrição da Vaga",
         "button": "Candidatar-se à vaga",
-        "applicant": "{appliers, plural, =0{Ninguém aplicou ainda} one{Uma pessoa aplicou} other{# pessoas aplicaram}}",
+        "applicant": "{appliers, plural, =0{Candidatos} one{Candidato} other{Candidatos}}",
         "apply": {
+            "already_applied": "Você já aplicou para essa Vaga.",
             "title": "Aplicar para",
             "name": "Nome",
             "last_name": "Sobrenome",
