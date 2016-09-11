@@ -61,7 +61,9 @@ angular.module('bitvagas',
 
         $httpProvider.interceptors.push('Interceptor');
 
-    }]).run(["$rootScope", "$state", "$auth", "$window", "$translate", "UserService", function($rootScope, $state, $auth, $window, $translate, UserService){
+    }]).run(["$rootScope", "$state", "$auth", "$window", "$translate", "UserService", "amMoment", function($rootScope, $state, $auth, $window, $translate, UserService, amMoment){
+
+        amMoment.changeLocale($translate.use().toLowerCase());
 
         $rootScope.$on("$stateChangeStart", function(e, toState, toParams, fromState, fromParams){
 
