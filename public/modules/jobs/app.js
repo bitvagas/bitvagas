@@ -1,22 +1,11 @@
 angular.module('bitvagas.jobs',
     [ 'ui.router'
     , 'bitvagas.jobs.controllers'
+    , 'bitvagas.jobs.filters'
     , 'bitvagas.jobs.services'
     , 'bitvagas.jobs.category.services'
     ])
-    .config(["$urlRouterProvider", "$stateProvider", "$urlMatcherFactoryProvider", function($urlRouterProvider, $stateProvider, $urlMatcherFactoryProvider){
-
-        $urlMatcherFactoryProvider.type('titleMatcher', {
-          encode: function(str) {
-            return str && str.replace(/ /g, "-").toLowerCase();
-          },
-          decode: function(str) {
-            return str && str.replace(/-/g, " ");
-          },
-          is: angular.isString,
-          pattern: /[^/]+/
-        });
-
+    .config(["$urlRouterProvider", "$stateProvider", function($urlRouterProvider, $stateProvider){
         $stateProvider
         .state('jobs', {
             url: '/jobs'
@@ -51,10 +40,10 @@ angular.module('bitvagas.jobs',
           , controller   : 'JobPostController'
         })
         .state('jobs-show', {
-            url: '/{title:titleMatcher}/'
+            url: '/{id: [0-9]+}-:title'
           , templateUrl: '/modules/jobs/views/job-show'
           , controller : 'JobShowController'
-          , params     : { id: undefined }
+          , params     : { id: undefined, title: undefined }
           , caseInsensitiveMatch: true
           , resolve    : {
             Job        : ["$q", "$state", "$stateParams", "JobService", function($q, $state, $stateParams, JobService){
@@ -69,36 +58,8 @@ angular.module('bitvagas.jobs',
                     $state.transitionTo('jobs-list');
                 });
               } else {
-                JobService.findByTitle($stateParams.title)
-                .then(function(job){
-                    return deferred.resolve(job);
-                }).catch(function(err){
-                    deferred.reject(err);
-                    $state.transitionTo('jobs-list');
-                    return;
-                });
-              }
-
-              return deferred.promise;
-            }]
-          }
-        })
-        .state('jobs-show-id', {
-            url: '/job/:id'
-          , templateUrl: '/modules/jobs/views/job-show'
-          , controller : 'JobShowController'
-          , resolve    : {
-            Job        : ["$q", "$state", "$stateParams", "JobService", function($q, $state, $stateParams, JobService){
-              var deferred = $q.defer();
-
-              JobService.findById($stateParams.id)
-              .then(function(job){
-                return deferred.resolve(job);
-              })
-              .catch(function(err){
-                deferred.reject(err);
                 $state.transitionTo('jobs-list');
-              });
+              }
 
               return deferred.promise;
             }]

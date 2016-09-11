@@ -26,7 +26,7 @@ hr
 h2.jobs-title(translate="explore.last")
 ul.jobs
   li(ng-repeat='job in jobs | filter: filter | filter: filterType')
-    a.jobs-item(ui-sref='jobs-show({id : job.id, title: job.TITLE })', title='')
+    a.jobs-item(ui-sref='jobs-show({id : job.id, title: (job.TITLE | UrlFilter) })', title='')
       .jobs-item__cell.jobs-item__cell--img
         img.jobs-item__img(src='/img/company-default.png', alt='')
 

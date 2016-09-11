@@ -2,9 +2,9 @@ angular.module('bitvagas.jobs.controllers', ['pg-ng-dropdown'])
 .controller('JobPostController', JobPostController)
 .controller('JobCreateController', JobCreateController);
 
-JobPostController.$inject   = ['$scope', '$state', '$stateParams', 'JobService', 'Categories', 'lodash', 'marked'];
-JobCreateController.$inject = ['$scope', '$state', '$stateParams', '$timeout', 'JobService', 'OrgService', 'Categories', 'lodash', 'SweetAlert', 'marked'];
-function JobPostController($scope, $state, $stateParams, JobService, Categories, _, marked){
+JobPostController.$inject   = ['$scope', '$filter', '$state', '$stateParams', 'JobService', 'Categories', 'lodash', 'marked'];
+JobCreateController.$inject = ['$scope', '$filter', '$state', '$stateParams', '$timeout', 'JobService', 'OrgService', 'Categories', 'lodash', 'SweetAlert', 'marked'];
+function JobPostController($scope, $filter, $state, $stateParams, JobService, Categories, _, marked){
 
     var markdown;
 
@@ -51,7 +51,7 @@ function JobPostController($scope, $state, $stateParams, JobService, Categories,
 
         JobService.post(data)
         .then(function(data){
-            $state.go('jobs-show', { id: data.data.id, title: data.data.TITLE });
+            $state.go('jobs-show', { id: data.data.id, title: $filter('UrlFilter')(data.data.TITLE) });
         }, function(err){
             //back to crate state and show errors
             $state.go('jobs-post', {
@@ -67,7 +67,7 @@ function JobPostController($scope, $state, $stateParams, JobService, Categories,
     };
 }
 
-function JobCreateController($scope, $state, $stateParams, $timeout, JobService, OrgService, Categories, _, SweetAlert, marked){
+function JobCreateController($scope, $filter, $state, $stateParams, $timeout, JobService, OrgService, Categories, _, SweetAlert, marked){
 
     var markdown;
 
@@ -117,7 +117,7 @@ function JobCreateController($scope, $state, $stateParams, $timeout, JobService,
     $scope.confirm = function(data){
         JobService.create(data)
         .then(function(data){
-            $state.go('jobs-show', { id: data.data.id, title: data.data.TITLE });
+            $state.go('jobs-show', { id: data.data.id, title: $filter('UrlFilter')(data.data.TITLE) });
         }, function(err){
             $state.go('dashboard.jobs.create', {
                 data : $scope.data

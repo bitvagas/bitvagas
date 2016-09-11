@@ -19,7 +19,7 @@ div(ng-if='currentUser.jobs.length !== 0')
           .jobs-item__type
             .label(class='label--{{ job.job_type.NAME }}') {{ job.job_type.NAME }}
           .jobs-item__date(am-time-ago='job.createdAt')
-          .jobs-item__link(ui-sref="jobs-show({ id: job.id, title: job.TITLE })")
+          .jobs-item__link(ui-sref="jobs-show({ id: job.id, title: (job.TITLE | UrlFilter) })")
             i.mdi.mdi-link-variant
             span Link
       .accodion(ng-show="$parent.open == $index")

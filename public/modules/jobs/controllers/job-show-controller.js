@@ -9,7 +9,7 @@ function JobShowController($scope, $stateParams, $state, $auth, $window, JobServ
     var job = Job.data;
     $scope.job = job;
     $scope.job.DESCRIPTION = marked(job.DESCRIPTION);
-    $scope.url = $stateParams.title.replace(/ /g, "-").toLowerCase();
+    $scope.url = job.id + "-" + $stateParams.title;
     $scope.tags = $scope.job.TAGS.join(', ');
     AlreadyApplied();
 

@@ -38,7 +38,7 @@ h1.slogan
             .typejob-label__text.label.label--temporary(translate="explore.search.type.temp")
     ul.jobs
       li(ng-repeat='job in jobs | limitTo: 5')
-        a.jobs-item(ui-sref='jobs-show({id : job.id, title: job.TITLE })', title='')
+        a.jobs-item(ui-sref='jobs-show({id: job.id, title: (job.TITLE | UrlFilter) })', title='')
           .jobs-item__cell.jobs-item__cell--img
             img.jobs-item__img(src='/img/company-default.png', alt='')
 
