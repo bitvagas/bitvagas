@@ -7,6 +7,7 @@ function UrlFilter(removeDiacritics) {
     return removeDiacritics
       .replace(input)
       .replace(/\s+/g, "-")
+      .replace(/\/+/g, "-")
       .replace(/\-+/g, "-")
       .toLowerCase()
   }
