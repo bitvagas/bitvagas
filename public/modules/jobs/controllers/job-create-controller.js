@@ -45,7 +45,6 @@ function JobPostController($scope, $filter, $state, $stateParams, JobService, Ca
                                 typeId == 3 ? 'FREELANCE' :
                                 typeId == 4 ? 'TEMPORARY' : 'FREELANCE';
 
-        console.log($scope.data);
         $state.go('jobs-confirm', { data : $scope.data });
     };
 
