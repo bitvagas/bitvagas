@@ -12,7 +12,7 @@ function JobPostController($scope, $filter, $state, $stateParams, JobService, Ca
     $scope.errors = $stateParams.errors || [];
 
     $scope.categories = Categories.data;
-    $scope.categories[2].selected = true;
+    $scope.categories[1].selected = true;
 
     // Render markedown on confirm page
     if($state.current.name === 'jobs-confirm') {
@@ -34,6 +34,7 @@ function JobPostController($scope, $filter, $state, $stateParams, JobService, Ca
 
     $scope.create = function(){
         $scope.data.CATEGORY_ID = _.selected($scope.categories, 'id');
+        $scope.data.CATEGORY_NAME = _.selected($scope.categories, 'NAME');
         $scope.data.TAGS = _.map($scope.tags, 'text');
         $scope.data.DESCRIPTION = markdown.value();
         $scope.data.marked = markdown.value();
@@ -44,6 +45,7 @@ function JobPostController($scope, $filter, $state, $stateParams, JobService, Ca
                                 typeId == 3 ? 'FREELANCE' :
                                 typeId == 4 ? 'TEMPORARY' : 'FREELANCE';
 
+        console.log($scope.data);
         $state.go('jobs-confirm', { data : $scope.data });
     };
 
@@ -99,6 +101,7 @@ function JobCreateController($scope, $filter, $state, $stateParams, $timeout, Jo
 
     $scope.create = function(){
         $scope.data.CATEGORY_ID = _.selected($scope.categories, 'id');
+        $scope.data.CATEGORY_NAME = _.selected($scope.categories, 'NAME');
         $scope.data.ORG_ID = _.selected($scope.orgs, 'id');
         $scope.data.ORG_NAME = _.result(_.find($scope.orgs, { id: $scope.data.ORG_ID }), 'NAME');
         $scope.data.TAGS = _.map($scope.tags, 'text');

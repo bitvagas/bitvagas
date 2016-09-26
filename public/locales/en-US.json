@@ -181,7 +181,8 @@
                 "appliers": {
                     "title": "Appliers",
                     "description": "Description: ",
-                    "links": "Links: "
+                    "links": "Links: ",
+                    "no_description": "No Description Provided"
                 },
                 "myapply": {
                     "title": "Jobs that you applied"
@@ -325,7 +326,12 @@
             "continue": "Next"
         },
         "confirm": {
-            "title": "Confirm Job"
+            "title": "Confirm Job",
+            "create": "Create Job",
+            "preview": "Preview",
+            "confirm": "Confirm",
+            "back": "Back",
+            "confirm_button": "Post Job"
         }
     },
     "job": {

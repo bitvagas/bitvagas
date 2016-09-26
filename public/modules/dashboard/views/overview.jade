@@ -45,7 +45,7 @@ hr
 
         ul.dashboard__my--jobs.dashboard__applicant--list
           li(ng-repeat='applicant in job.job_appliers' style='border-bottom: none; border-top:1px solid #ddd')
-            a.jobs-item(href='#/dashboard/overview#{{applicant.id}}' ng-click='toggle($index, applicant.id)')
+            span.jobs-item
               .jobs-item__cell.jobs-item__cell--img
                 img.thumb(ng-src='{{ applicant.user.PICTURE }}' ng-if='applicant.user.PICTURE')
               .jobs-item__cell.jobs-item__cell--body
@@ -56,10 +56,12 @@ hr
                 //- a(href='{{ applicant.user.LINKEDIN_PROFILE }}' target='_blank')
                   //- i.mdi.mdi-linkedin-box
                   //- | LinkedIn
-            div.dashboard__applicant--body(ng-show='$parent.open == $index')
+            div.dashboard__applicant--body
               .applicant--content
-                h5 Descrição:
-                label.applicant--description {{ applicant.DESCRIPTION }}
+                h5(translate='dashboard.overview.applicant.appliers.description')
+                label.applicant--description(ng-if='applicant.DESCRIPTION') {{ applicant.DESCRIPTION }}
+                label.applicant--description(ng-if='!applicant.DESCRIPTION')
+                  span(translate='dashboard.overview.applicant.appliers.no_description')
                 div(ng-if="applicant.LINKS !== null")
                   h5 Links:
                   span(ng-bind-html='applicant.LINKS | linky:"_blank"')

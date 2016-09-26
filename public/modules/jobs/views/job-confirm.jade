@@ -1,34 +1,37 @@
 .create
-  .create__cell.create__cell--main
-    header.create__head
+  .job__cell.job__cell--main.job__cell--main
+    header.job__head
       h1.create__title(translate='post_job.confirm.title')
-    .job--steps
-      ol
-        li
-          .separate
-          span Create Job
-        li.active
-          .separate
-          span Preview
-        li
-          .separate
-          span Confirm
-    .create__body
-      .job-media
-        a(href='{{ job.org.URL }}' target='_blank').job-media__img
-          img(src='/img/template.png')
-        .job-media__body
-          h1.job__title {{ data.TITLE }} <span class="job__company">{{ "job.in" | translate }} {{ data.ORG_NAME }}</span>
-      ul.job-info
-        li
-          |  <div class="label label--{{ data.TYPE_NAME }}">{{ data.TYPE_NAME }}</div>
-        li
-          img(src='/img/local.svg').job__icon
-          .job__local {{ data.LOCATION }}
+      .job--steps
+        ol
+          li
+            .separate
+            span(translate='dashboard.jobs.create')
+          li.active
+            .separate
+            span(translate='dashboard.jobs.preview')
+          li
+            .separate
+            span(translate='dashboard.jobs.confirm')
+      .create__body
+        .job-media
+          a(href='{{ job.org.URL }}' target='_blank').job-media__img
+            img(src='/img/template.png')
+          .job-media__body
+            h1.job__title {{ data.TITLE }} <span class="job__company">- {{ data.ORG_NAME }}</span>
+        ul.job-info
+          li
+            |  <div class="label label--{{ data.TYPE_NAME }}">{{ data.TYPE_NAME }}</div>
+          li
+            img(src='/img/local.svg').job__icon
+            .job__local {{ data.JOB_LOCATION }}
+          li
+            i.mdi.mdi-tie
+            span(translate='categories.{{ data.CATEGORY_NAME }}')
 
-      h6(translate="job.description")
+    .job__body
       p.job__description(ng-bind-html='data.DESCRIPTION')
 
-      footer.job-foot
-        button.btn.btn--medium(ng-click='unconfirm(data)') Voltar
-        button.btn.btn--medium.btn--primary(ng-click='confirm(data)' style='margin-left: 20px') Confirmar Vaga
+    footer.job-foot
+      button.btn.btn--medium(ng-click='unconfirm(data)' translate='post_job.confirm.back')
+      button.btn.btn--medium.btn--primary(ng-click='confirm(data)' style='margin-left: 20px' translate='post_job.confirm.confirm_button')

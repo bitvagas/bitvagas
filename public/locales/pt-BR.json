@@ -172,11 +172,13 @@
                 "create": "Nova Organização"
             },
             "applicant": {
-                "title": "Applicadores",
+                "title": "Candidatos",
                 "notyet": "No Appliers yet",
                 "appliers": {
+                    "title": "Candidatos",
                     "description": "Descrição: ",
-                    "links": "Links: "
+                    "links": "Links: ",
+                    "no_description": "Sem Descrição"
                 },
                 "myapply": {
                     "title": "Vagas que voce aplicou"
@@ -324,6 +326,14 @@
             },
             "terms": "Concordo com a Política de Privacidade.",
             "continue": "Próximo"
+        },
+        "confirm": {
+            "title": "Confirmar Vaga",
+            "create": "Criar Vaga",
+            "preview": "Visualizar",
+            "confirm": "Confirmar",
+            "back": "Voltar",
+            "confirm_button": "Postar Vaga"
         }
     },
     "job": {
