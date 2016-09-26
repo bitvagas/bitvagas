@@ -28,9 +28,7 @@ module.exports = function(app, config) {
     app.use(express.static(config.root + '/public'));
     app.use(methodOverride());
     app.use(passport.initialize());
-    app.disable('etag');
     app.disable('x-powered-by');
-
     app.use(require('prerender-node').set('prerenderToken', process.env.PRERENDER));
 
     //Initialize HarpJS
@@ -47,7 +45,7 @@ module.exports = function(app, config) {
         app.use('/api', require(route)(app));
     });
 
-    app.get('*', function(request, response, next) {
+    app.get('*', function(request, response) {
         response.render("index", { user : request.user });
     });
 };

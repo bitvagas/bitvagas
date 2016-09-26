@@ -31,7 +31,7 @@ html(lang='pt-BR', ng-app='bitvagas')
           li
             a(href='/about', title='{{ layout.site_nav.about }}' translate="layout.site_nav.about")
           li
-            a(href='/jobs/list', title='{{ "layout.site_nav.all_jobs" | translate }}' translate="layout.site_nav.all_jobs")
+            a(href='/jobs/list/', title='{{ "layout.site_nav.all_jobs" | translate }}' translate="layout.site_nav.all_jobs")
           li(ng-if='!isAuthenticated()')
             a(href='/jobs/post', title='{{ "layout.site_nav.post" | translate }}' translate="layout.site_nav.post")
           li(ng-if='isAuthenticated()')
