@@ -181,7 +181,9 @@
                     "no_description": "Sem Descrição"
                 },
                 "myapply": {
-                    "title": "Vagas que voce aplicou"
+                    "title": "Vagas que voce aplicou",
+                    "not_yet": "Voce não aplicou para nenhuma vaga ainda.",
+                    "apply_now": "APLICAR AGORA"
                 }
             }
         },

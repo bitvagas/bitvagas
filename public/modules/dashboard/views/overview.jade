@@ -84,7 +84,7 @@ hr
 
     br
     br
-    h4 Vagas que voce aplicou
+    h4(translate='dashboard.overview.applicant.myapply.title')
 
     div(ng-if='currentUser.job_appliers.length !== 0')
       ul.jobs
@@ -102,9 +102,9 @@ hr
                 span Link
 
     div(ng-if='currentUser.job_appliers.length == 0')
-      | You doesn't applied to any job yet
+      span(translate='dashboard.overview.applicant.myapply.not_yet')
       br
-      a(ui-sref='jobs-list') APPLY NOW
+      a(ui-sref='jobs-list' translate='dashboard.overview.applicant.myapply.apply_now')
   //- div(ui-view='wallet')
 
   //Organizations

@@ -185,7 +185,9 @@
                     "no_description": "No Description Provided"
                 },
                 "myapply": {
-                    "title": "Jobs that you applied"
+                    "title": "Jobs that you applied",
+                    "not_yet": "You doesn't applied to any job yet",
+                    "apply_now": "APPLY NOW"
                 }
             }
         },
