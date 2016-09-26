@@ -5,6 +5,7 @@ angular.module('bitvagas.main',
     ])
     .config(["$urlRouterProvider", "$stateProvider", "$locationProvider", function($urlRouterProvider, $stateProvider, $locationProvider){
 
+        $urlRouterProvider.otherwise('/');
         $locationProvider.html5Mode(true);
 
         $stateProvider
