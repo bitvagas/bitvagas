@@ -8,7 +8,6 @@ var express = require('express')
 module.exports = function(app){
 
     router.route('/jobs/:id/apply')
-    .get(apply.appliers)
     .post(user.checkAuthentication, apply.apply);
 
     router.param('id', jobs.findById);

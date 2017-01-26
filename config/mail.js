@@ -17,12 +17,28 @@ module.exports = {
 
     sendWelcome : function(user){
 
-        var subject   = 'Welcome to BitVagas';
+        var subject = 'Bem vindo ao BitVagas';
 
         var template = 'welcome';
         var context  = {
             name  : user.NAME
           , email : user.EMAIL
+          , url   : config.url
+        };
+
+        this.sendMail(user.EMAIL, subject, template, context);
+    }
+
+    , sendWelcomeApplier : function(job, user) {
+
+        var subject   = 'Bem vindo ao BitVagas';
+
+        var template = 'welcome-apply';
+        var context  = {
+            name  : user.NAME
+          , email : user.EMAIL
+          , job   : job
+          , url   : config.url
         };
 
         this.sendMail(user.EMAIL, subject, template, context);
@@ -30,7 +46,7 @@ module.exports = {
 
     , sendForgotPassword : function(user){
 
-        var subject = 'Reset your password';
+        var subject = 'Redefinir sua senha';
 
         var template = 'reset';
         var context  = {
@@ -45,7 +61,7 @@ module.exports = {
 
     , sendEmailVerification : function(user){
 
-        var subject = 'Verify your email address';
+        var subject = 'Verifique seu email';
 
         var template = 'verify';
         var context  = {
@@ -59,7 +75,7 @@ module.exports = {
     }
 
     , sendApplierNotification: function(recipient, job, applier, apply){
-        var subject  = 'BitVagas | ' + applier.NAME + ' has applied to your job';
+        var subject  = 'BitVagas | ' + applier.NAME + ' aplicou para sua vaga';
 
         var template = 'applier';
         var context  = {

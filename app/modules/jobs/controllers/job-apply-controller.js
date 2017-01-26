@@ -5,7 +5,6 @@ var db     = require(root + '/app/models')
 module.exports = {
 
     apply: function(request, response){
-        console.log('Appyling');
         if(!request.job)
             return response.status(400).send('errorMessage.job.not.found');
 
@@ -16,7 +15,7 @@ module.exports = {
 
         return db.sequelize.transaction(function(t){
 
-            if(!request.user){
+            if(!request.user) {
                 return db.user.find({ where: { EMAIL: request.body.EMAIL }, transaction: t })
                 .then(function(user){
                     if(user)
@@ -28,14 +27,12 @@ module.exports = {
                     apply.NAME = user.NAME;
                     apply.USER_ID = user.id;
 
+                    applier = user;
                     request.user = user;
-                    return db.job_apply.create(apply, { transaction: t });
-                }).then(function(applied){
+                    mailer.sendWelcomeApplier(request.job, user);
                     users.forgotPassword(request, response);
-                    response.status(201).json(applied);
-                }).catch(function(err){
-                    throw new Error(err);
-                });
+                    return db.job_apply.create(apply, { transaction: t });
+                })
             } else {
 
                 applier = request.user;
@@ -57,8 +54,7 @@ module.exports = {
             return response.status(201).json(apply);
         }).catch(function(err){
             // Transaction Rollback
-            console.log(err);
-            response.status(400).send(err);
+            return response.status(400).send(err.message);
         });
     }
 
@@ -66,7 +62,7 @@ module.exports = {
         if(!request.job)
             return response.status(401).send('errorMessage.job.not.found');
 
-        db.job_apply.find({ JOB_ID: request.job.id }).then(function(appliers){
+        db.job_apply.findAll({ JOB_ID: request.job.id }).then(function(appliers){
             return response.status(200).json(appliers);
         });
     }
