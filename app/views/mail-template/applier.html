@@ -11,21 +11,21 @@
                     </tr>
                     <tr>
                         <td colspan="2" style="padding:20px;">
-                            <h2 style="font-size: 20px; margin-top: 0;">{{ applier.NAME }} has applied to your job</h2>
+                            <h2 style="font-size: 20px; margin-top: 0;">{{ applier.NAME }} aplicou para sua vaga</h2>
                         </td>
                     </tr>
                     <tr>
-                        <td style="padding-left:20px">User details: <td>
+                        <td style="padding-left:20px">Detalhes: <td>
                     </tr>
                     <tr>
                         <td colspan="2" style="padding:20px">
-                            <p>Name: {{applier.NAME}}</p>
+                            <p>Nome: {{applier.NAME}}</p>
                             <p>Email: {{applier.EMAIL}}</p>
                             {{#if applier.LINKEDIN_PROFILE}}
                                 <p><img src='{{applier.PICTURE}}' style='max-width: 120px'/></p>
                                 <p>LinkedIn: {{applier.LINKEDIN_PROFILE}}</p>
                             {{else}}
-                                <p>LinkedIn not connected.</p>
+                                <p>LinkedIn não conectado.</p>
                             {{/if}}
                             <p>
                                 Links:
@@ -33,11 +33,11 @@
                                 {{apply.LINKS}}
                             </p>
                             <p>
-                                Description:
+                                Descrição:
                                 <br/>
                                 {{apply.DESCRIPTION}}
                             </p>
-                            <p>Date: {{ apply.createdAt }}</p>
+                            <p>Data: {{ apply.createdAt }}</p>
                         </td>
                     </tr>
                     <tr style="background-color:#1283b0; height:50px; color:white;">
@@ -45,9 +45,8 @@
                             <table style="width: 100%;text-align:center">
                                 <tbody>
                                     <tr>
-                                        <td><a href="{{url}}/#/jobs/create" style="color:white" title="Post a Job">Post a Job</a></td>
-                                        <td><a href="{{url}}/#/about" style="color:white" title="About">About</a></td>
-                                        <td><a href="{{url}}/#/contact" style="color:white" title="Contact">Contact</a></td>
+                                        <td><a href="{{url}}/#/jobs/create" style="color:white" title="Postar uma Vaga">Postar uma Vaga</a></td>
+                                        <td><a href="{{url}}/#/about" style="color:white" title="Sobre">Sobre</a></td>
                                     </tr>
                                 </tbody>
                             </table>
