@@ -12,7 +12,7 @@ update-meta(itemprop="twitter:description" content="{{ job.TITLE }} - {{ job.org
       .job__cell.job__cell--main
         header.job__head
           .job-media
-            a(href='{{ job.org.URL }}' target='_blank').job-media__img
+            a(href='{{ job.org.URL }}' rel="noopener noreferrer" target='_blank').job-media__img
               img(src='/img/template.png')
             .job-media__body
               h1.job__title {{ job.TITLE }} <span class="job__company">- {{ job.org.NAME }}</span>

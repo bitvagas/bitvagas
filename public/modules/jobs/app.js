@@ -40,7 +40,7 @@ angular.module('bitvagas.jobs',
           , controller   : 'JobPostController'
         })
         .state('jobs-show', {
-            url: '/{id: [0-9]+}-:title'
+            url: '/{id: [0-9]+}-:title-:org'
           , templateUrl: '/modules/jobs/views/job-show'
           , controller : 'JobShowController'
           , params     : { id: undefined, title: undefined }

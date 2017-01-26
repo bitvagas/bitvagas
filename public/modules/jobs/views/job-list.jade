@@ -26,12 +26,12 @@ hr
 h2.jobs-title(translate="explore.last")
 ul.jobs
   li(ng-repeat='job in jobs | filter: filter | filter: filterType')
-    a.jobs-item(ui-sref='jobs-show({id : job.id, title: (job.TITLE | UrlFilter) })', title='')
+    a.jobs-item(ui-sref='jobs-show({id : job.id, title: (job.TITLE | UrlFilter), org: (job.org.NAME | UrlFilter)})', title='')
       .jobs-item__cell.jobs-item__cell--img
         img.jobs-item__img(src='/img/company-default.png', alt='')
 
       .jobs-item__cell.jobs-item__cell--body
-        h2.jobs-item__title {{ job.TITLE }}
+        h2.jobs-item__title {{ job.TITLE }} - {{ job.org.NAME }}
         h3.jobs-item__company {{ job.LOCATION }}
 
       .jobs-item__cell.jobs-item__cell--meta
