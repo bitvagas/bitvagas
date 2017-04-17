@@ -14,7 +14,7 @@
 </p>
 
 
-##Tools
+## Tools
 
 * NodeJS + Express
 * Sequelize + Postgre SQL
@@ -24,13 +24,13 @@
 * BrowserSync
 
 
-##Usage
+## Usage
 
-####Install the npm dependencies:
+#### Install the npm dependencies:
 
 `$ npm install`
 
-####Install the bower dependencies:
+#### Install the bower dependencies:
 
 `$ bower install`
 
@@ -42,13 +42,13 @@
 
 `$ gulp fixtures`
 
-####Run with:
+#### Run with:
 
 `$ gulp`
 
 Open your browser at `http://localhost:9000`
 
-##Contributing
+## Contributing
 
 1. Fork it!
 2. Create your feature branch: `git checkout -b my-new-feature`
@@ -56,6 +56,6 @@ Open your browser at `http://localhost:9000`
 4. Push to the branch: `git push origin my-new-feature`
 5. Submit a pull request :D
 
-##License
+## License
 [GPL License](./LICENSE) © BitVagas
   
